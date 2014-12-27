@@ -1,0 +1,36 @@
+{
+  // required
+  "manifest_version": 2,
+  "name": "Einfaches Plugin",
+  "version": "1.0.0",
+
+  // recommended
+  "description": "Ein einfaches Plugin, das ein Popup öffnet.",
+  "icons": {
+    "16": "./css/images/icon-16px.png",           // Browser-Icon
+    "48": "./css/images/icon-48px.png",           // Icon für chrome://extensions/
+    "128": "./css/images/icon-128px.png"          // wird bei der Installation angezeigt
+  },
+
+  // optional
+  // Fügt das Plugin zur Toolbar hinzu und setzt den Inhalt des Popups
+  "browser_action": {
+    "default_icon": "./css/images/icon-16px.png",
+    "default_popup": "./html/popup.html"
+  },
+  "permissions": [
+    "tabs",                                       // Zugriff auf Felder des Tab-Objects
+    "http://*/*", "https://*/*"                   // Zugriff auf bestimmte Hosts
+  ],
+  // Script and Styles, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
+  "content_scripts": [{
+    "matches": ["https://*/*", "http://*/*"],
+    "css": ["./css/inject.css"],
+    "js": ["./javascript/inject.js"]
+  }]
+}
+        // TODO rausnehmen oder benutzen
+//  "background": {
+//    "scripts": ["./javascript/events.js"]
+//  }
+        // + "background" bei permissions
