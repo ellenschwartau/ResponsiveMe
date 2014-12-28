@@ -1,11 +1,11 @@
 {
   // required
   "manifest_version": 2,
-  "name": "Einfaches Plugin",
+  "name": "ResponsiveMe",
   "version": "1.0.0",
 
   // recommended
-  "description": "Ein einfaches Plugin, das ein Popup öffnet.",
+  "description": "Chrome Erweiterung, die das Entwickeln von Websites im Responsive Design vereinfacht.",
   "icons": {
     "16": "./css/images/icon-16px.png",           // Browser-Icon
     "48": "./css/images/icon-48px.png",           // Icon für chrome://extensions/
@@ -24,13 +24,22 @@
   ],
   // Script and Styles, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
   "content_scripts": [{
-    "matches": ["https://*/*", "http://*/*"],
+    "matches": ["https://*/*", "http://*/*"], // <all_urls>
     "css": ["./css/inject.css"],
-    "js": ["./javascript/inject.js"]
-  }]
+    "js": [
+      // libs
+      "./js/libs/require.js",
+      "./js/libs/jquery-1.11.2.min.js",
+      "./js/requireJsConfig.js",
+      "./js/inject.js",
+      // modules
+      "./js/modules/width/width.js"
+    ]
+  }],
+  // Dateien, die über Websites zugänglich sein sollen
+  "web_accessible_resources": [
+    "./js/modules/*",
+    "./js/modules/*/*",
+    "./js/libs/*"
+  ]
 }
-        // TODO rausnehmen oder benutzen
-//  "background": {
-//    "scripts": ["./javascript/events.js"]
-//  }
-        // + "background" bei permissions

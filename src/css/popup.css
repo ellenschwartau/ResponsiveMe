@@ -1,0 +1,43 @@
+@font-face {
+    font-family: MontserratLight;
+    src: url(./fonts/Montserrat-Light.otf);
+}
+@font-face {
+    font-family: MontserratRegular;
+    src: url(./fonts/Montserrat-Regular.otf);
+}
+@font-face {
+    font-family: MontserratBlack;
+    src: url(./fonts/Montserrat-Black.otf);
+}
+
+body {
+    min-width: 300px;
+    background: rgb(50, 50, 50);
+    color: rgb(235, 242, 242);
+}
+
+h1 {
+    font-family: MontserratBlack;
+    padding-bottom: 10px;
+    border-bottom: rgb(63, 102, 88) dotted 2px;
+    text-align: center;
+}
+
+h2 {
+    font-family: MontserratRegular;
+}
+
+.content {
+    padding: 20px;
+}
+
+.module {
+    padding: 5px;
+}
+
+.module .module-content {
+    padding: 5px;
+    background: rgb(64, 64, 61);
+    font-family: MontserratLight;
+}
