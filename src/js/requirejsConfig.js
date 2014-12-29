@@ -1,9 +1,21 @@
-var requireJsConfig = {
+require.config({
     // per default moduleIDs auf js/modules laden
-    baseUrl: '/js/modules',
+    baseUrl: '/js',
     // optional andere Pfade für bestimmte module definieren
     paths: {
-        libs: '/js/lib',
-        jquery: 'jquery-1.11.2.min'
+        jquery: 'libs/jquery-1.11.2.min',
+        popup: 'modules/popup/popup'
     }
-};
+});
+
+require(
+    ['jquery', 'popup']
+,
+function($, popup) {
+    // javascript initialisieren
+    $.each([
+        popup
+    ], function(i, item) {
+       item.init();
+    });
+});

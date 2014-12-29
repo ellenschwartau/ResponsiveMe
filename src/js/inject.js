@@ -1,10 +1,9 @@
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
  */
-requirejs.config(requireJsConfig);
-requirejs(
+require(
     ['jquery']
 ,
     function($) {
-        // $($.find("body")).css("background", "red");
+        //$("body").css("background", "red");
 });

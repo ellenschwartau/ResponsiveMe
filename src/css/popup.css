@@ -1,3 +1,8 @@
+/**
+ * Definiert das Styling des Popups.
+ */
+
+/* --- Schriftarten --- */
 @font-face {
     font-family: MontserratLight;
     src: url(./fonts/Montserrat-Light.otf);
@@ -11,6 +16,7 @@
     src: url(./fonts/Montserrat-Black.otf);
 }
 
+/* --- HTML Elemente --- */
 body {
     min-width: 300px;
     background: rgb(50, 50, 50);
@@ -26,8 +32,14 @@ h1 {
 
 h2 {
     font-family: MontserratRegular;
+    white-space: nowrap;
+}
+h2:hover {
+    border-bottom: rgb(63, 102, 88) solid 2px;
+    cursor: pointer;
 }
 
+/* --- definierte Klassen --- */
 .content {
     padding: 20px;
 }
