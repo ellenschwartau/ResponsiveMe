@@ -77,9 +77,34 @@ h2:hover
 
 /* --- Footer --- */
 #popup-footer {
-    margin-top: 10px;
+    font-family: MontserratRegular;
+    border-top: rgb(63, 102, 88) dotted 2px;
+    padding: 10px 0px;
+    margin: 0px 10px;
+    text-align: center;
 }
 
-#popup-footer span:hover {
-    border-bottom: rgb(63, 102, 88) solid 1px;
+.settings-icon {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-image: url("images/icon-settings-128px.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
 }
+
+.settings-icon:hover {
+    background-image: url("images/icon-settings-light-128px.png");
+    cursor: pointer;
+}
+
+.settings {
+    min-width: 42.5%;
+    height: 100%;
+    text-align: left;
+    padding: 0 10% 5px 10%;
+    display: none;
+}
+
+

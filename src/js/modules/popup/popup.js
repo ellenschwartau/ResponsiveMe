@@ -10,6 +10,7 @@ define(
 function($) {
     /** Wrapper-Element, für den Inhalt des Popups */
     var $content = $("#popup-content"),
+        $footer = $("#popup-footer"),
         activeClass = "active";
 
     /**
@@ -42,8 +43,52 @@ function($) {
     };
 
     /**
+     * Ein- und Ausblenden der Einstellungen bei Klick auf das Einstelluns-Icon im Footer.
+     */
+    var setSettingsCallback = function() {
+        var $settings = $footer.find(".settings"),
+            $showDescriptionsCb = $settings.find(".showDescriptionCb"),
+            $showAllModulesCb = $settings.find(".showAllModulesCb");
+        // TODO prüfen warum ohne unbind mehrmals das click event gefeuert wird
+        $footer.find(".settings-icon").unbind("click").click(function() {
+
+            $settings.toggle("slow");
+            if($settings.is(":visible")) {
+                $settings.css("display", "inline-block");
+            }
+        });
+
+        // Togglen der Hinweise ein-/ausschalten
+        $showDescriptionsCb.change(function(){
+            $content.find(".module").each(function(i, item) {
+                if($showDescriptionsCb.is(":checked")) {
+                    setSlideCallbacks($(item));
+                } else {
+                    resetSlideCallbacks($(item));
+                }
+            });
+        });
+
+        // Alle Module Ein-/Ausblenden
+        $showAllModulesCb.change(function(){
+            $content.find(".module").each(function(i, item) {
+                var $item = $(item);
+                if($showAllModulesCb.is(":checked")) {
+                    $item.find(".module-content").slideDown("slow");
+                    resetSlideCallbacks($item);
+                    $item.addClass(activeClass);
+                } else {
+                    $item.find(".module-content").slideUp("slow");
+                    setSlideCallbacks($item);
+                    $item.removeClass(activeClass);
+                }
+            });
+        });
+    };
+
+    /**
      * Setzt die Callbacks zur Manipulation der Anzeige.
-     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts,
+     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
      * sowie das Markieren des Moduls als aktiv oder inaktiv.
      * @param $element Element, bei dem die Callbacks registriert werden sollen
      */
@@ -57,6 +102,8 @@ function($) {
         });
         // Ein- und Ausblenden der Modul-Beschreibung
         setSlideCallbacks($element);
+        // Einstellungen
+        setSettingsCallback();
     };
 
     /**
@@ -65,13 +112,27 @@ function($) {
      * @param $element Element, bei dem die Callbacks registriert werden sollen
      */
     var setSlideCallbacks = function($element) {
-        var toggleDescription = $element.find(".module-description");
-        // Beschreibung ein- und ausblenden wenn die Überschrift gehovert wird
-        $element.find("h2").hover(function() {
-            toggleDescription.slideDown();
-        }, function() {
-            toggleDescription.slideUp();
-        });
+        var $settings = $footer.find(".settings"),
+            $descriptionCb = $settings.find(".showDescriptionCb"),
+            shouldDisplayDescriptions = $descriptionCb.is(":checked"),
+            toggleDescription = $element.find(".module-description");
+        if(shouldDisplayDescriptions) {
+            // Beschreibung ein- und ausblenden wenn die Überschrift gehovert wird
+            $element.find("h2").hover(function() {
+                toggleDescription.slideDown();
+            }, function() {
+                toggleDescription.slideUp();
+            });
+        }
+    };
+
+    /**
+     * Setzt das einblenden der Modul-Beschreibung bei Hover zurück.
+     * @param $element Modul-Element
+     */
+    var resetSlideCallbacks = function($element) {
+        $element.find("h2").unbind('mouseenter mouseleave');
+        $element.find(".module-description").slideUp();
     };
 
     /**
@@ -83,8 +144,7 @@ function($) {
             setSlideCallbacks($element);
         } else {
             // Ausblenden und Callbacks entfernen
-            $element.find("h2").unbind('mouseenter mouseleave');
-            $element.find(".module-description").slideUp();
+            resetSlideCallbacks($element);
         }
     };
 
