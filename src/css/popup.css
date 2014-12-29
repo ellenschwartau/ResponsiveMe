@@ -33,23 +33,53 @@ h1 {
 h2 {
     font-family: MontserratRegular;
     white-space: nowrap;
+    margin: 10px 0px;
+    padding-bottom: 5px;
 }
+
 h2:hover {
-    border-bottom: rgb(63, 102, 88) solid 2px;
     cursor: pointer;
 }
 
+h2:hover
+, .module.active h2 {
+    padding-bottom: 3px;
+    border-bottom: rgb(63, 102, 88) solid 2px;
+}
+
 /* --- definierte Klassen --- */
-.content {
+/* --- Module --- */
+#popup-content {
     padding: 20px;
 }
 
 .module {
     padding: 5px;
+    margin-bottom: 5px;
 }
 
-.module .module-content {
-    padding: 5px;
+.module-content
+, .module-description {
+    padding: 10px;
     background: rgb(64, 64, 61);
     font-family: MontserratLight;
+    margin-bottom: inherit;
+    display: none;
+}
+
+.module-content {
+    border-radius: 5px 5px 5px 5px;
+}
+
+.module-description {
+    border-radius: 0px 20px 20px 20px;
+}
+
+/* --- Footer --- */
+#popup-footer {
+    margin-top: 10px;
+}
+
+#popup-footer span:hover {
+    border-bottom: rgb(63, 102, 88) solid 1px;
 }

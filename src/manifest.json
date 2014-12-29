@@ -30,10 +30,10 @@
       // libs
       "./js/libs/require.js",
       "./js/libs/jquery-1.11.2.min.js",
-      "./js/requireJsConfig.js",
+      "./js/main.js",
       "./js/inject.js",
       // modules
-      "./js/modules/width/width.js"
+      "./js/modules/viewport/viewport.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen

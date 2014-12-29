@@ -1,4 +1,3 @@
-requirejs.config(requireJsConfig);
 requirejs(
     ['jquery']
 ,

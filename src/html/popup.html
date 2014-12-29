@@ -5,18 +5,18 @@
     <title>Responsive Me</title>
     <link rel="stylesheet" type="text/css" href="../css/popup.css"/>
     <script src="../js/libs/require.js"></script>
-    <script src="../js/requirejsConfig.js"></script>
-    <!--<script src="../js/modules/popup/popup.js"></script>-->
+    <script src="../js/main.js"></script>
 </head>
 <body>
-    <div class="content">
+    <div id="popup-content">
         <h1>ResponsiveMe</h1>
-        <div class="module">
-            <h2>Pixel-Dimensionen betrachen</h2>
-            <div class="module-content">
-                Hier kannst du deine Website in den verschiedenen Pixelbreiten bretrachten.
-            </div>
-        </div>
+        <link rel="import" href="modules/viewport.html">
+    </div>
+    <div id="popup-footer">
+        <span>Alle einblenden</span>
+        <span>Alle ausblenden</span>
+        <span>Beschreibungen einblenden</span>
+        <span>Beschreibungen ausblenden</span>
     </div>
 </body>
 </html>

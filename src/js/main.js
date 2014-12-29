@@ -1,3 +1,6 @@
+/**
+ * Die main.js übernimmt das Laden und Initialisieren der verschiedenen Module.
+ */
 require.config({
     // per default moduleIDs auf js/modules laden
     baseUrl: '/js',
