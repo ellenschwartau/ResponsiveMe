@@ -1,0 +1,7 @@
+{
+  "name": "Test",
+  "version": "1.0.0",
+  "devDependencies": {
+    "requirejs": ">= 2.0.4"
+  }
+}

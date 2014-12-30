@@ -1,4 +1,4 @@
-requirejs(
+define(
     ['jquery']
 ,
     function($) {

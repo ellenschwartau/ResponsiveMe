@@ -28,18 +28,16 @@
     "css": ["./css/inject.css"],
     "js": [
       // libs
-      "./js/libs/require.js",
-      "./js/libs/jquery-1.11.2.min.js",
-      "./js/main.js",
-      "./js/inject.js",
-      // modules
-      "./js/modules/viewport/viewport.js"
+      "/js/libs/require.js",
+      "/js/libs/jquery-1.11.2.min.js",
+      "/js/main.js",
+      "/js/inject.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen
   "web_accessible_resources": [
-    "./js/modules/*",
-    "./js/modules/*/*",
-    "./js/libs/*"
+    "/js/modules/*",
+    "/js/modules/*/*",
+    "/js/libs/*"
   ]
 }
