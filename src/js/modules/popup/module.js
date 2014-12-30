@@ -7,7 +7,6 @@ define(
     function($) {
         var baseDir = "modules/",       // Basispfad zu den Modulen
             modules = [                 // Module, die eingebunden werden sollen
-                "viewport.html",
                 "template.html",
                 "template.html"
             ],
