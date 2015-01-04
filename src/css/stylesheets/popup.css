@@ -1,8 +1,10 @@
+@charset "UTF-8";
 /**
  * Definiert das Styling des Popups.
  */
 /**
- * Definiert gemeinsam genutzte CSS Variablen.
+ * Definiert gemeinsam genutzte CSS Variablen, wie Farben, Fonts und Strings.
+ * Hier werden auch global ben├Âtigte Dateien eingebunden.
  */
 /* fonts */
 @font-face {
