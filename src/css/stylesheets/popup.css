@@ -1,0 +1,120 @@
+/**
+ * Definiert das Styling des Popups.
+ */
+/* --- Schriftarten --- */
+@font-face {
+  font-family: "MontserratLight";
+  src: url('../fonts/Montserrat-Light.otf?1419776508') format('opentype');
+}
+@font-face {
+  font-family: "MontserratRegular";
+  src: url('../fonts/Montserrat-Regular.otf?1419776509') format('opentype');
+}
+@font-face {
+  font-family: "MontserratBlack";
+  src: url('../fonts/Montserrat-Black.otf?1419776508') format('opentype');
+}
+/* --- HTML Elemente --- */
+/* line 13, ../popup.scss */
+body {
+  min-width: 300px;
+  background: #323232;
+  color: #ebf2f2;
+}
+
+/* line 19, ../popup.scss */
+h1 {
+  font-family: MontserratBlack;
+  padding-bottom: 10px;
+  border-bottom: #3f6658 dotted 2px;
+  text-align: center;
+}
+
+/* line 26, ../popup.scss */
+h2 {
+  font-family: MontserratRegular;
+  white-space: nowrap;
+  margin: 10px 0px;
+  padding-bottom: 5px;
+}
+
+/* line 33, ../popup.scss */
+h2:hover {
+  cursor: pointer;
+}
+
+/* line 37, ../popup.scss */
+h2:hover
+, .module.active h2 {
+  padding-bottom: 3px;
+  border-bottom: #3f6658 solid 2px;
+}
+
+/* --- definierte Klassen --- */
+/* --- Module --- */
+/* line 45, ../popup.scss */
+#popup-content {
+  padding: 20px;
+}
+
+/* line 49, ../popup.scss */
+.module {
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+/* line 54, ../popup.scss */
+.module-content
+, .module-description {
+  padding: 10px;
+  background: #40403d;
+  font-family: MontserratLight;
+  margin-bottom: inherit;
+  display: none;
+}
+
+/* line 63, ../popup.scss */
+.module-content {
+  border-radius: 5px 5px 5px 5px;
+}
+
+/* line 67, ../popup.scss */
+.module-description {
+  border-radius: 0px 20px 20px 20px;
+}
+
+/* --- Footer --- */
+/* line 72, ../popup.scss */
+#popup-footer {
+  font-family: MontserratRegular;
+  border-top: #3f6658 dotted 2px;
+  padding: 10px 0px;
+  margin: 0px 20px;
+  text-align: center;
+}
+
+/* line 80, ../popup.scss */
+.settings-icon {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-image: url('../images/icon-settings-128px.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+/* line 90, ../popup.scss */
+.settings-icon:hover {
+  background-image: url('../images/icon-settings-light-128px.png');
+  cursor: pointer;
+}
+
+/* line 99, ../popup.scss */
+.settings {
+  min-width: 42.5%;
+  height: 100%;
+  text-align: left;
+  padding: 0 10% 5px 10%;
+  display: none;
+}

@@ -25,7 +25,7 @@
   // Script and Styles, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
   "content_scripts": [{
     "matches": ["https://*/*", "http://*/*"], // <all_urls>
-    "css": ["./css/inject.css"],
+    "css": ["./css/stylesheets/inject.css"],
     "js": [
       // libs
       "/js/libs/require.js",
