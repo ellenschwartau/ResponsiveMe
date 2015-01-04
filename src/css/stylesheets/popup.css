@@ -1,49 +1,53 @@
 /**
  * Definiert das Styling des Popups.
  */
-/* --- Schriftarten --- */
+/**
+ * Definiert gemeinsam genutzte CSS Variablen.
+ */
+/* fonts */
 @font-face {
-  font-family: "MontserratLight";
+  font-family: "Montserrat Light";
   src: url('../fonts/Montserrat-Light.otf?1419776508') format('opentype');
 }
 @font-face {
-  font-family: "MontserratRegular";
+  font-family: "Montserrat Regular";
   src: url('../fonts/Montserrat-Regular.otf?1419776509') format('opentype');
 }
 @font-face {
-  font-family: "MontserratBlack";
+  font-family: "Montserrat Black";
   src: url('../fonts/Montserrat-Black.otf?1419776508') format('opentype');
 }
+/* colors */
+/* styles */
 /* --- HTML Elemente --- */
-/* line 13, ../popup.scss */
+/* line 9, ../popup.scss */
 body {
   min-width: 300px;
   background: #323232;
   color: #ebf2f2;
 }
 
-/* line 19, ../popup.scss */
+/* line 15, ../popup.scss */
 h1 {
-  font-family: MontserratBlack;
+  font-family: "Montserrat Black";
   padding-bottom: 10px;
   border-bottom: #3f6658 dotted 2px;
   text-align: center;
 }
 
-/* line 26, ../popup.scss */
+/* line 22, ../popup.scss */
 h2 {
-  font-family: MontserratRegular;
+  font-family: "Montserrat Regular";
   white-space: nowrap;
   margin: 10px 0px;
   padding-bottom: 5px;
 }
-
-/* line 33, ../popup.scss */
+/* line 28, ../popup.scss */
 h2:hover {
   cursor: pointer;
 }
 
-/* line 37, ../popup.scss */
+/* line 33, ../popup.scss */
 h2:hover
 , .module.active h2 {
   padding-bottom: 3px;
@@ -52,48 +56,48 @@ h2:hover
 
 /* --- definierte Klassen --- */
 /* --- Module --- */
-/* line 45, ../popup.scss */
+/* line 41, ../popup.scss */
 #popup-content {
   padding: 20px;
 }
 
-/* line 49, ../popup.scss */
+/* line 45, ../popup.scss */
 .module {
   padding: 5px;
   margin-bottom: 5px;
 }
 
-/* line 54, ../popup.scss */
+/* line 50, ../popup.scss */
 .module-content
 , .module-description {
   padding: 10px;
   background: #40403d;
-  font-family: MontserratLight;
+  font-family: "Montserrat Light";
   margin-bottom: inherit;
   display: none;
 }
 
-/* line 63, ../popup.scss */
+/* line 59, ../popup.scss */
 .module-content {
   border-radius: 5px 5px 5px 5px;
 }
 
-/* line 67, ../popup.scss */
+/* line 63, ../popup.scss */
 .module-description {
   border-radius: 0px 20px 20px 20px;
 }
 
 /* --- Footer --- */
-/* line 72, ../popup.scss */
+/* line 68, ../popup.scss */
 #popup-footer {
-  font-family: MontserratRegular;
+  font-family: "Montserrat Regular";
   border-top: #3f6658 dotted 2px;
   padding: 10px 0px;
   margin: 0px 20px;
   text-align: center;
 }
 
-/* line 80, ../popup.scss */
+/* line 76, ../popup.scss */
 .settings-icon {
   display: inline-block;
   height: 50px;
@@ -103,14 +107,13 @@ h2:hover
   background-position: center;
   background-size: 100%;
 }
-
-/* line 90, ../popup.scss */
+/* line 85, ../popup.scss */
 .settings-icon:hover {
   background-image: url('../images/icon-settings-light-128px.png');
   cursor: pointer;
 }
 
-/* line 99, ../popup.scss */
+/* line 95, ../popup.scss */
 .settings {
   min-width: 42.5%;
   height: 100%;

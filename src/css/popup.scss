@@ -3,41 +3,37 @@
  */
 
 @import "compass/css3";
-
-/* --- Schriftarten --- */
-@include font-face("MontserratLight", font-files("Montserrat-Light.otf"));
-@include font-face("MontserratRegular", font-files("Montserrat-Regular.otf"));
-@include font-face("MontserratBlack", font-files("Montserrat-Black.otf"));
+@import "_vars.scss";
 
 /* --- HTML Elemente --- */
 body {
   min-width: 300px;
-  background: rgb(50, 50, 50);
-  color: rgb(235, 242, 242);
+  background: $dark-grey;
+  color: $light-grey;
 }
 
 h1 {
-  font-family: MontserratBlack;
+  font-family: $font-black;
   padding-bottom: 10px;
-  border-bottom: rgb(63, 102, 88) dotted 2px;
+  border-bottom: $border-dotted;
   text-align: center;
 }
 
 h2 {
-  font-family: MontserratRegular;
+  font-family: $font-regular;
   white-space: nowrap;
   margin: 10px 0px;
   padding-bottom: 5px;
-}
 
-h2:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 h2:hover
 , .module.active h2 {
   padding-bottom: 3px;
-  border-bottom: rgb(63, 102, 88) solid 2px;
+  border-bottom: $border-solid;
 }
 
 /* --- definierte Klassen --- */
@@ -54,8 +50,8 @@ h2:hover
 .module-content
 , .module-description {
   padding: 10px;
-  background: rgb(64, 64, 61);
-  font-family: MontserratLight;
+  background: $gray;
+  font-family: $font-light;
   margin-bottom: inherit;
   display: none;
 }
@@ -70,8 +66,8 @@ h2:hover
 
 /* --- Footer --- */
 #popup-footer {
-  font-family: MontserratRegular;
-  border-top: rgb(63, 102, 88) dotted 2px;
+  font-family: $font-regular;
+  border-top: $border-dotted;
   padding: 10px 0px;
   margin: 0px 20px;
   text-align: center;
@@ -85,15 +81,15 @@ h2:hover
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
-}
 
-.settings-icon:hover {
-  // image-url arguments:
-  // $path: path relative to images directory in config.rb
-  // $path-only: if true, will cause only the path to be returned instead of a `url()` function
-  // $cache-buster: When set to `false` no cache buster will be used (i.e. `?313420982`)
-  background-image: image-url("icon-settings-light-128px.png", false, false);
-  cursor: pointer;
+  &:hover {
+    // image-url arguments:
+    // $path: path relative to images directory in config.rb
+    // $path-only: if true, will cause only the path to be returned instead of a `url()` function
+    // $cache-buster: When set to `false` no cache buster will be used (i.e. `?313420982`)
+    background-image: image-url("icon-settings-light-128px.png", false, false);
+    cursor: pointer;
+  }
 }
 
 .settings {
