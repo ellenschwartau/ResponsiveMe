@@ -7,7 +7,7 @@ define(
     function($) {
         var baseDir = "modules/",       // Basispfad zu den Modulen
             modules = [                 // Module, die eingebunden werden sollen
-                "template.html",
+                "viewport.html",
                 "template.html"
             ],
             activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
@@ -42,7 +42,7 @@ define(
         var initModuleDisplay = function($element) {
             var toggleContent = $element.find(".module-content");
             // Modul-Inhalt ein- und ausblenden
-            $element.click(function () {
+            $element.find("h2").click(function () {
                 toggleContent.slideToggle();
                 toggleActive($element);
                 toggleModuleDescriptionDisplay($element);

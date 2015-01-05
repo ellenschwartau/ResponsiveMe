@@ -18,10 +18,8 @@ function($, modules, settings) {
      * und die Callbacks zur Manipulation der Anzeige gesetzt.
      */
     var init = function () {
-        $(document).ready(function () {
-            modules.init($content);
-            settings.init();
-        });
+        modules.init($content);
+        settings.init();
     };
 
     return {

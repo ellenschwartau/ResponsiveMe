@@ -1,9 +1,24 @@
-<div class="module">
+<div id="moduleViewport" class="module">
     <h2>Viewport</h2>
     <div class="module-description">
         Mit diesem Modul kannst du deine Website in den verschiedenen Pixel-Breiten betrachten.
     </div>
     <div class="module-content">
-        Pixelbreite ändern
+        <form action="">
+            <p>
+                Breite des Browsers festlegen:<br>
+                <input id="widthScrollBar" type="range">
+                <span class="currentValue"></span>
+            </p>
+            <p>
+                Höhe des Browsers festlegen:<br>
+                <input id="heightScrollBar" type="range">
+                <span class="currentValue"></span>
+            </p>
+            <p>
+                Vordefinierte Auflösungen:<br>
+                <select id="resolutions"></select>
+            </p>
+        </form>
     </div>
 </div>

@@ -20,7 +20,7 @@ require(
 function($, popup, viewport) {
     // javascript initialisieren
     $.each([
-        popup
+        popup, viewport
     ], function(i, item) {
        item.init();
     });
