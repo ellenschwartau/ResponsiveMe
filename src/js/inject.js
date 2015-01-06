@@ -5,5 +5,5 @@ require(
     ['jquery']
 ,
     function($) {
-        //$("body").css("background", "red");
+       console.log(test);
 });

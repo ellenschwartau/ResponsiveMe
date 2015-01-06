@@ -9,7 +9,9 @@ define(
         // Selektoren für die benötigten Elemente
         var widthScrollBar = "#widthScrollBar",
             heightScrollBar = "#heightScrollBar",
-            resolutionDropdown = '#resolutions';
+            resolutionDropdown = '#resolutions',
+            animationDurationScrollBar = '#animationDurationScrollBar',
+            animationButton = '#animationButton';
 
         /**
          * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
@@ -28,10 +30,7 @@ define(
             $scrollbar.next().html(middle + "px");
 
             // Callbacks setzen
-            $scrollbar.mousemove(function() {
-                // Anzeige aktualisieren
-                $(this).next().html(parseInt($(this).val()) + "px");
-            });
+            showScrollBarValue($scrollbar, $scrollbar.next(), "px");
             $scrollbar.change(function() {
                 // Browser skalieren
                 var value = parseInt($(this).val());
@@ -41,6 +40,13 @@ define(
                 if(changeHeight) {
                     changeWindowSize(null, value);
                 }
+            });
+        };
+
+        var showScrollBarValue = function($scrollbar, $displayElement, unit) {
+            $scrollbar.mousemove(function() {
+                // Anzeige aktualisieren
+                $displayElement.html(parseInt($(this).val()) + unit);
             });
         };
 
@@ -106,6 +112,48 @@ define(
             });
         };
 
+        var animateWidth = function(time, start, end) {
+            var dist = (Math.max(start, end) - Math.min(start, end)),
+                stepPerMs = (dist / time) / 1000,
+                curWidth = start,
+                lastCall = $.now(),
+                currentCall = $.now();
+            changeWindowSize(start, null);
+            var interval = window.setInterval(function(){
+                currentCall = $.now();
+                var timeDist = currentCall - lastCall,
+                    animationDist = stepPerMs * timeDist;
+                curWidth = curWidth - stepPerMs;
+                changeWindowSize(parseInt(start - animationDist));
+                if(curWidth <= end) {
+                    window.clearInterval(interval);
+                }
+            }, 1);
+        };
+
+        var initAnimation = function() {
+            var $animationButton = $(animationButton),
+                $scrollbar = $(animationDurationScrollBar);
+            showScrollBarValue($scrollbar, $scrollbar.next(), "s");
+            $animationButton.click(function(){
+                animateWidth($scrollbar.val(), 800, 400);
+            });
+        };
+
+        var initRequest = function() {
+          $("#sendRequestButton").click(function(){
+              chrome.tabs.executeScript(null, {
+                  file: "/js/modules/viewport/viewport-content-script.js"
+              });
+          });
+
+            chrome.tabs.executeScript(null,
+                {code:"window.outerWidth"},
+                function(results){
+                  console.log(results);
+            });
+        };
+
         /**
          * Initialisiert das Viewport Modul.
          * Dafür werden die Maximalen Abmessungen auf Grundlage der Bildschirmauflösung gesetzt
@@ -116,6 +164,9 @@ define(
                 initWidthScrollBar();
                 initHeightScrollBar();
                 initResolutionDropDown();
+                initAnimation();
+                // TODO rausnehmen
+                initRequest();
             });
         };
 
