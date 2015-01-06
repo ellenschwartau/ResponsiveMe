@@ -3,23 +3,13 @@
  * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
  */
 define(
-    ['jquery']
+    ['jquery', 'config']
 ,
-    function($) {
+    function($, config) {
         // Selektoren für die benötigten Elemente
         var widthScrollBar = "#widthScrollBar",
             heightScrollBar = "#heightScrollBar",
-            resolutionDropdown = '#resolutions',
-            // TODO aus Datei einlesen + Speicher Funktion
-            resolutions = [
-                {name: "1920x1080", width: 1920, height: 1200},
-                {name: "1366x768", width: 1366, height: 768},
-                {name: "1280x800", width: 1280, height: 800},
-                {name: "1024x768", width: 1024, height: 768},
-                {name: "800x600", width: 800, height: 600},
-                {name: "640x960", width: 640, height: 960},
-                {name: "320x480", width: 320, height: 480}
-            ];
+            resolutionDropdown = '#resolutions';
 
         /**
          * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
@@ -106,12 +96,12 @@ define(
         var initResolutionDropDown = function() {
             var $resolutions = $(resolutionDropdown);
             // injizieren der Auflösungen
-            $.each(resolutions, function(index, item){
+            $.each(config.resolutions, function(index, item){
                 $resolutions.append("<option value='" + index +"'>" + item.name + "</option>");
             });
             // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
             $resolutions.change(function(){
-               var selectedResolution = resolutions[$resolutions.find(":selected").val()];
+               var selectedResolution = config.resolutions[$resolutions.find(":selected").val()];
                 changeWindowSize(selectedResolution.width, selectedResolution.height);
             });
         };

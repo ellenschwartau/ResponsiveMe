@@ -2,22 +2,17 @@
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
  */
 define(
-    ['jquery']
+    ['jquery', 'config']
     ,
-    function($) {
-        var baseDir = "modules/",       // Basispfad zu den Modulen
-            modules = [                 // Module, die eingebunden werden sollen
-                "viewport.html",
-                "template.html"
-            ],
-            activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
+    function($, config) {
+        var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
         /**
          * Inkludiert die Module zur Anzeige im Popup.
          */
         var includeModules = function($parentElement) {
-            $.each(modules, function(i, modulePath) {
-                $.get(baseDir + modulePath, function(data) {
+            $.each(config.modules, function(i, modulePath) {
+                $.get(config.baseDir + modulePath, function(data) {
                     var $data = $(data);
                     initModuleDisplay($data);
                     $parentElement.append($data);
