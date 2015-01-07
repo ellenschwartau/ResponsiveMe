@@ -1,0 +1,41 @@
+/**
+ * Definiert das Aussehen von Input Feldern des Typs Range (Schieberegler)
+ */
+input[type=range]{
+  // Alle vordefinierten Styles überschreiben
+  -webkit-appearance: none;
+  width: 75%;
+  margin: 10px 2px;
+}
+
+// Balken
+input[type=range]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: $light-grey;
+  border-radius: 3px;
+}
+
+// Schieber
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: $green;
+  margin-top: -2px;
+
+  &:hover {
+    background: $light-green;
+    cursor: pointer;
+  }
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+// Farbe bei Ändern des Wertes
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}

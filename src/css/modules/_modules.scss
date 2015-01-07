@@ -1,0 +1,29 @@
+/**
+ * Bündelt die Stylesheets aller Modules.
+ */
+
+@import "_viewport.scss";
+
+.item {
+  margin: 5px 0px;
+  border-radius: 5px 5px 5px 5px;
+  padding: 5px;
+}
+
+a.button {
+  color: $light-grey;
+  text-decoration: none;
+  background-color: $green;
+  height: $button-heigth;
+  border-radius: $button-border-radius;
+  padding: $button-padding;
+  line-height: $button-heigth;
+  font-size: 10px;
+  display: inline-block;
+  width: 91%;
+  text-align: center;
+
+  &:hover {
+    background-color: $light-green;
+  }
+}

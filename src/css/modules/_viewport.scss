@@ -1,0 +1,11 @@
+#moduleViewport {
+  .onoffswitch-switch {
+    background: $grey;
+  }
+  .onoffswitch-inner:before {
+    content: "OUTER";
+  }
+  .onoffswitch-inner:after {
+    content: "INNER";
+  }
+}

@@ -1,0 +1,21 @@
+/**
+  * Überschreibt die vordefinierten Styles der Scrollbars.
+  */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+// Scrollbalken
+::-webkit-scrollbar-thumb {
+  background-color: $light-grey;
+  border-radius: 5px;
+}
+
+// Hintergrund der Scrollbar
+::-webkit-scrollbar-track
+// oberes und unteres Ende der Scrollbar (Buttons für nach oben / nach unten)
+, ::-webkit-scrollbar-button
+// Ecke zwischen horizontaler und vertikaler Scrollbar
+, ::-webkit-scrollbar-corner {
+  background-color: $grey;
+}

@@ -5,29 +5,43 @@
     </div>
     <div class="module-content">
         <form action="">
-            <p>
-                Breite des Browsers festlegen:<br>
+            <div class="item">
+                <h3>Angaben inkl./exkl. Browserfenster:</h3>
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchInnerOuter" checked>
+                    <label class="onoffswitch-label" for="switchInnerOuter">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="item">
+                <h3>Breite des Browsers festlegen:</h3>
                 <input id="widthScrollBar" type="range">
                 <span class="currentValue"></span>
-            </p>
-            <p>
-                Höhe des Browsers festlegen:<br>
+            </div>
+            <div class="item">
+                <h3>Höhe des Browsers festlegen:</h3>
                 <input id="heightScrollBar" type="range">
                 <span class="currentValue"></span>
-            </p>
-            <p>
-                Vordefinierte Auflösungen:<br>
+            </div>
+            <div class="item">
+                <h3>Vordefinierte Auflösungen:</h3>
                 <select id="resolutions"></select>
-            </p>
-            <p>
-                <a id="animationButton" class="button" href="#">Breite animieren</a>
+            </div>
+            <div class="item">
+                <h3>Breite animieren</h3>
                 <input id="animationDurationScrollBar" type="range" min="1" max="60" value="1">
-                <span class="currentValue">30s</span>
-            </p>
-            <p>
-                Test Request:<br>
-                <input type="submit" id="sendRequestButton" value="Request senden"/>
-            </p>
+                <span class="currentValue">1s</span>
+                <input id="animationStart" type="number" min="299" max="2500" placeholder="von px"/>
+                <input id="animationEnd" type="number" min="299" max="2500" placeholder="bis px"/>
+                <input id="animationTimes" type="number" min="1" max="20" placeholder="x Mal"/>
+                <a id="animationButton" class="button" href="#">Animation starten</a>
+            </div>
+            <!--<p>-->
+                <!--Test Request:<br>-->
+                <!--<input type="submit" id="sendRequestButton" value="Request senden"/>-->
+            <!--</p>-->
         </form>
     </div>
 </div>

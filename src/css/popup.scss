@@ -1,45 +1,18 @@
 /**
  * Definiert das Styling des Popups.
  */
-
 @import "compass/css3";
-@import "_vars.scss";
+@import "vars";
+@import "includes/includes";
 
-/* --- HTML Elemente --- */
-body {
-  min-width: 300px;
-  background: $dark-grey;
-  color: $light-grey;
-}
-
-h1 {
-  font-family: $font-black;
-  padding-bottom: 10px;
-  border-bottom: $border-dotted;
-  text-align: center;
-}
-
-h2 {
-  font-family: $font-regular;
-  white-space: nowrap;
-  margin: 10px 0px;
-  padding-bottom: 5px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-h2:hover
-, .module.active h2 {
-  padding-bottom: 3px;
-  border-bottom: $border-solid;
-}
-
-/* --- definierte Klassen --- */
 /* --- Module --- */
 #popup-content {
-  padding: 20px;
+  padding: 20px 5px;
+  overflow: auto;
+  max-height: 400px;
+  border-bottom: $border-dotted;
+  border-top: $border-dotted;
+  margin: 0px 10px;
 }
 
 .module {
@@ -50,7 +23,7 @@ h2:hover
 .module-content
 , .module-description {
   padding: 10px;
-  background: $gray;
+  background: $grey;
   font-family: $font-light;
   margin-bottom: inherit;
   display: none;
@@ -67,7 +40,6 @@ h2:hover
 /* --- Footer --- */
 #popup-footer {
   font-family: $font-regular;
-  border-top: $border-dotted;
   padding: 10px 0px;
   margin: 0px 20px;
   text-align: center;
@@ -98,4 +70,39 @@ h2:hover
   text-align: left;
   padding: 0 10% 5px 10%;
   display: none;
+
+  .onoffswitch {
+    width: 145px;
+
+    .onoffswitch-inner {
+      &:before, &:after {
+        width: 46%;
+      }
+    }
+
+    .onoffswitch-switch {
+      right: 123px;
+    }
+
+    &.hints .onoffswitch-label {
+      .onoffswitch-inner:before {
+        content: "Hinweise ausschalten";
+      }
+      .onoffswitch-inner:after {
+        content: "Hinweise einschalten";
+      }
+    }
+
+    &.modules .onoffswitch-label {
+      .onoffswitch-inner:before {
+        content: "Alle ausblenden";
+      }
+      .onoffswitch-inner:after {
+        content: "Alle einblenden";
+      }
+    }
+  }
 }
+
+/* --- einbinden der Module --- */
+@import "modules/modules";

@@ -1,0 +1,95 @@
+/*
+ * Styles für eine Checkbox mit on-off-switch button
+ *
+ * Folgendes HTML muss eingebunden werden:
+
+ <div class="onoffswitch">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchInnerOuter" checked>
+      <label class="onoffswitch-label" for="switchInnerOuter">
+          <span class="onoffswitch-inner"></span>
+          <span class="onoffswitch-switch"></span>
+      </label>
+  </div>
+
+ * Die Beschriftung der labels kann wie folgt überschrieben werden:
+
+   .onoffswitch-inner:before {
+    content: "OUTER";
+  }
+  .onoffswitch-inner:after {
+    content: "INNER";
+  }
+
+ */
+.onoffswitch {
+  position: relative;
+  width: 70px;
+  margin: 3px;
+
+  .onoffswitch-checkbox {
+    display: none;
+
+    &:checked + .onoffswitch-label {
+      & .onoffswitch-inner {
+        margin-left: 0;
+      }
+      .onoffswitch-switch {
+        right: 0px;
+      }
+    }
+  }
+
+  .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: $button-border-radius;
+    height: $button-heigth;
+    line-height: 20px;
+    font-size: 10px;
+    color: $light-grey;
+
+    background-color: $green;
+    &:hover {
+      background-color: $light-green;
+    }
+
+    .onoffswitch-inner {
+      display: block;
+      width: 200%;
+      margin-left: -100%;
+      transition: margin 0.3s ease-in 0s;
+
+      &:before
+      , &:after {
+        display: block;
+        float: left;
+        width: 42%;
+      }
+
+      &:before {
+        content: "ON";
+        padding-left: 10px;
+      }
+
+      &:after {
+        content: "OFF";
+        padding-right: 10px;
+        text-align: right;
+      }
+    }
+
+    .onoffswitch-switch {
+      display: block;
+      width: 15px;
+      margin: 3px;
+      background: $dark-grey;
+      border-radius: 15px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 48px;
+      transition: all 0.3s ease-in 0s;
+    }
+  }
+}

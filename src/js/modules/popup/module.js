@@ -53,7 +53,7 @@ define(
          */
         var initModuleDescriptionDisplay = function($element) {
             var $settings = $("#popup-footer").find(".settings"),
-                $descriptionCb = $settings.find(".showDescriptionCb"),
+                $descriptionCb = $settings.find("#showDescriptionCb"),
                 shouldDisplayDescriptions = $descriptionCb.is(":checked"),
                 toggleDescription = $element.find(".module-description");
             if(shouldDisplayDescriptions) {

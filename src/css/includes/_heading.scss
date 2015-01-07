@@ -1,0 +1,31 @@
+/**
+ * Definiert das Aussehen der Überschriften
+ */
+h1 {
+  font-family: $font-black;
+  padding: 20px 20px 10px 20px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+h2 {
+  font-family: $font-regular;
+  white-space: nowrap;
+  margin: 10px 0px;
+  padding-bottom: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+h2:hover
+, .module.active h2 {
+  padding-bottom: 3px;
+  border-bottom: $border-solid;
+}
+
+h3 {
+  margin: 5px 0px;
+  font-size: 12px;
+}

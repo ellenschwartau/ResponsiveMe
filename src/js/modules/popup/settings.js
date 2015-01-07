@@ -10,8 +10,8 @@ function($, modules) {
     var $content = $("#popup-content"),                             // Wrapper-Element für den Content
         $footer = $("#popup-footer"),                               // Wrapper-Element für den Footer
         $settings = $footer.find(".settings"),                      // Formular, das die Settings enthält
-        $showDescriptionsCb = $settings.find(".showDescriptionCb"), // Checkbox für die Anzeige der Beschreibungen
-        $showAllModulesCb = $settings.find(".showAllModulesCb");    // Checkboc für die Anzeige der Module
+        $showDescriptionsCb = $settings.find("#showDescriptionCb"), // Checkbox für die Anzeige der Beschreibungen
+        $showAllModulesCb = $settings.find("#showAllModulesCb");    // Checkboc für die Anzeige der Module
 
     /**
      * Ein- und Ausblenden der Einstellungen bei Klick auf das Einstelluns-Icon im Footer.

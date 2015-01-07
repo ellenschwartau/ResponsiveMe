@@ -21,55 +21,254 @@
 }
 /* colors */
 /* styles */
-/* --- HTML Elemente --- */
-/* line 9, ../popup.scss */
+/* buttons */
+/**
+ * B├╝ndelt die ├╝bergreifenden Styles.
+ */
+/* line 1, ../includes/_body.scss */
 body {
   min-width: 300px;
   background: #323232;
   color: #ebf2f2;
 }
 
-/* line 15, ../popup.scss */
+/**
+ * Definiert das Aussehen der ├£berschriften
+ */
+/* line 4, ../includes/_heading.scss */
 h1 {
   font-family: "Montserrat Black";
-  padding-bottom: 10px;
-  border-bottom: #3f6658 dotted 2px;
+  padding: 20px 20px 10px 20px;
   text-align: center;
+  margin-bottom: 0px;
 }
 
-/* line 22, ../popup.scss */
+/* line 11, ../includes/_heading.scss */
 h2 {
   font-family: "Montserrat Regular";
   white-space: nowrap;
   margin: 10px 0px;
   padding-bottom: 5px;
 }
-/* line 28, ../popup.scss */
+/* line 17, ../includes/_heading.scss */
 h2:hover {
   cursor: pointer;
 }
 
-/* line 33, ../popup.scss */
+/* line 22, ../includes/_heading.scss */
 h2:hover
 , .module.active h2 {
   padding-bottom: 3px;
   border-bottom: #3f6658 solid 2px;
 }
 
-/* --- definierte Klassen --- */
-/* --- Module --- */
-/* line 41, ../popup.scss */
-#popup-content {
-  padding: 20px;
+/* line 28, ../includes/_heading.scss */
+h3 {
+  margin: 5px 0px;
+  font-size: 12px;
 }
 
-/* line 45, ../popup.scss */
+/**
+ * Enth├ñlt die Styles f├╝r Input Elemente.
+ */
+/**
+ * Definiert das Aussehen von Input Feldern des Typs Range (Schieberegler)
+ */
+/* line 4, ../includes/input/_input-range.scss */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 75%;
+  margin: 10px 2px;
+}
+
+/* line 12, ../includes/input/_input-range.scss */
+input[type=range]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #ebf2f2;
+  border-radius: 3px;
+}
+
+/* line 19, ../includes/input/_input-range.scss */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: #3f6658;
+  margin-top: -2px;
+}
+/* line 28, ../includes/input/_input-range.scss */
+input[type=range]::-webkit-slider-thumb:hover {
+  background: #4f806e;
+  cursor: pointer;
+}
+
+/* line 34, ../includes/input/_input-range.scss */
+input[type=range]:focus {
+  outline: none;
+}
+
+/* line 39, ../includes/input/_input-range.scss */
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+/*
+ * Styles f├╝r eine Checkbox mit on-off-switch button
+ *
+ * Folgendes HTML muss eingebunden werden:
+
+ <div class="onoffswitch">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchInnerOuter" checked>
+      <label class="onoffswitch-label" for="switchInnerOuter">
+          <span class="onoffswitch-inner"></span>
+          <span class="onoffswitch-switch"></span>
+      </label>
+  </div>
+
+ * Die Beschriftung der labels kann wie folgt ├╝berschrieben werden:
+
+   .onoffswitch-inner:before {
+    content: "OUTER";
+  }
+  .onoffswitch-inner:after {
+    content: "INNER";
+  }
+
+ */
+/* line 24, ../includes/input/_input-checkbox.scss */
+.onoffswitch {
+  position: relative;
+  width: 70px;
+  margin: 3px;
+}
+/* line 29, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-checkbox {
+  display: none;
+}
+/* line 33, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+/* line 36, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+/* line 42, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  color: #ebf2f2;
+  background-color: #3f6658;
+}
+/* line 53, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label:hover {
+  background-color: #4f806e;
+}
+/* line 57, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label .onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+/* line 63, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label .onoffswitch-inner:before
+, .onoffswitch .onoffswitch-label .onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 42%;
+}
+/* line 70, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label .onoffswitch-inner:before {
+  content: "ON";
+  padding-left: 10px;
+}
+/* line 75, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label .onoffswitch-inner:after {
+  content: "OFF";
+  padding-right: 10px;
+  text-align: right;
+}
+/* line 82, ../includes/input/_input-checkbox.scss */
+.onoffswitch .onoffswitch-label .onoffswitch-switch {
+  display: block;
+  width: 15px;
+  margin: 3px;
+  background: #323232;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 48px;
+  transition: all 0.3s ease-in 0s;
+}
+
+/* line 1, ../includes/input/_input-number.scss */
+input[type=number] {
+  -webkit-appearance: none;
+  padding: 0px 10px;
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  width: 23%;
+}
+
+/* line 1, ../includes/input/_input-select.scss */
+select {
+  border-radius: 15px;
+  height: 20px;
+  outline: none;
+}
+
+/**
+  * ├£berschreibt die vordefinierten Styles der Scrollbars.
+  */
+/* line 4, ../includes/_scrollbar.scss */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* line 9, ../includes/_scrollbar.scss */
+::-webkit-scrollbar-thumb {
+  background-color: #ebf2f2;
+  border-radius: 5px;
+}
+
+/* line 15, ../includes/_scrollbar.scss */
+::-webkit-scrollbar-track
+, ::-webkit-scrollbar-button
+, ::-webkit-scrollbar-corner {
+  background-color: #40403d;
+}
+
+/* --- Module --- */
+/* line 9, ../popup.scss */
+#popup-content {
+  padding: 20px 5px;
+  overflow: auto;
+  max-height: 400px;
+  border-bottom: #3f6658 dotted 2px;
+  border-top: #3f6658 dotted 2px;
+  margin: 0px 10px;
+}
+
+/* line 18, ../popup.scss */
 .module {
   padding: 5px;
   margin-bottom: 5px;
 }
 
-/* line 50, ../popup.scss */
+/* line 23, ../popup.scss */
 .module-content
 , .module-description {
   padding: 10px;
@@ -79,27 +278,26 @@ h2:hover
   display: none;
 }
 
-/* line 59, ../popup.scss */
+/* line 32, ../popup.scss */
 .module-content {
   border-radius: 5px 5px 5px 5px;
 }
 
-/* line 63, ../popup.scss */
+/* line 36, ../popup.scss */
 .module-description {
   border-radius: 0px 20px 20px 20px;
 }
 
 /* --- Footer --- */
-/* line 68, ../popup.scss */
+/* line 41, ../popup.scss */
 #popup-footer {
   font-family: "Montserrat Regular";
-  border-top: #3f6658 dotted 2px;
   padding: 10px 0px;
   margin: 0px 20px;
   text-align: center;
 }
 
-/* line 76, ../popup.scss */
+/* line 48, ../popup.scss */
 .settings-icon {
   display: inline-block;
   height: 50px;
@@ -109,17 +307,88 @@ h2:hover
   background-position: center;
   background-size: 100%;
 }
-/* line 85, ../popup.scss */
+/* line 57, ../popup.scss */
 .settings-icon:hover {
   background-image: url('../images/icon-settings-light-128px.png');
   cursor: pointer;
 }
 
-/* line 95, ../popup.scss */
+/* line 67, ../popup.scss */
 .settings {
   min-width: 42.5%;
   height: 100%;
   text-align: left;
   padding: 0 10% 5px 10%;
   display: none;
+}
+/* line 74, ../popup.scss */
+.settings .onoffswitch {
+  width: 145px;
+}
+/* line 78, ../popup.scss */
+.settings .onoffswitch .onoffswitch-inner:before, .settings .onoffswitch .onoffswitch-inner:after {
+  width: 46%;
+}
+/* line 83, ../popup.scss */
+.settings .onoffswitch .onoffswitch-switch {
+  right: 123px;
+}
+/* line 88, ../popup.scss */
+.settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:before {
+  content: "Hinweise ausschalten";
+}
+/* line 91, ../popup.scss */
+.settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:after {
+  content: "Hinweise einschalten";
+}
+/* line 97, ../popup.scss */
+.settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:before {
+  content: "Alle ausblenden";
+}
+/* line 100, ../popup.scss */
+.settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:after {
+  content: "Alle einblenden";
+}
+
+/* --- einbinden der Module --- */
+/**
+ * B├╝ndelt die Stylesheets aller Modules.
+ */
+/* line 2, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-switch {
+  background: #40403d;
+}
+/* line 5, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-inner:before {
+  content: "OUTER";
+}
+/* line 8, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-inner:after {
+  content: "INNER";
+}
+
+/* line 7, ../modules/_modules.scss */
+.item {
+  margin: 5px 0px;
+  border-radius: 5px 5px 5px 5px;
+  padding: 5px;
+}
+
+/* line 13, ../modules/_modules.scss */
+a.button {
+  color: #ebf2f2;
+  text-decoration: none;
+  background-color: #3f6658;
+  height: 20px;
+  border-radius: 20px;
+  padding: 0px 10px;
+  line-height: 20px;
+  font-size: 10px;
+  display: inline-block;
+  width: 91%;
+  text-align: center;
+}
+/* line 26, ../modules/_modules.scss */
+a.button:hover {
+  background-color: #4f806e;
 }

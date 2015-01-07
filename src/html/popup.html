@@ -8,15 +8,29 @@
     <script src="../js/main.js"></script>
 </head>
 <body>
+    <h1>ResponsiveMe</h1>
     <div id="popup-content">
-        <h1>ResponsiveMe</h1>
     </div>
     <div id="popup-footer">
         <span class="settings-icon"></span>
         <div class="settings">
             <form action="">
-                <input type="checkbox" class="showAllModulesCb" name="showAllModules">Alle einblenden<br>
-                <input type="checkbox" class="showDescriptionCb" name="showDescription" checked>Beschreibungen
+                <!-- Checkbox Module ein-/ausblenden -->
+                <div class="onoffswitch modules">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="showAllModulesCb">
+                    <label class="onoffswitch-label" for="showAllModulesCb">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+                <!-- Checkbox Beschreibungen -->
+                <div class="onoffswitch hints">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="showDescriptionCb" checked>
+                    <label class="onoffswitch-label" for="showDescriptionCb">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
             </form>
         </div>
     </div>
