@@ -15,6 +15,7 @@ define(
             animationEnd = '#animationEnd',
             animationTimes = '#animationTimes',
             animationButton = '#animationButton',
+            // Fehlermeldung
             MSG_ANIMATION_DATA_MISSING = "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.";
 
         /**
@@ -28,11 +29,13 @@ define(
          * @param changeHeight boolean Angabe, ob der Browser in seiner Höhe manipuliert werden soll
          */
         var initScrollBar = function($scrollbar, max, min, changeWidth, changeHeight) {
+            // Werte initialiseren
             $scrollbar.attr('max', max);
             $scrollbar.attr('min', min);
             $scrollbar.val(min);
             $scrollbar.next().html(min + "px");
 
+            // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
             showScrollBarValue($scrollbar, $scrollbar.next(), "px");
             $scrollbar.change(function() {
                 var value = parseInt($(this).val());
@@ -53,7 +56,8 @@ define(
          */
         var showScrollBarValue = function($scrollbar, $displayElement, unit) {
             $scrollbar.mousemove(function() {
-                // Anzeige aktualisieren
+                // Anzeige aktualisieren, wenn die Maus darüber bewegt wird
+                // (weniger komplex als auf Click + Mousemove, da es hierfür kein Event gibt)
                 $displayElement.html(parseInt($(this).val()) + unit);
             });
         };
@@ -67,7 +71,7 @@ define(
         var initWidthScrollBar = function() {
             var $scrollbar = $(widthScrollBar),         // Schieberegler
                 maxWidth = window.screen.availWidth,    // Maximalbreite des Browsers
-                minWidth = 299;         // Mindest-Breite des Browsers
+                minWidth = 299;                         // Mindest-Breite des Browsers
             initScrollBar($scrollbar, maxWidth, minWidth, true, false);
         };
 
@@ -110,20 +114,25 @@ define(
          * Auch die Anzeige des Aktuell auf dem Schieberegler der Zeitangabe eingestellten Wertes wird initialisiert.
          */
         var initAnimation = function() {
-            var $animationButton = $(animationButton),
-                $animationDuration = $(animationDurationScrollBar),
-                $animationStart = $(animationStart),
-                $animationEnd = $(animationEnd),
-                $animationTimes = $(animationTimes);
+            var $animationButton = $(animationButton),              // Button zum Starten der Animation
+                $animationDuration = $(animationDurationScrollBar), // Regler zum Einstellen der Animationdauer
+                $animationStart = $(animationStart),                // Input zur Angabe der Start-Breite
+                $animationEnd = $(animationEnd),                    // Input zur Angabe der End-Breite
+                $animationTimes = $(animationTimes);                // Input zur Angabe der gewollten Wiederholungen
 
-            showScrollBarValue($animationDuration, $animationDuration.next(), "s");
+            // Anzeige des Zeitwertes initialiseren
+            showScrollBarValue($animationDuration, animationDuration.next(), "s");
+            // Callback zum Starten der Animation initialisieren
             $animationButton.click(function(){
+                // Angaben auslesen
                 var startPx = parseInt($animationStart.val()),
                     endPx = parseInt($animationEnd.val()),
                     times = parseInt($animationTimes.val());
                 if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
+                    // Bei fehlenden Angaben eine Fehlermeldung ausgeben
                     alert(MSG_ANIMATION_DATA_MISSING);
                 } else {
+                    // Animation starten
                     viewportSize.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
                 }
             });
