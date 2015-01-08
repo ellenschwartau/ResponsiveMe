@@ -12,17 +12,80 @@ define(
             doneCalls,          // durchgeführte Wiederholungen
             durationPerCall,    // zur Verfügung stehende Zeit pro Wiederholung
             stepPerMs,          // anzupassende breite pro ms
-            curWidth;           // aktelle Breite
+            curWidth,           // aktelle Breite
+            widthBrowserOffset,
+            heightBrowserOffset,
+            sizesContainBrowserOffset;
+
+        /**
+         * Liefert die Breite,den der Browser einnimmt (z.B. durch Toolbars, oder Scrollbars).
+         */
+        var getWidthBrowserOffsetAsynchronusly = function() {
+            chrome.tabs.executeScript(null,
+                {code:"window.outerWidth - window.innerWidth"},
+                function(results){
+                    // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
+                    widthBrowserOffset = results[0];
+                }
+            );
+        };
+
+        /**
+         * Liefert die Höhe, die der Browser einnimmt (z.B. durch Toolbars oder Scrollbars).
+         */
+        var getHeightBrowserOffsetAsynchronously = function() {
+            chrome.tabs.executeScript(null,
+                {code:"window.outerHeight - window.innerHeight"},
+                function(results){
+                    // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
+                    heightBrowserOffset = results[0];
+                }
+            );
+        };
+
+        /**
+         * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.
+         * @param width                     int         Zielbreite
+         *                                  null        Breite soll sich nicht verändern
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         * @param win                       Window      Browserfenster
+         * @returns int
+         */
+        var calcDestWidth = function(width, containsBrowserOffset, win) {
+            if(width != null) {
+                // Browser-Breite aufaddieren, damit der Content selbst die Zielbreite hat
+                return containsBrowserOffset ? width : width + widthBrowserOffset;
+            }
+            return win.width;
+        };
+
+        /**
+         * Berechnet die Zielhöhe, auf die der Browser skaliert werden muss.
+         * @param height                    int         Zielhöhe
+         *                                  null        Höhe soll sich nicht verändern
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         * @param win                       Window      Browserfenster
+         * @returns int
+         */
+        var calcDestHeight = function(height, containsBrowserOffset, win) {
+            if(height != null) {
+                // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
+                return containsBrowserOffset ? height : height + heightBrowserOffset;
+            }
+            return win.height;
+        };
 
         /**
          * Skaliert das Browserfenster auf die gegebene Breite.
-         * @param width int Zeil-Browser-Breite
+         * @param width                     int         Ziel-Browser-Breite
+         * @param height                    int         Ziel-Browser-Breite
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
          */
-        var changeSize = function(width, height) {
+        var changeSize = function(width, height, containsBrowserOffset) {
             chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function(win){
                 // Position und Maße definieren
-                var destWidth = (width != null) ? width : win.width,
-                    destHeight = (height != null) ? height : win.height,
+                var destWidth = calcDestWidth(width, containsBrowserOffset, win),
+                    destHeight = calcDestHeight(height, containsBrowserOffset, win),
                     updateInfo = {
                         width: destWidth,
                         height: destHeight,
@@ -54,7 +117,7 @@ define(
          */
         var checkForRestart = function() {
             if(doneCalls < wantedCalls) {
-                animateWidth(duration, end, start, wantedCalls, doneCalls);
+                animateWidth(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
             }
         };
 
@@ -66,15 +129,16 @@ define(
          * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
          * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
          */
-        var calcAnimationData = function(animationDuration, startWidth, endWidht, wantedAnimationCalls, doneAnimationCalls) {
+        var calcAnimationData = function(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
             // Zwischenspeichern
             start = startWidth;
-            end = endWidht;
+            end = endWidth;
             start = startWidth;
-            end = endWidht;
+            end = endWidth;
             wantedCalls = wantedAnimationCalls;
             doneCalls = doneAnimationCalls;
             duration = animationDuration;
+            sizesContainBrowserOffset = containsBrowserOffset;
 
             // zusätzliche Berechnungen
             durationPerCall = duration / wantedCalls;
@@ -91,8 +155,8 @@ define(
          * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
          * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
          */
-        var animateWidth = function(animationDuration, startWidth, endWidht, wantedAnimationCalls, doneAnimationCalls) {
-            calcAnimationData(animationDuration, startWidth, endWidht, wantedAnimationCalls, doneAnimationCalls);
+        var animateWidth = function(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
+            calcAnimationData(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset);
             var lastCall = $.now(),     // Zeitpunkt des letzen Animationsschritts
                 currentCall = $.now(),  // Zeitpunkt des aktuellen Animationsschritts
                 timeDist,               // Verstrichene Zeit seit dem letzten Animationsschritts
@@ -102,21 +166,32 @@ define(
             // Anzahl der durchgeführten Animationen erhöhen
             doneCalls++;
             // Ausgangsbreite setzen
-            changeSize(start, null);
+            changeSize(start, null, containsBrowserOffset);
             // Animation durchführen
             interval = window.setInterval(function(){
                 currentCall = $.now();
                 timeDist = currentCall - lastCall,
                 animationDist = stepPerMs * timeDist;
                 curWidth = parseInt(Math.round(start - animationDist));
-                changeSize(curWidth, null);
+                changeSize(curWidth, null, containsBrowserOffset);
                 checkAnimationEnd(interval);
             }, 1);
         };
 
+        /**
+         * Initialisiert die Angaben, wie viel Pixel der Browser horizontal wie auch vertikal einnimmt
+         * (dazu zählen beispielsweise Tool- oder Scrollbars).
+         * Weil die Abfrage Asynchron erfolgt, sollte diese Initialisierung so früh wie möglich stattfinden.
+         */
+        var init = function() {
+            getWidthBrowserOffsetAsynchronusly();
+            getHeightBrowserOffsetAsynchronously();
+        };
+
         return {
             animateWidth: animateWidth,
-            changeSize: changeSize
+            changeSize: changeSize,
+            init: init
         }
     }
 );

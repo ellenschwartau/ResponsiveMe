@@ -15,8 +15,31 @@ define(
             animationEnd = '#animationEnd',
             animationTimes = '#animationTimes',
             animationButton = '#animationButton',
+            innerOuterSwitch ='#switchInnerOuter',
             // Fehlermeldung
-            MSG_ANIMATION_DATA_MISSING = "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.";
+            MSG_ANIMATION_DATA_MISSING = "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
+            // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
+            sizesContainBrowserOffset;
+
+        /**
+         * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
+         * (z.B. Tool- oder Scrolbars) gemacht werden.
+         * @returns boolean
+         */
+        var doSizesContainBrowserOffset = function() {
+            return $(innerOuterSwitch).is(":checked");
+        };
+
+        /**
+         * Liest die Anfangseinstellung des Inner/Outer-Switch aus und setzt den Wert erneut,
+         * wenn die Einstellung geändert wird.
+         */
+        var initInnerOuterSwitch = function() {
+            sizesContainBrowserOffset = doSizesContainBrowserOffset();
+            $(innerOuterSwitch).change(function() {
+                sizesContainBrowserOffset = !sizesContainBrowserOffset;
+            });
+        };
 
         /**
          * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
@@ -40,10 +63,10 @@ define(
             $scrollbar.change(function() {
                 var value = parseInt($(this).val());
                 if(changeWidth) {
-                    viewportSize.changeSize(value, null);
+                    viewportSize.changeSize(value, null, sizesContainBrowserOffset);
                 }
                 if(changeHeight) {
-                    viewportSize.changeSize(null, value);
+                    viewportSize.changeSize(null, value, sizesContainBrowserOffset);
                 }
             });
         };
@@ -99,7 +122,7 @@ define(
             // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
             $resolutions.change(function(){
                var selectedResolution = config.resolutions[$resolutions.find(":selected").val()];
-                viewportSize.changeSize(selectedResolution.width, selectedResolution.height);
+                viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
             });
         };
 
@@ -121,7 +144,7 @@ define(
                 $animationTimes = $(animationTimes);                // Input zur Angabe der gewollten Wiederholungen
 
             // Anzeige des Zeitwertes initialiseren
-            showScrollBarValue($animationDuration, animationDuration.next(), "s");
+            showScrollBarValue($animationDuration, $animationDuration.next(), "s");
             // Callback zum Starten der Animation initialisieren
             $animationButton.click(function(){
                 // Angaben auslesen
@@ -138,32 +161,19 @@ define(
             });
         };
 
-        // TODO rausnehmen
-        //var initRequest = function() {
-        //  $("#sendRequestButton").click(function(){
-        //      chrome.tabs.executeScript(null, {
-        //          file: "/js/modules/viewport/viewport-content-script.js"
-        //      });
-        //  });
-        //
-        //    chrome.tabs.executeScript(null,
-        //        {code:"window.outerWidth"},
-        //        function(results){
-        //          console.log(results);
-        //    });
-        //};
-
         /**
          * Initialisiert das Viewport Modul.
          * Dafür werden die Maximalen Abmessungen auf Grundlage der Bildschirmauflösung gesetzt
          * und die entsprechenden Callbacks zur Manipulation des Browserfensters gesetzt.
          */
         var init = function (){
+            viewportSize.init();
             $(document).ready(function(){
                 initWidthScrollBar();
                 initHeightScrollBar();
                 initResolutionDropDown();
                 initAnimation();
+                initInnerOuterSwitch();
             });
         };
 
