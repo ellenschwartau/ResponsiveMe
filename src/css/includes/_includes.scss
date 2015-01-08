@@ -1,7 +1,8 @@
 /**
  * Bündelt die übergreifenden Styles.
  */
-@import "body";
-@import "heading";
-@import "input/_input";
-@import "scrollbar";
+@import "atoms/body";
+@import "atoms/heading";
+@import "atoms/input/input";
+@import "atoms/scrollbar";
+@import "molecules/on-off-switch";

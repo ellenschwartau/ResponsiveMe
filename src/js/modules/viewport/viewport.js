@@ -166,9 +166,9 @@ define(
                 $animationTimes = $(animationTimes);
             showScrollBarValue($scrollbar, $scrollbar.next(), "s");
             $animationButton.click(function(){
-                var startPx = $animationStart.val(),
-                    endPx = $animationEnd.val(),
-                    times = $animationTimes.val();
+                var startPx = parseInt($animationStart.val()),
+                    endPx = parseInt($animationEnd.val()),
+                    times = parseInt($animationTimes.val());
                 if(startPx === "" || endPx === "" || times === "") {
                     alert("Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.");
                 } else {
