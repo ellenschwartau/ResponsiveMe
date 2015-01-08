@@ -11,7 +11,8 @@ require.config({
         popup: 'modules/popup/popup',
         modules: 'modules/popup/module',
         settings: 'modules/popup/settings',
-        viewport: 'modules/viewport/viewport'
+        viewport: 'modules/viewport/viewport',
+        viewportSize: 'modules/viewport/viewport-size'
     }
 });
 

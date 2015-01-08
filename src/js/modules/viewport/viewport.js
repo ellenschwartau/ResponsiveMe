@@ -3,9 +3,9 @@
  * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
  */
 define(
-    ['jquery', 'config']
+    ['jquery', 'config', 'viewportSize']
 ,
-    function($, config) {
+    function($, config, viewportSize) {
         // Selektoren für die benötigten Elemente
         var widthScrollBar = "#widthScrollBar",
             heightScrollBar = "#heightScrollBar",
@@ -14,7 +14,8 @@ define(
             animationStart = '#animationStart',
             animationEnd = '#animationEnd',
             animationTimes = '#animationTimes',
-            animationButton = '#animationButton';
+            animationButton = '#animationButton',
+            MSG_ANIMATION_DATA_MISSING = "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.";
 
         /**
          * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
@@ -36,10 +37,10 @@ define(
             $scrollbar.change(function() {
                 var value = parseInt($(this).val());
                 if(changeWidth) {
-                    changeWindowSize(value, null);
+                    viewportSize.changeSize(value, null);
                 }
                 if(changeHeight) {
-                    changeWindowSize(null, value);
+                    viewportSize.changeSize(null, value);
                 }
             });
         };
@@ -83,27 +84,6 @@ define(
         };
 
         /**
-         * Skaliert das Browserfenster auf die gegebene Breite.
-         * @param width int Zeil-Browser-Breite
-         */
-        var changeWindowSize = function(width, height) {
-            chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function(win){
-                // Position und Maße definieren
-                var destWidth = (width != null) ? width : win.width,
-                    destHeight = (height != null) ? height : win.height,
-                    updateInfo = {
-                        width: destWidth,
-                        height: destHeight,
-                        top: win.top,
-                        left: win.left,
-                        state: "normal" // auf normal setzen, da im Vollbildmodus nicht skaliert werden kann
-                    };
-                // Fenster aktualisieren
-                chrome.windows.update(chrome.windows.WINDOW_ID_CURRENT, updateInfo);
-            });
-        };
-
-        /**
          * Initialisiert das Dropdown mit den vorgefertigten Auflösugnen.
          */
         var initResolutionDropDown = function() {
@@ -115,64 +95,36 @@ define(
             // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
             $resolutions.change(function(){
                var selectedResolution = config.resolutions[$resolutions.find(":selected").val()];
-                changeWindowSize(selectedResolution.width, selectedResolution.height);
+                viewportSize.changeSize(selectedResolution.width, selectedResolution.height);
             });
         };
 
-        var checkAnimationEnd = function(time, start, end, curWidth, interval, wantedCalls, doneCalls) {
-            if(((start >= end) && (curWidth <= end))
-            || ((start < end) && (curWidth > end))){
-                    window.clearInterval(interval);
-                    checkForRestart(time, start, end, wantedCalls, doneCalls)
-            }
-        };
-
-        var checkForRestart = function(time, start, end, wantedCalls, doneCalls) {
-            if(doneCalls < wantedCalls) {
-                animateWidth(time, end, start, wantedCalls, doneCalls);
-            }
-        };
-
         /**
-         * Animiert die Breite des Browsers.
-         * @param time int Zeit in Sekunden, die die Animation dauern soll
-         * @param start int Start-Breite
-         * @param end int End-Breite
+         * Initialisiert die Animation des Viewports.
+         * Bei Betätigung des Animations-Buttons werden die benötigten Daten:
+         * - Start-Breite
+         * - End-Breite
+         * - Animations-Zeitraum
+         * - Anzahl an Wiederholungen
+         * ausgelesen und die Animation gestartet.
+         * Auch die Anzeige des Aktuell auf dem Schieberegler der Zeitangabe eingestellten Wertes wird initialisiert.
          */
-        var animateWidth = function(time, start, end, wantedCalls, doneCalls) {
-            var timePerCall = time / wantedCalls,
-                dist = start - end,
-                stepPerMs = (dist / timePerCall) / 1000,
-                curWidth = start,
-                lastCall = $.now(),
-                currentCall = $.now();
-            doneCalls++;
-            changeWindowSize(start, null);
-            var interval = window.setInterval(function(){
-                currentCall = $.now();
-                var timeDist = currentCall - lastCall,
-                    animationDist = stepPerMs * timeDist;
-                curWidth = start - animationDist;
-                changeWindowSize(parseInt(Math.round(curWidth)));
-                checkAnimationEnd(time, start, end, curWidth, interval, wantedCalls, doneCalls);
-            }, 1);
-        };
-
         var initAnimation = function() {
             var $animationButton = $(animationButton),
-                $scrollbar = $(animationDurationScrollBar),
+                $animationDuration = $(animationDurationScrollBar),
                 $animationStart = $(animationStart),
                 $animationEnd = $(animationEnd),
                 $animationTimes = $(animationTimes);
-            showScrollBarValue($scrollbar, $scrollbar.next(), "s");
+
+            showScrollBarValue($animationDuration, $animationDuration.next(), "s");
             $animationButton.click(function(){
                 var startPx = parseInt($animationStart.val()),
                     endPx = parseInt($animationEnd.val()),
                     times = parseInt($animationTimes.val());
-                if(startPx === "" || endPx === "" || times === "") {
-                    alert("Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.");
+                if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
+                    alert(MSG_ANIMATION_DATA_MISSING);
                 } else {
-                    animateWidth($scrollbar.val(), startPx, endPx, times, 0);
+                    viewportSize.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
                 }
             });
         };
