@@ -48,15 +48,14 @@ define(
          * @param width                     int         Zielbreite
          *                                  null        Breite soll sich nicht verändern
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
-         * @param win                       Window      Browserfenster
          * @returns int
          */
-        var calcDestWidth = function(width, containsBrowserOffset, win) {
+        var calcDestWidth = function(width, containsBrowserOffset) {
             if(width != null) {
                 // Browser-Breite aufaddieren, damit der Content selbst die Zielbreite hat
                 return containsBrowserOffset ? width : width + widthBrowserOffset;
             }
-            return win.width;
+            return width;
         };
 
         /**
@@ -64,28 +63,45 @@ define(
          * @param height                    int         Zielhöhe
          *                                  null        Höhe soll sich nicht verändern
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
-         * @param win                       Window      Browserfenster
          * @returns int
          */
-        var calcDestHeight = function(height, containsBrowserOffset, win) {
+        var calcDestHeight = function(height, containsBrowserOffset) {
             if(height != null) {
                 // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
                 return containsBrowserOffset ? height : height + heightBrowserOffset;
             }
-            return win.height;
+            return height;
         };
 
         /**
-         * Skaliert das Browserfenster auf die gegebene Breite.
-         * @param width                     int         Ziel-Browser-Breite
-         * @param height                    int         Ziel-Browser-Breite
-         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         * Passt die aktuelle Anzeige je nach Einstellung des Inner/Outer-Switch an,
+         * die Breite und Höhe der Browserelemente werden also zur Größe dazuaddiert oder abgezogen.
+         * @param containsBrowserOffset  boolean  Angabe, ob die Größenangaben die Größte der
+         *                                        Browserelemente (z.B. Toolbar) mit einbezieht
          */
-        var changeSize = function(width, height, containsBrowserOffset) {
+        var toggleInnerOuter = function(containsBrowserOffset) {
             chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function(win){
+                // Im Falle dass containsBrowserOffset true:
+                // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
+                // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
+                var width = win.width,
+                    height = win.height;
+                if(containsBrowserOffset) {
+                    width -= widthBrowserOffset;
+                    height -= heightBrowserOffset;
+                } else {
+                    width += widthBrowserOffset;
+                    height += heightBrowserOffset;
+                }
+                changeSize(width, height);
+            });
+        };
+
+        var changeSize = function(width, height) {
+            chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function (win) {
                 // Position und Maße definieren
-                var destWidth = calcDestWidth(width, containsBrowserOffset, win),
-                    destHeight = calcDestHeight(height, containsBrowserOffset, win),
+                var destWidth = (width != null) ? width : win.width,
+                    destHeight = (height != null) ? height : win.height,
                     updateInfo = {
                         width: destWidth,
                         height: destHeight,
@@ -96,6 +112,16 @@ define(
                 // Fenster aktualisieren
                 chrome.windows.update(chrome.windows.WINDOW_ID_CURRENT, updateInfo);
             });
+        };
+
+        /**
+         * Skaliert das Browserfenster auf die gegebene Breite.
+         * @param width                     int         Ziel-Browser-Breite
+         * @param height                    int         Ziel-Browser-Breite
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         */
+        var calcAndChangeSize = function(width, height, containsBrowserOffset) {
+            changeSize(calcDestWidth(width, containsBrowserOffset), calcDestHeight(height, containsBrowserOffset));
         };
 
         /**
@@ -190,7 +216,8 @@ define(
 
         return {
             animateWidth: animateWidth,
-            changeSize: changeSize,
+            changeSize: calcAndChangeSize,
+            toggleInnerOuter: toggleInnerOuter,
             init: init
         }
     }

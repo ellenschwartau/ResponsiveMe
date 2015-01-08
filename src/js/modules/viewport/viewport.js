@@ -38,6 +38,7 @@ define(
             sizesContainBrowserOffset = doSizesContainBrowserOffset();
             $(innerOuterSwitch).change(function() {
                 sizesContainBrowserOffset = !sizesContainBrowserOffset;
+                viewportSize.toggleInnerOuter(sizesContainBrowserOffset);
             });
         };
 
