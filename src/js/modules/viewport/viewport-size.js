@@ -12,9 +12,7 @@ define(
             doneCalls,          // durchgeführte Wiederholungen
             durationPerCall,    // zur Verfügung stehende Zeit pro Wiederholung
             stepPerMs,          // anzupassende breite pro ms
-            curWidth,           // aktelle Breite
-            lastCall,           // Zeitpunkt des letzen Animationsschritts
-            currentCall;        // Zeitpunkt des aktuellen Animationsschritts
+            curWidth;           // aktelle Breite
 
         /**
          * Skaliert das Browserfenster auf die gegebene Breite.
@@ -83,7 +81,6 @@ define(
             var dist = start - end;
             stepPerMs = (dist / durationPerCall) / 1000;
             curWidth = start;
-
         };
 
         /**
