@@ -64,10 +64,10 @@ define(
             $scrollbar.change(function() {
                 var value = parseInt($(this).val());
                 if(changeWidth) {
-                    viewportSize.changeSize(value, null, sizesContainBrowserOffset);
+                    viewportSize.changeWidth(value, sizesContainBrowserOffset);
                 }
                 if(changeHeight) {
-                    viewportSize.changeSize(null, value, sizesContainBrowserOffset);
+                    viewportSize.changeHeight(value, sizesContainBrowserOffset);
                 }
             });
         };

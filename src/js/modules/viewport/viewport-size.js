@@ -1,10 +1,10 @@
 /**
- * Stellt Funktionen zur Animation der Browser-Breite bereit.
+ * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
  */
 define(
-    ['jquery']
+    ['jquery', 'browserOffset']
     ,
-    function($) {
+    function($, browserOffset) {
         var start,                  // Start-Breite
             end,                    // End-Breite
             duration,               // Zur Verfügung stehende Zeit
@@ -13,64 +13,28 @@ define(
             durationPerCall,        // zur Verfügung stehende Zeit pro Wiederholung
             stepPerMs,              // anzupassende breite pro ms
             curWidth,               // aktelle Breite
-            widthBrowserOffset,     // Breite, die der Browser einnimmt
-            heightBrowserOffset,    // Höhe, die der Browser einnimmt
             sizesContainBrowserOffset;  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
-
-        /**
-         * Liefert die Breite,den der Browser einnimmt (z.B. durch Toolbars, oder Scrollbars).
-         */
-        var getWidthBrowserOffsetAsynchronusly = function() {
-            chrome.tabs.executeScript(null,
-                {code:"window.outerWidth - window.innerWidth"},
-                function(results){
-                    // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
-                    widthBrowserOffset = results[0];
-                }
-            );
-        };
-
-        /**
-         * Liefert die Höhe, die der Browser einnimmt (z.B. durch Toolbars oder Scrollbars).
-         */
-        var getHeightBrowserOffsetAsynchronously = function() {
-            chrome.tabs.executeScript(null,
-                {code:"window.outerHeight - window.innerHeight"},
-                function(results){
-                    // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
-                    heightBrowserOffset = results[0];
-                }
-            );
-        };
 
         /**
          * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.
          * @param width                     int         Zielbreite
-         *                                  null        Breite soll sich nicht verändern
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
          * @returns int
          */
         var calcDestWidth = function(width, containsBrowserOffset) {
-            if(width != null) {
-                // Browser-Breite aufaddieren, damit der Content selbst die Zielbreite hat
-                return containsBrowserOffset ? width : width + widthBrowserOffset;
-            }
-            return width;
+            // Browser-Breite aufaddieren, damit der Content selbst die Zielbreite hat
+            return containsBrowserOffset ? width : width + browserOffset.getWidth();
         };
 
         /**
          * Berechnet die Zielhöhe, auf die der Browser skaliert werden muss.
          * @param height                    int         Zielhöhe
-         *                                  null        Höhe soll sich nicht verändern
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
          * @returns int
          */
         var calcDestHeight = function(height, containsBrowserOffset) {
-            if(height != null) {
-                // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
-                return containsBrowserOffset ? height : height + heightBrowserOffset;
-            }
-            return height;
+            // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
+            return containsBrowserOffset ? height : height + browserOffset.getHeight();
         };
 
         /**
@@ -80,18 +44,18 @@ define(
          *                                        Browserelemente (z.B. Toolbar) mit einbezieht
          */
         var toggleInnerOuter = function(containsBrowserOffset) {
-            chrome.windows.getCurrent(function(win){
+            chrome.windows.getCurrent(function(window){
                 // Im Falle dass containsBrowserOffset true:
                 // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
                 // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
-                var width = win.width,
-                    height = win.height;
+                var width = window.width,
+                    height = window.height;
                 if(containsBrowserOffset) {
-                    width -= widthBrowserOffset;
-                    height -= heightBrowserOffset;
+                    width -= browserOffset.getWidth();
+                    height -= browserOffset.getHeight();
                 } else {
-                    width += widthBrowserOffset;
-                    height += heightBrowserOffset;
+                    width += browserOffset.getWidth();
+                    height += browserOffset.getHeight();
                 }
                 changeSize(width, height);
             });
@@ -100,33 +64,70 @@ define(
         /**
          * Skaliert das Browser-Fenster mit Hilfe der chrome.windows-API.
          * @param width     int     Breite, auf die der Browser skaliert werden soll
-         *                          null, wenn die aktuelle Breite beibehalten werden soll
          * @param height    int     Höhe, auf die der Browser skaliert werden soll
-         *                          null, wenn die aktuelle Höhe beibehalten werden soll
          */
         var changeSize = function(width, height) {
-            chrome.windows.getCurrent(function (win) {
-                // Position und Maße definieren
-                var destWidth = (width != null) ? width : win.width,
-                    destHeight = (height != null) ? height : win.height,
-                    updateInfo = {
-                        width: destWidth,
-                        height: destHeight,
-                        state: "normal" // auf normal setzen, da im Vollbildmodus nicht skaliert werden kann
-                    };
-                // Fenster aktualisieren
-                chrome.windows.update(chrome.windows.WINDOW_ID_CURRENT, updateInfo);
+            updateWindowSize({
+                width: width,
+                height: height
             });
         };
 
         /**
-         * Skaliert das Browserfenster auf die gegebene Breite.
+         * Skaliert die Breite des Browsers.
+         * @param width     int     Breite, auf die der Browser skaliert werden soll
+         */
+        var changeWidth = function(width) {
+            updateWindowSize({
+                width: width
+            });
+        };
+
+        /**
+         * Skaliert die Höhe des Browsers.
+         * @param height    int     Höhe, auf die der Browser skaliert werden soll
+         */
+        var changeHeight = function(height) {
+            updateWindowSize({
+                height: height
+            });
+        };
+
+        /**
+         * Aktualisiert das Browserfenster mit der gegebenen Information.
+         * @param updateInfo    Object  in JSON angegebene Attribute des Browserfensters
+         */
+        var updateWindowSize = function(updateInfo) {
+            updateInfo.state = "normal";
+            chrome.windows.update(chrome.windows.WINDOW_ID_CURRENT, updateInfo);
+        };
+
+        /**
+         * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebenen Maße.
          * @param width                     int         Ziel-Browser-Breite
          * @param height                    int         Ziel-Browser-Breite
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
          */
         var calcAndChangeSize = function(width, height, containsBrowserOffset) {
             changeSize(calcDestWidth(width, containsBrowserOffset), calcDestHeight(height, containsBrowserOffset));
+        };
+
+        /**
+         * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebene Breite.
+         * @param width                     int         Ziel-Browser-Breite
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         */
+        var calcAndChangeWidth = function(width, containsBrowserOffset) {
+            changeWidth(calcDestWidth(width, containsBrowserOffset));
+        };
+
+        /**
+         * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebene Hlhe.
+         * @param height                     int        Ziel-Browser-Höhe
+         * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
+         */
+        var calcAndChangeHeight = function(height, containsBrowserOffset) {
+            changeHeight(calcDestHeight(height, containsBrowserOffset));
         };
 
         /**
@@ -201,14 +202,14 @@ define(
             // Anzahl der durchgeführten Animationen erhöhen
             doneCalls++;
             // Ausgangsbreite setzen
-            changeSize(start, null, containsBrowserOffset);
+            changeSize(start, containsBrowserOffset);
             // Animation durchführen
             interval = window.setInterval(function(){
                 currentCall = $.now();
                 timeDist = currentCall - lastCall,
                 animationDist = stepPerMs * timeDist;
                 curWidth = parseInt(Math.round(start - animationDist));
-                changeSize(curWidth, null, containsBrowserOffset);
+                calcAndChangeWidth(curWidth, containsBrowserOffset);
                 checkAnimationEnd(interval);
             }, 1);
         };
@@ -219,13 +220,14 @@ define(
          * Weil die Abfrage Asynchron erfolgt, sollte diese Initialisierung so früh wie möglich stattfinden.
          */
         var init = function() {
-            getWidthBrowserOffsetAsynchronusly();
-            getHeightBrowserOffsetAsynchronously();
+            browserOffset.init();
         };
 
         return {
             animateWidth: animateWidth,
             changeSize: calcAndChangeSize,
+            changeWidth: calcAndChangeWidth,
+            changeHeight: calcAndChangeHeight,
             toggleInnerOuter: toggleInnerOuter,
             init: init
         }

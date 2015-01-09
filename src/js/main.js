@@ -12,7 +12,8 @@ require.config({
         modules: 'popup/module',
         settings: 'popup/settings',
         viewport: 'modules/viewport/viewport',
-        viewportSize: 'modules/viewport/viewport-size'
+        viewportSize: 'modules/viewport/viewport-size',
+        browserOffset: 'modules/viewport/browser-offset'
     }
 });
 
