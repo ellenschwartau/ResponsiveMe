@@ -38,10 +38,18 @@ define(
             );
         };
 
+        /**
+         * Liefert den Breiten-Offset in Pixeln, den der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
+         * @returns int
+         */
         var getWidth = function() {
           return offsetWidth;
         };
 
+        /**
+         * Liefert den Höhen-Offset in Pixeln, den der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
+         * @returns int
+         */
         var getHeight = function() {
             return offsetHeight;
         };
