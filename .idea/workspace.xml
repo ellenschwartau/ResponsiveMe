@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="">
+    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="TODOs aufgeräumt">
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\copyright\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\rebel_project.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/popup/popup.js" afterPath="$PROJECT_DIR$/src/js/popup/popup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ResponsiveMe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,16 +39,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="viewport.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/modules/viewport/viewport.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="3230">
-              <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_viewport.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/css/modules/_viewport.scss">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,11 +99,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="popup.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="popup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/popup/popup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26240352" vertical-offset="0" max-vertical-offset="907">
-              <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+              <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.018743109" vertical-offset="0" max-vertical-offset="907">
+              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -143,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/css/images/inject.css" />
         <option value="$PROJECT_DIR$/src/css/styles.css" />
         <option value="$PROJECT_DIR$/src/js/modules/test.js" />
         <option value="$PROJECT_DIR$/src/js/modules/width/test.js" />
@@ -194,6 +203,7 @@
         <option value="$PROJECT_DIR$/src/js/modules/config.js" />
         <option value="$PROJECT_DIR$/src/manifest.json" />
         <option value="$PROJECT_DIR$/src/js/popup/popup.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -248,82 +258,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="popup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -604,7 +538,7 @@
       <workItem from="1420537116745" duration="493000" />
       <workItem from="1420537698655" duration="9471000" />
       <workItem from="1420622231264" duration="23875000" />
-      <workItem from="1420798107436" duration="9403000" />
+      <workItem from="1420798107436" duration="9669000" />
     </task>
     <task id="LOCAL-00001" summary="Require js eingebaut&#10;Styling des Popups begonnen">
       <created>1419778191850</created>
@@ -714,11 +648,17 @@
       <option name="project" value="LOCAL" />
       <updated>1420826973047</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="TODOs aufgeräumt">
+      <created>1420827011986</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1420827011986</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119883000" />
+    <option name="totallyTimeSpent" value="120149000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1696" height="1066" extended-state="6" />
@@ -753,6 +693,9 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32573727" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -786,7 +729,8 @@
     <MESSAGE value="Styling der Input Elemente, der Scrollbar und des Viewport-Moduls. Animation der Bildschirmbreite, mit Angabe des Start- und Endwerts, sowie die Anzahl an wiederholungen." />
     <MESSAGE value="Ändern des hellen Graus in ein richtiges grau (ohne überwiegenden Blau-Anteil), anpassen der Pfade in der input.scss" />
     <MESSAGE value="popip skripte aus modules-Unterordner raus&#10;contentScripte aufgeräumt" />
-    <option name="LAST_COMMIT_MESSAGE" value="popip skripte aus modules-Unterordner raus&#10;contentScripte aufgeräumt" />
+    <MESSAGE value="TODOs aufgeräumt" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODOs aufgeräumt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1109,8 +1053,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/popup/popup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26240352" vertical-offset="0" max-vertical-offset="907">
-          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.018743109" vertical-offset="0" max-vertical-offset="907">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
           <folding />
         </state>
       </provider>

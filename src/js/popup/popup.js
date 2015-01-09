@@ -1,6 +1,7 @@
 /**
  * Javascript der popup.html - initialisiert das Popup.
  * Die verfügbaren Module werden geladen und die Settings initialisiert.
+ *
  */
 define(
     ['jquery', 'modules', 'settings']
