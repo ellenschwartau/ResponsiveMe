@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\copyright\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\scopes\scope_settings.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="ResponsiveMe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -279,6 +280,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ResponsiveMe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ResponsiveMe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -560,7 +575,7 @@
       <workItem from="1420537116745" duration="493000" />
       <workItem from="1420537698655" duration="9471000" />
       <workItem from="1420622231264" duration="23875000" />
-      <workItem from="1420798107436" duration="10010000" />
+      <workItem from="1420798107436" duration="10131000" />
     </task>
     <task id="LOCAL-00001" summary="Require js eingebaut&#10;Styling des Popups begonnen">
       <created>1419778191850</created>
@@ -688,11 +703,17 @@
       <option name="project" value="LOCAL" />
       <updated>1420827407899</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="workspace.xml aus git raus">
+      <created>1420827614337</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1420827614337</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120490000" />
+    <option name="totallyTimeSpent" value="120611000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1696" height="1066" extended-state="6" />
@@ -765,7 +786,8 @@
     <MESSAGE value="popip skripte aus modules-Unterordner raus&#10;contentScripte aufgeräumt" />
     <MESSAGE value="TODOs aufgeräumt" />
     <MESSAGE value="gitignore und .idea Ordner aus git raus" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore und .idea Ordner aus git raus" />
+    <MESSAGE value="workspace.xml aus git raus" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml aus git raus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
