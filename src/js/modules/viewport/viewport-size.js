@@ -5,17 +5,7 @@ define(
     ['jquery', 'browserOffset']
     ,
     function($, browserOffset) {
-        var start,                  // Start-Breite
-            end,                    // End-Breite
-            duration,               // Zur Verfügung stehende Zeit
-            wantedCalls,            // gewünschte Wiederholungen
-            doneCalls,              // durchgeführte Wiederholungen
-            durationPerCall,        // zur Verfügung stehende Zeit pro Wiederholung
-            stepPerMs,              // anzupassende breite pro ms
-            curWidth,               // aktelle Breite
-            sizesContainBrowserOffset;  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
-
-        /**
+         /**
          * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.
          * @param width                     int         Zielbreite
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
@@ -35,30 +25,6 @@ define(
         var calcDestHeight = function(height, containsBrowserOffset) {
             // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
             return containsBrowserOffset ? height : height + browserOffset.getHeight();
-        };
-
-        /**
-         * Passt die aktuelle Anzeige je nach Einstellung des Inner/Outer-Switch an,
-         * die Breite und Höhe der Browserelemente werden also zur Größe dazuaddiert oder abgezogen.
-         * @param containsBrowserOffset  boolean  Angabe, ob die Größenangaben die Größte der
-         *                                        Browserelemente (z.B. Toolbar) mit einbezieht
-         */
-        var toggleInnerOuter = function(containsBrowserOffset) {
-            chrome.windows.getCurrent(function(window){
-                // Im Falle dass containsBrowserOffset true:
-                // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
-                // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
-                var width = window.width,
-                    height = window.height;
-                if(containsBrowserOffset) {
-                    width -= browserOffset.getWidth();
-                    height -= browserOffset.getHeight();
-                } else {
-                    width += browserOffset.getWidth();
-                    height += browserOffset.getHeight();
-                }
-                changeSize(width, height);
-            });
         };
 
         /**
@@ -131,87 +97,27 @@ define(
         };
 
         /**
-         * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
-         * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde.
-         * @param interval ID des Intervalls, das die Animation durchführt
+         * Passt die aktuelle Anzeige je nach Einstellung des Inner/Outer-Switch an,
+         * die Breite und Höhe der Browserelemente werden also zur Größe dazuaddiert oder abgezogen.
+         * @param containsBrowserOffset  boolean  Angabe, ob die Größenangaben die Größte der
+         *                                        Browserelemente (z.B. Toolbar) mit einbezieht
          */
-        var checkAnimationEnd = function(interval) {
-            if(((start >= end) && (curWidth <= end))
-                || ((start < end) && (curWidth > end))){
-                window.clearInterval(interval);
-                checkForRestart();
-            }
-        };
-
-        /**
-         * Startet die Animation erneut mit vertauschtem Start- und Endwert,
-         * wenn die gewollte Anzahl an Wiederholungen noch nicht erreicht wurde.
-         */
-        var checkForRestart = function() {
-            if(doneCalls < wantedCalls) {
-                animateWidth(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
-            }
-        };
-
-        /**
-         * Speichert die Eckdaten der Animation zwischen.
-         * @param animationDuration     int zur Verfügung stehende Zeit
-         * @param startWidth            int Startbreite
-         * @param endWidth              int Endbreite
-         * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
-         * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
-         */
-        var calcAnimationData = function(animationDuration, startWidth, endWidth,
-                                         wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-            // Zwischenspeichern
-            start = startWidth;
-            end = endWidth;
-            start = startWidth;
-            end = endWidth;
-            wantedCalls = wantedAnimationCalls;
-            doneCalls = doneAnimationCalls;
-            duration = animationDuration;
-            sizesContainBrowserOffset = containsBrowserOffset;
-
-            // zusätzliche Berechnungen
-            durationPerCall = duration / wantedCalls;
-            var dist = start - end;
-            stepPerMs = (dist / durationPerCall) / 1000;
-            curWidth = start;
-        };
-
-        /**
-         * Animiert die Breite des Browsers.
-         * @param animationDuration     int zur Verfügung stehende Zeit
-         * @param startWidth            int Startbreite
-         * @param endWidth              int Endbreite
-         * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
-         * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
-         */
-        var animateWidth = function(animationDuration, startWidth, endWidth,
-                                    wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-            calcAnimationData(
-                animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
-            );
-            var lastCall = $.now(),     // Zeitpunkt des letzen Animationsschritts
-                currentCall = $.now(),  // Zeitpunkt des aktuellen Animationsschritts
-                timeDist,               // Verstrichene Zeit seit dem letzten Animationsschritts
-                animationDist,          // Notwendige Anpassung der Breite in Relation zur verstrichenen Zeit
-                interval;               // ID des Callback, der die Animation ausführt
-
-            // Anzahl der durchgeführten Animationen erhöhen
-            doneCalls++;
-            // Ausgangsbreite setzen
-            changeSize(start, containsBrowserOffset);
-            // Animation durchführen
-            interval = window.setInterval(function(){
-                currentCall = $.now();
-                timeDist = currentCall - lastCall,
-                animationDist = stepPerMs * timeDist;
-                curWidth = parseInt(Math.round(start - animationDist));
-                calcAndChangeWidth(curWidth, containsBrowserOffset);
-                checkAnimationEnd(interval);
-            }, 1);
+        var toggleInnerOuter = function(containsBrowserOffset) {
+            chrome.windows.getCurrent(function(window){
+                // Im Falle dass containsBrowserOffset true:
+                // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
+                // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
+                var width = window.width,
+                    height = window.height;
+                if(containsBrowserOffset) {
+                    width -= browserOffset.getWidth();
+                    height -= browserOffset.getHeight();
+                } else {
+                    width += browserOffset.getWidth();
+                    height += browserOffset.getHeight();
+                }
+                changeSize(width, height);
+            });
         };
 
         /**
@@ -224,7 +130,6 @@ define(
         };
 
         return {
-            animateWidth: animateWidth,
             changeSize: calcAndChangeSize,
             changeWidth: calcAndChangeWidth,
             changeHeight: calcAndChangeHeight,

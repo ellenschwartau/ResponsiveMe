@@ -12,6 +12,7 @@ require.config({
         modules: 'popup/module',
         settings: 'popup/settings',
         viewport: 'modules/viewport/viewport',
+        viewportAnimation: 'modules/viewport/viewport-animation',
         viewportSize: 'modules/viewport/viewport-size',
         browserOffset: 'modules/viewport/browser-offset'
     }

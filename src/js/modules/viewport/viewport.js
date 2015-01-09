@@ -3,9 +3,9 @@
  * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
  */
 define(
-    ['jquery', 'config', 'viewportSize']
+    ['jquery', 'config', 'viewportSize', 'viewportAnimation']
 ,
-    function($, config, viewportSize) {
+    function($, config, viewportSize, viewportAnimation) {
         // Selektoren für die benötigten Elemente
         var widthScrollBar = "#widthScrollBar",
             heightScrollBar = "#heightScrollBar",
@@ -157,7 +157,7 @@ define(
                     alert(MSG_ANIMATION_DATA_MISSING);
                 } else {
                     // Animation starten
-                    viewportSize.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
+                    viewportAnimation.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
                 }
             });
         };
@@ -169,6 +169,7 @@ define(
          */
         var init = function (){
             viewportSize.init();
+            viewportAnimation.init();
             $(document).ready(function(){
                 initWidthScrollBar();
                 initHeightScrollBar();
