@@ -112,8 +112,6 @@ define(
                     updateInfo = {
                         width: destWidth,
                         height: destHeight,
-                        top: win.top,
-                        left: win.left,
                         state: "normal" // auf normal setzen, da im Vollbildmodus nicht skaliert werden kann
                     };
                 // Fenster aktualisieren
