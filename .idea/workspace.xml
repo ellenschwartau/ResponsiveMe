@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="TODOs aufgeräumt">
+    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\.name" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\compiler.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\copyright\profiles_settings.xml" afterPath="" />
@@ -13,7 +14,6 @@
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\uiDesigner.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\.idea\workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/popup/popup.js" afterPath="$PROJECT_DIR$/src/js/popup/popup.js" />
     </list>
     <ignored path="ResponsiveMe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -241,7 +241,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -263,6 +262,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -538,7 +538,7 @@
       <workItem from="1420537116745" duration="493000" />
       <workItem from="1420537698655" duration="9471000" />
       <workItem from="1420622231264" duration="23875000" />
-      <workItem from="1420798107436" duration="9669000" />
+      <workItem from="1420798107436" duration="9802000" />
     </task>
     <task id="LOCAL-00001" summary="Require js eingebaut&#10;Styling des Popups begonnen">
       <created>1419778191850</created>
@@ -654,11 +654,17 @@
       <option name="project" value="LOCAL" />
       <updated>1420827011986</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="TODOs aufgeräumt">
+      <created>1420827276294</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1420827276294</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120149000" />
+    <option name="totallyTimeSpent" value="120282000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1696" height="1066" extended-state="6" />
