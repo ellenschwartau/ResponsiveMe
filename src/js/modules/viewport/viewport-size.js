@@ -5,17 +5,17 @@ define(
     ['jquery']
     ,
     function($) {
-        var start,              // Start-Breite
-            end,                // End-Breite
-            duration,           // Zur Verfügung stehende Zeit
-            wantedCalls,        // gewünschte Wiederholungen
-            doneCalls,          // durchgeführte Wiederholungen
-            durationPerCall,    // zur Verfügung stehende Zeit pro Wiederholung
-            stepPerMs,          // anzupassende breite pro ms
-            curWidth,           // aktelle Breite
-            widthBrowserOffset,
-            heightBrowserOffset,
-            sizesContainBrowserOffset;
+        var start,                  // Start-Breite
+            end,                    // End-Breite
+            duration,               // Zur Verfügung stehende Zeit
+            wantedCalls,            // gewünschte Wiederholungen
+            doneCalls,              // durchgeführte Wiederholungen
+            durationPerCall,        // zur Verfügung stehende Zeit pro Wiederholung
+            stepPerMs,              // anzupassende breite pro ms
+            curWidth,               // aktelle Breite
+            widthBrowserOffset,     // Breite, die der Browser einnimmt
+            heightBrowserOffset,    // Höhe, die der Browser einnimmt
+            sizesContainBrowserOffset;  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
 
         /**
          * Liefert die Breite,den der Browser einnimmt (z.B. durch Toolbars, oder Scrollbars).
@@ -155,7 +155,8 @@ define(
          * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
          * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
          */
-        var calcAnimationData = function(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
+        var calcAnimationData = function(animationDuration, startWidth, endWidth,
+                                         wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
             // Zwischenspeichern
             start = startWidth;
             end = endWidth;
@@ -181,8 +182,11 @@ define(
          * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
          * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
          */
-        var animateWidth = function(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-            calcAnimationData(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset);
+        var animateWidth = function(animationDuration, startWidth, endWidth,
+                                    wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
+            calcAnimationData(
+                animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
+            );
             var lastCall = $.now(),     // Zeitpunkt des letzen Animationsschritts
                 currentCall = $.now(),  // Zeitpunkt des aktuellen Animationsschritts
                 timeDist,               // Verstrichene Zeit seit dem letzten Animationsschritts
