@@ -80,7 +80,7 @@ define(
          *                                        Browserelemente (z.B. Toolbar) mit einbezieht
          */
         var toggleInnerOuter = function(containsBrowserOffset) {
-            chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function(win){
+            chrome.windows.getCurrent(function(win){
                 // Im Falle dass containsBrowserOffset true:
                 // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
                 // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
@@ -97,8 +97,15 @@ define(
             });
         };
 
+        /**
+         * Skaliert das Browser-Fenster mit Hilfe der chrome.windows-API.
+         * @param width     int     Breite, auf die der Browser skaliert werden soll
+         *                          null, wenn die aktuelle Breite beibehalten werden soll
+         * @param height    int     Höhe, auf die der Browser skaliert werden soll
+         *                          null, wenn die aktuelle Höhe beibehalten werden soll
+         */
         var changeSize = function(width, height) {
-            chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, function (win) {
+            chrome.windows.getCurrent(function (win) {
                 // Position und Maße definieren
                 var destWidth = (width != null) ? width : win.width,
                     destHeight = (height != null) ? height : win.height,
