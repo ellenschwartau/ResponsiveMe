@@ -27,10 +27,7 @@
     "matches": ["https://*/*", "http://*/*"], // <all_urls>
     "css": ["./css/stylesheets/inject.css"],
     "js": [
-      // libs
       "/js/libs/require.js",
-      "/js/libs/jquery-1.11.2.min.js",
-      "/js/main.js",
       "/js/inject.js"
     ]
   }],

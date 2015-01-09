@@ -360,11 +360,11 @@ select {
 }
 /* line 5, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-inner:before {
-  content: "ON";
+  content: "OUTER";
 }
 /* line 8, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-inner:after {
-  content: "OFF";
+  content: "INNER";
 }
 
 /* line 7, ../modules/_modules.scss */
