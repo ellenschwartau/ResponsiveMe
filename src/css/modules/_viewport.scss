@@ -3,9 +3,9 @@
     background: $grey;
   }
   .onoffswitch-inner:before {
-    content: "OUTER";
+    content: "ON";
   }
   .onoffswitch-inner:after {
-    content: "INNER";
+    content: "OFF";
   }
 }

@@ -25,17 +25,17 @@
 /**
  * B├╝ndelt die ├╝bergreifenden Styles.
  */
-/* line 1, ../includes/_body.scss */
+/* line 1, ../includes/atoms/_body.scss */
 body {
   min-width: 300px;
   background: #323232;
-  color: #ebf2f2;
+  color: #f2f2f2;
 }
 
 /**
  * Definiert das Aussehen der ├£berschriften
  */
-/* line 4, ../includes/_heading.scss */
+/* line 4, ../includes/atoms/_heading.scss */
 h1 {
   font-family: "Montserrat Black";
   padding: 20px 20px 10px 20px;
@@ -43,26 +43,26 @@ h1 {
   margin-bottom: 0px;
 }
 
-/* line 11, ../includes/_heading.scss */
+/* line 11, ../includes/atoms/_heading.scss */
 h2 {
   font-family: "Montserrat Regular";
   white-space: nowrap;
   margin: 10px 0px;
   padding-bottom: 5px;
 }
-/* line 17, ../includes/_heading.scss */
+/* line 17, ../includes/atoms/_heading.scss */
 h2:hover {
   cursor: pointer;
 }
 
-/* line 22, ../includes/_heading.scss */
+/* line 22, ../includes/atoms/_heading.scss */
 h2:hover
 , .module.active h2 {
   padding-bottom: 3px;
   border-bottom: #3f6658 solid 2px;
 }
 
-/* line 28, ../includes/_heading.scss */
+/* line 28, ../includes/atoms/_heading.scss */
 h3 {
   margin: 5px 0px;
   font-size: 12px;
@@ -74,21 +74,21 @@ h3 {
 /**
  * Definiert das Aussehen von Input Feldern des Typs Range (Schieberegler)
  */
-/* line 4, ../includes/input/_input-range.scss */
+/* line 4, ../includes/atoms/input/_input-range.scss */
 input[type=range] {
   -webkit-appearance: none;
   width: 75%;
   margin: 10px 2px;
 }
 
-/* line 12, ../includes/input/_input-range.scss */
+/* line 12, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-runnable-track {
   height: 2px;
-  background: #ebf2f2;
+  background: #f2f2f2;
   border-radius: 3px;
 }
 
-/* line 19, ../includes/input/_input-range.scss */
+/* line 19, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -98,20 +98,61 @@ input[type=range]::-webkit-slider-thumb {
   background: #3f6658;
   margin-top: -2px;
 }
-/* line 28, ../includes/input/_input-range.scss */
+/* line 28, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-thumb:hover {
   background: #4f806e;
   cursor: pointer;
 }
 
-/* line 34, ../includes/input/_input-range.scss */
+/* line 34, ../includes/atoms/input/_input-range.scss */
 input[type=range]:focus {
   outline: none;
 }
 
-/* line 39, ../includes/input/_input-range.scss */
+/* line 39, ../includes/atoms/input/_input-range.scss */
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #ccc;
+}
+
+/* line 1, ../includes/atoms/input/_input-number.scss */
+input[type=number] {
+  -webkit-appearance: none;
+  padding: 0px 10px;
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  width: 23%;
+}
+
+/* line 1, ../includes/atoms/input/_input-select.scss */
+select {
+  border-radius: 15px;
+  height: 20px;
+  outline: none;
+}
+
+/**
+  * ├£berschreibt die vordefinierten Styles der Scrollbars.
+  */
+/* line 4, ../includes/atoms/_scrollbar.scss */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* line 9, ../includes/atoms/_scrollbar.scss */
+::-webkit-scrollbar-thumb {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+/* line 15, ../includes/atoms/_scrollbar.scss */
+::-webkit-scrollbar-track
+, ::-webkit-scrollbar-button
+, ::-webkit-scrollbar-corner {
+  background-color: #40403d;
 }
 
 /*
@@ -137,25 +178,25 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   }
 
  */
-/* line 24, ../includes/input/_input-checkbox.scss */
+/* line 24, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch {
   position: relative;
   width: 70px;
   margin: 3px;
 }
-/* line 29, ../includes/input/_input-checkbox.scss */
+/* line 29, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-checkbox {
   display: none;
 }
-/* line 33, ../includes/input/_input-checkbox.scss */
+/* line 33, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
   margin-left: 0;
 }
-/* line 36, ../includes/input/_input-checkbox.scss */
+/* line 36, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
 }
-/* line 42, ../includes/input/_input-checkbox.scss */
+/* line 42, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label {
   display: block;
   overflow: hidden;
@@ -164,39 +205,39 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   height: 20px;
   line-height: 20px;
   font-size: 10px;
-  color: #ebf2f2;
+  color: #f2f2f2;
   background-color: #3f6658;
 }
-/* line 53, ../includes/input/_input-checkbox.scss */
+/* line 53, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label:hover {
   background-color: #4f806e;
 }
-/* line 57, ../includes/input/_input-checkbox.scss */
+/* line 57, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label .onoffswitch-inner {
   display: block;
   width: 200%;
   margin-left: -100%;
   transition: margin 0.3s ease-in 0s;
 }
-/* line 63, ../includes/input/_input-checkbox.scss */
+/* line 63, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label .onoffswitch-inner:before
 , .onoffswitch .onoffswitch-label .onoffswitch-inner:after {
   display: block;
   float: left;
   width: 42%;
 }
-/* line 70, ../includes/input/_input-checkbox.scss */
+/* line 70, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label .onoffswitch-inner:before {
   content: "ON";
   padding-left: 10px;
 }
-/* line 75, ../includes/input/_input-checkbox.scss */
+/* line 75, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label .onoffswitch-inner:after {
   content: "OFF";
   padding-right: 10px;
   text-align: right;
 }
-/* line 82, ../includes/input/_input-checkbox.scss */
+/* line 82, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch .onoffswitch-label .onoffswitch-switch {
   display: block;
   width: 15px;
@@ -208,47 +249,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   bottom: 0;
   right: 48px;
   transition: all 0.3s ease-in 0s;
-}
-
-/* line 1, ../includes/input/_input-number.scss */
-input[type=number] {
-  -webkit-appearance: none;
-  padding: 0px 10px;
-  border-radius: 20px;
-  height: 20px;
-  line-height: 20px;
-  border: none;
-  outline: none;
-  margin-bottom: 10px;
-  width: 23%;
-}
-
-/* line 1, ../includes/input/_input-select.scss */
-select {
-  border-radius: 15px;
-  height: 20px;
-  outline: none;
-}
-
-/**
-  * ├£berschreibt die vordefinierten Styles der Scrollbars.
-  */
-/* line 4, ../includes/_scrollbar.scss */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* line 9, ../includes/_scrollbar.scss */
-::-webkit-scrollbar-thumb {
-  background-color: #ebf2f2;
-  border-radius: 5px;
-}
-
-/* line 15, ../includes/_scrollbar.scss */
-::-webkit-scrollbar-track
-, ::-webkit-scrollbar-button
-, ::-webkit-scrollbar-corner {
-  background-color: #40403d;
 }
 
 /* --- Module --- */
@@ -360,11 +360,11 @@ select {
 }
 /* line 5, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-inner:before {
-  content: "OUTER";
+  content: "ON";
 }
 /* line 8, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-inner:after {
-  content: "INNER";
+  content: "OFF";
 }
 
 /* line 7, ../modules/_modules.scss */
@@ -376,7 +376,7 @@ select {
 
 /* line 13, ../modules/_modules.scss */
 a.button {
-  color: #ebf2f2;
+  color: #f2f2f2;
   text-decoration: none;
   background-color: #3f6658;
   height: 20px;
