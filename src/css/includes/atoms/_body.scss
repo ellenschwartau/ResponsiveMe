@@ -1,5 +1,13 @@
-body {
-  min-width: 300px;
+html, body {
   background: $dark-grey;
   color: $light-grey;
+}
+body {
+  min-width: 300px;
+  &.hide {
+    display: none;
+    html:hover & {
+      display:block;
+    }
+  }
 }

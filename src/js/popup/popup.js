@@ -18,6 +18,12 @@ function($, modules, settings) {
     var init = function () {
         modules.init($content);
         settings.init();
+        $("body").mouseleave(function(){
+            $(this).addClass("hide");
+        });
+        $("body").mouseenter(function(){
+            $("body").removeClass("hide");
+        });
     };
 
     return {

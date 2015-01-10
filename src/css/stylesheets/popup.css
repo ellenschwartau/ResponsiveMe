@@ -26,10 +26,22 @@
  * B├╝ndelt die ├╝bergreifenden Styles.
  */
 /* line 1, ../includes/atoms/_body.scss */
-body {
-  min-width: 300px;
+html, body {
   background: #323232;
   color: #f2f2f2;
+}
+
+/* line 5, ../includes/atoms/_body.scss */
+body {
+  min-width: 300px;
+}
+/* line 7, ../includes/atoms/_body.scss */
+body.hide {
+  display: none;
+}
+/* line 9, ../includes/atoms/_body.scss */
+html:hover body.hide {
+  display: block;
 }
 
 /**
