@@ -93,8 +93,8 @@ define(
             // Animation durchführen
             interval = window.setInterval(function(){
                 currentCall = $.now();
-                timeDist = currentCall - lastCall,
-                    animationDist = stepPerMs * timeDist;
+                timeDist = currentCall - lastCall;
+                animationDist = stepPerMs * timeDist;
                 curWidth = parseInt(Math.round(start - animationDist));
                 viewportSize.changeWidth(curWidth, containsBrowserOffset);
                 checkAnimationEnd(interval);
