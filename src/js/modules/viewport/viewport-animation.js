@@ -91,11 +91,13 @@ define(
             // Ausgangsbreite setzen
             viewportSize.changeWidth(start, containsBrowserOffset);
             // Animation durchführen
+            curWidth = start;
             interval = window.setInterval(function(){
                 currentCall = $.now();
                 timeDist = currentCall - lastCall;
                 animationDist = stepPerMs * timeDist;
                 curWidth = parseInt(Math.round(start - animationDist));
+                //curWidth = parseInt(Math.round(curWidth - stepPerMs));
                 viewportSize.changeWidth(curWidth, containsBrowserOffset);
                 checkAnimationEnd(interval);
             }, 1);

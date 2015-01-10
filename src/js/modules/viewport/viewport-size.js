@@ -75,7 +75,10 @@ define(
          * @param containsBrowserOffset     boolean     Angabe, ob die Zielbreite den Browser mit einbezieht
          */
         var calcAndChangeSize = function(width, height, containsBrowserOffset) {
-            changeSize(calcDestWidth(width, containsBrowserOffset), calcDestHeight(height, containsBrowserOffset));
+            changeSize(
+                calcDestWidth(width, containsBrowserOffset),
+                calcDestHeight(height, containsBrowserOffset)
+            );
         };
 
         /**
