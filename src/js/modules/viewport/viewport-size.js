@@ -13,7 +13,7 @@ define(
          */
         var calcDestWidth = function(width, containsBrowserOffset) {
             // Browser-Breite aufaddieren, damit der Content selbst die Zielbreite hat
-            return containsBrowserOffset ? width : width + browserOffset.getWidth();
+            return containsBrowserOffset ? width : width + browserOffset.get().x;
         };
 
         /**
@@ -24,7 +24,7 @@ define(
          */
         var calcDestHeight = function(height, containsBrowserOffset) {
             // Browser-Höhe aufaddieren, damit der Content selbst die Zielhöhe hat
-            return containsBrowserOffset ? height : height + browserOffset.getHeight();
+            return containsBrowserOffset ? height : height + browserOffset.get().y;
         };
 
         /**
@@ -108,13 +108,14 @@ define(
                 // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
                 // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
                 var width = window.width,
-                    height = window.height;
+                    height = window.height,
+                    offset = browserOffset.get();
                 if(containsBrowserOffset) {
-                    width -= browserOffset.getWidth();
-                    height -= browserOffset.getHeight();
+                    width -= offset.x;
+                    height -= offset.y;
                 } else {
-                    width += browserOffset.getWidth();
-                    height += browserOffset.getHeight();
+                    width += offset.x;
+                    height += offset.y;
                 }
                 changeSize(width, height);
             });

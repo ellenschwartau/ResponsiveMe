@@ -39,19 +39,14 @@ define(
         };
 
         /**
-         * Liefert den Breiten-Offset in Pixeln, den der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-         * @returns int
+         * Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
+         * @returns {{x: int, y: int}}
          */
-        var getWidth = function() {
-          return offsetWidth;
-        };
-
-        /**
-         * Liefert den Höhen-Offset in Pixeln, den der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-         * @returns int
-         */
-        var getHeight = function() {
-            return offsetHeight;
+        var getBrowserOffset = function() {
+            return {
+                x: offsetWidth,
+                y: offsetHeight
+            }
         };
 
         /**
@@ -63,8 +58,7 @@ define(
         };
 
         return {
-            getWidth: getWidth,
-            getHeight: getHeight,
+            get: getBrowserOffset,
             init: init
         };
     }

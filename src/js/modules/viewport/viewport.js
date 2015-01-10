@@ -58,10 +58,10 @@ define(
          * Dazu wird der minimale, maximale und aktuelle Wert der Scrollbar initialisiert,
          * die Anzeige des aktuellen Wertes , sowie die Callbacks zum Ändern der Breite, bzw. Höhe gesetzt.
          * @param $scrollbar Element ScrollBar
-         * @param max int Maximalwert
-         * @param min int Minimalwert
-         * @param changeWidth boolean Angabe, ob der Browser in seiner Breite manipuliert werden soll
-         * @param changeHeight boolean Angabe, ob der Browser in seiner Höhe manipuliert werden soll
+         * @param max           int     Maximalwert
+         * @param min           int     Minimalwert
+         * @param changeWidth   boolean Angabe, ob der Browser in seiner Breite manipuliert werden soll
+         * @param changeHeight  boolean Angabe, ob der Browser in seiner Höhe manipuliert werden soll
          */
         var initScrollBar = function($scrollbar, max, min, changeWidth, changeHeight) {
             // Werte initialiseren
@@ -184,11 +184,11 @@ define(
             viewportSize.init();
             viewportAnimation.init();
             $(document).ready(function(){
-                initWidthScrollBar();
-                initHeightScrollBar();
+                initInnerOuterSwitch();
                 initResolutionDropDown();
                 initAnimation();
-                initInnerOuterSwitch();
+                initWidthScrollBar();
+                initHeightScrollBar();
             });
         };
 
