@@ -43,6 +43,17 @@ define(
         };
 
         /**
+         * Aktualisiert den Wert und die Anzeige einer Scrollbar
+         * @param $scrollbar    Element Scrollbar
+         * @param value         int     Wert
+         * @param unit          String  Einheit
+         */
+        var updateScrollbarValue = function($scrollbar, value, unit) {
+            $scrollbar.val(value);
+            $scrollbar.next().html(value + unit);
+        };
+
+        /**
          * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
          * Dazu wird der minimale, maximale und aktuelle Wert der Scrollbar initialisiert,
          * die Anzeige des aktuellen Wertes , sowie die Callbacks zum Ändern der Breite, bzw. Höhe gesetzt.
@@ -56,8 +67,7 @@ define(
             // Werte initialiseren
             $scrollbar.attr('max', max);
             $scrollbar.attr('min', min);
-            $scrollbar.val(min);
-            $scrollbar.next().html(min + "px");
+            updateScrollbarValue($scrollbar, min, "px");
 
             // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
             showScrollBarValue($scrollbar, $scrollbar.next(), "px");
@@ -124,6 +134,8 @@ define(
             $resolutions.change(function(){
                var selectedResolution = config.resolutions[$resolutions.find(":selected").val()];
                 viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
+                updateScrollbarValue($(widthScrollBar), selectedResolution.width, "px");
+                updateScrollbarValue($(heightScrollBar), selectedResolution.height, "px");
             });
         };
 
@@ -158,6 +170,7 @@ define(
                 } else {
                     // Animation starten
                     viewportAnimation.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
+                    updateScrollbarValue($(widthScrollBar), endPx, "px");
                 }
             });
         };
