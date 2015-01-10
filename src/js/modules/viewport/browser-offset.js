@@ -15,7 +15,7 @@ define(
         /**
          * Liefert die Breite,den der Browser einnimmt (z.B. durch Toolbars, oder Scrollbars).
          */
-        var getWidthBrowserOffsetAsynchronusly = function() {
+        var getWidthBrowserOffsetAsync = function() {
             chrome.tabs.executeScript(null,
                 {code:"window.outerWidth - window.innerWidth"},
                 function(results){
@@ -28,7 +28,7 @@ define(
         /**
          * Liefert die Höhe, die der Browser einnimmt (z.B. durch Toolbars oder Scrollbars).
          */
-        var getHeightBrowserOffsetAsynchronously = function() {
+        var getHeightBrowserOffsetAsync = function() {
             chrome.tabs.executeScript(null,
                 {code:"window.outerHeight - window.innerHeight"},
                 function(results){
@@ -53,8 +53,8 @@ define(
          * Berechnet den Offset des Browser-Fensters.
          */
         var init = function() {
-            getWidthBrowserOffsetAsynchronusly();
-            getHeightBrowserOffsetAsynchronously();
+            getWidthBrowserOffsetAsync();
+            getHeightBrowserOffsetAsync();
         };
 
         return {
