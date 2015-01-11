@@ -83,6 +83,24 @@ h3 {
 /**
  * Enth├ñlt die Styles f├╝r Input Elemente.
  */
+/* line 4, ../includes/atoms/input/_input.scss */
+input[type=number],
+input[type=text] {
+  -webkit-appearance: none;
+  padding: 0px 10px;
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+}
+/* line 15, ../includes/atoms/input/_input.scss */
+input[type=number]:hover,
+input[type=text]:hover {
+  mouse: pointer;
+}
+
 /**
  * Definiert das Aussehen von Input Feldern des Typs Range (Schieberegler)
  */
@@ -128,22 +146,21 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 /* line 1, ../includes/atoms/input/_input-number.scss */
 input[type=number] {
-  -webkit-appearance: none;
-  padding: 0px 10px;
-  border-radius: 20px;
-  height: 20px;
-  line-height: 20px;
-  border: none;
-  outline: none;
-  margin-bottom: 10px;
   width: 23%;
+}
+
+/* line 1, ../includes/atoms/input/_input-text.scss */
+input[type=text] {
+  width: 50%;
 }
 
 /* line 1, ../includes/atoms/input/_input-select.scss */
 select {
-  border-radius: 15px;
   height: 20px;
+  border-radius: 20px;
+  border: none;
   outline: none;
+  margin-bottom: 10px;
 }
 
 /**
@@ -401,6 +418,11 @@ a.button {
   text-align: center;
 }
 /* line 26, ../modules/_modules.scss */
+a.button.small {
+  width: 5px;
+  margin-left: 5px;
+}
+/* line 31, ../modules/_modules.scss */
 a.button:hover {
   background-color: #4f806e;
 }

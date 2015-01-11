@@ -23,6 +23,11 @@ a.button {
   width: 91%;
   text-align: center;
 
+  &.small {
+    width: 5px;
+    margin-left: 5px;
+  }
+
   &:hover {
     background-color: $light-green;
   }

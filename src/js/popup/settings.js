@@ -3,9 +3,9 @@
  * Einstellungen. Dazu gehört beispielsweise das Ein- und Ausblenden aller Module und das Aktivieren und Deaktivieren
  * der Beschreibungstexte.
  */
-define(
-    ['jquery', 'modules']
-,
+define([
+    'jquery', 'modules'
+],
 function($, modules) {
     var $content = $("#popup-content"),                             // Wrapper-Element für den Content
         $footer = $("#popup-footer"),                               // Wrapper-Element für den Footer

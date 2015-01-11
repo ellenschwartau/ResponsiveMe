@@ -1,5 +1,7 @@
 select {
-  border-radius: 15px;
-  height: 20px;
+  height: $button-heigth;
+  border-radius: $button-border-radius;
+  border: none;
   outline: none;
+  margin-bottom: 10px;
 }

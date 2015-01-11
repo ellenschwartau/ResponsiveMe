@@ -6,8 +6,9 @@ define(
     function() {
         var baseDir = "modules/",       // Basispfad zu den Modulen
             modules = [                 // Module, die eingebunden werden sollen
-                "viewport.html",
-                "template.html"
+                "viewport",
+                "visualize",
+                "template"
             ],
             resolutions = [             // vordefinierte Display-Auflösungen
                 {name: "1920x1080", width: 1920, height: 1200},

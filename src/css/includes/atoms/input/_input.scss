@@ -1,6 +1,23 @@
 /**
  * Enthält die Styles für Input Elemente.
  */
+input[type=number],
+input[type=text] {
+  -webkit-appearance: none;
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  height: $button-heigth;
+  line-height: $button-heigth;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+
+  &:hover {
+    mouse: pointer;
+  }
+}
+
 @import "input-range";
 @import "input-number";
+@import "input-text";
 @import "input-select";

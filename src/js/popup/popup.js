@@ -3,9 +3,9 @@
  * Die verfügbaren Module werden geladen und die Settings initialisiert.
  *
  */
-define(
-    ['jquery', 'modules', 'settings']
-    ,
+define([
+    'jquery', 'modules', 'settings'
+],
 function($, modules, settings) {
     /** Wrapper-Element, für den Inhalt des Popups */
     var $content = $("#popup-content");

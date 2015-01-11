@@ -8,23 +8,27 @@ require.config({
     paths: {
         jquery: 'libs/jquery-1.11.2.min',
         config: 'modules/config',
+        // Popup
         popup: 'popup/popup',
         modules: 'popup/module',
         settings: 'popup/settings',
+        // Viewport
         viewport: 'modules/viewport/viewport',
         viewportAnimation: 'modules/viewport/viewport-animation',
         viewportSize: 'modules/viewport/viewport-size',
-        browserOffset: 'modules/viewport/browser-offset'
+        browserOffset: 'modules/viewport/browser-offset',
+        // Visualisierung
+        visualize: 'modules/visualize/visualize'
     }
 });
 
-require(
-    ['jquery', 'popup', 'viewport']
-,
-function($, popup, viewport) {
+require([
+    'jquery', 'popup', 'viewport', 'visualize'
+],
+function($, popup, viewport, visualize) {
     // javascript initialisieren
     $.each([
-        popup, viewport
+        popup, viewport, visualize
     ], function(i, item) {
        item.init();
     });
