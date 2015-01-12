@@ -52,8 +52,6 @@ function($, viewportSize) {
         // Zwischenspeichern
         start = startWidth;
         end = endWidth;
-        start = startWidth;
-        end = endWidth;
         wantedCalls = wantedAnimationCalls;
         doneCalls = doneAnimationCalls;
         duration = animationDuration;

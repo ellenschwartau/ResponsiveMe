@@ -158,8 +158,8 @@ function($, config, viewportSize, viewportAnimation) {
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
             // Angaben auslesen
-            var startPx = parseInt($animationStart.val()),
-                endPx = parseInt($animationEnd.val()),
+            var startPx = parseInt(Math.round($animationStart.val())),
+                endPx = parseInt(Math.round($animationEnd.val())),
                 times = parseInt($animationTimes.val());
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
                 // Bei fehlenden Angaben eine Fehlermeldung ausgeben
