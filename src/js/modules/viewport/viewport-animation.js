@@ -94,8 +94,7 @@ function($, viewportSize) {
             currentCall = $.now();
             timeDist = currentCall - lastCall;
             animationDist = stepPerMs * timeDist;
-            curWidth = parseInt(Math.round(start - animationDist));
-            //curWidth = parseInt(Math.round(curWidth - stepPerMs));
+            curWidth = parseInt(Math.round(curWidth - animationDist));
             viewportSize.changeWidth(curWidth, containsBrowserOffset);
             checkAnimationEnd(interval);
         }, 1);
