@@ -80,7 +80,7 @@ function($, viewportSize) {
         );
         var lastCall = $.now(),     // Zeitpunkt des letzen Animationsschritts
             currentCall = $.now(),  // Zeitpunkt des aktuellen Animationsschritts
-            timeDist,               // Verstrichene Zeit seit dem letzten Animationsschritts
+            elapsedTime,            // Verstrichene Zeit seit dem letzten Animationsschritts
             animationDist,          // Notwendige Anpassung der Breite in Relation zur verstrichenen Zeit
             interval;               // ID des Callback, der die Animation ausführt
 
@@ -92,12 +92,13 @@ function($, viewportSize) {
         curWidth = start;
         interval = window.setInterval(function(){
             currentCall = $.now();
-            timeDist = currentCall - lastCall;
-            animationDist = stepPerMs * timeDist;
+            elapsedTime = currentCall - lastCall;
+            lastCall = currentCall;
+            animationDist = stepPerMs * elapsedTime;
             curWidth = Math.round(Math.max(end, curWidth - animationDist));
             viewportSize.changeWidth(curWidth, containsBrowserOffset);
             checkAnimationEnd(interval);
-        }, 1);
+        }, 10);
     };
 
     /**
