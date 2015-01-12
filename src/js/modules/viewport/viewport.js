@@ -160,13 +160,14 @@ function($, config, viewportSize, viewportAnimation) {
             // Angaben auslesen
             var startPx = parseInt(Math.round($animationStart.val())),
                 endPx = parseInt(Math.round($animationEnd.val())),
-                times = parseInt($animationTimes.val());
+                times = parseInt($animationTimes.val()),
+                duration = parseInt($animationDuration.val());
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
                 // Bei fehlenden Angaben eine Fehlermeldung ausgeben
                 alert(MSG_ANIMATION_DATA_MISSING);
             } else {
                 // Animation starten
-                viewportAnimation.animateWidth($animationDuration.val(), startPx, endPx, times, 0);
+                viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
                 updateScrollbarValue($(widthScrollBar), endPx, "px");
             }
         });
