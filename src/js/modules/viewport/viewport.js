@@ -136,6 +136,10 @@ function($, config, viewportSize, viewportAnimation) {
         });
     };
 
+    var parseIntVal = function($element) {
+        return parseInt(Math.round($element.val()));
+    };
+
     /**
      * Initialisiert die Animation des Viewports.
      * Bei Betätigung des Animations-Buttons werden die benötigten Daten:
@@ -158,10 +162,10 @@ function($, config, viewportSize, viewportAnimation) {
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
             // Angaben auslesen
-            var startPx = parseInt(Math.round($animationStart.val())),
-                endPx = parseInt(Math.round($animationEnd.val())),
-                times = parseInt($animationTimes.val()),
-                duration = parseInt($animationDuration.val());
+            var startPx = parseIntVal($animationStart),
+                endPx = parseIntVal($animationEnd),
+                times = parseIntVal($animationTimes),
+                duration = parseIntVal($animationDuration);
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
                 // Bei fehlenden Angaben eine Fehlermeldung ausgeben
                 alert(MSG_ANIMATION_DATA_MISSING);

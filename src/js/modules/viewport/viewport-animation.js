@@ -5,15 +5,16 @@ define([
     'jquery', 'viewportSize'
 ],
 function($, viewportSize) {
-    var start,                  // Start-Breite
-        end,                    // End-Breite
-        duration,               // Zur Verfügung stehende Zeit
-        wantedCalls,            // gewünschte Wiederholungen
-        doneCalls,              // durchgeführte Wiederholungen
-        durationPerCall,        // zur Verfügung stehende Zeit pro Wiederholung
-        stepPerMs,              // anzupassende breite pro ms
-        curWidth,               // aktelle Breite
-        sizesContainBrowserOffset;  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
+    var start,                      // Start-Breite
+        end,                        // End-Breite
+        duration,                   // Zur Verfügung stehende Zeit
+        wantedCalls,                // gewünschte Wiederholungen
+        doneCalls,                  // durchgeführte Wiederholungen
+        durationPerCall,            // zur Verfügung stehende Zeit pro Wiederholung
+        stepPerMs,                  // anzupassende breite pro ms
+        curWidth,                   // aktelle Breite
+        sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
+        lastCall;                   // Zeitpunkt des letzen Animationsschritts
 
     /**
      * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
@@ -22,7 +23,7 @@ function($, viewportSize) {
      */
     var checkAnimationEnd = function(interval) {
         if(((start >= end) && (curWidth <= end))
-            || ((start < end) && (curWidth > end))){
+            || ((start < end) && (curWidth >= end))){
             window.clearInterval(interval);
             checkForRestart();
         }
@@ -62,6 +63,27 @@ function($, viewportSize) {
         var dist = start - end;
         stepPerMs = (dist / durationPerCall) / 1000;
         curWidth = start;
+        lastCall = $.now();
+    };
+
+    /**
+     * Berechnet die Browserbreite, auf die der Browser im aktuellen Animationsschritt animiert werden sollte.
+     * @returns {number}
+     */
+    var calcBrowserWidth = function() {
+        var currentCall = $.now(),
+            elapsedTime,
+            animationDist;
+
+        elapsedTime = currentCall - lastCall;
+        lastCall = currentCall;
+        animationDist = stepPerMs * elapsedTime;
+
+        if(start >= end) {
+            return Math.round(Math.max(end, curWidth - animationDist));
+        } else {
+            return Math.round(Math.min(end, curWidth - animationDist));
+        }
     };
 
     /**
@@ -78,24 +100,11 @@ function($, viewportSize) {
         calcAnimationData(
             animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
         );
-        var lastCall = $.now(),     // Zeitpunkt des letzen Animationsschritts
-            currentCall = $.now(),  // Zeitpunkt des aktuellen Animationsschritts
-            elapsedTime,            // Verstrichene Zeit seit dem letzten Animationsschritts
-            animationDist,          // Notwendige Anpassung der Breite in Relation zur verstrichenen Zeit
-            interval;               // ID des Callback, der die Animation ausführt
-
-        // Anzahl der durchgeführten Animationen erhöhen
         doneCalls++;
-        // Ausgangsbreite setzen
         viewportSize.changeWidth(start, containsBrowserOffset);
         // Animation durchführen
-        curWidth = start;
-        interval = window.setInterval(function(){
-            currentCall = $.now();
-            elapsedTime = currentCall - lastCall;
-            lastCall = currentCall;
-            animationDist = stepPerMs * elapsedTime;
-            curWidth = Math.round(Math.max(end, curWidth - animationDist));
+        var interval = window.setInterval(function(){
+            curWidth = calcBrowserWidth();
             viewportSize.changeWidth(curWidth, containsBrowserOffset);
             checkAnimationEnd(interval);
         }, 10);
