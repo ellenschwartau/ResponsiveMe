@@ -2,12 +2,13 @@
  * Modul zur Visualisierung von Grids und Media Queries.
  */
 define([
-    'jquery'
+    'jquery', 'extension'
 ],
-function($){
+function($, extension){
     // Benötigte Selektoren
     var showGrid = "#showGrid",
         addSelectorButton = "#addSelectorButton",
+        showGridButton = "#showGridButton",
         showMediaQueries = "#showMediaQueries";
 
     /**
@@ -15,17 +16,31 @@ function($){
      * Bei einem Klick auf den Button wird ein neues Input-Element vor dem Button hinzugefügt.
      */
     var initAddSelectorButton = function() {
-        // delegated Event Handling --> http://learn.jquery.com/events/event-delegation/
+        // TODO Doku: Keine Delegated Events
+        // delegated Event Handling --> http://learn.jquery.com/events/event-delegation/l
         // Um Events bei Elementen zu registrieren, die nachgeladen werden und zum Zeitpunkt der Initialisierung
         // noch nicht vorhanden sind
-        $("#popup-content").on("click",  addSelectorButton, function(){
+        $(addSelectorButton).click(function(){
             var $lastInput = $(showGrid).find("input").last();
             $lastInput.after($lastInput.clone());
         });
     };
 
+    /**
+     * Initialisiert die Anzeige des Grids.
+     */
+    var initShowGrid = function() {
+        $(showGridButton).click(function(){
+            extension.sendMessageToTab({type: "showGrid"});
+        });
+    };
+
+    /**
+     * Initialisiert das Visualize-Modul.
+     */
     var init = function() {
         initAddSelectorButton();
+        initShowGrid();
     };
 
     return {

@@ -2,8 +2,15 @@
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
  */
 require(
-    ['jquery']
+    ['jquery', 'extension']
 ,
-    function($) {
-       console.log(test);
+    function($, extension) {
+        var handleShowGrid = function() {
+            console.log("Test");
+        };
+
+        extension.handleMessage("showGrid", handleShowGrid());
+
+        // Anzeige IST-Zustand
+        // Info bei Browseränderung
 });

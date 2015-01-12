@@ -2,9 +2,9 @@
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
  */
 define([
-    'jquery', 'config', 'viewport'
+    'jquery', 'config', 'viewport', 'visualize'
 ],
-function($, config, viewport) {
+function($, config, viewport, visualize) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
     /**
@@ -12,27 +12,34 @@ function($, config, viewport) {
      */
     var includeModules = function($parentElement) {
         $.each(config.modules, function(i, modulePath) {
+            var paths = modulePath.split("/"),
+                moduleName = paths[paths.length-1];
             $.get(config.baseDir + modulePath + ".html", function(data) {
-                var $data = $(data),
-                    paths = modulePath.split("/"),
-                    moduleName = paths[paths.length-1];
-                initModule($data, moduleName);
+                var $data = $(data);
+                // TODO init module display auch in init?
+                initModuleDisplay($data);
                 $parentElement.append($data);
+            }).done(function() {
+                // Initialisieren, wenn fertig geladen
+                initModule(moduleName);
             });
         });
     };
 
     /**
      * Initialisiert die Anzeige und die Daten der Module.
-     * @param $data Inhalt des Moduls
-     * @param module Name des Moduls
+     * @param moduleName String Name des Moduls
      */
-    var initModule = function($data, module){
-        initModuleDisplay($data);
-        // weitere DOM-Manipulation
-        switch(module) {
+    var initModule = function(moduleName){
+        console.log("Modul " + moduleName + " geladen.");
+        switch(moduleName) {
             case "viewport":
-                viewport.initData($data);
+                viewport.init();
+                break;
+            case "visualize":
+                visualize.init();
+                break;
+
         }
     };
 

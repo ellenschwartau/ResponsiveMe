@@ -28,6 +28,8 @@
     "css": ["./css/stylesheets/inject.css"],
     "js": [
       "/js/libs/require.js",
+      "/js/requireContent.js",
+      "/js/requireJsConfig.js",
       "/js/inject.js"
     ]
   }],
@@ -35,6 +37,7 @@
   "web_accessible_resources": [
     "/js/modules/*",
     "/js/modules/*/*",
-    "/js/libs/*"
+    "/js/libs/*",
+    "/js/*"
   ]
 }

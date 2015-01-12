@@ -5,8 +5,10 @@
  * Der Aufruf, um dies zu ermitteln ist asynchron, und sollte deswegen so früh wie möglich initiiert werden,
  * um dafür zu Sorgen, dass die benötigten Werte vorliegen, wenn sie benötigt werden.
  */
-define([],
-function() {
+define([
+        'extension'
+],
+function(extension) {
     var offsetWidth,     // Breite, die der Browser einnimmt
         offsetHeight;    // Höhe, die der Browser einnimmt
 
@@ -14,21 +16,22 @@ function() {
      * Liefert die Breite,den der Browser einnimmt (z.B. durch Toolbars, oder Scrollbars).
      */
     var getWidthBrowserOffsetAsync = function() {
-        chrome.tabs.executeScript(null,
-            {code:"window.outerWidth - window.innerWidth"},
+        extension.executeScriptCode(
+            "window.outerWidth - window.innerWidth",
             function(results){
                 // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
                 offsetWidth = results[0];
             }
         );
+        // promises https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
     };
 
     /**
      * Liefert die Höhe, die der Browser einnimmt (z.B. durch Toolbars oder Scrollbars).
      */
     var getHeightBrowserOffsetAsync = function() {
-        chrome.tabs.executeScript(null,
-            {code:"window.outerHeight - window.innerHeight"},
+        extension.executeScriptCode(
+            "window.outerHeight - window.innerHeight",
             function(results){
                 // asynchroner Aufruf, deswegen einmal bei öffnen des Plugins auslesen und zwischenspeichern
                 offsetHeight = results[0];
@@ -44,7 +47,7 @@ function() {
         return {
             x: offsetWidth,
             y: offsetHeight
-        }
+        };
     };
 
     /**

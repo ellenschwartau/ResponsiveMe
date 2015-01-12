@@ -182,10 +182,10 @@ function($, config, viewportSize, viewportAnimation) {
      * Dabei werden die vordefinierten Auflösungen geladen.
      * @param $data Markup des Popups
      */
-    var initData = function($data) {
+    var initData = function() {
         // injizieren der Auflösungen
         $.each(config.resolutions, function(index, item){
-            $data.find(resolutionDropdown).append("<option value='" + index +"'>" + item.name + "</option>");
+            $(resolutionDropdown).append("<option value='" + index +"'>" + item.name + "</option>");
         });
     };
 
@@ -197,17 +197,15 @@ function($, config, viewportSize, viewportAnimation) {
     var init = function (){
         viewportSize.init();
         viewportAnimation.init();
-        $(document).ready(function(){
-            initInnerOuterSwitch();
-            initResolutionDropDown();
-            initAnimation();
-            initWidthScrollBar();
-            initHeightScrollBar();
-        });
+        initData();
+        initInnerOuterSwitch();
+        initResolutionDropDown();
+        initAnimation();
+        initWidthScrollBar();
+        initHeightScrollBar();
     };
 
     return {
-        init: init,
-        initData: initData
+        init: init
     }
 });
