@@ -52,12 +52,21 @@ function(){
      * @param callback  function    Funktion, die das Ergebnis verarbeitet
      */
     var executeScriptCode = function(code, callback) {
-        chrome.tabs.executeScript(null,
-            {code: code},
-            function(results){
-                callback(results);
-            }
-        );
+        //chrome.tabs.executeScript(null,
+        //    {code: code},
+        //    function(results){
+        //        callback(results);
+        //    }
+        //);
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {code: code},
+                function(results){
+                    callback(results);
+                }
+            );
+        });
     };
 
     return {
