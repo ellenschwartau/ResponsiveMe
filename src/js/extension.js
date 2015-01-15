@@ -34,6 +34,14 @@ function(){
     };
 
     /**
+     * Sendet eine Nachricht mit den übergebenen Daten.
+     * @param data JSON
+     */
+    var sendMessage = function(data) {
+        chrome.runtime.sendMessage(data);
+    };
+
+    /**
      * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
      * @param type      String      Type der Message
      * @param action    function    Funktion, die ausgeführt werden soll
@@ -64,6 +72,7 @@ function(){
     };
 
     return {
+        sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
         sendMessageToTabWithCb: sendMessageToTabWithCb,
         handleMessage: handleMessage,

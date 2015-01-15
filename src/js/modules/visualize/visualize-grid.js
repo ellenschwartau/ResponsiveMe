@@ -38,9 +38,11 @@ function($, extension, config) {
             if(selectors.length >= 1) {
                 extension.sendMessageToTab({
                     type: config.messageTypes.showGrid,
-                    selectors: selectors,
-                    color: getColor(),
-                    width: getWidth()
+                    data: {
+                        selectors: selectors,
+                        color: getColor(),
+                        width: getWidth()
+                    }
                 });
             }
         });

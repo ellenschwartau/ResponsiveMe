@@ -7,7 +7,8 @@ require([
 ],
 function($, extension, config, visualize) {
     var handleShowGrid = function(request, sender, sendResponse) {
-        visualize.showGrid(request.selectors, request.color, request.width);
+        visualize.showGrid(request.data.selectors, request.data.color, request.data.width);
+        // TODO DOku: Request immer ein type und ein data Attribut
     };
 
     var handleShowMediaQueries = function(request, sender, sendResponse) {
