@@ -85,7 +85,8 @@ h3 {
  */
 /* line 4, ../includes/atoms/input/_input.scss */
 input[type=number],
-input[type=text] {
+input[type=text],
+input[type=color] {
   -webkit-appearance: none;
   padding: 0px 10px;
   border-radius: 20px;
@@ -95,9 +96,10 @@ input[type=text] {
   outline: none;
   margin-bottom: 10px;
 }
-/* line 15, ../includes/atoms/input/_input.scss */
+/* line 16, ../includes/atoms/input/_input.scss */
 input[type=number]:hover,
-input[type=text]:hover {
+input[type=text]:hover,
+input[type=color]:hover {
   mouse: pointer;
 }
 
@@ -161,6 +163,11 @@ select {
   border: none;
   outline: none;
   margin-bottom: 10px;
+}
+
+/* line 1, ../includes/atoms/input/_input-color.scss */
+input[type=color] {
+  background-color: #f2f2f2;
 }
 
 /**

@@ -2,7 +2,8 @@
  * Enthält die Styles für Input Elemente.
  */
 input[type=number],
-input[type=text] {
+input[type=text],
+input[type=color] {
   -webkit-appearance: none;
   padding: $button-padding;
   border-radius: $button-border-radius;
@@ -21,3 +22,4 @@ input[type=text] {
 @import "input-number";
 @import "input-text";
 @import "input-select";
+@import "input-color";

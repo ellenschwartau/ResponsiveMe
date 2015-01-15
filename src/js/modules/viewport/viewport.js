@@ -6,20 +6,18 @@ define([
     'jquery', 'config', 'viewportSize', 'viewportAnimation'
 ],
 function($, config, viewportSize, viewportAnimation) {
-    // Selektoren für die benötigten Elemente
-    var widthScrollBar = "#widthScrollBar",
-        heightScrollBar = "#heightScrollBar",
-        resolutionDropdown = '#resolutions',
-        animationDurationScrollBar = '#animationDurationScrollBar',
-        animationStart = '#animationStart',
-        animationEnd = '#animationEnd',
-        animationTimes = '#animationTimes',
-        animationButton = '#animationButton',
-        innerOuterSwitch ='#switchInnerOuter',
-        // Fehlermeldung
-        MSG_ANIMATION_DATA_MISSING = "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
-        // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
-        sizesContainBrowserOffset;
+    var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
+        $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
+        $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
+        $animationDurationScrollBar,     // Schieberegler zum Einstellen der Animationsdauer
+        $animationStart,                 // Input-Feld zur Angabe der Start-Breite der Animation
+        $animationEnd,                   // Input-Feld zur Angabe der End-Breite der Animation
+        $animationTimes,                 // Input-Feld zur Angabe das Anzahl an Wiederholungen
+        $animationButton,                // Button zum Starten der Animation
+        $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
+        MSG_ANIMATION_DATA_MISSING =    // Fehlermeldung
+            "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
+        sizesContainBrowserOffset;      // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -27,7 +25,7 @@ function($, config, viewportSize, viewportAnimation) {
      * @returns boolean
      */
     var doSizesContainBrowserOffset = function() {
-        return $(innerOuterSwitch).is(":checked");
+        return $innerOuterSwitch.is(":checked");
     };
 
     /**
@@ -36,7 +34,7 @@ function($, config, viewportSize, viewportAnimation) {
      */
     var initInnerOuterSwitch = function() {
         sizesContainBrowserOffset = doSizesContainBrowserOffset();
-        $(innerOuterSwitch).change(function() {
+        $innerOuterSwitch.change(function() {
             sizesContainBrowserOffset = !sizesContainBrowserOffset;
             viewportSize.toggleInnerOuter(sizesContainBrowserOffset);
         });
@@ -103,10 +101,9 @@ function($, config, viewportSize, viewportAnimation) {
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initWidthScrollBar = function() {
-        var $scrollbar = $(widthScrollBar),         // Schieberegler
-            maxWidth = window.screen.availWidth,    // Maximalbreite des Browsers
-            minWidth = 299;                         // Mindest-Breite des Browsers
-        initScrollBar($scrollbar, maxWidth, minWidth, true, false);
+        initScrollBar(
+            $widthScrollBar, window.screen.availWidth, 299, true, false
+        );
     };
 
     /**
@@ -116,26 +113,29 @@ function($, config, viewportSize, viewportAnimation) {
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initHeightScrollBar = function() {
-        var $scrollbar = $(heightScrollBar),         // Schieberegler
-            maxHeight = window.screen.availHeight;   // Bildschirmbreite
-        initScrollBar($scrollbar, maxHeight, 1, false, true);
+        initScrollBar(
+            $heightScrollBar, window.screen.availHeight, 1, false, true
+        );
     };
 
     /**
      * Initialisiert das Dropdown mit den vorgefertigten Auflösugnen.
      */
     var initResolutionDropDown = function() {
-        var $resolutions = $(resolutionDropdown);
-
         // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
-        $resolutions.change(function(){
-           var selectedResolution = config.resolutions[$resolutions.find(":selected").val()];
+        $resolutionDropdown.change(function(){
+           var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
             viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
             updateScrollbarValue($(widthScrollBar), selectedResolution.width, "px");
             updateScrollbarValue($(heightScrollBar), selectedResolution.height, "px");
         });
     };
 
+    /**
+     * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
+     * @param $element Element dessen Wert ausgelesen werden soll
+     * @returns {Number}
+     */
     var parseIntVal = function($element) {
         return parseInt(Math.round($element.val()));
     };
@@ -151,21 +151,15 @@ function($, config, viewportSize, viewportAnimation) {
      * Auch die Anzeige des Aktuell auf dem Schieberegler der Zeitangabe eingestellten Wertes wird initialisiert.
      */
     var initAnimation = function() {
-        var $animationButton = $(animationButton),              // Button zum Starten der Animation
-            $animationDuration = $(animationDurationScrollBar), // Regler zum Einstellen der Animationdauer
-            $animationStart = $(animationStart),                // Input zur Angabe der Start-Breite
-            $animationEnd = $(animationEnd),                    // Input zur Angabe der End-Breite
-            $animationTimes = $(animationTimes);                // Input zur Angabe der gewollten Wiederholungen
-
         // Anzeige des Zeitwertes initialiseren
-        showScrollBarValue($animationDuration, $animationDuration.next(), "s");
+        showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), "s");
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
             // Angaben auslesen
             var startPx = parseIntVal($animationStart),
                 endPx = parseIntVal($animationEnd),
                 times = parseIntVal($animationTimes),
-                duration = parseIntVal($animationDuration);
+                duration = parseIntVal($animationDurationScrollBar);
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
                 // Bei fehlenden Angaben eine Fehlermeldung ausgeben
                 alert(MSG_ANIMATION_DATA_MISSING);
@@ -180,13 +174,28 @@ function($, config, viewportSize, viewportAnimation) {
     /**
      * Initialisiert das Markup des Moduls.
      * Dabei werden die vordefinierten Auflösungen geladen.
-     * @param $data Markup des Popups
      */
     var initData = function() {
         // injizieren der Auflösungen
         $.each(config.resolutions, function(index, item){
-            $(resolutionDropdown).append("<option value='" + index +"'>" + item.name + "</option>");
+            $resolutionDropdown.append("<option value='" + index +"'>" + item.name + "</option>");
         });
+    };
+
+    /**
+     * Speichert die Interaktionselemente zwischen.
+     */
+    var initElements = function() {
+        // TODO Konstanten?
+        $widthScrollBar = $("#widthScrollBar");
+        $heightScrollBar = $("#heightScrollBar");
+        $resolutionDropdown = $('#resolutions');
+        $animationDurationScrollBar = $('#animationDurationScrollBar');
+        $animationStart = $('#animationStart');
+        $animationEnd = $('#animationEnd');
+        $animationTimes = $('#animationTimes');
+        $animationButton = $('#animationButton');
+        $innerOuterSwitch = $('#switchInnerOuter');
     };
 
     /**
@@ -197,6 +206,7 @@ function($, config, viewportSize, viewportAnimation) {
     var init = function (){
         viewportSize.init();
         viewportAnimation.init();
+        initElements();
         initData();
         initInnerOuterSwitch();
         initResolutionDropDown();

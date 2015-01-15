@@ -7,8 +7,19 @@ define([
     'jquery', 'modules', 'settings'
 ],
 function($, modules, settings) {
-    /** Wrapper-Element, für den Inhalt des Popups */
-    var $content = $("#popup-content");
+    /**
+     * Initialisiert das Minimieren und Maximieren des Popups,
+     * wenn die Maus auf das Popup oder vom Popup weg bewegt wird.
+     */
+    var initPopupDisplay = function() {
+        var $body = $("body");
+        $body.mouseleave(function(){
+            $(this).addClass("hide");
+        });
+        $body.mouseenter(function(){
+            $("body").removeClass("hide");
+        });
+    };
 
     /**
      * Initialisiert das Popup.
@@ -16,14 +27,10 @@ function($, modules, settings) {
      * und die Callbacks zur Manipulation der Anzeige gesetzt.
      */
     var init = function () {
+        var $content = $("#popup-content");
         modules.init($content);
         settings.init();
-        $("body").mouseleave(function(){
-            $(this).addClass("hide");
-        });
-        $("body").mouseenter(function(){
-            $("body").removeClass("hide");
-        });
+        initPopupDisplay();
     };
 
     return {

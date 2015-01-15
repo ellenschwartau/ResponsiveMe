@@ -1,3 +1,4 @@
+// TODO Variable rausnehmen, wenn keine Tests mehr geschrieben werden
 var requireJsConfig = {
     // Basispfad der Javaskript Dateien
     baseUrl: '/js',
@@ -17,8 +18,9 @@ var requireJsConfig = {
         viewportSize: 'modules/viewport/viewport-size',
         browserOffset: 'modules/viewport/browser-offset',
         // Visualisierung
-        visualize: 'modules/visualize/visualize'
+        visualize: 'modules/visualize/visualize',
+        grid: 'modules/visualize/visualize-grid',
+        mediaQueries: 'modules/visualize/visualize-media-queries'
     }
 };
-
 require.config(requireJsConfig);

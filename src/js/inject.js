@@ -1,16 +1,22 @@
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
  */
-require(
-    ['jquery', 'extension']
-,
-    function($, extension) {
-        var handleShowGrid = function() {
-            console.log("Test");
-        };
+require([
+    'jquery', 'extension', 'config'
+],
+function($, extension, config) {
+    var handleShowGrid = function() {
+        console.log("Grid Anzeigen");
+    };
 
-        extension.handleMessage("showGrid", handleShowGrid());
+    var handleShowMediaQueries = function() {
+        console.log("Media Queries anzeigen.")
+    };
 
-        // Anzeige IST-Zustand
-        // Info bei Browseränderung
+    extension.handleMessage(config.messageTypes.showGrid, handleShowGrid);
+
+    extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
+
+    // Anzeige IST-Zustand
+    // Info bei Browseränderung
 });
