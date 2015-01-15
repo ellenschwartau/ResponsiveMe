@@ -19,7 +19,7 @@ function() {
             {name: "640x960", width: 640, height: 960},
             {name: "320x480", width: 320, height: 480}
         ],
-        // TODO in ein Message Handling Modul?
+    // TODO in ein Message Handling Modul, oder mit in extension.js?
         messageTypes = {            // Type, zur Identifikation der Nachrichten, die zwischen
             showGrid: "showGrid",    // den Komponenten der Erweiterung verschickt werden
             showMediaQueries: "showMediaQueries"

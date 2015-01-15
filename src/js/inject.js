@@ -1,16 +1,17 @@
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
+ * Behandelt die Messages und führt die gewünschten Aktionen aus.
  */
 require([
-    'jquery', 'extension', 'config'
+    'jquery', 'extension', 'config', 'visualize'
 ],
-function($, extension, config) {
-    var handleShowGrid = function() {
-        console.log("Grid Anzeigen");
+function($, extension, config, visualize) {
+    var handleShowGrid = function(request, sender, sendResponse) {
+        visualize.showGrid(request.selectors, request.color, request.width);
     };
 
-    var handleShowMediaQueries = function() {
-        console.log("Media Queries anzeigen.")
+    var handleShowMediaQueries = function(request, sender, sendResponse) {
+        visualize.showMediaQueries();
     };
 
     extension.handleMessage(config.messageTypes.showGrid, handleShowGrid);

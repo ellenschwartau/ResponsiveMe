@@ -37,7 +37,7 @@ function($, extension, config) {
             if(selectors.length >= 1) {
                 extension.sendMessageToTab({
                     type: config.messageTypes.showGrid,
-                    data: selectors,
+                    selectors: selectors,
                     color: getColor(),
                     width: getWidth()
                 });
@@ -46,11 +46,36 @@ function($, extension, config) {
     };
 
     /**
+     * Liefert den CSS String zur Darstellung einer Außenlinie in der angegebenen Farbe und Dicke.
+     * @param color     String  Farbe
+     * @param width     int     Dicke
+     * @returns {string}
+     */
+    var getBorderAttributeStr = function(color, width) {
+        return "solid " + color + " " + width + "px";
+    };
+
+    /**
+     * Zeigt da Grid, das durch die Selektoren definiert wird, in der übergebenen Farbe und Pixelbreite an.
+     * @param selectors [String]    Selektoren, die das Grid definieren
+     * @param color     String      Farbe
+     * @param width     int         Breite
+     */
+    var showGrid = function(selectors, color, width) {
+        console.log("Gird anzeigen - Selektoren: " + selectors + " Farbe: " + color + " Breite: " + width + "px");
+        $.each(selectors, function(i, selector) {
+            $(selector).css({
+                border: getBorderAttributeStr(color, width)
+            });
+        });
+    };
+
+    /**
      * Liest die angegebenen Selektoren aus, die das Grid definierten.
      * @returns {Array}
      */
     var getGridSelectors = function() {
-        var inputFields =  $contentWrapper.find("input"),
+        var inputFields =  $contentWrapper.find("input[type=text]"),
             values = [];
         inputFields.each(function(i, element) {
             var value = element.value;
@@ -99,6 +124,7 @@ function($, extension, config) {
     };
 
     return {
-        init: init
+        init: init,
+        show: showGrid
     };
 });
