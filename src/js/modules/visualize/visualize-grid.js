@@ -10,7 +10,8 @@ function($, extension, config) {
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
         $gridColor,             // Eingabe-Feld zu Angabe der Darstellungsfarbe
-        $gridWidth;             // Eingabe-Feld zur Angabe der Anzeigebreite
+        $gridWidth,             // Eingabe-Feld zur Angabe der Anzeigebreite
+        inputSelectors = "input[type=text]";    // Selektor zur identifizierung
 
     /**
      * Initialisiert den Button zum Hinzufügen neuer Selektoren.
@@ -22,7 +23,7 @@ function($, extension, config) {
         // Um Events bei Elementen zu registrieren, die nachgeladen werden und zum Zeitpunkt der Initialisierung
         // noch nicht vorhanden sind
         $addSelectorButton.click(function(){
-            var $lastInput = $contentWrapper.find("input").last();
+            var $lastInput = $contentWrapper.find(inputSelectors).last();
             $lastInput.after($lastInput.clone());
         });
     };
@@ -49,10 +50,15 @@ function($, extension, config) {
      * Liefert den CSS String zur Darstellung einer Außenlinie in der angegebenen Farbe und Dicke.
      * @param color     String  Farbe
      * @param width     int     Dicke
-     * @returns {string}
+     * @returns {{css}}
      */
-    var getBorderAttributeStr = function(color, width) {
-        return "solid " + color + " " + width + "px";
+    var getCssToDisplayGrid = function(color, width) {
+        //"border": "solid " + color + " " + width + "px",
+        //"box-sizing": "border-box"
+        return {
+            "box-shadow": "green inset"
+        };
+
     };
 
     /**
@@ -62,11 +68,11 @@ function($, extension, config) {
      * @param width     int         Breite
      */
     var showGrid = function(selectors, color, width) {
-        console.log("Gird anzeigen - Selektoren: " + selectors + " Farbe: " + color + " Breite: " + width + "px");
+        console.log("Grid anzeigen - Selektoren: " + selectors + " Farbe: " + color + " Breite: " + width + "px");
         $.each(selectors, function(i, selector) {
-            $(selector).css({
-                border: getBorderAttributeStr(color, width)
-            });
+            $(selector).css(
+                getCssToDisplayGrid(color, width)
+            );
         });
     };
 
@@ -75,7 +81,7 @@ function($, extension, config) {
      * @returns {Array}
      */
     var getGridSelectors = function() {
-        var inputFields =  $contentWrapper.find("input[type=text]"),
+        var inputFields =  $contentWrapper.find(inputSelectors),
             values = [];
         inputFields.each(function(i, element) {
             var value = element.value;
