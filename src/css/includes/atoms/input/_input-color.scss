@@ -1,3 +1,15 @@
 input[type=color] {
-  background-color: $light-grey;
+  background-color: transparent;
+  cursor: pointer;
+  width: 9%;
+  position: relative;
+  top: 1px;
+}
+
+// Styling für die Farbvorschau
+::-webkit-color-swatch {
+  border: solid $light-grey 2px;
+  height: 100%;
+  width: 50%;
+  border-radius: $button-border-radius;
 }

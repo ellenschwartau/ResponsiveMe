@@ -148,7 +148,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 /* line 1, ../includes/atoms/input/_input-number.scss */
 input[type=number] {
-  width: 23%;
+  width: 22%;
 }
 
 /* line 1, ../includes/atoms/input/_input-text.scss */
@@ -163,11 +163,24 @@ select {
   border: none;
   outline: none;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 /* line 1, ../includes/atoms/input/_input-color.scss */
 input[type=color] {
-  background-color: #f2f2f2;
+  background-color: transparent;
+  cursor: pointer;
+  width: 9%;
+  position: relative;
+  top: 1px;
+}
+
+/* line 10, ../includes/atoms/input/_input-color.scss */
+::-webkit-color-swatch {
+  border: solid #f2f2f2 2px;
+  height: 100%;
+  width: 50%;
+  border-radius: 20px;
 }
 
 /**
@@ -423,13 +436,14 @@ a.button {
   display: inline-block;
   width: 91%;
   text-align: center;
+  cursor: pointer;
 }
-/* line 26, ../modules/_modules.scss */
+/* line 27, ../modules/_modules.scss */
 a.button.small {
   width: 5px;
   margin-left: 5px;
 }
-/* line 31, ../modules/_modules.scss */
+/* line 32, ../modules/_modules.scss */
 a.button:hover {
   background-color: #4f806e;
 }
