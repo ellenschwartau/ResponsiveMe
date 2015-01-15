@@ -53,12 +53,10 @@ function($, extension, config) {
      * @returns {{css}}
      */
     var getCssToDisplayGrid = function(color, width) {
-        //"border": "solid " + color + " " + width + "px",
-        //"box-sizing": "border-box"
         return {
-            "box-shadow": "green inset"
+            "border": "solid " + color + " " + width + "px",
+            "box-sizing": "border-box"
         };
-
     };
 
     /**
