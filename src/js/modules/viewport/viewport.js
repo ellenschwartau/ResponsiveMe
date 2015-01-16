@@ -3,9 +3,9 @@
  * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
  */
 define([
-    'jquery', 'config', 'viewportSize', 'viewportAnimation', 'extension'
+    'jquery', 'config', 'viewportSize', 'viewportAnimation'
 ],
-function($, config, viewportSize, viewportAnimation, extension) {
+function($, config, viewportSize, viewportAnimation) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen

@@ -20,7 +20,8 @@ var requireJsConfig = {
         // Visualisierung
         visualize: 'modules/visualize/visualize',
         grid: 'modules/visualize/visualize-grid',
-        mediaQueries: 'modules/visualize/visualize-media-queries'
+        mediaQueries: 'modules/visualize/visualize-media-queries',
+        stylesheetParser: 'modules/visualize/stylesheet-parser'
     }
 };
 require.config(requireJsConfig);

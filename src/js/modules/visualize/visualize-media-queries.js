@@ -2,9 +2,9 @@
  * Dieses Modul dient der Visualisierung von Media Queries.
  */
 define([
-    'jquery', 'extension', 'config'
+    'jquery', 'extension', 'config', 'stylesheetParser'
 ],
-function($, extension, config) {
+function($, extension, config, stylesheetParser) {
     var $contentWrapper,            // Parent Element des Modul-Inhalts
         $showMediaQueriesButton;    // Button zum Anzeigen der Media Queries
 
@@ -24,6 +24,7 @@ function($, extension, config) {
      */
     var showMediaQueries = function() {
         console.log("Media Queries anzeigen.");
+        console.log(stylesheetParser.getMediaQueries())
     };
 
     /**
