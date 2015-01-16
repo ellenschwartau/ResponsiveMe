@@ -9,7 +9,6 @@ define([
 ],
 function($){
     var CSS_STYLE_RULE_TYPE = 1,
-        CSS_IMPORT_RULE_TYPE = 3,
         CSS_MEDIA_RULE_TYPE = 4,
         CSS_STYLE_RULE_ATTRIBUTE_SELECTOR = "selectorText",
         CSS_STYLE_RULE_ATTRIBUTE_CSS_TEXT = "cssText";
@@ -35,7 +34,6 @@ function($){
      * Liefert alle css-Regeln eines bestimmten Typs.
      * @param type  int Typ der gesuchten Regeln
      *                  1: Style Rule
-     *                  3: Import Rule
      *                  4: Media Rule
      */
     var getCssRulesWithType = function(type) {
