@@ -24,7 +24,7 @@ function($, extension, config, stylesheetParser) {
      */
     var showMediaQueries = function() {
         console.log("Media Queries anzeigen.");
-        console.log(stylesheetParser.getMediaQueries())
+        console.log(stylesheetParser.getMediaQueries());
     };
 
     /**
