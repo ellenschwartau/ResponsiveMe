@@ -1,9 +1,6 @@
 /**
  * Bündelt die Stylesheets aller Modules.
  */
-
-@import "_viewport.scss";
-
 .item {
   margin: 5px 0px;
   border-radius: 5px 5px 5px 5px;
@@ -33,3 +30,6 @@ a.button {
     background-color: $light-green;
   }
 }
+
+@import "_viewport.scss";
+@import "_visualize.scss";

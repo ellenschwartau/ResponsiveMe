@@ -22,8 +22,8 @@ function($, extension, grid, mediaQueries){
     /**
      * Zeigt die Media Queries über das Hilfsmodul an.
      */
-    var showMediaQueries = function() {
-        mediaQueries.show();
+    var getMediaQueries = function() {
+        return mediaQueries.get();
     };
 
     /**
@@ -37,6 +37,6 @@ function($, extension, grid, mediaQueries){
     return {
         init: init,
         showGrid: showGrid,
-        showMediaQueries: showMediaQueries
+        getMediaQueries: getMediaQueries
     }
 });

@@ -27,6 +27,8 @@ function($){
                 });
             }
         });
+        // TODO hier evtl. schon in JSON Format konvertieren und Index des Stylesheets, sowie der Rule mit speichern
+        // um im Nachhinein das bearbeiten zu ermöglichen
         return cssRules;
     };
 
@@ -74,7 +76,10 @@ function($){
      * @param filterSelector    String  Selektor, nach dem gefiltert werden soll
      */
     var getCssStyleRuleContainingSelector = function(filterSelector){
-        return filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_SELECTOR, filterSelector);
+        return convertRulesToJSON(
+            CSS_STYLE_RULE_TYPE,
+            filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_SELECTOR, filterSelector)
+        );
     };
 
     /**
@@ -82,14 +87,68 @@ function($){
      * @param filter   String  Style, nach dem gefiltert werden soll
      */
     var getCssStyleRuleContaining = function(filter) {
-        return filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_CSS_TEXT, filter);
+        return convertRulesToJSON(
+            CSS_STYLE_RULE_TYPE,
+            filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_CSS_TEXT, filter)
+        );
+    };
+
+    /**
+     * Liefert den Wert des Selektors.
+     * @param type  Typ der Regeln
+     * @param rule  CSSRule
+     * @returns String
+     */
+    var getSelectorValue = function(type, rule) {
+        switch(type) {
+            case CSS_MEDIA_RULE_TYPE:
+                return "@media " + rule.media.mediaText;
+                break;
+            case CSS_STYLE_RULE_TYPE:
+                return rule.selectorText;
+        }
+        return "";
+    };
+
+    /**
+     * Liefert die Styles einer CSSRule inklusive geschweiften Klammern.
+     * @param rule          CSSRule
+     * @param selector      String  Selektor
+     * @returns {string}
+     */
+    var getStyleValue = function(rule, selector) {
+        var cssText = rule.cssText;
+        return cssText.replace(selector, "");
+    };
+
+    /**
+     * Konvertiert die Regeln und die notwendigen Informationen in JSON.
+     * @param type      int Typ der Regeln
+     * @param cssRules  []  CSSRules
+     * return {selector: String, style: String}
+     */
+    var convertRulesToJSON = function(type, cssRules){
+        var jsonRules = [];
+        $.each(cssRules, function(i, rule){
+            var selector = getSelectorValue(type, rule),
+                style = getStyleValue(rule, selector);
+            jsonRules.push({
+                selector: getSelectorValue(type, rule),
+                style: style,
+                fullCss: rule.cssText
+            });
+        });
+        return jsonRules;
     };
 
     /**
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
      */
     var getMediaQueries = function(){
-        return getCssRulesWithType(CSS_MEDIA_RULE_TYPE);
+        return convertRulesToJSON(
+            CSS_MEDIA_RULE_TYPE,
+            getCssRulesWithType(CSS_MEDIA_RULE_TYPE)
+        );
     };
 
     return {

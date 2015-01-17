@@ -1,0 +1,15 @@
+#moduleVisualize {
+  #mediaQueries {
+    padding: 0 5px;
+
+    .mediaQuery {
+      .style {
+        display: none;
+        padding: 5px;
+        background: $light-grey;
+        color: $dark-grey;
+        border-radius: 5px;
+      }
+    }
+  }
+}

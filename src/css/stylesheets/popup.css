@@ -80,6 +80,11 @@ h3 {
   font-size: 12px;
 }
 
+/* line 34, ../includes/atoms/_heading.scss */
+h4:hover {
+  cursor: pointer;
+}
+
 /**
  * Enth├ñlt die Styles f├╝r Input Elemente.
  */
@@ -170,7 +175,7 @@ select {
 input[type=color] {
   background-color: transparent;
   cursor: pointer;
-  width: 9%;
+  width: 20px;
   position: relative;
   top: 1px;
 }
@@ -403,27 +408,14 @@ input[type=color] {
 /**
  * B├╝ndelt die Stylesheets aller Modules.
  */
-/* line 2, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-switch {
-  background: #40403d;
-}
-/* line 5, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-inner:before {
-  content: "OUTER";
-}
-/* line 8, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-inner:after {
-  content: "INNER";
-}
-
-/* line 7, ../modules/_modules.scss */
+/* line 4, ../modules/_modules.scss */
 .item {
   margin: 5px 0px;
   border-radius: 5px 5px 5px 5px;
   padding: 5px;
 }
 
-/* line 13, ../modules/_modules.scss */
+/* line 10, ../modules/_modules.scss */
 a.button {
   color: #f2f2f2;
   text-decoration: none;
@@ -438,12 +430,38 @@ a.button {
   text-align: center;
   cursor: pointer;
 }
-/* line 27, ../modules/_modules.scss */
+/* line 24, ../modules/_modules.scss */
 a.button.small {
   width: 5px;
   margin-left: 5px;
 }
-/* line 32, ../modules/_modules.scss */
+/* line 29, ../modules/_modules.scss */
 a.button:hover {
   background-color: #4f806e;
+}
+
+/* line 2, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-switch {
+  background: #40403d;
+}
+/* line 5, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-inner:before {
+  content: "OUTER";
+}
+/* line 8, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch-inner:after {
+  content: "INNER";
+}
+
+/* line 2, ../modules/_visualize.scss */
+#moduleVisualize #mediaQueries {
+  padding: 0 5px;
+}
+/* line 6, ../modules/_visualize.scss */
+#moduleVisualize #mediaQueries .mediaQuery .style {
+  display: none;
+  padding: 5px;
+  background: #f2f2f2;
+  color: #323232;
+  border-radius: 5px;
 }

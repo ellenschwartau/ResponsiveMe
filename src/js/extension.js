@@ -46,11 +46,22 @@ function(){
      * @param type      String      Type der Message
      * @param action    function    Funktion, die ausgeführt werden soll
      */
-    var handleMessage = function(type, action) {
+    //var handleMessage = function(type, action) {
+    //    chrome.runtime.onMessage.addListener(
+    //        function(request, sender, sendResponse) {
+    //            if (request.type == type)
+    //                action(request, sender, sendResponse);
+    //        });
+    //};
+
+    /**
+     * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
+     * @param action    function    Funktion, die ausgeführt werden soll
+     */
+    var handleMessage = function(action) {
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
-                if (request.type == type)
-                    action(request, sender, sendResponse);
+                action(request, sender, sendResponse);
             });
     };
 
