@@ -93,7 +93,7 @@ input[type=number],
 input[type=text],
 input[type=color] {
   -webkit-appearance: none;
-  padding: 0px 10px;
+  padding: 0px 4%;
   border-radius: 20px;
   height: 20px;
   line-height: 20px;
@@ -153,7 +153,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 /* line 1, ../includes/atoms/input/_input-number.scss */
 input[type=number] {
-  width: 22%;
+  width: 24%;
 }
 
 /* line 1, ../includes/atoms/input/_input-text.scss */
@@ -169,6 +169,7 @@ select {
   outline: none;
   margin-bottom: 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 /* line 1, ../includes/atoms/input/_input-color.scss */
@@ -422,7 +423,7 @@ a.button {
   background-color: #3f6658;
   height: 20px;
   border-radius: 20px;
-  padding: 0px 10px;
+  padding: 0px 4%;
   line-height: 20px;
   font-size: 10px;
   display: inline-block;
@@ -452,6 +453,12 @@ a.button:hover {
 /* line 8, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-inner:after {
   content: "INNER";
+}
+/* line 13, ../modules/_viewport.scss */
+#moduleViewport .scroll-bar-label {
+  width: 21%;
+  display: inline-block;
+  text-align: right;
 }
 
 /**

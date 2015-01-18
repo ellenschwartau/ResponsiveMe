@@ -124,6 +124,17 @@ function($){
     };
 
     /**
+     * Formatiert Styleangaben und fügt Absätze ein.
+     * @param style
+     */
+    var formatStyle = function(style) {
+        return style
+            .replace(/\{/g, "{<br>")
+            .replace(/;/g, ";<br>")
+            .replace(/\}/g, "}<br>");
+    };
+
+    /**
      * Konvertiert die Regeln und die notwendigen Informationen in JSON.
      * @param cssRules  []  CSSRules
      * return {selector: String, style: String}
@@ -135,7 +146,7 @@ function($){
                 style = getStyleValue(rule, selector),
                 json = {
                     selector: getSelectorValue(rule),
-                    style: style,
+                    style: formatStyle(style),
                     mediaQueryWidth: getMediaQueryWidth(rule),
                     fullCss: rule.cssText
                 };
