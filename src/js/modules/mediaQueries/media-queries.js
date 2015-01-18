@@ -33,25 +33,41 @@ function($, extension, config, stylesheetParser, viewportSize) {
      * @param mediaQuery    JSON    Daten der Media Query
      */
     var createMarkup = function(mediaQuery){
-        // Vorlage inklusive Event-Handler klonen und Werte setzen
-        var $query = $mediaQueryHtml.clone(true),
+        var $query = $mediaQueryHtml.clone(),
             $heading = $query.find("h4"),
             $style = $query.find(".style"),
             mediaQueryWidth = mediaQuery.mediaQueryWidth;
 
+        // Inahlte setzen
         $heading.html(mediaQuery.selector);
         $style.html(mediaQuery.style);
+
+        // Callbacks setzen
+        $heading.click(function(){
+            $style.toggle();
+        });
+        // Button zum Browser skalieren einfügen, wenn die Media Query eine Breiten-Angabe enthält
         if(mediaQueryWidth > -1) {
-            // Button über den auf die Breite gesprungen werden kann, bei dem die Media Query greift
-            var $button = $("<a class='button'>Auf " + mediaQueryWidth + "px skalieren</a>");
-            $button.click(function() {
-                // Browser auf die angegebene Breite skalieren, wenn auf eine Media Query geklickt wird
-                viewportSize.changeWidth(mediaQueryWidth, false);
-            });
-            $style.after($button);
+            addScaleButton(mediaQueryWidth, $style);
         }
 
         return $query;
+    };
+
+    /**
+     * Fügt einen Button nach dem übergebenen Element an, über den der Browser auf eine bestimmte Breite skaliert
+     * werden kann.
+     * @param mediaQueryWidth   Breite, auf die der Browser skaliert werden soll
+     * @param $insertAfterElm   Element, nach dem der Button eingefügt werden soll
+     */
+    var addScaleButton = function(mediaQueryWidth, $insertAfterElm) {
+        // Button über den auf die Breite gesprungen werden kann, bei dem die Media Query greift
+        var $button = $("<a class='button'>Auf " + mediaQueryWidth + "px skalieren</a>");
+        $button.click(function() {
+            // Browser auf die angegebene Breite skalieren, wenn auf eine Media Query geklickt wird
+            viewportSize.changeWidth(mediaQueryWidth, false);
+        });
+        $insertAfterElm.after($button);
     };
 
     /**
@@ -94,15 +110,6 @@ function($, extension, config, stylesheetParser, viewportSize) {
     };
 
     /**
-     * Registriert die Callbacks zur Anzeige auf der Vorlage für die Media Queries.
-     */
-    var initMediaQueryItemDisplay = function(){
-        $mediaQueryHtml.click(function(){
-            $(this).find(".style").toggle();
-        });
-    };
-
-    /**
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
@@ -120,7 +127,6 @@ function($, extension, config, stylesheetParser, viewportSize) {
         viewportSize.init();
         initElements();
         initMediaQueryDisplay();
-        initMediaQueryItemDisplay();
     };
 
     return {
