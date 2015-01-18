@@ -22,25 +22,6 @@ function($, extension, config, stylesheetParser, viewportSize) {
             "Es sind keine Media Queries vorhanden.";  // Meldung, falls keine Media Queries gefunden wurden
 
     /**
-     * Initialisiert die Anzeige der Media Queries.
-     */
-    var initMediaQueryDisplay = function() {
-        $showMediaQueriesButton.click(function(){
-            // Media Queries von Content Script abfragen
-            extension.sendMessageToTabWithCb({
-                type: config.messageTypes.showMediaQueries
-            },
-                // erhaltene Antwort verarbeiten und Media Queries anzeigen
-                showMediaQueries
-            );
-        });
-        $hideMediaQueriesButton.click(function(){
-            $mediaQueries.empty();
-            $hideMediaQueriesButton.remove();
-        });
-    };
-
-    /**
      * Ermittelt die Media Queries, die in den Styles der Website vorhanden sind.
      */
     var getMediaQueries = function() {
@@ -91,6 +72,25 @@ function($, extension, config, stylesheetParser, viewportSize) {
             // Meldung ausgeben, falls keine vorhanden sind
             $mediaQueries.html(MSG_NO_MEDIA_QUERIES_FOUND);
         }
+    };
+
+    /**
+     * Initialisiert die Anzeige der Media Queries.
+     */
+    var initMediaQueryDisplay = function() {
+        $showMediaQueriesButton.click(function(){
+            // Media Queries von Content Script abfragen
+            extension.sendMessageToTabWithCb({
+                    type: config.messageTypes.showMediaQueries
+                },
+                // erhaltene Antwort verarbeiten und Media Queries anzeigen
+                showMediaQueries
+            );
+        });
+        $hideMediaQueriesButton.click(function(){
+            $mediaQueries.empty();
+            $hideMediaQueriesButton.remove();
+        });
     };
 
     /**

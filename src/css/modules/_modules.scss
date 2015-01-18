@@ -2,7 +2,7 @@
  * Bündelt die Stylesheets aller Modules.
  */
 .item {
-  margin: 5px 0px;
+  margin: 5px 0;
   border-radius: 5px 5px 5px 5px;
   padding: 5px;
 }
@@ -32,5 +32,5 @@ a.button {
   }
 }
 
-@import "_viewport.scss";
-@import "_visualize.scss";
+@import "viewport";
+@import "mediaQueries";

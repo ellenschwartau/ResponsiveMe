@@ -18,10 +18,9 @@ var requireJsConfig = {
         viewportSize: 'modules/viewport/viewport-size',
         browserOffset: 'modules/viewport/browser-offset',
         // Visualisierung
-        visualize: 'modules/visualize/visualize',
-        grid: 'modules/visualize/visualize-grid',
-        mediaQueries: 'modules/visualize/visualize-media-queries',
-        stylesheetParser: 'modules/visualize/stylesheet-parser'
+        grid: 'modules/grid/grid',
+        mediaQueries: 'modules/mediaQueries/media-queries',
+        stylesheetParser: 'modules/mediaQueries/stylesheet-parser'
     }
 };
 require.config(requireJsConfig);

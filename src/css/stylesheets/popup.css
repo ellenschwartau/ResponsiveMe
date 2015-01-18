@@ -411,7 +411,7 @@ input[type=color] {
  */
 /* line 4, ../modules/_modules.scss */
 .item {
-  margin: 5px 0px;
+  margin: 5px 0;
   border-radius: 5px 5px 5px 5px;
   padding: 5px;
 }
@@ -464,17 +464,17 @@ a.button:hover {
 /**
  * Enth├ñlt die Styles des Visualisierungs-Moduls.
  */
-/* line 5, ../modules/_visualize.scss */
-#moduleVisualize #mediaQueries {
+/* line 5, ../modules/_mediaQueries.scss */
+#moduleMediaQueries #mediaQueries {
   padding: 0 5px;
   margin-bottom: 20px;
 }
-/* line 9, ../modules/_visualize.scss */
-#moduleVisualize #mediaQueries .mediaQuery {
+/* line 9, ../modules/_mediaQueries.scss */
+#moduleMediaQueries #mediaQueries .mediaQuery {
   border-bottom: #323232 solid 1px;
 }
-/* line 11, ../modules/_visualize.scss */
-#moduleVisualize #mediaQueries .mediaQuery .style {
+/* line 11, ../modules/_mediaQueries.scss */
+#moduleMediaQueries #mediaQueries .mediaQuery .style {
   display: none;
   padding: 5px;
   background: #f2f2f2;

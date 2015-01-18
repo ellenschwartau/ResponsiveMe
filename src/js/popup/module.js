@@ -2,9 +2,9 @@
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
  */
 define([
-    'jquery', 'config', 'viewport', 'visualize'
+    'jquery', 'config', 'viewport', 'mediaQueries', 'grid'
 ],
-function($, config, viewport, visualize) {
+function($, config, viewport, mediaQueries, grid) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
     /**
@@ -35,10 +35,12 @@ function($, config, viewport, visualize) {
             case "viewport":
                 viewport.init();
                 break;
-            case "visualize":
-                visualize.init();
+            case "grid":
+                grid.init();
                 break;
-
+            case "media-queries":
+                mediaQueries.init();
+                break;
         }
     };
 
