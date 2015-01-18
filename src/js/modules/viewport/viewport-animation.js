@@ -16,8 +16,6 @@ function($, viewportSize) {
      */
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-
-        // TODO das hier machen, oder lieber die Variablen durchreichen?
         // Kaspeln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
         var start,                      // Start-Breite
             end,                        // End-Breite

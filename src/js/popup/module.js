@@ -16,7 +16,6 @@ function($, config, viewport, visualize) {
                 moduleName = paths[paths.length-1];
             $.get(config.baseDir + modulePath + ".html", function(data) {
                 var $data = $(data);
-                // TODO init module display auch in init?
                 initModuleDisplay($data);
                 $parentElement.append($data);
             }).done(function() {

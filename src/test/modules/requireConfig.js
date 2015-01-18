@@ -18,7 +18,7 @@
         var pathPrefix = _dirname + '/../..';
 
         // Modififikationen
-        var config = requirejsConfig; // TODO wieder als Variable anlegen
+        var config = requirejsConfig;
         config.baseUrl = pathPrefix + rc.baseUrl;
         var path;
         for(path in rc.paths) {

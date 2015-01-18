@@ -17,8 +17,7 @@ function($, modules) {
      * Ein- und Ausblenden der Einstellungen bei Klick auf das Einstelluns-Icon im Footer.
      */
     var initSettingsDisplay = function() {
-        // TODO prüfen warum ohne unbind mehrmals das click event gefeuert wird
-        $footer.find(".settings-icon").unbind("click").click(function() {
+        $footer.find(".settings-icon").click(function() {
             $settings.toggle("slow");
             if($settings.is(":visible")) {
                 $settings.css("display", "inline-block");

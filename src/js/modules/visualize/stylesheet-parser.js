@@ -41,7 +41,6 @@ function($){
                 filteredRules.push(cssRule);
             }
         });
-        console.log(filteredRules); // TODO rausnehmen
         return filteredRules;
     };
 
