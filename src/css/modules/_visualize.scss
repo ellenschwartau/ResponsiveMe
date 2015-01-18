@@ -1,8 +1,13 @@
+/**
+ * Enthält die Styles des Visualisierungs-Moduls.
+ */
 #moduleVisualize {
   #mediaQueries {
     padding: 0 5px;
+    margin-bottom: 20px;
 
     .mediaQuery {
+      border-bottom: $border-solid-thin;
       .style {
         display: none;
         padding: 5px;

@@ -429,13 +429,14 @@ a.button {
   width: 91%;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 10px;
 }
-/* line 24, ../modules/_modules.scss */
+/* line 25, ../modules/_modules.scss */
 a.button.small {
   width: 5px;
   margin-left: 5px;
 }
-/* line 29, ../modules/_modules.scss */
+/* line 30, ../modules/_modules.scss */
 a.button:hover {
   background-color: #4f806e;
 }
@@ -453,11 +454,19 @@ a.button:hover {
   content: "INNER";
 }
 
-/* line 2, ../modules/_visualize.scss */
+/**
+ * Enth├ñlt die Styles des Visualisierungs-Moduls.
+ */
+/* line 5, ../modules/_visualize.scss */
 #moduleVisualize #mediaQueries {
   padding: 0 5px;
+  margin-bottom: 20px;
 }
-/* line 6, ../modules/_visualize.scss */
+/* line 9, ../modules/_visualize.scss */
+#moduleVisualize #mediaQueries .mediaQuery {
+  border-bottom: #323232 solid 1px;
+}
+/* line 11, ../modules/_visualize.scss */
 #moduleVisualize #mediaQueries .mediaQuery .style {
   display: none;
   padding: 5px;

@@ -1,6 +1,11 @@
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
  * Dieses Grid kann durch die Angabe mehrerer CSS-Selektoren angegeben werden.
+ *
+ * Zur Anzeige des Grids können auch reguläre Ausdrücke verwendet werden, z.B.:
+ * "div[class^='column-'],div[class*=' column-']" // Alle Klassen, die mit "column-" beginnen oder " column-" beinhalten
+ * oder
+ * "div[class*='column-']"  // Alle Klassem, die "column-" beinhalten
  */
 define([
     'jquery', 'extension', 'config'
@@ -11,7 +16,7 @@ function($, extension, config) {
         $showGridButton,        // Button zum Anzeigen des Grids
         $gridColor,             // Eingabe-Feld zu Angabe der Darstellungsfarbe
         $gridWidth,             // Eingabe-Feld zur Angabe der Anzeigebreite
-        inputSelectors = "input[type=text]";    // Selektor zur identifizierung
+        inputSelectors = "input[type=text]";    // Selektor zur Identifizierung der angegebenen Selektoren
 
     /**
      * Initialisiert den Button zum Hinzufügen neuer Selektoren.
@@ -68,7 +73,6 @@ function($, extension, config) {
      * @param width     int         Breite
      */
     var showGrid = function(selectors, color, width) {
-        console.log("Grid anzeigen - Selektoren: " + selectors + " Farbe: " + color + " Breite: " + width + "px");
         $.each(selectors, function(i, selector) {
             $(selector).css(
                 getCssToDisplayGrid(color, width)

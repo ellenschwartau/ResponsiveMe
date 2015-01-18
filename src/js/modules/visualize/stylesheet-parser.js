@@ -1,17 +1,14 @@
 /**
  * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
- * Die Css-Regeln können beispielsweise nach Media Queries oder beliebigen anderen Selektoren gefiltert werden.
- *
- * // TODO hier: http://stackoverflow.com/questions/15696124/accessing-css-media-query-rules-via-javascript-dom
+ * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
  */
 define([
     'jquery'
 ],
 function($){
-    var CSS_STYLE_RULE_TYPE = 1,
-        CSS_MEDIA_RULE_TYPE = 4,
-        CSS_STYLE_RULE_ATTRIBUTE_SELECTOR = "selectorText",
-        CSS_STYLE_RULE_ATTRIBUTE_CSS_TEXT = "cssText";
+    // Typ der Media Queries
+    var CSS_MEDIA_RULE_TYPE = 4;
+
     /**
      * Liefert alle css-Regeln der aktuell geladenen Stylesheets.
      * @returns {Array}
@@ -35,8 +32,6 @@ function($){
     /**
      * Liefert alle css-Regeln eines bestimmten Typs.
      * @param type  int Typ der gesuchten Regeln
-     *                  1: Style Rule
-     *                  4: Media Rule
      */
     var getCssRulesWithType = function(type) {
         var cssRules = getCssRules(),
@@ -46,6 +41,7 @@ function($){
                 filteredRules.push(cssRule);
             }
         });
+        console.log(filteredRules); // TODO rausnehmen
         return filteredRules;
     };
 
@@ -72,42 +68,12 @@ function($){
     };
 
     /**
-     * Filtert aus allen Styleangaben die css-Rules heraus, die den übergebenen Selektor enthalten.
-     * @param filterSelector    String  Selektor, nach dem gefiltert werden soll
-     */
-    var getCssStyleRuleContainingSelector = function(filterSelector){
-        return convertRulesToJSON(
-            CSS_STYLE_RULE_TYPE,
-            filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_SELECTOR, filterSelector)
-        );
-    };
-
-    /**
-     * Filtert auf allen Styleangaben, die css-Rules heraus, die den übergeben String beinhalten.
-     * @param filter   String  Style, nach dem gefiltert werden soll
-     */
-    var getCssStyleRuleContaining = function(filter) {
-        return convertRulesToJSON(
-            CSS_STYLE_RULE_TYPE,
-            filterCssRule(CSS_STYLE_RULE_TYPE, CSS_STYLE_RULE_ATTRIBUTE_CSS_TEXT, filter)
-        );
-    };
-
-    /**
      * Liefert den Wert des Selektors.
-     * @param type  Typ der Regeln
      * @param rule  CSSRule
      * @returns String
      */
-    var getSelectorValue = function(type, rule) {
-        switch(type) {
-            case CSS_MEDIA_RULE_TYPE:
-                return "@media " + rule.media.mediaText;
-                break;
-            case CSS_STYLE_RULE_TYPE:
-                return rule.selectorText;
-        }
-        return "";
+    var getSelectorValue = function(rule) {
+        return "@media " + rule.media.mediaText;
     };
 
     /**
@@ -122,21 +88,59 @@ function($){
     };
 
     /**
+     * Liefert die Breite, ab der eine Media Query greift und geht dabei nur von korrekt verfassten Media Queries aus.
+     * Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte Zahl, geliefert.
+     * @param cssMediaRule  CSSMediaRule    Media Query
+     * @return int  maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
+     */
+    var getMediaQueryWidth = function(cssMediaRule) {
+        var mediaList = cssMediaRule.media,
+            PREFIX = "width: ",
+            POSTFIX = "px",
+            width = -1;
+        // Elemente müssen so abgelaufen werden, da die MediaList neben der Liste noch weitere Attribute enthält
+        for(var i=0; i<mediaList.length; i++) {
+            var mediaRule = mediaList[i],
+                widthIndex = mediaRule.indexOf(PREFIX);
+            while(widthIndex > -1) {
+                var endPrefix = widthIndex + PREFIX.length,
+                    unit = mediaRule.indexOf(POSTFIX, endPrefix),
+                    widthBegin = endPrefix,
+                    widthEnd = unit - 1;
+                if(unit > -1 && (widthEnd > widthBegin)) {
+                    // Wenn der Postfix gefunden wurde und zwischen Pre- und Postfix noch etwas steht,
+                    // diesen Wert auslesen und als width übernehmen, wenn er größer als die bisherige Angabe ist
+                    width = Math.max(
+                        width,
+                        parseFloat(
+                            mediaRule.substr(widthBegin, widthEnd)
+                        )
+                    );
+                }
+                // Nach weiteren Breitenangaben suchen
+                widthIndex = mediaRule.indexOf(PREFIX, endPrefix);
+            }
+        }
+        return width;
+    };
+
+    /**
      * Konvertiert die Regeln und die notwendigen Informationen in JSON.
-     * @param type      int Typ der Regeln
      * @param cssRules  []  CSSRules
      * return {selector: String, style: String}
      */
-    var convertRulesToJSON = function(type, cssRules){
+    var convertRulesToJSON = function(cssRules){
         var jsonRules = [];
         $.each(cssRules, function(i, rule){
-            var selector = getSelectorValue(type, rule),
-                style = getStyleValue(rule, selector);
-            jsonRules.push({
-                selector: getSelectorValue(type, rule),
-                style: style,
-                fullCss: rule.cssText
-            });
+            var selector = getSelectorValue(rule),
+                style = getStyleValue(rule, selector),
+                json = {
+                    selector: getSelectorValue(rule),
+                    style: style,
+                    mediaQueryWidth: getMediaQueryWidth(rule),
+                    fullCss: rule.cssText
+                };
+            jsonRules.push(json);
         });
         return jsonRules;
     };
@@ -146,14 +150,11 @@ function($){
      */
     var getMediaQueries = function(){
         return convertRulesToJSON(
-            CSS_MEDIA_RULE_TYPE,
             getCssRulesWithType(CSS_MEDIA_RULE_TYPE)
         );
     };
 
     return {
-        getMediaQueries: getMediaQueries,
-        getCssStyleRuleContainingSelector: getCssStyleRuleContainingSelector,
-        getCssStyleRuleContaining: getCssStyleRuleContaining
+        getMediaQueries: getMediaQueries
     }
 });
