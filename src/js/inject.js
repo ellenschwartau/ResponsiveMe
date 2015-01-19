@@ -3,9 +3,9 @@
  * Behandelt die Messages und führt die gewünschten Aktionen aus.
  */
 require([
-    'jquery', 'extension', 'grid', 'config', 'mediaQueries'
+    'jquery', 'extension', 'visualizeElements', 'config', 'mediaQueries'
 ],
-function($, extension, grid, config, mediaQueries) {
+function($, extension, visualizeElements, config, mediaQueries) {
     /**
      * Zeigt das Grid auf der Seite an.
      * @param request
@@ -13,8 +13,7 @@ function($, extension, grid, config, mediaQueries) {
      * @param sendResponse
      */
     var handleShowGrid = function(request, sender, sendResponse) {
-        grid.show(request.data.selectors, request.data.color, request.data.width);
-        // TODO Doku: Request immer ein type und ein data Attribut
+        visualizeElements.show(request.data.selectors, request.data.color, request.data.width);
     };
 
     /**
@@ -41,7 +40,7 @@ function($, extension, grid, config, mediaQueries) {
         // deswegen muss die Unterscheidung des Types hier passieren
         // nicht erst in der extension.handleMessage Methode
         switch(request.type) {
-            case config.messageTypes.showGrid:
+            case config.messageTypes.showElements:
                 handleShowGrid(request, sender, sendResponse);
                 break;
             case config.messageTypes.showMediaQueries:

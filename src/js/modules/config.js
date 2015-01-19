@@ -21,7 +21,7 @@ function() {
         ],
     // TODO in ein Message Handling Modul, oder mit in extension.js?
         messageTypes = {            // Type, zur Identifikation der Nachrichten, die zwischen
-            showGrid: "showGrid",    // den Komponenten der Erweiterung verschickt werden
+            showElements: "showElements",    // den Komponenten der Erweiterung verschickt werden
             showMediaQueries: "showMediaQueries",
             windowResize: "windowResize"
         };

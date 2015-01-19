@@ -8,9 +8,9 @@
  * "div[class*='column-']"  // Alle Klassem, die "column-" beinhalten
  */
 define([
-    'jquery', 'extension', 'config'
+    'jquery', 'visualizeElements'
 ],
-function($, extension, config) {
+function($, visualizeElements) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
@@ -41,42 +41,8 @@ function($, extension, config) {
             var selectors = getGridSelectors();
             // Wenn Selektoren angegeben wurden, Anzeige anstoßen
             if(selectors.length >= 1) {
-                extension.sendMessageToTab({
-                    type: config.messageTypes.showGrid,
-                    data: {
-                        selectors: selectors,
-                        color: getColor(),
-                        width: getWidth()
-                    }
-                });
+                visualizeElements.triggerShowElements(selectors, getColor(), getWidth());
             }
-        });
-    };
-
-    /**
-     * Liefert den CSS String zur Darstellung einer Außenlinie in der angegebenen Farbe und Dicke.
-     * @param color     String  Farbe
-     * @param width     int     Dicke
-     * @returns {{css}}
-     */
-    var getCssToDisplayGrid = function(color, width) {
-        return {
-            "border": "solid " + color + " " + width + "px",
-            "box-sizing": "border-box"
-        };
-    };
-
-    /**
-     * Zeigt da Grid, das durch die Selektoren definiert wird, in der übergebenen Farbe und Pixelbreite an.
-     * @param selectors [String]    Selektoren, die das Grid definieren
-     * @param color     String      Farbe
-     * @param width     int         Breite
-     */
-    var showGrid = function(selectors, color, width) {
-        $.each(selectors, function(i, selector) {
-            $(selector).css(
-                getCssToDisplayGrid(color, width)
-            );
         });
     };
 
@@ -134,7 +100,6 @@ function($, extension, config) {
     };
 
     return {
-        init: init,
-        show: showGrid
+        init: init
     };
 });

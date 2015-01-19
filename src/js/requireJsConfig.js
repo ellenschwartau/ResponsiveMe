@@ -19,6 +19,7 @@ var requireJsConfig = {
         browserOffset: 'modules/viewport/browser-offset',
         // Visualisierung
         grid: 'modules/grid/grid',
+        visualizeElements: 'modules/grid/visualize-elements',
         mediaQueries: 'modules/mediaQueries/media-queries',
         stylesheetParser: 'modules/mediaQueries/stylesheet-parser'
     }
