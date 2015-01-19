@@ -7,12 +7,12 @@ require([
 ],
 function($, extension, visualizeElements, config, mediaQueries) {
     /**
-     * Zeigt das Grid auf der Seite an.
+     * Zeigt die gewünschten Elemente auf der Seite an.
      * @param request
      * @param sender
      * @param sendResponse
      */
-    var handleShowGrid = function(request, sender, sendResponse) {
+    var handleShowElements = function(request, sender, sendResponse) {
         visualizeElements.show(request.data.selectors, request.data.color, request.data.width);
     };
 
@@ -41,7 +41,7 @@ function($, extension, visualizeElements, config, mediaQueries) {
         // nicht erst in der extension.handleMessage Methode
         switch(request.type) {
             case config.messageTypes.showElements:
-                handleShowGrid(request, sender, sendResponse);
+                handleShowElements(request, sender, sendResponse);
                 break;
             case config.messageTypes.showMediaQueries:
                 handleShowMediaQueries(request, sender, sendResponse);
