@@ -30,6 +30,8 @@ function($, extension, config){
      * @returns {{css}}
      */
     var getCssToDisplayElement = function(color, width) {
+        // border-box: sorgt dafür, dass die Border nicht auf die Breite aufaddiert wird,
+        // sodass die Umrangun nicht zu ungewollten Umbrüchen u.Ä. führt
         return {
             "border": "solid " + color + " " + width + "px",
             "box-sizing": "border-box"
@@ -37,8 +39,9 @@ function($, extension, config){
     };
 
     /**
-     * Zeigt da Grid, das durch die Selektoren definiert wird, in der übergebenen Farbe und Pixelbreite an.
-     * @param selectors [String]    Selektoren, die das Grid definieren
+     * Kennzeichnet die Elemente, die durch die Selektoren definiert werden,
+     * durch eine Außenlinie in der übergebenen Farbe und Pixelbreite.
+     * @param selectors [String]    css-Selektoren
      * @param color     String      Farbe
      * @param width     int         Breite
      */
