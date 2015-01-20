@@ -7,7 +7,9 @@ define([
     'ace'
 ],
 function(){
-    var initCodeEditor = function(id, value) {
+    var editors = [];
+
+    var initCodeEditor = function(id, rule) {
         // trigger extension
         ace.require("ace/ext/language_tools");
         var editor = ace.edit(id);
@@ -18,7 +20,26 @@ function(){
             enableBasicAutocompletion: true
         });
         editor.renderer.setShowGutter(false);
-        editor.session.setValue(value);
+        editor.session.setValue(rule.fullCss);
+
+        saveEditorData(editor, rule.indexStyleSheet, rule.indexRule);
+        bindCallbacks(editor);
+
+        return editor;
+    };
+
+    var bindCallbacks = function(editor) {
+        editor.getSession().selection.on('blur', function(){
+            console.log("Blur");
+        });
+    };
+
+    var saveEditorData = function(editor, indexStyleSheet, indexRule) {
+        editors.push({
+            editor: editor,
+            indexStyleSheet: indexStyleSheet,
+            indexRule: indexRule
+        });
     };
 
     return {

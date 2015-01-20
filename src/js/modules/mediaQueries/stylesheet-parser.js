@@ -134,6 +134,7 @@ function($){
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
      */
     var getMediaQueries = function(){
+        console.log(getCssRules(CSS_MEDIA_RULE_TYPE)); // TODO DEBUG
         return getCssRules(CSS_MEDIA_RULE_TYPE);
     };
 

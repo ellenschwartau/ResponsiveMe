@@ -41,7 +41,6 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
 
         // Inahlte setzen
         $heading.html(mediaQuery.selector);
-        //$style.html(mediaQuery.style);
         $style.attr("id", id);
 
         // Callbacks setzen
@@ -85,7 +84,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
             $.each(data, function(i, mediaQuery){
                 var id = ID_PREFIX_MEDIA_QUERY + i;
                 $mediaQueries.append(createMarkup(mediaQuery, id));
-                aceHelper.initCodeEditor(id, mediaQuery.fullCss);
+                aceHelper.initCodeEditor(id, mediaQuery);
             });
             $showMediaQueriesButton.after($hideMediaQueriesButton);
         } else {
