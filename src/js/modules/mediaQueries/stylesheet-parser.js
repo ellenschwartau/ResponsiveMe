@@ -21,8 +21,12 @@ function($){
         $.each(styleSheets, function(indexStyleSheet, styleSheet){
             var ruleList = styleSheet.cssRules;
             if(ruleList != null && ruleList.length > 0) {
-                // Für jedes StyleSheet die Regeln speichern
-                cssRules.push(getCssRulesFromRuleList(type, indexStyleSheet, ruleList));
+                // Für jedes StyleSheet die Liste an Regeln in JSON konvertieren
+                var rules = getCssRulesFromRuleList(type, indexStyleSheet, ruleList);
+                // Und die Regeln in eine Liste speichern
+                $.each(rules, function(i, rule){
+                    cssRules.push(rule);
+                });
             }
         });
 
@@ -130,10 +134,7 @@ function($){
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
      */
     var getMediaQueries = function(){
-        //return convertRulesToJSON(
-        //    getCssRulesWithType(CSS_MEDIA_RULE_TYPE)
-        //);
-        console.log(getCssRules(CSS_MEDIA_RULE_TYPE));
+        return getCssRules(CSS_MEDIA_RULE_TYPE);
     };
 
     return {
