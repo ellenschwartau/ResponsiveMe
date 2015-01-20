@@ -15,9 +15,10 @@ function($, config, viewportSize, viewportAnimation) {
         $animationTimes,                 // Input-Feld zur Angabe das Anzahl an Wiederholungen
         $animationButton,                // Button zum Starten der Animation
         $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
-        MSG_ANIMATION_DATA_MISSING =    // Fehlermeldung
+        MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
             "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
-        sizesContainBrowserOffset;      // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
+        sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
+        MIN_WIDTH_CHROME = 299;          // Minimale Breite, die der Chrome Browser annehmen kann
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -102,7 +103,7 @@ function($, config, viewportSize, viewportAnimation) {
      */
     var initWidthScrollBar = function() {
         initScrollBar(
-            $widthScrollBar, window.screen.availWidth, 299, true, false
+            $widthScrollBar, window.screen.availWidth, MIN_WIDTH_CHROME, true, false
         );
     };
 
