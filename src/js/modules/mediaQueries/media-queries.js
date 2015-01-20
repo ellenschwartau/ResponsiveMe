@@ -20,7 +20,8 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
             "</div>"),
         MSG_NO_MEDIA_QUERIES_FOUND =
             "Es sind keine Media Queries vorhanden.",  // Meldung, falls keine Media Queries gefunden wurden
-        ID_PREFIX_MEDIA_QUERY = "media-query-";        // Prefix der IDs der Media Query Elemente
+        ID_PREFIX_MEDIA_QUERY = "media-query-",       // Prefix der IDs der Media Query Elemente
+        editorNewMediaQuery = "newMediaQuery";
 
     /**
      * Ermittelt die Media Queries, die in den Styles der Website vorhanden sind.
@@ -121,6 +122,10 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         $mediaQueries = $("#mediaQueries");
     };
 
+    var initNewMediaQuery = function() {
+        aceHelper.initCodeEditor(editorNewMediaQuery, "");
+    };
+
     var initCodeEditor = function(){
         aceHelper.initCodeEditor("editor", ".test{width:50%}");
     };
@@ -134,6 +139,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         initElements();
         initMediaQueryDisplay();
         initCodeEditor();
+        initNewMediaQuery();
     };
 
     return {
