@@ -28,16 +28,18 @@
     "css": ["./css/stylesheets/inject.css"],
     "js": [
       "/js/libs/require.js",
-      "/js/requireContent.js",
-      "/js/requireJsConfig.js",
-      "/js/inject.js"
+      "/js/requirejs/requireContent.js",
+      "/js/requirejs/requireJsConfig.js",
+      "/js/contentScripts/inject.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen
   "web_accessible_resources": [
     "/js/modules/*",
     "/js/modules/*/*",
-    "/js/libs/*",
-    "/js/*"
+    "/js/helper/*",
+    "/js/requirejs/*",
+    "/js/contentScripts/*",
+    "/js/libs/*"
   ]
 }

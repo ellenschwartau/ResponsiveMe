@@ -9,7 +9,7 @@ var requireJsConfig = {
         jquery: 'libs/jquery-1.11.2.min',
         config: 'modules/config',
         // Helper
-        extension: 'extension',
+        extension: 'helper/extension',
         // Popup
         popup: 'popup/popup',
         modules: 'popup/module',
