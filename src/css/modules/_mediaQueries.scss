@@ -8,12 +8,10 @@
 
     .mediaQuery {
       border-bottom: $border-solid-thin;
-      .style {
+      .editor {
         display: none;
-        padding: 5px;
-        background: $light-grey;
-        color: $dark-grey;
-        border-radius: 5px;
+        height: 100px;
+        margin-bottom: 10px;
       }
     }
   }

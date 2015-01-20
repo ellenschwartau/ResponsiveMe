@@ -7,7 +7,6 @@
         body {
             overflow: hidden;
         }
-
         #editor {
             margin: 0;
             position: absolute;
@@ -23,9 +22,9 @@
 <pre id="editor"></pre>
 
 <!-- load ace -->
-<script src="../js/libs/ace/src-noconflict/ace.js"></script>
+<script src="../js/libs/ace/ace.js"></script>
 <!-- load ace language tools -->
-<script src="../js/libs/ace/src-noconflict/ext-language_tools.js"></script>
+<script src="../js/libs/ace/ext-language_tools.js"></script>
 <script>
     // trigger extension
     ace.require("ace/ext/language_tools");
@@ -34,17 +33,9 @@
     editor.setTheme("ace/theme/dawn");
     // enable autocompletion and snippets
     editor.setOptions({
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
+        enableBasicAutocompletion: true
     });
     editor.session.setValue(".klasse {width: 100%;}");
 </script>
-
-<script src="./show_own_source.js"></script>
 </body>
 </html>
-
-<!--var code = ace.getSession().getValue();-->
-<!--// prettify-->
-<!--ace.getSession().setValue(code);-->

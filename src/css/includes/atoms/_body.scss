@@ -3,7 +3,7 @@ html, body {
   color: $light-grey;
 }
 body {
-  min-width: 300px;
+  min-width: 400px;
   &.hide {
     display: none;
     html:hover & {
