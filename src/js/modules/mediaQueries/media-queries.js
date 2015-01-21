@@ -126,10 +126,6 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         aceHelper.initCodeEditor(editorNewMediaQuery, "");
     };
 
-    var initCodeEditor = function(){
-        aceHelper.initCodeEditor("editor", ".test{width:50%}");
-    };
-
     /**
      * Initialisiert das Media Query Modul.
      * Die benötigten Elemente werden ausgelesen und die notwendigen Callbacks gesetzt.
@@ -138,7 +134,6 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         viewportSize.init();
         initElements();
         initMediaQueryDisplay();
-        initCodeEditor();
         initNewMediaQuery();
     };
 

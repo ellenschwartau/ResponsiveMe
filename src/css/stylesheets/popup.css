@@ -4,26 +4,26 @@
  */
 /**
  * Definiert gemeinsam genutzte CSS Variablen, wie Farben, Fonts und Strings.
- * Hier werden auch global benötigte Dateien eingebunden.
+ * Hier werden auch global ben├Âtigte Dateien eingebunden.
  */
 /* fonts */
 @font-face {
   font-family: "Montserrat Light";
-  src: url('../fonts/Montserrat-Light.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Light.otf?1419776508') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Regular";
-  src: url('../fonts/Montserrat-Regular.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Regular.otf?1419776509') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Black";
-  src: url('../fonts/Montserrat-Black.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Black.otf?1419776508') format('opentype');
 }
 /* colors */
 /* styles */
 /* buttons */
 /**
- * Bündelt die übergreifenden Styles.
+ * B├╝ndelt die ├╝bergreifenden Styles.
  */
 /* line 1, ../includes/atoms/_body.scss */
 html, body {
@@ -45,7 +45,7 @@ html:hover body.hide {
 }
 
 /**
- * Definiert das Aussehen der Überschriften
+ * Definiert das Aussehen der ├£berschriften
  */
 /* line 4, ../includes/atoms/_heading.scss */
 h1 {
@@ -86,7 +86,7 @@ h4:hover {
 }
 
 /**
- * Enthält die Styles für Input Elemente.
+ * Enth├ñlt die Styles f├╝r Input Elemente.
  */
 /* line 4, ../includes/atoms/input/_input.scss */
 input[type=number],
@@ -190,7 +190,7 @@ input[type=color] {
 }
 
 /**
-  * Überschreibt die vordefinierten Styles der Scrollbars.
+  * ├£berschreibt die vordefinierten Styles der Scrollbars.
   */
 /* line 4, ../includes/atoms/_scrollbar.scss */
 ::-webkit-scrollbar {
@@ -212,7 +212,7 @@ input[type=color] {
 }
 
 /*
- * Styles für eine Checkbox mit on-off-switch button
+ * Styles f├╝r eine Checkbox mit on-off-switch button
  *
  * Folgendes HTML muss eingebunden werden:
 
@@ -224,7 +224,7 @@ input[type=color] {
       </label>
   </div>
 
- * Die Beschriftung der labels kann wie folgt überschrieben werden:
+ * Die Beschriftung der labels kann wie folgt ├╝berschrieben werden:
 
    .onoffswitch-inner:before {
     content: "OUTER";
@@ -305,6 +305,12 @@ input[type=color] {
   bottom: 0;
   right: 48px;
   transition: all 0.3s ease-in 0s;
+}
+
+/* line 1, ../includes/molecules/_editor.scss */
+.editor {
+  height: 100px;
+  margin-bottom: 10px;
 }
 
 /* --- Module --- */
@@ -408,7 +414,7 @@ input[type=color] {
 
 /* --- einbinden der Module --- */
 /**
- * Bündelt die Stylesheets aller Module.
+ * B├╝ndelt die Stylesheets aller Module.
  */
 /* line 4, ../modules/_modules.scss */
 .item {
@@ -463,7 +469,7 @@ a.button:hover {
 }
 
 /**
- * Enthält die Styles des Visualisierungs-Moduls.
+ * Enth├ñlt die Styles des Visualisierungs-Moduls.
  */
 /* line 5, ../modules/_mediaQueries.scss */
 #moduleMediaQueries #mediaQueries {
@@ -477,6 +483,4 @@ a.button:hover {
 /* line 11, ../modules/_mediaQueries.scss */
 #moduleMediaQueries #mediaQueries .mediaQuery .editor {
   display: none;
-  height: 100px;
-  margin-bottom: 10px;
 }
