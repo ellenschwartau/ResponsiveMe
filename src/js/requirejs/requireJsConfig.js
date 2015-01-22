@@ -4,8 +4,9 @@ var requireJsConfig = {
     baseUrl: '/js',
     // Vorhandene Module und Libs
     paths: {
-        ace: 'libs/ace/ace',
-        aceHelper: 'helper/ace-helper',
+        codeEditor: 'libs/ace/ace',
+        codeEditorHelper: 'helper/ace-helper',
+        aceLanguageTools: 'libs/ace/ext-language_tools',
         jquery: 'libs/jquery-1.11.2.min',
         config: 'modules/config',
         // Helper

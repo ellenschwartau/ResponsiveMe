@@ -5,7 +5,7 @@
  * an der diese Media Query greift.
  */
 define([
-    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'aceHelper'
+    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper'
 ],
 function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
     var $contentWrapper,             // Parent Element des Modul-Inhalts

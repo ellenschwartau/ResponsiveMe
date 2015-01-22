@@ -5,7 +5,7 @@
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
  */
 define([
-    'jquery','ace'
+    'jquery'
 ],
 function($){
     var editors = [];
@@ -17,22 +17,40 @@ function($){
      * @returns {Object} - Editor
      */
     var initCodeEditor = function(id, rule) {
-        // trigger extension
-        ace.require("ace/ext/language_tools");
+        // Editor Erstellen und Modus sowie Theme setzen
         var editor = ace.edit(id);
         editor.session.setMode("ace/mode/css");
         editor.setTheme("ace/theme/dawn");
-        // enable autocompletion and snippets
-        editor.setOptions({
-            enableBasicAutocompletion: true
-        });
-        editor.renderer.setShowGutter(false);
-        editor.session.setValue(rule.fullCss);
 
+        // Umbrüche erzwingen
+        editor.session.setUseWrapMode(true);
+        // Keine Warnmeldung wenn kein Cursor gesetzt wurde
+        editor.$blockScrolling = Infinity;
+        // Zeilenzahlen
+        editor.renderer.setShowGutter(false);
+        // Wert des Editors initialisieren
+        editor.session.setValue(rule.fullCss);
+        // Auto-Vervollständigung
+        enableAutocompletion(editor);
+
+        // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
         saveEditorData(editor, id, rule.indexStyleSheet, rule.indexRule);
+        // Callbacks initialisieren
         bindCallbacks(editor);
 
         return editor;
+    };
+
+    /**
+     * Aktiviert die Autovervollständigung des Editors.
+     * @param {Object} editor - Code Editor
+     */
+    var enableAutocompletion = function(editor){
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true
+        });
     };
 
     // TODO

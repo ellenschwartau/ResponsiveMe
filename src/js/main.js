@@ -1,5 +1,5 @@
 /**
- * Die main.js übernimmt das Laden und Initialisieren der Module.
+ * Dieses Skript übernimmt das Initialisieren der Erweiterung.
  */
 require([
     'popup'
