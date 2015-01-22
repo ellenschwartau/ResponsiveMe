@@ -13,12 +13,17 @@ function($){
     /**
      * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
      * @param {string} id - CSS-ID des Editors
-     * @param {{styleSheetIndex:int,ruleIndex:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
+     * @param {{indexStyleSheet:int,indexRule:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
+     * @param {function} [onBlurCallback] - Funktion, die beim Verlassen des Editors ausgeführt werden soll
      * @returns {Object} - Editor
      */
-    var initCodeEditor = function(id, rule) {
+    var initCodeEditor = function(id, rule, onBlurCallback) {
         // Editor Erstellen und Modus sowie Theme setzen
-        var editor = ace.edit(id);
+        var editor = ace.edit(id),
+            style = rule.fullCss,
+            indexStyleSheet = rule.indexStyleSheet,
+            indexRule = rule.indexRule;
+
         editor.session.setMode("ace/mode/css");
         editor.setTheme("ace/theme/dawn");
 
@@ -30,14 +35,16 @@ function($){
         // Zeilenzahlen
         //editor.renderer.setShowGutter(false);
         // Wert des Editors initialisieren
-        editor.session.setValue(rule.fullCss);
+        editor.session.setValue(style);
         // Auto-Vervollständigung
         enableAutocompletion(editor);
 
         // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
-        saveEditorData(editor, id, rule.indexStyleSheet, rule.indexRule);
+        saveEditorData(editor, id, indexStyleSheet, indexRule);
         // Callbacks initialisieren
-        bindCallbacks(editor);
+        if(onBlurCallback != undefined) {
+            bindBlurCallback(editor, indexStyleSheet, indexRule, onBlurCallback);
+        }
 
         return editor;
     };
@@ -54,10 +61,16 @@ function($){
         });
     };
 
-    // TODO
-    var bindCallbacks = function(editor) {
-        editor.getSession().selection.on('blur', function(){
-            console.log("Blur");
+    /**
+     * Bindet eine Callback-Funktion an das blur-Event.
+     * @param {Object} editor - Code-Editor
+     * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
+     * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, callback) {
+        editor.on("blur", function(){
+            callback(editor.session.getValue(), indexStyleSheet, indexRule);
         });
     };
 

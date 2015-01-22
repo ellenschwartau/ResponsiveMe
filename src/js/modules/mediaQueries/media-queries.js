@@ -3,6 +3,8 @@
  * Es liest die in den Style Sheets der aufgerufenen Website enthaltenen Media Queries aus und bringt diese zur Anzeige.
  * Über einen Mausklick auf den Selektor der Media Query kann anschließend an die Stelle gesprungen werden,
  * an der diese Media Query greift.
+ *
+ * // TODO Logik in weiteres Untermodul auslagern
  */
 define([
     'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper'
@@ -80,6 +82,31 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         $insertAfterElm.after($button);
     };
 
+    var triggerMediaQueryUpdate = function(style, indexStyleSheet, indexRule) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.updateStyle,
+            data: {
+                style: style,
+                indexStyleSheet: indexStyleSheet,
+                indexRule: indexRule
+            }
+        });
+    };
+
+    var triggerMediaQueryInsertion = function(id) {
+        var style = aceHelper.getEditorValue(id),
+            editorData = aceHelper.getEditorData(id);
+        if(style != "" && editorData != undefined) {
+            extension.sendMessageToTab({
+                type: config.messageTypes.insertStyle,
+                data: {
+                    style: style,
+                    indexStyleSheet: editorData.indexStyleSheet
+                }
+            });
+        }
+    };
+
     /**
      * Konvertiert die Informationen über die Media Queries in HTML-Elemente und zeigt diese an.
      * @param {json} response - Antwort der getMediaQueries-Methode
@@ -94,7 +121,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
             $.each(data, function(i, mediaQuery){
                 var id = ID_PREFIX_MEDIA_QUERY + i;
                 $mediaQueries.append(createMarkup(mediaQuery, id));
-                aceHelper.initCodeEditor(id, mediaQuery);
+                aceHelper.initCodeEditor(id, mediaQuery, triggerMediaQueryUpdate); // TODO Callback mit reinreichen
             });
             $showMediaQueriesButton.after($hideMediaQueriesButton);
         } else {
@@ -138,17 +165,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
     var initNewMediaQuery = function() {
         aceHelper.initCodeEditor(editorIdNewMediaQuery, stylesheetParser.getEmptyCssRuleJson());
         $newMediaQueryButton.click(function() {
-            var style = aceHelper.getEditorValue(editorIdNewMediaQuery),
-                editorData = aceHelper.getEditorData(editorIdNewMediaQuery);
-            if(style != "" && editorData != undefined){
-                extension.sendMessageToTab({
-                    type: config.messageTypes.insertStyle,
-                    data: {
-                        style: style,
-                        indexStyleSheet: editorData.indexStyleSheet
-                    }
-                });
-            }
+                triggerMediaQueryInsertion(editorIdNewMediaQuery);
         });
 
     };
