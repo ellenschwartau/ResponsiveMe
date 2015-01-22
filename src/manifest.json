@@ -30,7 +30,7 @@
       "/js/libs/require.js",
       "/js/requirejs/requireContent.js",
       "/js/requirejs/requireJsConfig.js",
-      "/js/contentScripts/inject.js"
+      "/js/contentScripts/message-handling.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen

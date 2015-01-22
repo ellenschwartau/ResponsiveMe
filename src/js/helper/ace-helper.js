@@ -5,16 +5,16 @@
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
  */
 define([
-    'ace'
+    'jquery','ace'
 ],
-function(){
+function($){
     var editors = [];
 
     /**
      * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
-     * @param id        int     ID des Editors
-     * @param rule      CSSRule Regel, die angezeigt werden soll
-     * @returns {*}     Editor
+     * @param {string} id - CSS-ID des Editors
+     * @param {{styleSheetIndex:int,ruleIndex:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
+     * @returns {Object} - Editor
      */
     var initCodeEditor = function(id, rule) {
         // trigger extension
@@ -44,10 +44,10 @@ function(){
 
     /**
      * Speichert die Daten eines Editors zwischen.
-     * @param editor            Object  Code Editor
-     * @param id                String  ID des Editors
-     * @param indexStyleSheet   int     Index des Style Sheets, zu dem der Inhalt des Editors gehört
-     * @param indexRule         int     Index der Regel, zu der der Inhalt des Editors gehört
+     * @param {Object} editor - Code Editor
+     * @param {string} id - CSS-ID des Editors
+     * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
+     * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
      */
     var saveEditorData = function(editor, id, indexStyleSheet, indexRule) {
         editors.push({
@@ -60,20 +60,44 @@ function(){
 
     /**
      * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen id.
-     * @param id            String      ID des Editors
+     * @param {string} id - CSS-ID des Editors
      * @returns {string}
      */
     var getEditorValue = function(id) {
-        $.each(editors, function(i, editor){
-            if(editor.id === id) {
-                return editor.session.getValue();
+        var editorData = getEditorData(id);
+        return editorData != undefined ? editorData.editor.session.getValue() : "";
+    };
+
+    /**
+     * Leert den Inhalt eines über seine ID bestimmten Editors.
+     * @param {string} id - CSS-ID des Editors
+     */
+    var clearEditorValue = function(id){
+        var editorData = getEditorData(id);
+        if(editorData != undefined) {
+            editorData.session.setValue("");
+        }
+    };
+
+    /**
+     * Liefert die Daten eines Editors, der über seine ID spezifiziert wird.
+     * @param {String} id - css-ID des Editors
+     * @returns {undefined|{editor:Object,id:string,indexStyleSheets:int,indexRule:int}}
+     */
+    var getEditorData = function(id) {
+        var data = undefined;
+        $.each(editors, function(i, editorData){
+            if(editorData.id === id) {
+                data = editorData;
             }
         });
-        return "";
+        return data;
     };
 
     return {
         initCodeEditor: initCodeEditor,
-        getEditorValue: getEditorValue
+        getEditorValue: getEditorValue,
+        cleatEditorValue: clearEditorValue,
+        getEditorData: getEditorData
     }
 });

@@ -23,7 +23,9 @@ function() {
         messageTypes = {            // Type, zur Identifikation der Nachrichten, die zwischen
             showElements: "showElements",    // den Komponenten der Erweiterung verschickt werden
             showMediaQueries: "showMediaQueries",
-            windowResize: "windowResize"
+            windowResize: "windowResize",
+            updateStyle: "updateStyle",
+            insertStyle: "insertStyle"
         };
 
     return {

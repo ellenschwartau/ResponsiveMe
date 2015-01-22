@@ -5,11 +5,11 @@
  * an der diese Media Query greift.
  */
 define([
-    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'aceHelper'
+    'jquery', 'extension', 'config', 'stylesheetParser', 'styleEditor', 'viewportSize', 'aceHelper'
 ],
-function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
-    var $contentWrapper,            // Parent Element des Modul-Inhalts
-        $showMediaQueriesButton,    // Button zum Anzeigen der Media Queries
+function($, extension, config, stylesheetParser, styleEditor, viewportSize, aceHelper) {
+    var $contentWrapper,             // Parent Element des Modul-Inhalts
+        $showMediaQueriesButton,     // Button zum Anzeigen der Media Queries
         $hideMediaQueriesButton =    // Button um de Media Queries wieder auszublenden
             $("<a id='hideMediaQueriesButton' class='button'>Media Queries ausblenden</a>"),
         $mediaQueries,              // Container für die angezeigten Media Queries
@@ -19,12 +19,14 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
                 "<div class='editor'></div>" +
             "</div>"),
         MSG_NO_MEDIA_QUERIES_FOUND =
-            "Es sind keine Media Queries vorhanden.",  // Meldung, falls keine Media Queries gefunden wurden
-        ID_PREFIX_MEDIA_QUERY = "media-query-",       // Prefix der IDs der Media Query Elemente
-        editorNewMediaQuery = "newMediaQuery";
+            "Es sind keine Media Queries vorhanden.",   // Meldung, falls keine Media Queries gefunden wurden
+        ID_PREFIX_MEDIA_QUERY = "media-query-",         // Prefix der IDs der Media Query Elemente
+        editorIdNewMediaQuery = "newMediaQuery",        // ID des Editors zum verfassen einer neuen Media Query
+        $newMediaQueryButton;                           // Button zum Speichern der neuen Media Query
 
     /**
      * Ermittelt die Media Queries, die in den Styles der Website vorhanden sind.
+     * @return {{styleSheetIndex:int,ruleIndex:int,fullCss:string,mediaQueryWidth:int,selector:string}[]}
      */
     var getMediaQueries = function() {
         return stylesheetParser.getMediaQueries();
@@ -32,7 +34,13 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
 
     /**
      * Erstellt das Markup für eine Media Query.
-     * @param mediaQuery    JSON    Daten der Media Query
+     * @param {json} mediaQuery - Daten der Media Query
+     * @param {int} mediaQuery.styleSheetIndex - Index des Style Sheets in der StyleSheetList
+     * @param {int} mediaQuery.ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     * @param {string} mediaQuery.fullCSss - Gesamtes CSS der Regel
+     * @param {int} mediaQuery.mediaQueryWidth - obere Grenze der Breite, ab der die Media Query greift (-1 wenn keine Breite angegeben)
+     * @param {string} mediaQuery.selector - Selektor der CSS Regel
+     * @param {string} id - CSS-ID der Media Query
      */
     var createMarkup = function(mediaQuery, id){
         var $query = $mediaQueryHtml.clone(),
@@ -59,8 +67,8 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
     /**
      * Fügt einen Button nach dem übergebenen Element an, über den der Browser auf eine bestimmte Breite skaliert
      * werden kann.
-     * @param mediaQueryWidth   Breite, auf die der Browser skaliert werden soll
-     * @param $insertAfterElm   Element, nach dem der Button eingefügt werden soll
+     * @param {int} mediaQueryWidth - Breite, auf die der Browser skaliert werden soll
+     * @param {$} $insertAfterElm - Element, nach dem der Button eingefügt werden soll
      */
     var addScaleButton = function(mediaQueryWidth, $insertAfterElm) {
         // Button über den auf die Breite gesprungen werden kann, bei dem die Media Query greift
@@ -74,7 +82,8 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
 
     /**
      * Konvertiert die Informationen über die Media Queries in HTML-Elemente und zeigt diese an.
-     * @param response  JSON    Antwort der getMediaQueries-Methode
+     * @param {json} response - Antwort der getMediaQueries-Methode
+     * @param {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}[]} response.data - Daten der Antwort
      */
     var showMediaQueries = function(response){
         // Eventuell vorher angezeigte Media Queries löschen
@@ -120,10 +129,30 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
         $contentWrapper = $("#showMediaQueries");
         $showMediaQueriesButton = $("#showMediaQueriesButton");
         $mediaQueries = $("#mediaQueries");
+        $newMediaQueryButton = $("#newMediaQueriesButton");
     };
 
+    /**
+     * Initialisiert die Funktionalität zum Erstellen einer neuen Media Query.
+     */
     var initNewMediaQuery = function() {
-        aceHelper.initCodeEditor(editorNewMediaQuery, "");
+        aceHelper.initCodeEditor(editorIdNewMediaQuery, stylesheetParser.getEmptyCssRuleJson());
+        $newMediaQueryButton.click(function() {
+            var style = aceHelper.getEditorValue(editorIdNewMediaQuery),
+                editorData = aceHelper.getEditorData(editorIdNewMediaQuery);
+            if(style != "" && editorData != undefined){
+                //styleEditor.insert(style, editorData.indexStyleSheet, editorData.indexRule);
+                extension.sendMessageToTab({
+                    type: config.messageTypes.insertStyle,
+                    data: {
+                        style: style,
+                        indexStyleSheet: editorData.indexStyleSheet,
+                        indexRule: editorData.indexRule
+                    }
+                });
+            }
+        });
+
     };
 
     /**

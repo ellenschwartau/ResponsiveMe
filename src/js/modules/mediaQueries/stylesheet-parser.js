@@ -11,7 +11,8 @@ function($){
 
     /**
      * Liefert alle css-Regeln eines bestimmten Typs der aktuell geladenen Stylesheets.
-     * @returns {Array}
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @returns {{styleSheetIndex:int,ruleIndex:int,fullCss:string}[]}
      */
     var getCssRules = function(type) {
         var styleSheets = document.styleSheets,
@@ -36,10 +37,10 @@ function($){
     /**
      * List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert die
      * benötigten Informationen ins JSON-Format.
-     * @param type              int             Typ der Regeln, die geliefert werden sollen
-     * @param indexStyleSheet   int             Index des Style Sheets, aus dem die Media Query stammt
-     * @param ruleList          CSSRuleList     Liste, die die css-Regeln enthält
-     * @returns {Array}
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
+     * @param {CSSRuleList} ruleList - Liste, die die css-Regeln enthält
+     * @returns {{styleSheetIndex:int,ruleIndex:int,fullCss:string}[]}
      */
     var getCssRulesFromRuleList = function(type, indexStyleSheet, ruleList) {
         var cssRules = [];
@@ -54,11 +55,11 @@ function($){
 
     /**
      * Konvertiert eine Media Query in ein JSON-Format.
-     * @param type              int     Typ der Regeln, die geliefert werden sollen
-     * @param indexStyleSheet   int         Index des Style Sheets, aus dem die Media Query stammt
-     * @param indexRule         int         Index der Regel, die die Media Query definiert
-     * @param rule              CSSRegel    Regel
-     * @returns {{indexStyleSheet: *, indexRule: *, fullCss: (string|showComposition.$composition.cssText|*|rule.cssText|cssText|.style.cssText), selector: String}}
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
+     * @param {int} indexRule - Index der Regel, die die Media Query definiert
+     * @param {CSSRule} rule - CSS-Regel
+     * @returns {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string}}
      */
     var convertRuleToJson = function(type, indexStyleSheet, indexRule, rule) {
         return addTypeSpecificInformation(type, rule, {
@@ -70,9 +71,10 @@ function($){
 
     /**
      * Fügt dem JSON Object der css-Regel je nach dessen Typ weitere Daten an.
-     * @param type      int     Typ der css-Regel
-     * @param rule      CSSRule css-Regel
-     * @param json      JSON    bisherig gesammelte Daten zur Regel
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {CSSRule} rule - CSS-Regel
+     * @param {json} json  - bisherig gesammelte Daten zur Regel
+     * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
      */
     var addTypeSpecificInformation = function(type, rule, json) {
         switch(type) {
@@ -91,6 +93,18 @@ function($){
      */
     var getMediaRuleSelectorValue = function(rule) {
         return "@media " + rule.media.mediaText;
+    };
+
+    /**
+     * Liefert ein leeres Object einer CSSRule im JSON Format.
+     * @returns {{indexStyleSheet: number, indexRule: number, fullCss: string}}
+     */
+    var getEmptyCssRuleJson = function() {
+        return {
+            indexStyleSheet: 0,
+            indexRule: 0,
+            fullCss: ""
+        };
     };
 
     /**
@@ -132,6 +146,7 @@ function($){
 
     /**
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
+     * @return {{styleSheetIndex:int,ruleIndex:int,fullCss:string,mediaQueryWidth:int,selector:string}[]}
      */
     var getMediaQueries = function(){
         console.log(getCssRules(CSS_MEDIA_RULE_TYPE)); // TODO DEBUG
@@ -139,6 +154,7 @@ function($){
     };
 
     return {
-        getMediaQueries: getMediaQueries
+        getMediaQueries: getMediaQueries,
+        getEmptyCssRuleJson: getEmptyCssRuleJson
     }
 });

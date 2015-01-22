@@ -23,7 +23,8 @@ var requireJsConfig = {
         grid: 'modules/grid/grid',
         visualizeElements: 'modules/grid/visualize-elements',
         mediaQueries: 'modules/mediaQueries/media-queries',
-        stylesheetParser: 'modules/mediaQueries/stylesheet-parser'
+        stylesheetParser: 'modules/mediaQueries/stylesheet-parser',
+        styleEditor: 'modules/mediaQueries/style-editor'
     }
 };
 require.config(requireJsConfig);
