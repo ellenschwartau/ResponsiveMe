@@ -23,7 +23,7 @@ function($, config, viewportSize, viewportAnimation) {
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
      * (z.B. Tool- oder Scrolbars) gemacht werden.
-     * @returns boolean
+     * @returns {boolean}
      */
     var doSizesContainBrowserOffset = function() {
         return $innerOuterSwitch.is(":checked");
@@ -43,9 +43,9 @@ function($, config, viewportSize, viewportAnimation) {
 
     /**
      * Aktualisiert den Wert und die Anzeige einer Scrollbar
-     * @param $scrollbar    Element Scrollbar
-     * @param value         int     Wert
-     * @param unit          String  Einheit
+     * @param {$} $scrollbar - Scrollbar
+     * @param {string} unit - Einheit
+     * @param {int} value - Wert
      */
     var updateScrollbarValue = function($scrollbar, value, unit) {
         $scrollbar.val(value);
@@ -56,11 +56,11 @@ function($, config, viewportSize, viewportAnimation) {
      * Initialisiert eine Scrollbar zur Manipulation der Größe eines Browsers.
      * Dazu wird der minimale, maximale und aktuelle Wert der Scrollbar initialisiert,
      * die Anzeige des aktuellen Wertes , sowie die Callbacks zum Ändern der Breite, bzw. Höhe gesetzt.
-     * @param $scrollbar Element ScrollBar
-     * @param max           int     Maximalwert
-     * @param min           int     Minimalwert
-     * @param changeWidth   boolean Angabe, ob der Browser in seiner Breite manipuliert werden soll
-     * @param changeHeight  boolean Angabe, ob der Browser in seiner Höhe manipuliert werden soll
+     * @param {$} $scrollbar - Element ScrollBar
+     * @param {int} max - Maximalwert
+     * @param {int} min - Minimalwert
+     * @param {boolean} changeWidth - Angabe, ob der Browser in seiner Breite manipuliert werden soll
+     * @param {boolean} changeHeight - Angabe, ob der Browser in seiner Höhe manipuliert werden soll
      */
     var initScrollBar = function($scrollbar, max, min, changeWidth, changeHeight) {
         // Werte initialiseren
@@ -83,9 +83,9 @@ function($, config, viewportSize, viewportAnimation) {
 
     /**
      * Initialisiert die Anzeige des Wertes, der aktuell auf der ScrollBar angezeigt wird.
-     * @param $scrollbar ScrollBar
-     * @param $displayElement Element, dass den aktuellen Wert anzeigen soll
-     * @param unit String Einheit der Anzeige (z.B. "px")
+     * @param {$} $scrollbar - ScrollBar
+     * @param {$} $displayElement - Element, das den aktuellen Wert anzeigen soll
+     * @param {string} unit - Einheit der Anzeige (z.B. "px")
      */
     var showScrollBarValue = function($scrollbar, $displayElement, unit) {
         $scrollbar.mousemove(function() {
@@ -134,8 +134,8 @@ function($, config, viewportSize, viewportAnimation) {
 
     /**
      * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
-     * @param $element Element dessen Wert ausgelesen werden soll
-     * @returns {Number}
+     * @param {$} $element - Element dessen Wert ausgelesen werden soll
+     * @returns {int}
      */
     var parseIntVal = function($element) {
         return parseInt(Math.round($element.val()));

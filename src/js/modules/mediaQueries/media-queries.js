@@ -5,9 +5,9 @@
  * an der diese Media Query greift.
  */
 define([
-    'jquery', 'extension', 'config', 'stylesheetParser', 'styleEditor', 'viewportSize', 'aceHelper'
+    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'aceHelper'
 ],
-function($, extension, config, stylesheetParser, styleEditor, viewportSize, aceHelper) {
+function($, extension, config, stylesheetParser, viewportSize, aceHelper) {
     var $contentWrapper,             // Parent Element des Modul-Inhalts
         $showMediaQueriesButton,     // Button zum Anzeigen der Media Queries
         $hideMediaQueriesButton =    // Button um de Media Queries wieder auszublenden
@@ -141,13 +141,11 @@ function($, extension, config, stylesheetParser, styleEditor, viewportSize, aceH
             var style = aceHelper.getEditorValue(editorIdNewMediaQuery),
                 editorData = aceHelper.getEditorData(editorIdNewMediaQuery);
             if(style != "" && editorData != undefined){
-                //styleEditor.insert(style, editorData.indexStyleSheet, editorData.indexRule);
                 extension.sendMessageToTab({
                     type: config.messageTypes.insertStyle,
                     data: {
                         style: style,
-                        indexStyleSheet: editorData.indexStyleSheet,
-                        indexRule: editorData.indexRule
+                        indexStyleSheet: editorData.indexStyleSheet
                     }
                 });
             }

@@ -88,8 +88,8 @@ function($){
 
     /**
      * Liefert den Wert des Selektors einer Media Query.
-     * @param rule      CSSMediaRule
-     * @returns String
+     * @param {CSSMediaRule} rule - Media Query
+     * @returns {string}
      */
     var getMediaRuleSelectorValue = function(rule) {
         return "@media " + rule.media.mediaText;
@@ -110,8 +110,8 @@ function($){
     /**
      * Liefert die Breite, ab der eine Media Query greift und geht dabei nur von korrekt verfassten Media Queries aus.
      * Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte Zahl, geliefert.
-     * @param cssMediaRule  CSSMediaRule    Media Query
-     * @return int  maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
+     * @param {CSSMediaRule} cssMediaRule - Media Query
+     * @return {int} - maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
      */
     var getMediaQueryWidth = function(cssMediaRule) {
         var mediaList = cssMediaRule.media,

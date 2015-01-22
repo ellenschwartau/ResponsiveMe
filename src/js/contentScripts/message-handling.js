@@ -90,11 +90,6 @@ function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
 
     extension.handleMessage(handleMessages);
 
-
-    // TODO was davon richtig?
-    //extension.handleMessage(config.messageTypes.showGrid, handleShowGrid);
-    //extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
-
     // TODO Anzeige IST-Zustand
     // TODO Info bei Browseränderung
 });

@@ -7,12 +7,12 @@ define([
 function($, viewportSize) {
     /**
      * Animiert die Breite des Browsers.
-     * @param animationDuration     int zur Verfügung stehende Zeit
-     * @param startWidth            int Startbreite
-     * @param endWidth              int Endbreite
-     * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
-     * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
-     * @param containsBrowserOffset boolean Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+     * @param {int} animationDuration - zur Verfügung stehende Zeit
+     * @param {int} startWidth - Startbreite
+     * @param {int} endWidth - Endbreite
+     * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
+     * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
      */
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
@@ -32,7 +32,7 @@ function($, viewportSize) {
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
          * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde.
-         * @param interval ID des Intervalls, das die Animation durchführt
+         * @param {int} interval - ID des Intervalls, das die Animation durchführt
          */
         var checkAnimationEnd = function (interval) {
             if (((start >= end) && (curWidth <= end))
@@ -54,12 +54,12 @@ function($, viewportSize) {
 
         /**
          * Speichert die Eckdaten der Animation zwischen.
-         * @param animationDuration     int zur Verfügung stehende Zeit
-         * @param startWidth            int Startbreite
-         * @param endWidth              int Endbreite
-         * @param wantedAnimationCalls  int gewollte Anzahl an Wiederholungen der Animation
-         * @param doneAnimationCalls    int getätigte Anzahl an Wiederholungen der Animation
-         * @param containsBrowserOffset boolean Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+         * @param {int} animationDuration - zur Verfügung stehende Zeit
+         * @param {int} startWidth - Startbreite
+         * @param {int} endWidth - Endbreite
+         * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
+         * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
+         * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
          */
         var calcAnimationData = function (animationDuration, startWidth, endWidth,
                                           wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
@@ -101,12 +101,12 @@ function($, viewportSize) {
 
         /**
          * Animiert die Breite des Browsers.
-         * @param animationDuration     int     zur Verfügung stehende Zeit
-         * @param startWidth            int     Startbreite
-         * @param endWidth              int     Endbreite
-         * @param wantedAnimationCalls  int     gewollte Anzahl an Wiederholungen der Animation
-         * @param doneAnimationCalls    int     getätigte Anzahl an Wiederholungen der Animation
-         * @param containsBrowserOffset boolean Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+         * @param {int} animationDuration - zur Verfügung stehende Zeit
+         * @param {int} startWidth - Startbreite
+         * @param {int} endWidth - Endbreite
+         * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
+         * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
+         * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {

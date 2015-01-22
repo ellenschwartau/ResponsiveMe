@@ -27,7 +27,7 @@ function($, config, viewport, mediaQueries, grid) {
 
     /**
      * Initialisiert die Anzeige und die Daten der Module.
-     * @param moduleName String Name des Moduls
+     * @param {string} moduleName - Name des Moduls
      */
     var initModule = function(moduleName){
         console.log("Modul " + moduleName + " geladen.");
@@ -46,7 +46,7 @@ function($, config, viewport, mediaQueries, grid) {
 
     /**
      * Markiert ein Modul als aktiv oder inaktiv.
-     * @param $element Modul-Element
+     * @param {$} $element - Modul-Element
      */
     var toggleActive = function($element) {
         $element.toggleClass(activeClass);
@@ -56,7 +56,7 @@ function($, config, viewport, mediaQueries, grid) {
      * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
      * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
      * sowie das Markieren des Moduls als aktiv oder inaktiv.
-     * @param $element Element, bei dem die Callbacks registriert werden sollen
+     * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
      */
     var initModuleDisplay = function($element) {
         var toggleContent = $element.find(".module-content");
@@ -73,7 +73,7 @@ function($, config, viewport, mediaQueries, grid) {
     /**
      * Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung, wenn mit der Maus über den Modul-Titel
      * gefahren wird.
-     * @param $element Element, bei dem die Callbacks registriert werden sollen
+     * @param {$}  $element - Element, bei dem die Callbacks registriert werden sollen
      */
     var initModuleDescriptionDisplay = function($element) {
         var $settings = $("#popup-footer").find(".settings"),
@@ -93,7 +93,7 @@ function($, config, viewport, mediaQueries, grid) {
     /**
      * Deaktiviert die Anzeige der Modulbeschreibungen und setzt dafür das Einblenden der
      * Modul-Beschreibung bei Hover zurück.
-     * @param $element Modul-Element
+     * @param {$} $element - Modul-Element
      */
     var disableModuleDescriptionDisplay = function($element) {
         $element.find("h2").unbind('mouseenter mouseleave');
@@ -103,7 +103,7 @@ function($, config, viewport, mediaQueries, grid) {
     /**
      * Aktiviert oder Deaktiviert die Anzeige der Modul-Beschreibungen und
      * setzt oder entfernt dafür den hover-Callback der Modulbeschreibung.
-     * @param $element Modul-Element
+     * @param {$} $element - Modul-Element
      */
     var toggleModuleDescriptionDisplay = function($element) {
         if(!$element.hasClass(activeClass)) {

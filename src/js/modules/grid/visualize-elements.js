@@ -8,9 +8,9 @@ define([
 function($, extension, config){
     /**
      * Stößt die Anzeige der Elemente, die über die Selektoren identifiziert werden an.
-     * @param selectors Array   Selektoren
-     * @param color     String  Anzeigefarbe
-     * @param width     int     Dicke der Umrandung
+     * @param {string[]} selectors -  Selektoren der Elemente, die angezeigt werden sollen
+     * @param {string} color - Anzeigefarbe
+     * @param {int} width - Dicke der Umrandung
      */
     var triggerShowElements = function(selectors, color, width) {
         extension.sendMessageToTab({
@@ -25,8 +25,8 @@ function($, extension, config){
 
     /**
      * Liefert den CSS String zur Darstellung einer Außenlinie in der angegebenen Farbe und Dicke.
-     * @param color     String  Farbe
-     * @param width     int     Dicke
+     * @param {string} color - Anzeigefarbe
+     * @param {int} width - Dicke der Umrandung
      * @returns {{css}}
      */
     var getCssToDisplayElement = function(color, width) {
@@ -41,9 +41,9 @@ function($, extension, config){
     /**
      * Kennzeichnet die Elemente, die durch die Selektoren definiert werden,
      * durch eine Außenlinie in der übergebenen Farbe und Pixelbreite.
-     * @param selectors [String]    css-Selektoren
-     * @param color     String      Farbe
-     * @param width     int         Breite
+     * @param {string[]} selectors - css-Selektoren
+     * @param {string} color - Anzeigefarbe
+     * @param {int} width - Dicke der Umrandung
      */
     var showElements = function(selectors, color, width) {
         $.each(selectors, function(i, selector) {
