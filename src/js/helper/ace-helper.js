@@ -22,12 +22,13 @@ function($){
         editor.session.setMode("ace/mode/css");
         editor.setTheme("ace/theme/dawn");
 
+        // TODO: Ungebrauchtes raus werfen
         // Umbrüche erzwingen
-        editor.session.setUseWrapMode(true);
+        //editor.session.setUseWrapMode(true);
         // Keine Warnmeldung wenn kein Cursor gesetzt wurde
         editor.$blockScrolling = Infinity;
         // Zeilenzahlen
-        editor.renderer.setShowGutter(false);
+        //editor.renderer.setShowGutter(false);
         // Wert des Editors initialisieren
         editor.session.setValue(rule.fullCss);
         // Auto-Vervollständigung
