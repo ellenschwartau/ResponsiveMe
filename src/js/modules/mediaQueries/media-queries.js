@@ -1,8 +1,8 @@
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
- * Es liest die in den Style Sheets der aufgerufenen Website enthaltenen Media Queries aus und bringt diese zur Anzeige.
- * Über einen Mausklick auf den Selektor der Media Query kann anschließend an die Stelle gesprungen werden,
- * an der diese Media Query greift.
+ * Es bringt die aktuell vorhandenen Media Queries zur Anzeige und bietet außerdem die Möglichkeit,
+ * die vorhandenen Media Queries zu bearbeiten und neue Hinzuzufügen.
+ * Auch die aktuell greifenden Media Queries werden aufgelistet.
  */
 define([
     'jquery', 'showMediaQueries', 'newMediaQuery', 'config', 'extension'
