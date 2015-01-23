@@ -31,7 +31,7 @@
       "/js/requirejs/requireContent.js",
       "/js/requirejs/requireJsConfig.js",
       "/js/contentScripts/message-handling.js",
-      "/js/contentScripts/current-media-queries.js"
+      "/js/contentScripts/cs-media-queries.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen

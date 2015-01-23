@@ -31,6 +31,7 @@ var requireJsConfig = {
         newMediaQuery: 'modules/mediaQueries/new-media-query',
         showMediaQueries: 'modules/mediaQueries/show-media-queries',
         matchMedia: 'modules/mediaQueries/match-media',
+        currentMediaQueries: 'modules/mediaQueries/current-media-queries',
         // Style-Sheets
         stylesheetParser: 'modules/mediaQueries/stylesheet-parser',
         styleEditor: 'modules/mediaQueries/style-editor'

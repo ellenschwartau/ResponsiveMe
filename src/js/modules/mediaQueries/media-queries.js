@@ -5,9 +5,9 @@
  * Auch die aktuell greifenden Media Queries werden aufgelistet.
  */
 define([
-    'jquery', 'showMediaQueries', 'newMediaQuery', 'config', 'extension'
+    'jquery', 'showMediaQueries', 'newMediaQuery', 'currentMediaQueries', 'config', 'extension'
 ],
-function($, showMediaQueries, newMediaQuery, config, extension) {
+function($, showMediaQueries, newMediaQuery, currentMediaQueries, config, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
         EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
@@ -54,6 +54,7 @@ function($, showMediaQueries, newMediaQuery, config, extension) {
         initNewMediaQuery();
         newMediaQuery.init(EDITOR_ID_NEW_MEDIA_QUERY);
         showMediaQueries.init();
+        currentMediaQueries.init();
     };
 
     return {

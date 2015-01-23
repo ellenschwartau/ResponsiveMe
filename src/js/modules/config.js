@@ -25,7 +25,8 @@ function() {
             showMediaQueries: "showMediaQueries",
             windowResize: "windowResize",
             updateStyle: "updateStyle",
-            insertStyle: "insertStyle"
+            insertStyle: "insertStyle",
+            displayCurrentMediaList: "displayCurrentMediaList"
         };
 
     return {

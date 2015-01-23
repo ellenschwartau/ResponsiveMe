@@ -1,6 +1,6 @@
 require([
-    'jquery', 'matchMedia', 'stylesheetParser'
-], function($, matchMedia, stylesheetParser){
+    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
+], function($, matchMedia, stylesheetParser, extension, config){
     var mediaList;      // Liste der Media-Angaben innerhalb der Media Queries
                         // werden einmal bei Seitenaufruf initialisiert und können
                         // über Message Passing aktualisiert werden
@@ -35,6 +35,12 @@ require([
             var matchedMediaList = getMatchedMedia();
             console.log("Gesamte Media Angaben: " + mediaList);
             console.log("Greifende Media Angaben: " + matchedMediaList);
+            extension.sendMessage({
+                type: config.messageTypes.displayCurrentMediaList,
+                data: {
+                    mediaList: matchedMediaList
+                }
+            })
         });
     };
 
