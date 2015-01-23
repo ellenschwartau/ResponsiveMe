@@ -4,8 +4,7 @@
  */
 require([
     'jquery', 'extension', 'visualizeElements', 'config', 'mediaQueries', 'styleEditor'
-],
-function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
+], function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
     /**
      * Visualisiert die gewünschten Elemente durch eine Umrandung.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage

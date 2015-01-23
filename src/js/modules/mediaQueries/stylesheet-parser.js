@@ -3,9 +3,9 @@
  * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
  */
 define([
-    'jquery'
+    'jquery', 'tools'
 ],
-function($){
+function($, tools){
     // Typ der Media Queries
     var CSS_MEDIA_RULE_TYPE = 4;
 
@@ -81,6 +81,7 @@ function($){
             case CSS_MEDIA_RULE_TYPE:
                 json.mediaQueryWidth = getMediaQueryWidth(rule);
                 json.selector = getMediaRuleSelectorValue(rule);
+                json.media = rule.media;
                 break;
         }
         return json;
@@ -145,16 +146,35 @@ function($){
     };
 
     /**
+     * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
+     * @returns {Array} - Liste der Media-Angaben
+     */
+    var getMediaList = function(){
+        var mediaQueries = getMediaQueries(),
+            resultList = [];
+        $.each(mediaQueries, function(i, mediaQuery) {
+            var mediaList = mediaQuery.media;
+            for(var i=0; i<mediaList.length; i++) {
+                var media = mediaList[i];
+                if (!tools.list.listContainsValue(resultList, media)) {
+                    resultList.push(media);
+                }
+            }
+        });
+        return resultList;
+    };
+
+    /**
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
      * @return {{styleSheetIndex:int,ruleIndex:int,fullCss:string,mediaQueryWidth:int,selector:string}[]}
      */
     var getMediaQueries = function(){
-        console.log(getCssRules(CSS_MEDIA_RULE_TYPE)); // TODO DEBUG
         return getCssRules(CSS_MEDIA_RULE_TYPE);
     };
 
     return {
         getMediaQueries: getMediaQueries,
-        getEmptyCssRuleJson: getEmptyCssRuleJson
+        getEmptyCssRuleJson: getEmptyCssRuleJson,
+        getMediaList: getMediaList
     }
 });

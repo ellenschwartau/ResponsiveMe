@@ -10,7 +10,7 @@ define([
 function($, showMediaQueries, newMediaQuery, config, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
-        EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";        // ID des Editors zum verfassen einer neuen Media Query
+        EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
 
     /**
      * Initialisiert die Anzeige der Media Queries.
