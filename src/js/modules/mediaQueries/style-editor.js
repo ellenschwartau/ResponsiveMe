@@ -4,7 +4,8 @@
  * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
  */
 define([
-], function(){
+    'config', 'extension'
+], function(config, extension){
     /**
      * Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regel
      * am Anfang der Liste der Regeln hinzu.
@@ -45,10 +46,44 @@ define([
         insert(style, styleSheetIndex, ruleIndex);
     };
 
+    /**
+     * Triggert das Speichern eines neuen Styles in ein bestimmtes Style Sheet.
+     * @param {string} style - css Style
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     */
+    var triggerInsertStyle = function(style, indexStyleSheet) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.insertStyle,
+            data: {
+                style: style,
+                indexStyleSheet: indexStyleSheet
+            }
+        });
+    };
+
+    /**
+     * Triggert die Aktualisierung eines Styles in ein bestimmtes Style Sheet.
+     * @param {string} style - css Style
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     * @param {int} indexRule - Index der CSSRule aus der Liste der Regeln eines bestimmten Style Sheets
+     */
+    var triggerUpdateStyle = function(style, indexStyleSheet, indexRule) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.updateStyle,
+            data: {
+                style: style,
+                indexStyleSheet: indexStyleSheet,
+                indexRule: indexRule
+            }
+        });
+    };
+
     return {
         insert: insert,
         remove: remove,
-        update: update
+        update: update,
+        triggerInsertStyle: triggerInsertStyle,
+        triggerUpdateStyle: triggerUpdateStyle
     };
 
 });

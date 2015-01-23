@@ -24,6 +24,8 @@ var requireJsConfig = {
         grid: 'modules/grid/grid',
         visualizeElements: 'modules/grid/visualize-elements',
         mediaQueries: 'modules/mediaQueries/media-queries',
+        newMediaQuery: 'modules/mediaQueries/new-media-query',
+        showMediaQueries: 'modules/mediaQueries/show-media-queries',
         stylesheetParser: 'modules/mediaQueries/stylesheet-parser',
         styleEditor: 'modules/mediaQueries/style-editor'
     }
