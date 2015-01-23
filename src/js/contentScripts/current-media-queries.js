@@ -1,7 +1,10 @@
 require([
-    'matchMedia', 'stylesheetParser'
-], function(matchMedia, stylesheetParser){
-    var mediaList;  // Liste der Media-Angaben innerhalb der Media Queries
+    'jquery', 'matchMedia', 'stylesheetParser'
+], function($, matchMedia, stylesheetParser){
+    var mediaList;      // Liste der Media-Angaben innerhalb der Media Queries
+                        // werden einmal bei Seitenaufruf initialisiert und können
+                        // über Message Passing aktualisiert werden
+    // TODO über Message Passing aktualisierbar machen
 
     /**
      * Liefert die Media Angaben, die innerhalb der Media Queries vorhanden sind.
@@ -11,5 +14,37 @@ require([
         return stylesheetParser.getMediaList();
     };
 
-    console.log("Media Angaben: " + getMediaList());
+    /**
+     * Liefert die aktuell zutreffenden Media-Angaben.
+     */
+    var getMatchedMedia = function() {
+        var matchedMediaList = [];
+        $.each(mediaList, function(i, media){
+            if(matchMedia.matches(media)){
+                matchedMediaList.push(media);
+            }
+        });
+        return matchedMediaList;
+    };
+
+    /**
+     * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
+     */
+    var calcMatchedMediaOnResize = function(){
+        $(window).resize(function(){
+            var matchedMediaList = getMatchedMedia();
+            console.log("Gesamte Media Angaben: " + mediaList);
+            console.log("Greifende Media Angaben: " + matchedMediaList);
+        });
+    };
+
+    /**
+     * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
+     */
+    var init = function(){
+        mediaList = getMediaList();
+        calcMatchedMediaOnResize();
+    };
+
+    init();
 });
