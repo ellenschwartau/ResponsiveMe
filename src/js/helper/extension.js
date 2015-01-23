@@ -69,11 +69,21 @@ function(){
         });
     };
 
+    /**
+     * Liefert die Hintergrundseite der Erweiterung.
+     * //TODO DOku
+     * @returns {*}
+     */
+    var getBackgroundPage = function(){
+        return chrome.extension.getBackgroundPage();
+    };
+
     return {
         sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
         sendMessageToTabWithCb: sendMessageToTabWithCb,
         handleMessage: handleMessage,
-        executeScriptCode: executeScriptCode
+        executeScriptCode: executeScriptCode,
+        getBackgroundPage: getBackgroundPage
     };
 });

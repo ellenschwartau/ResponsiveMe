@@ -1,6 +1,6 @@
 define([
-    'jquery', 'extension', 'config'
-], function($, extension, config){
+    'jquery', 'extension', 'config', 'backgroundAccess'
+], function($, extension, config, backgroundAccess){
     var $matchedMediaElement,       // Element, in dem die greifenden Media Angaben angezeigt werden sollen
         MSG_NO_MEDIAS = "-",        // Nachricht, die ausgegeben wird, wenn aktuell keine Media Queries greifen
         $mediaElement = $("<li></li>");
@@ -11,17 +11,25 @@ define([
      */
     var handleCurrentMediaMessage = function(request){
         if(request.type === config.messageTypes.displayCurrentMediaList) {
-            $matchedMediaElement.empty();
-            var mediaList = request.data.mediaList;
-            if(mediaList.length == 0){
-                $matchedMediaElement.html(MSG_NO_MEDIAS);
-            } else {
-                $.each(request.data.mediaList, function(i, media) {
-                    var $element = $mediaElement.clone();
-                    $element.html(media);
-                    $matchedMediaElement.append($element);
-                })
-            }
+            setMatchMedia(request.data.mediaList)
+        }
+    };
+
+    /**
+     * Setzt den Inhalt des Media-Elements und zeigt die übergebenen Media-Angaben in der Liste an.
+     * Ist die Liste leer, wird eine entsprechende Nachricht angezeigt.
+     * @param {String[]} mediaList - Liste an Media-Angaben
+     */
+    var setMatchMedia = function(mediaList) {
+        $matchedMediaElement.empty();
+        if(mediaList.length == 0){
+            $matchedMediaElement.html(MSG_NO_MEDIAS);
+        } else {
+            $.each(request.data.mediaList, function(i, media) {
+                var $element = $mediaElement.clone();
+                $element.html(media);
+                $matchedMediaElement.append($element);
+            })
         }
     };
 
@@ -32,9 +40,11 @@ define([
         $matchedMediaElement = $("#matchedMedia");
         // TODO Message Handling muss eventuell ausgelagert werden, wenn mehrere Nachrichten verarbeitet werden sollen
         extension.handleMessage(handleCurrentMediaMessage);
+        setMatchMedia(backgroundAccess.getMediaList());
     };
 
     return {
-        init: init
+        init: init,
+        setMatchMedia: setMatchMedia
     };
 });

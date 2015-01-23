@@ -8,6 +8,8 @@ var requireJsConfig = {
         jquery: 'libs/jquery-1.11.2.min',
         codeEditor: 'libs/ace/ace',
         aceLanguageTools: 'libs/ace/ext-language_tools',
+        // Hintergrundseite
+        backgroundAccess: 'background/background-access',
         // Konfiguration
         config: 'modules/config',
         // Helper
@@ -35,7 +37,6 @@ var requireJsConfig = {
         // Style-Sheets
         stylesheetParser: 'modules/mediaQueries/stylesheet-parser',
         styleEditor: 'modules/mediaQueries/style-editor'
-
     }
 };
 require.config(requireJsConfig);

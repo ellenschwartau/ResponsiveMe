@@ -41,6 +41,11 @@
     "/js/helper/*",
     "/js/requirejs/*",
     "/js/contentScripts/*",
-    "/js/libs/*"
-  ]
+    "/js/libs/*",
+    "/js/background/*"
+  ],
+  // Hinergrundseite
+  "background": {
+    "scripts": ["/js/background/background.js"]
+  }
 }
