@@ -46,6 +46,6 @@
   ],
   // Hinergrundseite
   "background": {
-    "scripts": ["/js/background/background.js"]
+    "page": "/html/background.html"
   }
 }

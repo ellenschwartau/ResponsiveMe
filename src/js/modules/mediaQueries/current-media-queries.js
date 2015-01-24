@@ -25,7 +25,7 @@ define([
         if(mediaList.length == 0){
             $matchedMediaElement.html(MSG_NO_MEDIAS);
         } else {
-            $.each(request.data.mediaList, function(i, media) {
+            $.each(mediaList, function(i, media) {
                 var $element = $mediaElement.clone();
                 $element.html(media);
                 $matchedMediaElement.append($element);
