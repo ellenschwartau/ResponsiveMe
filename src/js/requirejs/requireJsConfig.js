@@ -35,8 +35,8 @@ var requireJsConfig = {
         matchMedia: 'modules/mediaQueries/match-media',
         currentMediaQueries: 'modules/mediaQueries/current-media-queries',
         // Style-Sheets
-        stylesheetParser: 'modules/mediaQueries/stylesheet-parser',
-        styleEditor: 'modules/mediaQueries/style-editor'
+        stylesheetParser: 'helper/styles/stylesheet-parser',
+        styleEditor: 'helper/styles/style-editor'
     }
 };
 require.config(requireJsConfig);
