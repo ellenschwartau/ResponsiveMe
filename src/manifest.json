@@ -42,7 +42,8 @@
     "/js/requirejs/*",
     "/js/contentScripts/*",
     "/js/libs/*",
-    "/js/background/*"
+    "/js/background/*",
+    "/js/contentScripts/*"
   ],
   // Hinergrundseite
   "background": {
