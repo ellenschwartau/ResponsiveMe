@@ -75,7 +75,7 @@ function(){
      * @returns {*}
      */
     var getBackgroundPage = function(){
-        return chrome.extension.getBackgroundPage();
+        //return chrome.runtime.getBackgroundPage(function(bg){}); //chrome.extension.getBackgroundPage();
     };
 
     return {

@@ -40,7 +40,7 @@ define([
         $matchedMediaElement = $("#matchedMedia");
         // TODO Message Handling muss eventuell ausgelagert werden, wenn mehrere Nachrichten verarbeitet werden sollen
         extension.handleMessage(handleCurrentMediaMessage);
-        setMatchMedia(backgroundAccess.getMediaList());
+        //setMatchMedia(backgroundAccess.getMediaList());
     };
 
     return {

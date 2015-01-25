@@ -29,4 +29,4 @@ define([
     };
 });
 
-//var mediaList = ["test"];
+var mediaList = ["test"];
