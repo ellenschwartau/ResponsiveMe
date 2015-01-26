@@ -27,7 +27,6 @@ function($){
         editor.session.setMode("ace/mode/css");
         editor.setTheme("ace/theme/dawn");
 
-        // TODO: Ungebrauchtes raus werfen
         // Umbrüche erzwingen
         //editor.session.setUseWrapMode(true);
         // Keine Warnmeldung wenn kein Cursor gesetzt wurde
