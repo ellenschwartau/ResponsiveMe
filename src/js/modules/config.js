@@ -26,6 +26,7 @@ function() {
             windowResize: "windowResize",
             updateStyle: "updateStyle",
             insertStyle: "insertStyle",
+            deleteStyle: "deleteStyle",
             displayCurrentMediaList: "displayCurrentMediaList"
         };
 

@@ -92,13 +92,38 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
             $.each(data, function(i, mediaQuery){
                 var id = ID_PREFIX_MEDIA_QUERY + i;
                 $mediaQueries.append(createMediaQueryMarkup(mediaQuery, id));
-                aceHelper.initCodeEditor(id, mediaQuery, styleEditor.triggerUpdateStyle);
+                aceHelper.initCodeEditor(id, mediaQuery, saveMediaQuery);
             });
             $showMediaQueriesButton.after($hideMediaQueriesButton);
         } else {
             // Meldung ausgeben, falls keine vorhanden sind
             $mediaQueries.html(MSG_NO_MEDIA_QUERIES_FOUND);
         }
+    };
+
+
+    /**
+     * Triggert die Aktualisierung eines Styles in ein bestimmtes Style Sheet.
+     * @param {string} style - css Style
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     * @param {int} indexRule - Index der CSSRule aus der Liste der Regeln eines bestimmten Style Sheets
+     * @param {string} id - CSS-ID des Editors
+     */
+    var saveMediaQuery = function(style, indexStyleSheet, indexRule, id){
+        styleEditor.triggerUpdateStyle(style, indexStyleSheet, indexRule);
+        // Media Query Element löschen, wenn der neue Style leer ist
+        if(style == "") {
+            removeMediaQuery(id);
+        }
+    };
+
+    /**
+     * Löscht sowohl das HTML-Element des Editors, sowie den Eintrag in der Editoren Liste.
+     * @param {string} id - CSS-ID des Editors
+     */
+    var removeMediaQuery = function(id) {
+        $("#" + id).parent().remove();
+        aceHelper.removeEditorFromList(id);
     };
 
     /**

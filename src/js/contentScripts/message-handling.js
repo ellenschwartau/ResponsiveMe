@@ -60,6 +60,20 @@ require([
     };
 
     /**
+     * Löscht eine bestimmte CSS-Regel.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {string} request.data.style - Style-Angaben
+     * @param {int} request.data.indexStyleSheet - Index des Style Sheets aus der Style Sheet Liste des document
+     * @param {int} request.data.indexRule - zu bearbeitende Rule aus der CSSRuleList des Style Sheets
+     */
+    var handleDeleteStyle = function(request) {
+        var data = request.data;
+        styleEditor.remove(data.indexStyleSheet, data.indexRule);
+    };
+
+    /**
      * Behandelt die Nachrichten, die an das Content Script gedenset werden.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
@@ -83,6 +97,9 @@ require([
                 break;
             case config.messageTypes.updateStyle:
                 handleUpdateStyle(request);
+                break;
+            case config.messageTypes.deleteStyle:
+                handleDeleteStyle(request);
                 break;
         }
     };

@@ -8,17 +8,19 @@ define([
 ], function(config, extension){
     /**
      * Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regel
-     * am Anfang der Liste der Regeln hinzu.
+     * am Anfang der Liste der Regeln hinzu, wenn die Style-Angaben nicht leer sind.
      * @param {string} style - Style der hinzugefügt werden soll
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
      * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
      */
     var insert = function(style, styleSheetIndex, ruleIndex){
-        var styleSheets = document.styleSheets;
-        if(styleSheetIndex < styleSheets.length){
-            var styleSheet = styleSheets[styleSheetIndex];
-            if(ruleIndex >= 0 &&  ruleIndex <= styleSheet.cssRules.length) {
-                styleSheet.insertRule(style, ruleIndex);
+        if(style != ""){
+            var styleSheets = document.styleSheets;
+            if(styleSheetIndex < styleSheets.length){
+                var styleSheet = styleSheets[styleSheetIndex];
+                if(ruleIndex >= 0 &&  ruleIndex <= styleSheet.cssRules.length) {
+                    styleSheet.insertRule(style, ruleIndex);
+                }
             }
         }
     };
@@ -36,7 +38,7 @@ define([
     };
 
     /**
-     * Aktualisiert eine CSSRule.
+     * Aktualisiert eine CSSRule. Ist die neue Style-Angabe leer, wird die CSS-Regel gelöscht.
      * @param {string} style - Style der hinzugefügt werden soll
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
      * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
@@ -78,12 +80,26 @@ define([
         });
     };
 
+    /**
+     * Triggert das Löschen eines Styles aus einem bestimmten Style Sheet.
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     */
+    var triggerDeleteStyle = function(indexStyleSheet) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.deleteStyle,
+            data: {
+                indexStyleSheet: indexStyleSheet
+            }
+        });
+    };
+
     return {
         insert: insert,
         remove: remove,
         update: update,
         triggerInsertStyle: triggerInsertStyle,
-        triggerUpdateStyle: triggerUpdateStyle
+        triggerUpdateStyle: triggerUpdateStyle,
+        triggerDeleteStyle: triggerDeleteStyle
     };
 
 });

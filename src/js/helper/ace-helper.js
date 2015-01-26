@@ -42,7 +42,7 @@ function($){
         saveEditorData(editor, id, indexStyleSheet, indexRule);
         // Callbacks initialisieren
         if(onBlurCallback != undefined) {
-            bindBlurCallback(editor, indexStyleSheet, indexRule, onBlurCallback);
+            bindBlurCallback(editor, indexStyleSheet, indexRule, id, onBlurCallback);
         }
 
         return editor;
@@ -65,11 +65,12 @@ function($){
      * @param {Object} editor - Code-Editor
      * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
      * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
+     * @param {string} id - CSS-ID des Editors
      * @param {function} callback - Funktion, die aufgerufen werden soll
      */
-    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, callback) {
+    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, id, callback) {
         editor.on("blur", function(){
-            callback(editor.session.getValue(), indexStyleSheet, indexRule);
+            callback(editor.session.getValue(), indexStyleSheet, indexRule, id);
         });
     };
 
@@ -86,6 +87,18 @@ function($){
             id: id,
             indexStyleSheet: indexStyleSheet,
             indexRule: indexRule
+        });
+    };
+
+    /**
+     * Löscht einen Editor aus der Liste der Editoren.
+     * @param {string} id - CSS-ID des Editors
+     */
+    var removeEditorFromList = function(id) {
+        $.each(editors, function(i, editorData){
+            if(editorData.id === id) {
+                editors.splite(i, 1);
+            }
         });
     };
 
@@ -129,6 +142,7 @@ function($){
         initCodeEditor: initCodeEditor,
         getEditorValue: getEditorValue,
         cleatEditorValue: clearEditorValue,
-        getEditorData: getEditorData
+        getEditorData: getEditorData,
+        removeEditorFromList: removeEditorFromList
     }
 });
