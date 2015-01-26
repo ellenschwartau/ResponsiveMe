@@ -26,6 +26,7 @@ require([
         });
         return matchedMediaList;
     };
+    // TODO Funktion in matchMedia Modul auslagern
 
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
