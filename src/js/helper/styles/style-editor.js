@@ -7,6 +7,38 @@ define([
     'config', 'extension'
 ], function(config, extension){
     /**
+     * Prüft, ob ein gegebenes Style Sheet valide ist.
+     * @param {CSSStyleSheet} styleSheet - zu prüfendes Style Sheet
+     * @returns {boolean}
+     */
+    var styleSheetIsValid = function(styleSheet){
+        return styleSheet != null;
+    };
+
+    /**
+     * Prüft, ob eine CSS Regel an einer bestimmten Stelle in eine bestehende Liste eingefügt werden kann.
+     * Das ist der Fall, wenn diese Liste leer ist, oder die neue Regel innerhalb oder am Ende der Liste
+     * eingefügt werden soll.
+     * @param {CSSRuleList} cssRules - Liste bestehender Regeln
+     * @param {int} newRuleIndex - Index der Stelle, an der die neue Regel eingefügt werden soll
+     * @returns {boolean}
+     */
+    var ruleCanBeInserted = function(cssRules, newRuleIndex){
+        return cssRules != null && newRuleIndex >= 0 && newRuleIndex <= cssRules.length;
+    };
+
+    /**
+     * Fügt ein neues Style Sheet mit den übergebenen Style Angaben hinzu.
+     * @param {String} style - CSS
+     */
+    var addNewStyleSheet = function(style){
+        // Create the <style> tag
+        var styleElm = document.createElement("style");
+        $(styleElm).html(style);
+        document.head.appendChild(styleElm);
+    };
+
+    /**
      * Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regel
      * am Anfang der Liste der Regeln hinzu, wenn die Style-Angaben nicht leer sind.
      * @param {string} style - Style der hinzugefügt werden soll
@@ -17,9 +49,12 @@ define([
         if(style != ""){
             var styleSheets = document.styleSheets;
             if(styleSheetIndex < styleSheets.length){
-                var styleSheet = styleSheets[styleSheetIndex];
-                if(ruleIndex >= 0 &&  ruleIndex <= styleSheet.cssRules.length) {
+                var styleSheet = styleSheets[styleSheetIndex],
+                    cssRules = styleSheet.cssRules;
+                if(styleSheetIsValid(styleSheet) && ruleCanBeInserted(cssRules, ruleIndex)) {
                     styleSheet.insertRule(style, ruleIndex);
+                } else {
+                    addNewStyleSheet(style);
                 }
             }
         }
