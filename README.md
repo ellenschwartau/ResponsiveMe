@@ -15,3 +15,11 @@ Dieses Modul kann genutzt werden, um das zugrungeliegende Raster eine Seite sich
 
 ## Media Queries
 Das Media Query Modul dient der Darstellung der Media Queries und ermöglicht es, sich die vorhandenen Media Queries anzeigen zu lassen. Enthalten diese eine Breitenangabe, wird ein Button bereit gestellt, mit dem zur entsprechenden Größe gesprungen werden kann. Auch die aktuell greifenden Media Angaben werden angezeigt und bei Browserskalierung aktualisiert. Durch bereitgestellt Code Editoren können die vorhandenen Media Queries bearbeitet, sowie neue hinzugefügt werden.
+
+# Setup
+## Entpackte Erweiterung laden
+src/* Ordner herunterladen und über Chrome einbinden. 
+Dazu muss innerhalb der Erweiterungen unter den Einstellungen des Browsers der Entwicklermodus aktiviert und über die Schaltfläche „Entpackte Erweiterung laden...“ der Oberordner, in dem die Dateien liegen, ausgewählt werden.
+
+## Gepackte Erweiterung laden
+.crx-Datei zur Installation verwenden.
