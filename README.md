@@ -19,7 +19,7 @@ Das Media Query Modul dient der Darstellung der Media Queries und ermöglicht es
 # Setup
 ## Entpackte Erweiterung laden
 src/* Ordner herunterladen und über Chrome einbinden. 
-Dazu muss innerhalb der Erweiterungen unter den Einstellungen des Browsers der Entwicklermodus aktiviert und über die Schaltfläche „Entpackte Erweiterung laden...“ der Oberordner, in dem die Dateien liegen, ausgewählt werden (siehe chrome://extensions/).
+Dazu muss innerhalb der Erweiterungen unter den Einstellungen des Browsers der Entwicklermodus aktiviert und über die Schaltfläche „Entpackte Erweiterung laden...“ der Oberordner, in dem die Dateien liegen, ausgewählt werden (siehe [chrome://extensions/]).
 
 ## Gepackte Erweiterung laden
 .crx-Datei zur Installation verwenden.
