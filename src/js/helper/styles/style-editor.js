@@ -7,12 +7,13 @@ define([
     'config', 'extension'
 ], function(config, extension){
     /**
-     * Prüft, ob ein gegebenes Style Sheet valide ist.
-     * @param {CSSStyleSheet} styleSheet - zu prüfendes Style Sheet
+     * Prüft, ob ein angefordertes Style Sheet vorhanden ist.
+     * @param {StyleSheetList} styleSheets - Liste vorhandener Style Sheets
+     * @param {int} styleSheetIndex - Index des auszulesenden Style Sheets
      * @returns {boolean}
      */
-    var styleSheetIsValid = function(styleSheet){
-        return styleSheet != null;
+    var styleSheetIsValid = function(styleSheets, styleSheetIndex){
+        return styleSheetIndex < styleSheets.length && styleSheets[styleSheetIndex] != null;
     };
 
     /**
@@ -47,15 +48,17 @@ define([
      */
     var insert = function(style, styleSheetIndex, ruleIndex){
         if(style != ""){
-            var styleSheets = document.styleSheets;
-            if(styleSheetIndex < styleSheets.length){
-                var styleSheet = styleSheets[styleSheetIndex],
-                    cssRules = styleSheet.cssRules;
-                if(styleSheetIsValid(styleSheet) && ruleCanBeInserted(cssRules, ruleIndex)) {
+            var styleSheets = document.styleSheets,
+                insertionPossible = false;
+            if(styleSheetIsValid(styleSheets, styleSheetIndex)) {
+                var styleSheet = styleSheets[styleSheetIndex];
+                insertionPossible = ruleCanBeInserted(styleSheet.cssRules, ruleIndex);
+                if(insertionPossible) {
                     styleSheet.insertRule(style, ruleIndex);
-                } else {
-                    addNewStyleSheet(style);
                 }
+            }
+            if(!insertionPossible){
+                addNewStyleSheet(style);
             }
         }
     };
