@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: popup/module.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: popup/module.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
+ * @module modules
+ */
+define([
+    'jquery', 'config', 'viewport', 'mediaQueries', 'grid'
+],
+function($, config, viewport, mediaQueries, grid) {
+    var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
+
+    /**
+     * Inkludiert die Module zur Anzeige im Popup.
+     */
+    var includeModules = function($parentElement) {
+        $.each(config.modules, function(i, modulePath) {
+            var paths = modulePath.split("/"),
+                moduleName = paths[paths.length-1];
+            $.get(config.baseDir + modulePath + ".html", function(data) {
+                var $data = $(data);
+                initModuleDisplay($data);
+                $parentElement.append($data);
+            }).done(function() {
+                // Initialisieren, wenn fertig geladen
+                initModule(moduleName);
+            });
+        });
+    };
+
+    /**
+     * Initialisiert die Anzeige und die Daten der Module.
+     * @param {string} moduleName - Name des Moduls
+     */
+    var initModule = function(moduleName){
+        console.log("Modul " + moduleName + " geladen.");
+        switch(moduleName) {
+            case "viewport":
+                viewport.init();
+                break;
+            case "grid":
+                grid.init();
+                break;
+            case "media-queries":
+                mediaQueries.init();
+                break;
+        }
+    };
+
+    /**
+     * Markiert ein Modul als aktiv oder inaktiv.
+     * @param {$} $element - Modul-Element
+     */
+    var toggleActive = function($element) {
+        $element.toggleClass(activeClass);
+    };
+
+    /**
+     * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
+     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
+     * sowie das Markieren des Moduls als aktiv oder inaktiv.
+     * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
+     */
+    var initModuleDisplay = function($element) {
+        var toggleContent = $element.find(".module-content");
+        // Modul-Inhalt ein- und ausblenden
+        $element.find("h2").click(function () {
+            toggleContent.slideToggle();
+            toggleActive($element);
+            toggleModuleDescriptionDisplay($element);
+        });
+        // Ein- und Ausblenden der Modul-Beschreibung
+        initModuleDescriptionDisplay($element);
+    };
+
+    /**
+     * Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung, wenn mit der Maus über den Modul-Titel
+     * gefahren wird.
+     * @param {$}  $element - Element, bei dem die Callbacks registriert werden sollen
+     */
+    var initModuleDescriptionDisplay = function($element) {
+        var $settings = $("#popup-footer").find(".settings"),
+            $descriptionCb = $settings.find("#showDescriptionCb"),
+            shouldDisplayDescriptions = $descriptionCb.is(":checked"),
+            toggleDescription = $element.find(".module-description");
+        if(shouldDisplayDescriptions) {
+            // Beschreibung ein- und ausblenden wenn die Überschrift gehovert wird
+            $element.find("h2").hover(function() {
+                toggleDescription.slideDown();
+            }, function() {
+                toggleDescription.slideUp();
+            });
+        }
+    };
+
+    /**
+     * Deaktiviert die Anzeige der Modulbeschreibungen und setzt dafür das Einblenden der
+     * Modul-Beschreibung bei Hover zurück.
+     * @param {$} $element - Modul-Element
+     */
+    var disableModuleDescriptionDisplay = function($element) {
+        $element.find("h2").unbind('mouseenter mouseleave');
+        $element.find(".module-description").slideUp();
+    };
+
+    /**
+     * Aktiviert oder Deaktiviert die Anzeige der Modul-Beschreibungen und
+     * setzt oder entfernt dafür den hover-Callback der Modulbeschreibung.
+     * @param {$} $element - Modul-Element
+     */
+    var toggleModuleDescriptionDisplay = function($element) {
+        if(!$element.hasClass(activeClass)) {
+            initModuleDescriptionDisplay($element);
+        } else {
+            disableModuleDescriptionDisplay($element);
+        }
+    };
+
+    return {
+        init: includeModules,
+        setSlideCallbacks: initModuleDescriptionDisplay,
+        resetSlideCallbacks: disableModuleDescriptionDisplay,
+        activeClass: activeClass
+    };
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-currentMediaQueries.html">currentMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-showMediaQueries.html">showMediaQueries</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Tue Jan 27 2015 20:00:56 GMT+0100 (Mitteleuropäische Zeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

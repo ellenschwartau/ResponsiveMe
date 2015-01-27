@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: helper/ace-helper.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: helper/ace-helper.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Hilfsskript zur Verwendung des Code Editors ACE.
+ * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
+ * werden.
+ * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
+ * @module codeEditorHelper
+ */
+define([
+    'jquery'
+],
+function($){
+    var editors = [];
+
+    /**
+     * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
+     * @param {string} id - CSS-ID des Editors
+     * @param {{indexStyleSheet:int,indexRule:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
+     * @param {function} [onBlurCallback] - Funktion, die beim Verlassen des Editors ausgeführt werden soll
+     * @returns {Object} - Editor
+     */
+    var initCodeEditor = function(id, rule, onBlurCallback) {
+        // Editor Erstellen und Modus sowie Theme setzen
+        var editor = ace.edit(id),
+            style = rule.fullCss,
+            indexStyleSheet = rule.indexStyleSheet,
+            indexRule = rule.indexRule;
+
+        editor.session.setMode("ace/mode/css");
+        editor.setTheme("ace/theme/dawn");
+
+        // Umbrüche erzwingen
+        //editor.session.setUseWrapMode(true);
+        // Keine Warnmeldung wenn kein Cursor gesetzt wurde
+        editor.$blockScrolling = Infinity;
+        // Zeilenzahlen
+        //editor.renderer.setShowGutter(false);
+        // Wert des Editors initialisieren
+        editor.session.setValue(style);
+        // Auto-Vervollständigung
+        enableAutocompletion(editor);
+
+        // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
+        saveEditorData(editor, id, indexStyleSheet, indexRule);
+        // Callbacks initialisieren
+        if(onBlurCallback != undefined) {
+            bindBlurCallback(editor, indexStyleSheet, indexRule, id, onBlurCallback);
+        }
+
+        return editor;
+    };
+
+    /**
+     * Aktiviert die Autovervollständigung des Editors.
+     * @param {Object} editor - Code Editor
+     */
+    var enableAutocompletion = function(editor){
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true
+        });
+    };
+
+    /**
+     * Bindet eine Callback-Funktion an das blur-Event.
+     * @param {Object} editor - Code-Editor
+     * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
+     * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
+     * @param {string} id - CSS-ID des Editors
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, id, callback) {
+        editor.on("blur", function(){
+            callback(editor.session.getValue(), indexStyleSheet, indexRule, id);
+        });
+    };
+
+    /**
+     * Speichert die Daten eines Editors zwischen.
+     * @param {Object} editor - Code Editor
+     * @param {string} id - CSS-ID des Editors
+     * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
+     * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
+     */
+    var saveEditorData = function(editor, id, indexStyleSheet, indexRule) {
+        editors.push({
+            editor: editor,
+            id: id,
+            indexStyleSheet: indexStyleSheet,
+            indexRule: indexRule
+        });
+    };
+
+    /**
+     * Löscht einen Editor aus der Liste der Editoren.
+     * @param {string} id - CSS-ID des Editors
+     */
+    var removeEditorFromList = function(id) {
+        $.each(editors, function(i, editorData){
+            if(editorData.id === id) {
+                editors.splite(i, 1);
+            }
+        });
+    };
+
+    /**
+     * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen id.
+     * @param {string} id - CSS-ID des Editors
+     * @returns {string}
+     */
+    var getEditorValue = function(id) {
+        var editorData = getEditorData(id);
+        return editorData != undefined ? editorData.editor.session.getValue() : "";
+    };
+
+    /**
+     * Leert den Inhalt eines über seine ID bestimmten Editors.
+     * @param {string} id - CSS-ID des Editors
+     */
+    var clearEditorValue = function(id){
+        var editorData = getEditorData(id);
+        if(editorData != undefined) {
+            editorData.session.setValue("");
+        }
+    };
+
+    /**
+     * Liefert die Daten eines Editors, der über seine ID spezifiziert wird.
+     * @param {String} id - css-ID des Editors
+     * @returns {undefined|{editor:Object,id:string,indexStyleSheets:int,indexRule:int}}
+     */
+    var getEditorData = function(id) {
+        var data = undefined;
+        $.each(editors, function(i, editorData){
+            if(editorData.id === id) {
+                data = editorData;
+            }
+        });
+        return data;
+    };
+
+    return {
+        initCodeEditor: initCodeEditor,
+        getEditorValue: getEditorValue,
+        cleatEditorValue: clearEditorValue,
+        getEditorData: getEditorData,
+        removeEditorFromList: removeEditorFromList
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-currentMediaQueries.html">currentMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-showMediaQueries.html">showMediaQueries</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Tue Jan 27 2015 20:00:56 GMT+0100 (Mitteleuropäische Zeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

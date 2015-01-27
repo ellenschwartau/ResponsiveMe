@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: helper/extension.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: helper/extension.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Stellt verschiedene Funktionen bereit, um zwischen Browser und Erweiterung zu kommunizieren.
+ * Dient als Wrapper-Modul für die Funktionalitäten die die chrome.*-API bereitstellt.
+ * @module extension
+ */
+define([
+
+],
+function(){
+    /**
+     * Sendet eine Nachricht an den aktiven Tab und führt eine Funktion aus, wenn eine Response zurück kommt.
+     * @param {json} data - Daten, die übergeben werden sollen
+     * @param {function} responseCallback - Funktion, die auf der Response ausgeführt werden soll
+     */
+    var sendMessageToTabWithCb = function(data, responseCallback) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(
+                tabs[0].id,
+                data,
+                function(response) {
+                    responseCallback(response);
+                }
+            )
+        });
+    };
+
+    /**
+     * Sendet eine Nachricht an den aktiven Tab.
+     * @param {json} data - Daten, die übergeben werden sollen
+     */
+    var sendMessageToTab = function(data) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, data)
+        });
+    };
+
+    /**
+     * Sendet eine Nachricht mit den übergebenen Daten.
+     * @param {json} data - Daten, die übergeben werden sollen
+     */
+    var sendMessage = function(data) {
+        chrome.runtime.sendMessage(data);
+    };
+
+    /**
+     * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
+     * @param {function} action - Funktion, die ausgeführt werden soll
+     */
+    var handleMessage = function(action) {
+        chrome.runtime.onMessage.addListener(
+            function(request, sender, sendResponse) {
+                action(request, sender, sendResponse);
+            });
+    };
+
+    /**
+     * Führt Javascript auf der geöffneten Seite aus.
+     * @param {string} code - Code, der ausgeführt werden soll
+     * @param {function} callback - Funktion, die das Ergebnis verarbeitet
+     */
+    var executeScriptCode = function(code, callback) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {code: code},
+                function(results){
+                    callback(results);
+                }
+            );
+        });
+    };
+
+    /**
+     * Liefert die Hintergrundseite der Erweiterung.
+     * //TODO DOku
+     * @returns {*}
+     */
+    var getBackgroundPage = function(){
+        //return chrome.runtime.getBackgroundPage(function(bg){}); //chrome.extension.getBackgroundPage();
+    };
+
+    return {
+        sendMessage: sendMessage,
+        sendMessageToTab: sendMessageToTab,
+        sendMessageToTabWithCb: sendMessageToTabWithCb,
+        handleMessage: handleMessage,
+        executeScriptCode: executeScriptCode,
+        getBackgroundPage: getBackgroundPage
+    };
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-currentMediaQueries.html">currentMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-showMediaQueries.html">showMediaQueries</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Tue Jan 27 2015 20:00:56 GMT+0100 (Mitteleuropäische Zeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
