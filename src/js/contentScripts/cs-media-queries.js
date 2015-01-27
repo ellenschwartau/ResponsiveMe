@@ -1,6 +1,20 @@
 require([
     'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
-], function($, matchMedia, stylesheetParser, extension, config){
+],
+/**
+ * Content Script zur Verarbeitung der aktuellen Media Angaben.
+ * @exports csMediaQueries
+ * @param {Object} $ - JQuery
+ * @param {module} matchMedia - matchMedia-Modul
+ * @see module:matchMedia
+ * @param {module} stylesheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
+ * @param {module} extension - extension-Modul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ */
+function($, matchMedia, stylesheetParser, extension, config){
     var mediaList;      // Liste der Media-Angaben innerhalb der Media Queries
                         // werden einmal bei Seitenaufruf initialisiert und können
                         // über Message Passing aktualisiert werden

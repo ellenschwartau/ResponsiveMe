@@ -1,12 +1,20 @@
+define([
+    'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor'
+],
 /**
  * Modul zum Erstellen und speichern einer neuen Media Query.
  * Dieses Skript stellt Funktionen bereit, einen Code Editor zu initialisieren und dessen Inhalt
  * als eine neue Style-Angabe zu speichern.
- * @module newMediaQuery
+ * @exports newMediaQuery
+ * @param {Object} $ - JQuery
+ * @param {module} stylesheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
+ * @param {module} aceHelper - codeEditorHelper-Modul
+ * @see module:codeEditorHelper
+ * @param {module} styleEditor - styleEditor-Modul
+ * @see module:styleEditor
+ * @returns {{init: Function, save: Function}}
  */
-define([
-    'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor'
-],
 function($, stylesheetParser, aceHelper, styleEditor) {
     /**
      * Stößt das Speichern einer neuen Media Query an.

@@ -1,10 +1,23 @@
+require([
+    'jquery', 'extension', 'visualizeElements', 'config', 'mediaQueries', 'styleEditor'
+],
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
  * Behandelt die Messages und führt die gewünschten Aktionen aus.
+ * @exports messageHandling
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} visualizeElements - visualizeElements-Modul
+ * @see module:visualizeElements
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} mediaQueries - mediaQueries-Modul
+ * @see module:mediaQueries
+ * @param {module} styleEditor - styleEditor-Modul
+ * @see module:styleEditor
  */
-require([
-    'jquery', 'extension', 'visualizeElements', 'config', 'mediaQueries', 'styleEditor'
-], function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
+    function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
     /**
      * Visualisiert die gewünschten Elemente durch eine Umrandung.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage

@@ -1,10 +1,20 @@
-/**
- * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
- * @module modules
- */
 define([
     'jquery', 'config', 'viewport', 'mediaQueries', 'grid'
 ],
+/**
+ * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
+ * @exports modules
+ * @param {Object} $ - JQuery
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} viewport - viewport-Modul
+ * @see module:viewport
+ * @param {module} mediaQueries - mediaQueries-Modul
+ * @see module:mediaQueries
+ * @param {module} grid - grid-Modul
+ * @see module:grid
+ * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
+ */
 function($, config, viewport, mediaQueries, grid) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 

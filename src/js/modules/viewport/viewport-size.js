@@ -1,10 +1,14 @@
-/**
- * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
- * @module viewportSize
- */
 define([
         'jquery', 'browserOffset'
 ],
+/**
+ * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
+ * @exports viewportSize
+ * @param {$} $ - JQuery
+ * @param {module} browserOffset - browserOffest-Modul
+ * @see module:browserOffset
+ * @returns {{changeSize: Function, changeWidth: Function, changeHeight: Function, toggleInnerOuter: Function, init: Function}}
+ */
 function($, browserOffset) {
      /**
      * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.

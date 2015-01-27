@@ -1,14 +1,20 @@
+define([
+    'jquery'
+],
 /**
  * Hilfsskript zur Verwendung des Code Editors ACE.
  * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
  * werden.
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
- * @module codeEditorHelper
+ * @exports codeEditorHelper
+ * @param {Object} $ - JQuery
+ * @returns {{initCodeEditor: Function, getEditorValue: Function, cleatEditorValue: Function, getEditorData: Function, removeEditorFromList: Function}}
  */
-define([
-    'jquery'
-],
 function($){
+    /**
+     * Liste der vorhandenen Editoren.
+     * @type {Array}
+     */
     var editors = [];
 
     /**

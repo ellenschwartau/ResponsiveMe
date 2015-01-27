@@ -1,11 +1,15 @@
+define([
+],
 /**
  * Stellt übrgreifend nützliche Funktionen bereit.
- * @module tools
+ * @exports tools
  */
-define([
+function(){
 
-], function(){
-
+    /**
+     * Tools zur Bearbeitung von Listen.
+     * @type {{listContainsValue: Function}}
+     */
     var list = {
         /**
          * Ermittelt, ob ein bestimmter Wert in einer Liste enthalten ist.

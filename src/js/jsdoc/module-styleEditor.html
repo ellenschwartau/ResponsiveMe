@@ -54,6 +54,78 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">config-Modul</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extension</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">extensionModul</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
 
 
 
@@ -87,7 +159,1498 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line1">line 1</a>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-config.html">module:config</a></li>
+        
+            <li><a href="module-extension.html">module:extension</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addNewStyleSheet"><span class="type-signature">(inner) </span>addNewStyleSheet<span class="signature">(style)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Fügt ein neues Style Sheet mit den übergebenen Style Angaben hinzu.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">CSS</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~insert"><span class="type-signature">(inner) </span>insert<span class="signature">(style, styleSheetIndex, ruleIndex)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regelhinzu, wenn die Style-Angaben nicht leer sind. Sollte das Einfügen an der definiertenStelle nicht möglich sein, weil das Style Sheet nicht existiert oder die gewünschte Stellein der Liste der CSS Regeln nicht valide ist, dann wird ein neues Style Sheet erstellt.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Style der hinzugefügt werden soll</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>styleSheetIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets in der StyleSheetList</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ruleIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index, an dem die Regel der CSSRuleList hinzugefügt werden soll</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~remove"><span class="type-signature">(inner) </span>remove<span class="signature">(styleSheetIndex, ruleIndex)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Löscht eine CSSRegel aus einem Style Sheet.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>styleSheetIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets in der StyleSheetList</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ruleIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index, an dem die Regel der CSSRuleList hinzugefügt werden soll</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~ruleCanBeInserted"><span class="type-signature">(inner) </span>ruleCanBeInserted<span class="signature">(cssRules, newRuleIndex)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Prüft, ob eine CSS Regel an einer bestimmten Stelle in eine bestehende Liste eingefügt werden kann.Das ist der Fall, wenn diese Liste leer ist, oder die neue Regel innerhalb oder am Ende der Listeeingefügt werden soll.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cssRules</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CSSRuleList</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Liste bestehender Regeln</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newRuleIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index der Stelle, an der die neue Regel eingefügt werden soll</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~styleSheetIsValid"><span class="type-signature">(inner) </span>styleSheetIsValid<span class="signature">(styleSheets, styleSheetIndex)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Prüft, ob ein angefordertes Style Sheet vorhanden ist.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>styleSheets</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">StyleSheetList</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Liste vorhandener Style Sheets</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>styleSheetIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des auszulesenden Style Sheets</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~triggerDeleteStyle"><span class="type-signature">(inner) </span>triggerDeleteStyle<span class="signature">(indexStyleSheet)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Triggert das Löschen eines Styles aus einem bestimmten Style Sheet.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>indexStyleSheet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets aus der Liste der geladenen Style Sheets</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line134">line 134</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~triggerInsertStyle"><span class="type-signature">(inner) </span>triggerInsertStyle<span class="signature">(style, indexStyleSheet)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Triggert das Speichern eines neuen Styles in ein bestimmtes Style Sheet.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">css Style</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indexStyleSheet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets aus der Liste der geladenen Style Sheets</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line103">line 103</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~triggerUpdateStyle"><span class="type-signature">(inner) </span>triggerUpdateStyle<span class="signature">(style, indexStyleSheet, indexRule)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Triggert die Aktualisierung eines Styles in ein bestimmtes Style Sheet.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">css Style</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indexStyleSheet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets aus der Liste der geladenen Style Sheets</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indexRule</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index der CSSRule aus der Liste der Regeln eines bestimmten Style Sheets</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line119">line 119</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~update"><span class="type-signature">(inner) </span>update<span class="signature">(style, styleSheetIndex, ruleIndex)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Aktualisiert eine CSSRule. Ist die neue Style-Angabe leer, wird die CSS-Regel gelöscht.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>style</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Style der hinzugefügt werden soll</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>styleSheetIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index des Style Sheets in der StyleSheetList</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ruleIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Index, an dem die Regel der CSSRuleList hinzugefügt werden soll</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_style-editor.js.html">helper/styles/style-editor.js</a>, <a href="helper_styles_style-editor.js.html#line93">line 93</a>
     </li></ul></dd>
     
 
@@ -115,21 +1678,6 @@
 
         
     
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
 
     
 
@@ -144,13 +1692,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-currentMediaQueries.html">currentMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-showMediaQueries.html">showMediaQueries</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-showMediaQueries.html">showMediaQueries</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Tue Jan 27 2015 20:00:56 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Tue Jan 27 2015 21:53:13 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

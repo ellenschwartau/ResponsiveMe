@@ -1,13 +1,25 @@
+define([
+    'jquery', 'showMediaQueries', 'newMediaQuery', 'currentMediaQueries', 'config', 'extension'
+],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
  * Es bringt die aktuell vorhandenen Media Queries zur Anzeige und bietet außerdem die Möglichkeit,
  * die vorhandenen Media Queries zu bearbeiten und neue Hinzuzufügen.
  * Auch die aktuell greifenden Media Queries werden aufgelistet.
- * @module mediaQueries
+ * @exports mediaQueries
+ * @param {Object} $ - JQuery
+ * @param {module} showMediaQueries - showMediaQueries-Modul
+ * @see module:showMediaQueries
+ * @param {module} newMediaQuery - newMediaQuery-Modul
+ * @see module:newMediaQuery
+ * @param {module} currentMediaQueries - currentMediaQueries-Modul
+ * @see module:currentMediaQueries
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param extension - extensionModul
+ * @see module:extension
+ * @returns {{init: Function, get: *}}
  */
-define([
-    'jquery', 'showMediaQueries', 'newMediaQuery', 'currentMediaQueries', 'config', 'extension'
-],
 function($, showMediaQueries, newMediaQuery, currentMediaQueries, config, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query

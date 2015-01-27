@@ -1,10 +1,11 @@
+define([
+],
 /**
  * Skript zur Prüfung, ob bestimmte Media Queries greifen, oder nicht.
- * @module matchMedia
+ * @exports matchMedia
+ * @returns {{matches: Function}}
  */
-define([
-
-], function(){
+function(){
     /**
      * Liefert die Information, ob eine aktuelle Media-Angabe zutrifft.
      * @param {string} media - Media Query

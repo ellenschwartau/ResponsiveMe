@@ -1,13 +1,21 @@
-/**
- * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
- * @module currentMediaQueries
- */
 define([
     'jquery', 'extension', 'config', 'backgroundAccess'
-], function($, extension, config, backgroundAccess){
+],
+/**
+ * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} backgroundAccess - backgroundAccess-Modul
+ * @see module:backgroundAccess
+ * @returns {{init: Function, setMatchMedia: Function}}
+ */
+function($, extension, config, backgroundAccess){
     var $matchedMediaElement,       // Element, in dem die greifenden Media Angaben angezeigt werden sollen
         MSG_NO_MEDIAS = "-",        // Nachricht, die ausgegeben wird, wenn aktuell keine Media Queries greifen
-        $mediaElement = $("<li></li>");
+        $mediaElement = $("<li></li>"); // Markup eines Listen-Elements der aktuell greifenden Media-Angaben
 
     /**
      * Behandelt die Anzeige der aktuell greifenden Media Angaben.

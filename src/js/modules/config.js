@@ -1,9 +1,10 @@
-/**
- * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
- * @module config
- */
 define([
 ],
+/**
+ * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
+ * @exports config
+ * @returns {{baseDir: string, modules: Array, resolutions: Array, messageTypes: {showElements: string, showMediaQueries: string, windowResize: string, updateStyle: string, insertStyle: string, deleteStyle: string, displayCurrentMediaList: string}}}
+ */
 function() {
     var baseDir = "modules/",       // Basispfad zu den Modulen
         modules = [                 // Module, die eingebunden werden sollen

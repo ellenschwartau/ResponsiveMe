@@ -1,11 +1,10 @@
+define([
+],
 /**
  * Stellt verschiedene Funktionen bereit, um zwischen Browser und Erweiterung zu kommunizieren.
  * Dient als Wrapper-Modul für die Funktionalitäten die die chrome.*-API bereitstellt.
- * @module extension
+ * @exports extension
  */
-define([
-
-],
 function(){
     /**
      * Sendet eine Nachricht an den aktiven Tab und führt eine Funktion aus, wenn eine Response zurück kommt.

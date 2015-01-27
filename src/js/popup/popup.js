@@ -1,11 +1,17 @@
-/**
- * Javascript der popup.html - initialisiert das Popup.
- * Die verfügbaren Module werden geladen und die Settings initialisiert.
- * @module popup
- */
 define([
     'jquery', 'modules', 'settings'
 ],
+/**
+ * Javascript der popup.html - initialisiert das Popup.
+ * Die verfügbaren Module werden geladen und die Settings initialisiert.
+ * @exports popup
+ * @param {Object} $ - JQuery
+ * @param {module} modules - modules-Modul
+ * @see module:modules
+ * @param {module} settings - settings-Modul
+ * @see module:settings
+ * @returns {{init: Function}}
+ */
 function($, modules, settings) {
     /**
      * Initialisiert das Minimieren und Maximieren des Popups,

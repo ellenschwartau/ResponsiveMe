@@ -1,12 +1,16 @@
+define([
+    'jquery', 'modules'
+],
 /**
  * Die settings.js übernimmt das Initialisieren der Einstellungen und das Behandeln der Änderungen an den
  * Einstellungen. Dazu gehört beispielsweise das Ein- und Ausblenden aller Module und das Aktivieren und Deaktivieren
  * der Beschreibungstexte.
- * @module settings
+ * @exports settings
+ * @param {Object} $ - JQuery
+ * @param {module} modules - modules-Modul
+ * @see module:modules
+ * @returns {{init: Function}}
  */
-define([
-    'jquery', 'modules'
-],
 function($, modules) {
     var $content = $("#popup-content"),                             // Wrapper-Element für den Content
         $footer = $("#popup-footer"),                               // Wrapper-Element für den Footer

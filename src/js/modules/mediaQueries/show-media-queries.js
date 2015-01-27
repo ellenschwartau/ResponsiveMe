@@ -1,14 +1,28 @@
+define([
+    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
+],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
  * Es liest die in den Style Sheets der aufgerufenen Website enthaltenen Media Queries aus und bringt diese zur Anzeige.
  * Über einen Mausklick auf den Selektor der Media Query kann anschließend an die Stelle gesprungen werden,
  * an der diese Media Query greift.
  * Die Media Queries können außerdem über die vorhandenen Code Editoren bearbeitet werden.
- * @module showMediaQueries
+ * @exports showMediaQueries
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} stylesheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
+ * @param {module} viewportSize - viewportSize-Modul
+ * @see module:viewportSize
+ * @param {module} aceHelper - codeEditorHelper-Modul
+ * @see module:codeEditorHelper
+ * @param {module} styleEditor - styleEditor-Modul
+ * @see module:styleEditor
+ * @returns {{init: Function, show: Function, get: Function}}
  */
-define([
-    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
-],
 function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleEditor) {
     var $mediaQueries,                                  // Container für die angezeigten Media Queries
         $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries

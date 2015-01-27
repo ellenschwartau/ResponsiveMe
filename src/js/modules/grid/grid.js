@@ -12,6 +12,9 @@
 define([
     'jquery', 'visualizeElements'
 ],
+/**
+ * @exports grid
+ */
 function($, visualizeElements) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren

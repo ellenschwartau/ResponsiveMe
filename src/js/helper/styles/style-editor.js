@@ -1,12 +1,18 @@
+define([
+    'config', 'extension'
+],
 /**
  * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets bereit,
  * die auf einer Seite geladen werden.
  * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
- * @module styleEditor
+ * @exports styleEditor
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @returns {{insert: Function, remove: Function, update: Function, triggerInsertStyle: Function, triggerUpdateStyle: Function, triggerDeleteStyle: Function}}
  */
-define([
-    'config', 'extension'
-], function(config, extension){
+function(config, extension){
     /**
      * Prüft, ob ein angefordertes Style Sheet vorhanden ist.
      * @param {StyleSheetList} styleSheets - Liste vorhandener Style Sheets

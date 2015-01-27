@@ -1,3 +1,6 @@
+define([
+        'extension'
+],
 /**
  * Stellt Funktionen zur Berechnung der Breite und Höhe bereit, die der Browser, beispielsweise durch
  * Toolbar oder Scrollbar einnimmt.
@@ -5,11 +8,11 @@
  * Der Aufruf, um dies zu ermitteln ist asynchron, und sollte deswegen so früh wie möglich initiiert werden,
  * um dafür zu Sorgen, dass die benötigten Werte vorliegen, wenn sie benötigt werden.
  *
- * @module browserOffset
+ * @exports browserOffset
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @returns {{get: Function, init: Function}}
  */
-define([
-        'extension'
-],
 function(extension) {
     var offsetWidth,     // Breite, die der Browser einnimmt
         offsetHeight;    // Höhe, die der Browser einnimmt

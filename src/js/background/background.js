@@ -1,11 +1,19 @@
+define([
+    'jquery', 'extension', 'config'
+],
 /**
  * Hintergrundseite der Erweiterung.
  * Sie läuft durchgehend im Hintergrund und hält Daten und Funktionen zur Kommunikation zwischen
  * den einzelnen Bestandteilen der Erweiterung bereit.
+ * @exports background
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extension-Modul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @returns {{mediaList: string[]}}
  */
-define([
-    'jquery', 'extension', 'config'
-],function($, extension, config){
+function($, extension, config){
     var outerBrowserHeight, // TODO Initiale Browserbreite hierüber setzen
         innerBrowserHeight,
         outerBrowserWidth,

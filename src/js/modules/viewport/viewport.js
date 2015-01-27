@@ -1,11 +1,19 @@
-/**
- * Beinhaltet die Funktionalitäten des Viewport Moduls,
- * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
- * @module viewport
- */
 define([
     'jquery', 'config', 'viewportSize', 'viewportAnimation'
 ],
+/**
+ * Beinhaltet die Funktionalitäten des Viewport Moduls,
+ * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
+ * @exports viewport
+ * @param {Object} $ - JQuery
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} viewportSize - viewportSize-Modul
+ * @see module:viewportSize
+ * @param {module} viewportAnimation - viewportAnimation-Modul
+ * @see module:viewportAnimation
+ * @returns {{init: Function}}
+ */
 function($, config, viewportSize, viewportAnimation) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe

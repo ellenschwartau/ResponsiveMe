@@ -1,10 +1,14 @@
-/**
- * Animiert die Breite eines Browserfensters.
- * @module viewportAnimation
- */
 define([
     'jquery', 'viewportSize'
 ],
+/**
+ * Animiert die Breite eines Browserfensters.
+ * @exports viewportAnimation
+ * @param {Object} $ - JQuery
+ * @param {module} viewportSize - viewportSize-Modul
+ * @see module:viewportSize
+ * @returns {{animateWidth: Function, init: Function}}
+ */
 function($, viewportSize) {
     /**
      * Animiert die Breite des Browsers.

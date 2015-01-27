@@ -1,11 +1,15 @@
-/**
- * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
- * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
- * @module stylesheetParser
- */
 define([
     'jquery', 'tools'
 ],
+/**
+ * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
+ * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
+ * @exports stylesheetParser
+ * @param {Object} $ - JQuery
+ * @param {module} tools - tools-Module
+ * @see module:tools
+ * @returns {{getMediaQueries: Function, getEmptyCssRuleJson: Function, getMediaList: Function}}
+ */
 function($, tools){
     // Typ der Media Queries
     var CSS_MEDIA_RULE_TYPE = 4;
@@ -151,7 +155,7 @@ function($, tools){
 
     /**
      * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
-     * @returns {Array} - Liste der Media-Angaben
+     * @returns {Array} Liste der Media-Angaben
      */
     var getMediaList = function(){
         var mediaQueries = getMediaQueries(),
@@ -170,7 +174,7 @@ function($, tools){
 
     /**
      * Liefert die CSS-Rules, die @media-Angaben enthalten.
-     * @return *
+     * @return {Array}
      */
     var getMediaQueries = function(){
         console.log(getCssRules(CSS_MEDIA_RULE_TYPE));

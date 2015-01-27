@@ -1,11 +1,17 @@
-/**
- * Skript zur Anzeige von Elementen durch eine Umrandung in einer angegebenen Farbe und Breite.
- * Die Elemente werden durch ihre css-Selektoren identifiziert.
- * @module visualizeElements
- */
 define([
     'jquery', 'extension', 'config'
 ],
+/**
+ * Skript zur Anzeige von Elementen durch eine Umrandung in einer angegebenen Farbe und Breite.
+ * Die Elemente werden durch ihre css-Selektoren identifiziert.
+ * @exports visualizeElements
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @returns {{triggerShowElements: Function, show: Function}}
+ */
 function($, extension, config){
     /**
      * Stößt die Anzeige der Elemente, die über die Selektoren identifiziert werden an.
