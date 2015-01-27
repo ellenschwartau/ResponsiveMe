@@ -1,3 +1,7 @@
+/**
+ * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
+ * @module currentMediaQueries
+ */
 define([
     'jquery', 'extension', 'config', 'backgroundAccess'
 ], function($, extension, config, backgroundAccess){

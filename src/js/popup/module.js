@@ -1,5 +1,6 @@
 /**
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
+ * @module modules
  */
 define([
     'jquery', 'config', 'viewport', 'mediaQueries', 'grid'

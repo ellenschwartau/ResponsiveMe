@@ -6,6 +6,8 @@
  * "div[class^='column-'],div[class*=' column-']" // Alle Klassen, die mit "column-" beginnen oder " column-" beinhalten
  * oder
  * "div[class*='column-']"  // Alle Klassem, die "column-" beinhalten
+ *
+ * @module grid
  */
 define([
     'jquery', 'visualizeElements'

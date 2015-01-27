@@ -1,5 +1,6 @@
 /**
  * Dieses Skript kapselt den Zugriff auf Funktionen und Variablen der Hintergrundseite der Erweiterung.
+ * @module backgroundAccess
  */
 define([
     'extension'

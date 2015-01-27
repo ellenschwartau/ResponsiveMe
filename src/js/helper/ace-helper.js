@@ -3,6 +3,7 @@
  * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
  * werden.
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
+ * @module codeEditorHelper
  */
 define([
     'jquery'

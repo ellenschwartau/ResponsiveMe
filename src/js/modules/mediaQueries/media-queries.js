@@ -3,6 +3,7 @@
  * Es bringt die aktuell vorhandenen Media Queries zur Anzeige und bietet außerdem die Möglichkeit,
  * die vorhandenen Media Queries zu bearbeiten und neue Hinzuzufügen.
  * Auch die aktuell greifenden Media Queries werden aufgelistet.
+ * @module mediaQueries
  */
 define([
     'jquery', 'showMediaQueries', 'newMediaQuery', 'currentMediaQueries', 'config', 'extension'

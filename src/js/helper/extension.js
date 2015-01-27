@@ -1,6 +1,7 @@
 /**
  * Stellt verschiedene Funktionen bereit, um zwischen Browser und Erweiterung zu kommunizieren.
  * Dient als Wrapper-Modul für die Funktionalitäten die die chrome.*-API bereitstellt.
+ * @module extension
  */
 define([
 

@@ -1,5 +1,6 @@
 /**
  * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
+ * @module config
  */
 define([
 ],

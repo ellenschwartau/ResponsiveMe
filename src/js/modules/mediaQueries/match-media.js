@@ -1,5 +1,6 @@
 /**
  * Skript zur Prüfung, ob bestimmte Media Queries greifen, oder nicht.
+ * @module matchMedia
  */
 define([
 

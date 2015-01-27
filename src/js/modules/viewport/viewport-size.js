@@ -1,5 +1,6 @@
 /**
  * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
+ * @module viewportSize
  */
 define([
         'jquery', 'browserOffset'

@@ -2,6 +2,7 @@
  * Modul zum Erstellen und speichern einer neuen Media Query.
  * Dieses Skript stellt Funktionen bereit, einen Code Editor zu initialisieren und dessen Inhalt
  * als eine neue Style-Angabe zu speichern.
+ * @module newMediaQuery
  */
 define([
     'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor'

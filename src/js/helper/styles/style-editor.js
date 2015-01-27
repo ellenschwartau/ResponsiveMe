@@ -2,6 +2,7 @@
  * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets bereit,
  * die auf einer Seite geladen werden.
  * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
+ * @module styleEditor
  */
 define([
     'config', 'extension'
@@ -41,7 +42,9 @@ define([
 
     /**
      * Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regel
-     * am Anfang der Liste der Regeln hinzu, wenn die Style-Angaben nicht leer sind.
+     * hinzu, wenn die Style-Angaben nicht leer sind. Sollte das Einfügen an der definierten
+     * Stelle nicht möglich sein, weil das Style Sheet nicht existiert oder die gewünschte Stelle
+     * in der Liste der CSS Regeln nicht valide ist, dann wird ein neues Style Sheet erstellt.
      * @param {string} style - Style der hinzugefügt werden soll
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
      * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll

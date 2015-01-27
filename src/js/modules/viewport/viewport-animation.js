@@ -1,5 +1,6 @@
 /**
  * Animiert die Breite eines Browserfensters.
+ * @module viewportAnimation
  */
 define([
     'jquery', 'viewportSize'

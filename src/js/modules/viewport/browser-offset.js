@@ -4,6 +4,8 @@
  *
  * Der Aufruf, um dies zu ermitteln ist asynchron, und sollte deswegen so früh wie möglich initiiert werden,
  * um dafür zu Sorgen, dass die benötigten Werte vorliegen, wenn sie benötigt werden.
+ *
+ * @module browserOffset
  */
 define([
         'extension'

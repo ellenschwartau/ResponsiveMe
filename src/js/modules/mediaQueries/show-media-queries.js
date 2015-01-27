@@ -4,6 +4,7 @@
  * Über einen Mausklick auf den Selektor der Media Query kann anschließend an die Stelle gesprungen werden,
  * an der diese Media Query greift.
  * Die Media Queries können außerdem über die vorhandenen Code Editoren bearbeitet werden.
+ * @module showMediaQueries
  */
 define([
     'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
@@ -24,7 +25,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
 
     /**
      * Ermittelt die Media Queries, die in den Styles der Website vorhanden sind.
-     * @return {{styleSheetIndex:int,ruleIndex:int,fullCss:string,mediaQueryWidth:int,selector:string}[]}
+     * @return {json}
      */
     var getMediaQueries = function() {
         return stylesheetParser.getMediaQueries();
@@ -81,7 +82,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
     /**
      * Konvertiert die Informationen über die Media Queries in HTML-Elemente und zeigt diese an.
      * @param {json} response - Antwort der getMediaQueries-Methode
-     * @param {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}[]} response.data - Daten der Antwort
+     * @param {json} response.data - Daten der Antwort
      */
     var showMediaQueries = function(response){
         // Eventuell vorher angezeigte Media Queries löschen

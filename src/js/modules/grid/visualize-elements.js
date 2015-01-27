@@ -1,6 +1,7 @@
 /**
  * Skript zur Anzeige von Elementen durch eine Umrandung in einer angegebenen Farbe und Breite.
  * Die Elemente werden durch ihre css-Selektoren identifiziert.
+ * @module visualizeElements
  */
 define([
     'jquery', 'extension', 'config'

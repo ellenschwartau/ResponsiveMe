@@ -2,6 +2,7 @@
  * Die settings.js übernimmt das Initialisieren der Einstellungen und das Behandeln der Änderungen an den
  * Einstellungen. Dazu gehört beispielsweise das Ein- und Ausblenden aller Module und das Aktivieren und Deaktivieren
  * der Beschreibungstexte.
+ * @module settings
  */
 define([
     'jquery', 'modules'

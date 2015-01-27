@@ -1,5 +1,6 @@
 /**
  * Stellt übrgreifend nützliche Funktionen bereit.
+ * @module tools
  */
 define([
 

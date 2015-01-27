@@ -1,6 +1,7 @@
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
  * zur Betrachtung der Website in den verschiedenen Pixelbreiten.
+ * @module viewport
  */
 define([
     'jquery', 'config', 'viewportSize', 'viewportAnimation'
