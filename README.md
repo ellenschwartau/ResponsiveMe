@@ -23,3 +23,6 @@ Dazu muss innerhalb der Erweiterungen unter den Einstellungen des Browsers (chro
 
 ## Gepackte Erweiterung laden
 .crx-Datei zur Installation verwenden.
+
+# Dokumentation
+Die Dokumentation der JavaScript-Module kann über die index.html im Ordner src/js/jsdoc/ abgerufen werden.
