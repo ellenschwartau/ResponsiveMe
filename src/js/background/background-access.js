@@ -4,7 +4,7 @@ define([
 /**
  * Dieses Skript kapselt den Zugriff auf Funktionen und Variablen der Hintergrundseite der Erweiterung.
  * @exports backgroundAccess
- * @param extension
+ * @param {module} extension - extensionModul
  * @see module:extension
  * @returns {{getMediaList: Function, getOuterBrowserSize: Function, getInnerBrowserSize: Function}}
  */
@@ -64,8 +64,8 @@ function(extension){
     };
 
     /**
-     *
-     * @returns {{width: (Window.availBrowserWidth|*), height: (Window.availBrowserHeight|*)}}
+     * Liefert die erreichbare Browser-Größe.
+     * @returns {{width: int, height: int}}
      */
     var getAvailBrowserSize = function(){
         return {

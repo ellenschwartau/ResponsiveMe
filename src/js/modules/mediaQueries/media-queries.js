@@ -16,7 +16,7 @@ define([
  * @see module:activeMediaQueries
  * @param {module} config - config-Modul
  * @see module:config
- * @param extension - extensionModul
+ * @param {module} extension - extensionModul
  * @see module:extension
  * @returns {{init: Function, get: *}}
  */

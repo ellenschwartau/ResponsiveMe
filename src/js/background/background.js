@@ -33,6 +33,10 @@ function($, matchMedia, extension, config){
         exportBrowserSizeToBackgroundPage();
     };
 
+    /**
+     * Behandelt die Aktuelle Browser-Größe bei einer Größenänderung.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     */
     var handleCurrentBrowserSizeMessage = function(request){
         var data = request.data;
         outerBrowserHeight = data.outerBrowserHeight;
@@ -43,8 +47,8 @@ function($, matchMedia, extension, config){
     };
 
     /**
-     *
-     * @param request
+     * Behandelt die erreichbare Browser-Größe.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleAvailBrowserSizeMessage = function(request){
         var data = request.data;
@@ -54,7 +58,7 @@ function($, matchMedia, extension, config){
     };
 
     /**
-     * Macht die benötigten Daten nach außen hin bekannt.
+     * Gibt die benötigten Daten der Hintergraundseite bekannt.
      */
     var exportValuesToBackgroundPage = function() {
         exportMediaListToBackgoundPage();
@@ -62,10 +66,16 @@ function($, matchMedia, extension, config){
         exportAvailBrowserSizeToBackgroundPage();
     };
 
+    /**
+     * Gibt die Greifenden Media Angaben der Hintergundseite bekannt.
+     */
     var exportMediaListToBackgoundPage = function(){
         window.mediaList = mediaList;
     };
 
+    /**
+     * Gibt die Greifenden aktuelle Größe des Browsers der Hintergundseite bekannt.
+     */
     var exportBrowserSizeToBackgroundPage = function(){
         window.outerBrowserHeight = outerBrowserHeight;
         window.innerBrowserHeight = innerBrowserHeight;
@@ -73,6 +83,9 @@ function($, matchMedia, extension, config){
         window.innerBrowserWidth = innerBrowserWidth;
     };
 
+    /**
+     * Gibt die erreichbare Größe des Browsers der Hintergundseite bekannt.
+     */
     var exportAvailBrowserSizeToBackgroundPage = function(){
         window.availBrowserHeight = availBrowserHeight;
         window.availBrowserWidth = availBrowserWidth;
