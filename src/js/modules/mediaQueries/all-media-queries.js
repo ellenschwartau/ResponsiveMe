@@ -7,7 +7,7 @@ define([
  * Über einen Mausklick auf den Selektor der Media Query kann anschließend an die Stelle gesprungen werden,
  * an der diese Media Query greift.
  * Die Media Queries können außerdem über die vorhandenen Code Editoren bearbeitet werden.
- * @exports showMediaQueries
+ * @exports allMediaQueries
  * @param {Object} $ - JQuery
  * @param {module} extension - extensionModul
  * @see module:extension

@@ -31,9 +31,9 @@ var requireJsConfig = {
         // Media Queries
         mediaQueries: 'modules/mediaQueries/media-queries',
         newMediaQuery: 'modules/mediaQueries/new-media-query',
-        showMediaQueries: 'modules/mediaQueries/show-media-queries',
+        allMediaQueries: 'modules/mediaQueries/all-media-queries',
         matchMedia: 'modules/mediaQueries/match-media',
-        currentMediaQueries: 'modules/mediaQueries/current-media-queries',
+        activeMediaQueries: 'modules/mediaQueries/active-media-queries',
         csMediaQueries: 'contentScripts/cs-media-queries',
         // Style-Sheets
         stylesheetParser: 'helper/styles/stylesheet-parser',

@@ -3,6 +3,7 @@ define([
 ],
 /**
  * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
+ * @exports activeMediaQueries
  * @param {Object} $ - JQuery
  * @param {module} extension - extensionModul
  * @see module:extension

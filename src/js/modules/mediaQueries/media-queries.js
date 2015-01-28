@@ -1,5 +1,5 @@
 define([
-    'jquery', 'showMediaQueries', 'newMediaQuery', 'currentMediaQueries', 'config', 'extension'
+    'jquery', 'allMediaQueries', 'newMediaQuery', 'activeMediaQueries', 'config', 'extension'
 ],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
@@ -8,19 +8,19 @@ define([
  * Auch die aktuell greifenden Media Queries werden aufgelistet.
  * @exports mediaQueries
  * @param {Object} $ - JQuery
- * @param {module} showMediaQueries - showMediaQueries-Modul
- * @see module:showMediaQueries
+ * @param {module} allMediaQueries - allMediaQueries-Modul
+ * @see module:allMediaQueries
  * @param {module} newMediaQuery - newMediaQuery-Modul
  * @see module:newMediaQuery
- * @param {module} currentMediaQueries - currentMediaQueries-Modul
- * @see module:currentMediaQueries
+ * @param {module} activeMediaQueries - activeMediaQueries-Modul
+ * @see module:activeMediaQueries
  * @param {module} config - config-Modul
  * @see module:config
  * @param extension - extensionModul
  * @see module:extension
  * @returns {{init: Function, get: *}}
  */
-function($, showMediaQueries, newMediaQuery, currentMediaQueries, config, extension) {
+function($, allMediaQueries, newMediaQuery, activeMediaQueries, config, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
         EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
@@ -35,7 +35,7 @@ function($, showMediaQueries, newMediaQuery, currentMediaQueries, config, extens
                     type: config.messageTypes.showMediaQueries
                 },
                 // erhaltene Antwort verarbeiten und Media Queries anzeigen
-                showMediaQueries.show
+                allMediaQueries.show
             );
         });
     };
@@ -66,12 +66,12 @@ function($, showMediaQueries, newMediaQuery, currentMediaQueries, config, extens
         initMediaQueryDisplay();
         initNewMediaQuery();
         newMediaQuery.init(EDITOR_ID_NEW_MEDIA_QUERY);
-        showMediaQueries.init();
-        currentMediaQueries.init();
+        allMediaQueries.init();
+        activeMediaQueries.init();
     };
 
     return {
         init: init,
-        get: showMediaQueries.get
+        get: allMediaQueries.get
     };
 });
