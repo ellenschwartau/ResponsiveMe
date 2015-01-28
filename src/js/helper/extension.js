@@ -43,12 +43,16 @@ function(){
 
     /**
      * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
+     * @param {string} type - Typ der Nachricht
      * @param {function} action - Funktion, die ausgeführt werden soll
+     * // TODO Doku
      */
-    var handleMessage = function(action) {
+    var handleMessage = function(type, action) {
         chrome.runtime.onMessage.addListener(
             function(request, sender, sendResponse) {
-                action(request, sender, sendResponse);
+                if(type === request.type) {
+                    action(request, sender, sendResponse);
+                }
             });
     };
 

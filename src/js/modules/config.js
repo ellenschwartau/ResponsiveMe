@@ -29,7 +29,9 @@ function() {
             updateStyle: "updateStyle",
             insertStyle: "insertStyle",
             deleteStyle: "deleteStyle",
-            displayCurrentMediaList: "displayCurrentMediaList"
+            displayCurrentMediaList: "displayCurrentMediaList",
+            updateBrowserSize: "updateBrowserSize",
+            updateAvailBrowserSize: "updateAvailBrowserSize"
         };
 
     return {

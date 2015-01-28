@@ -23,9 +23,7 @@ function($, extension, config, backgroundAccess){
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleCurrentMediaMessage = function(request){
-        if(request.type === config.messageTypes.displayCurrentMediaList) {
-            setMatchMedia(request.data.mediaList)
-        }
+        setMatchMedia(request.data.mediaList)
     };
 
     /**
@@ -35,14 +33,16 @@ function($, extension, config, backgroundAccess){
      */
     var setMatchMedia = function(mediaList) {
         $matchedMediaElement.empty();
-        if(mediaList.length == 0){
-            $matchedMediaElement.html(MSG_NO_MEDIAS);
-        } else {
-            $.each(mediaList, function(i, media) {
-                var $element = $mediaElement.clone();
-                $element.html(media);
-                $matchedMediaElement.append($element);
-            })
+        if(mediaList != null){
+            if(mediaList.length == 0){
+                $matchedMediaElement.html(MSG_NO_MEDIAS);
+            } else {
+                $.each(mediaList, function(i, media) {
+                    var $element = $mediaElement.clone();
+                    $element.html(media);
+                    $matchedMediaElement.append($element);
+                })
+            }
         }
     };
 
@@ -51,7 +51,7 @@ function($, extension, config, backgroundAccess){
      */
     var init = function(){
         $matchedMediaElement = $("#matchedMedia");
-        extension.handleMessage(handleCurrentMediaMessage);
+        extension.handleMessage(config.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
         setMatchMedia(backgroundAccess.getMediaList());
     };
 

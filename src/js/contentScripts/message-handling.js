@@ -88,36 +88,17 @@ require([
 
     /**
      * Behandelt die Nachrichten, die an das Content Script gedenset werden.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
-     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
-     * @param {json} request.data - zusätzliche Daten der Nachricht
-     * @param {MessageSender} sender - Enthält Informationen über den Absender
-     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
      */
-    var handleMessages = function(request, sender, sendResponse) {
+    var handleMessages = function() {
         // Nur eine Antwort kann pro document gesendet werden
         // deswegen muss die Unterscheidung des Types hier passieren
         // nicht erst in der extension.handleMessage Methode
-        switch(request.type) {
-            case config.messageTypes.showElements:
-                handleShowElements(request);
-                break;
-            case config.messageTypes.showMediaQueries:
-                handleShowMediaQueries(request, sender, sendResponse);
-                break;
-            case config.messageTypes.insertStyle:
-                handleInsertStyle(request);
-                break;
-            case config.messageTypes.updateStyle:
-                handleUpdateStyle(request);
-                break;
-            case config.messageTypes.deleteStyle:
-                handleDeleteStyle(request);
-                break;
-        }
-    };
-
-    extension.handleMessage(handleMessages);
+        extension.handleMessage(config.messageTypes.showElements, handleShowElements);
+        extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
+        extension.handleMessage(config.messageTypes.insertStyle, handleInsertStyle);
+        extension.handleMessage(handleInsertStyle, handleUpdateStyle);
+        extension.handleMessage(config.messageTypes.deleteStyle, handleDeleteStyle);
+    }();
 
     // TODO Anzeige IST-Zustand
     // TODO Info bei Browseränderung

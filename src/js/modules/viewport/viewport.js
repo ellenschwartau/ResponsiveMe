@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'viewportSize', 'viewportAnimation'
+    'jquery', 'config', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -12,9 +12,11 @@ define([
  * @see module:viewportSize
  * @param {module} viewportAnimation - viewportAnimation-Modul
  * @see module:viewportAnimation
+ * @param {module} backgroundAccess - backgroundAccess-Modul
+ * @see module:backgroundAccess
  * @returns {{init: Function}}
  */
-function($, config, viewportSize, viewportAnimation) {
+function($, config, viewportSize, viewportAnimation, backgroundAccess) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -68,14 +70,15 @@ function($, config, viewportSize, viewportAnimation) {
      * @param {$} $scrollbar - Element ScrollBar
      * @param {int} max - Maximalwert
      * @param {int} min - Minimalwert
+     * @param {int} cur - aktueller Wert der Scrollbar
      * @param {boolean} changeWidth - Angabe, ob der Browser in seiner Breite manipuliert werden soll
      * @param {boolean} changeHeight - Angabe, ob der Browser in seiner Höhe manipuliert werden soll
      */
-    var initScrollBar = function($scrollbar, max, min, changeWidth, changeHeight) {
+    var initScrollBar = function($scrollbar, max, min, cur, changeWidth, changeHeight) {
         // Werte initialiseren
         $scrollbar.attr('max', max);
         $scrollbar.attr('min', min);
-        updateScrollbarValue($scrollbar, min, "px");
+        updateScrollbarValue($scrollbar, cur, "px");
 
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
         showScrollBarValue($scrollbar, $scrollbar.next(), "px");
@@ -111,9 +114,12 @@ function($, config, viewportSize, viewportAnimation) {
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initWidthScrollBar = function() {
+        var max = backgroundAccess.getAvailBrowserSize().width,
+            cur = backgroundAccess.getBrowserWidth(sizesContainBrowserOffset);
         initScrollBar(
-            $widthScrollBar, window.screen.availWidth, MIN_WIDTH_CHROME, true, false
+            $widthScrollBar, max, MIN_WIDTH_CHROME, cur, true, false
         );
+        // TODO echte Min Width?
     };
 
     /**
@@ -123,8 +129,10 @@ function($, config, viewportSize, viewportAnimation) {
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initHeightScrollBar = function() {
+        var max = backgroundAccess.getAvailBrowserSize().height,
+            cur = backgroundAccess.getBrowserHeight(sizesContainBrowserOffset);
         initScrollBar(
-            $heightScrollBar, window.screen.availHeight, 1, false, true
+            $heightScrollBar, max, 1, cur, false, true
         );
     };
 

@@ -16,10 +16,12 @@ require([
  * @returns {{mediaList: string[]}}
  */
 function($, matchMedia, extension, config){
-    var outerBrowserHeight, // TODO Initiale Browserbreite hierüber setzen
+    var outerBrowserHeight,
         innerBrowserHeight,
         outerBrowserWidth,
         innerBrowserWidth,
+        availBrowserHeight,
+        availBrowserWidth,
         mediaList;
 
     /**
@@ -27,17 +29,53 @@ function($, matchMedia, extension, config){
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleCurrentMediaMessage = function(request){
-        if(request.type === config.messageTypes.displayCurrentMediaList) {
-            mediaList = request.data.mediaList;
-        }
-        exportValuesToBackgroundPage();
+        mediaList = request.data.mediaList;
+        exportBrowserSizeToBackgroundPage();
+    };
+
+    var handleCurrentBrowserSizeMessage = function(request){
+        var data = request.data;
+        outerBrowserHeight = data.outerBrowserHeight;
+        innerBrowserHeight = data.innerBrowserHeight;
+        outerBrowserWidth = data.outerBrowserWidth;
+        innerBrowserWidth = data.innerBrowserWidth;
+        exportMediaListToBackgoundPage();
+    };
+
+    /**
+     *
+     * @param request
+     */
+    var handleAvailBrowserSizeMessage = function(request){
+        var data = request.data;
+        availBrowserHeight = data.availBrowserHeight;
+        availBrowserWidth = data.availBrowserWidth;
+        exportAvailBrowserSizeToBackgroundPage();
     };
 
     /**
      * Macht die benötigten Daten nach außen hin bekannt.
      */
     var exportValuesToBackgroundPage = function() {
+        exportMediaListToBackgoundPage();
+        exportBrowserSizeToBackgroundPage();
+        exportAvailBrowserSizeToBackgroundPage();
+    };
+
+    var exportMediaListToBackgoundPage = function(){
         window.mediaList = mediaList;
+    };
+
+    var exportBrowserSizeToBackgroundPage = function(){
+        window.outerBrowserHeight = outerBrowserHeight;
+        window.innerBrowserHeight = innerBrowserHeight;
+        window.outerBrowserWidth = outerBrowserWidth;
+        window.innerBrowserWidth = innerBrowserWidth;
+    };
+
+    var exportAvailBrowserSizeToBackgroundPage = function(){
+        window.availBrowserHeight = availBrowserHeight;
+        window.availBrowserWidth = availBrowserWidth;
     };
 
     /**
@@ -46,7 +84,9 @@ function($, matchMedia, extension, config){
      * bekannt gegeben.
      */
     var init = function(){
-        extension.handleMessage(handleCurrentMediaMessage);
+        extension.handleMessage(config.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
+        extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
+        extension.handleMessage(config.messageTypes.updateAvailBrowserSize, handleAvailBrowserSizeMessage);
         exportValuesToBackgroundPage();
     }();
 });
