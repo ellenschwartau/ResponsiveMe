@@ -1,5 +1,5 @@
 require([
-    'jquery', 'extension', 'visualizeElements', 'config', 'mediaQueries', 'styleEditor'
+    'jquery', 'extension', 'visualizeElements', 'config', 'stylesheetParser', 'styleEditor'
 ],
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
@@ -12,12 +12,12 @@ require([
  * @see module:visualizeElements
  * @param {module} config - config-Modul
  * @see module:config
- * @param {module} mediaQueries - mediaQueries-Modul
- * @see module:mediaQueries
+ * @param {module} styleSheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
  */
-    function($, extension, visualizeElements, config, mediaQueries, styleEditor) {
+    function($, extension, visualizeElements, config, styleSheetParser, styleEditor) {
     /**
      * Visualisiert die gewünschten Elemente durch eine Umrandung.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
@@ -41,7 +41,7 @@ require([
      */
     var handleShowMediaQueries = function(request, sender, sendResponse) {
         sendResponse({
-            data: mediaQueries.get()
+            data: styleSheetParser.getMediaQueries()
         });
     };
 
