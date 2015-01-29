@@ -18,9 +18,9 @@
 
   #switchOrientationButton {
     // image-url arguments:
-      // $path: path relative to images directory in config.rb
-      // $path-only: if true, will cause only the path to be returned instead of a `url()` function
-      // $cache-buster: When set to `false` no cache buster will be used (i.e. `?313420982`)
+    // $path: path relative to images directory in config.rb
+    // $path-only: if true, will cause only the path to be returned instead of a `url()` function
+    // $cache-buster: When set to `false` no cache buster will be used (i.e. `?313420982`)
     background-image: image-url("icon-switch-48px.png", false, false);
     display: inline-block;
     height: 20px;
