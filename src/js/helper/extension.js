@@ -45,7 +45,6 @@ function(){
      * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
      * @param {string} type - Typ der Nachricht
      * @param {function} action - Funktion, die ausgeführt werden soll
-     * // TODO Doku
      */
     var handleMessage = function(type, action) {
         chrome.runtime.onMessage.addListener(
@@ -75,7 +74,6 @@ function(){
 
     /**
      * Liefert die Hintergrundseite der Erweiterung.
-     * //TODO DOku
      * @returns {*}
      */
     var getBackgroundPage = function(){
