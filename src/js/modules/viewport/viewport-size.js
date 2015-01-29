@@ -110,6 +110,7 @@ function($, browserOffset) {
      * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
      */
     var toggleInnerOuter = function(containsBrowserOffset) {
+        // TODO über backgroud page?
         chrome.windows.getCurrent(function(window){
             // Im Falle dass containsBrowserOffset true:
             // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
@@ -138,9 +139,10 @@ function($, browserOffset) {
     };
 
     return {
-        changeSize: calcAndChangeSize,
-        changeWidth: calcAndChangeWidth,
-        changeHeight: calcAndChangeHeight,
+        calcAndChangeSize: calcAndChangeSize,
+        calcAndChangeWidth: calcAndChangeWidth,
+        calcAndChangeHeight: calcAndChangeHeight,
+        changeSize: changeSize,
         toggleInnerOuter: toggleInnerOuter,
         init: init
     }

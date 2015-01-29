@@ -26,6 +26,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $animationTimes,                 // Input-Feld zur Angabe das Anzahl an Wiederholungen
         $animationButton,                // Button zum Starten der Animation
         $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
+        $switchOrientationButton,        // Button zum Ändern der Orientierung
         MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
             "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
         sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
@@ -85,10 +86,10 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $scrollbar.change(function() {
             var value = parseInt($(this).val());
             if(changeWidth) {
-                viewportSize.changeWidth(value, sizesContainBrowserOffset);
+                viewportSize.calcAndChangeWidth(value, sizesContainBrowserOffset);
             }
             if(changeHeight) {
-                viewportSize.changeHeight(value, sizesContainBrowserOffset);
+                viewportSize.calcAndChangeHeight(value, sizesContainBrowserOffset);
             }
         });
     };
@@ -142,10 +143,27 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
     var initResolutionDropDown = function() {
         // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
         $resolutionDropdown.change(function(){
-           var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
-            viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
+            var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
+            viewportSize.calcAndChangeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
             updateScrollbarValue($(widthScrollBar), selectedResolution.width, "px");
             updateScrollbarValue($(heightScrollBar), selectedResolution.height, "px");
+        });
+    };
+
+    /**
+     * Initialisiert den Button zum Tauschen der Orientierung.
+     * Bei einem Klick auf diesen Button werden Breite und Höhe des Browser getauscht
+     * und die Anzeige auf den Scrollbars aktualisiert.
+     */
+    var initSwitchOrientationButton = function(){
+        $switchOrientationButton.click(function(){
+            var browserSize = backgroundAccess.getOuterBrowserSize(),
+                newHeight = browserSize.width,
+                newWidth = browserSize.height;
+            viewportSize.changeSize(newHeight, newWidth);
+            // Scrollbars anpassen
+            updateScrollbarValue($heightScrollBar, newHeight, "px");
+            updateScrollbarValue($widthScrollBar, newWidth, "px");
         });
     };
 
@@ -156,6 +174,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
      */
     var parseIntVal = function($element) {
         return parseInt(Math.round($element.val()));
+        // TODO in TOOLS auslagern
     };
 
     /**
@@ -204,7 +223,6 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
-        // TODO Konstanten?
         $widthScrollBar = $("#widthScrollBar");
         $heightScrollBar = $("#heightScrollBar");
         $resolutionDropdown = $('#resolutions');
@@ -214,6 +232,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $animationTimes = $('#animationTimes');
         $animationButton = $('#animationButton');
         $innerOuterSwitch = $('#switchInnerOuter');
+        $switchOrientationButton = $("#switchOrientationButton");
     };
 
     /**
@@ -231,6 +250,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         initAnimation();
         initWidthScrollBar();
         initHeightScrollBar();
+        initSwitchOrientationButton();
     };
 
     return {

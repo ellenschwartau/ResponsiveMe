@@ -87,6 +87,8 @@ function(extension){
         getBrowserHeight: getBrowserHeight,
         getBrowserWidth: getBrowserWidth,
         getBrowserSize: getBrowserSize,
+        getOuterBrowserSize: getOuterBrowserSize,
+        getInnerBrowserSize: getInnerBrowserSize,
         getAvailBrowserSize: getAvailBrowserSize
     };
 });
