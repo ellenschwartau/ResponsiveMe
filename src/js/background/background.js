@@ -22,7 +22,21 @@ function($, matchMedia, extension, config){
         innerBrowserWidth,
         availBrowserHeight,
         availBrowserWidth,
+        browserOffset = {
+            x: 0,
+            y: 0
+        },
         mediaList;
+
+    /**
+     * Berechnet ausgehend von den inner und outer Browsergrößen den Offset des Browsers,
+     * den er beispielsweise durch Scroll- und Toolbars einnimmt.
+     */
+    var calcBrowserOffset = function(){
+        browserOffset.x = outerBrowserWidth - innerBrowserWidth;
+        browserOffset.y = outerBrowserHeight - innerBrowserHeight;
+        exportBrowserOffsetToBackgoundPage();
+    };
 
     /**
      * Behandelt die Anzeige der aktuell greifenden Media Angaben.
@@ -43,7 +57,8 @@ function($, matchMedia, extension, config){
         innerBrowserHeight = data.innerBrowserHeight;
         outerBrowserWidth = data.outerBrowserWidth;
         innerBrowserWidth = data.innerBrowserWidth;
-        exportMediaListToBackgoundPage();
+        exportBrowserOffsetToBackgoundPage();
+        calcBrowserOffset();
     };
 
     /**
@@ -62,6 +77,7 @@ function($, matchMedia, extension, config){
      */
     var exportValuesToBackgroundPage = function() {
         exportMediaListToBackgoundPage();
+        exportBrowserOffsetToBackgoundPage();
         exportBrowserSizeToBackgroundPage();
         exportAvailBrowserSizeToBackgroundPage();
     };
@@ -71,6 +87,13 @@ function($, matchMedia, extension, config){
      */
     var exportMediaListToBackgoundPage = function(){
         window.mediaList = mediaList;
+    };
+
+    /**
+     * Gibt den Browser-Offset der Hintergundseite bekannt.
+     */
+    var exportBrowserOffsetToBackgoundPage = function(){
+        window.browserOffset = browserOffset;
     };
 
     /**

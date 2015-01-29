@@ -82,13 +82,20 @@ function(extension){
         return background.mediaList;
     };
 
+    /**
+     * Liefert den Offset, den der Browser aktuell durch Elemente Scroll- oder Toolbars einnimmt.
+     * @returns {{x: int, y:int}}
+     */
+    var getBrowserOffset = function(){
+        return background.browserOffset;
+    };
+
     return {
         getMediaList: getMediaList,
         getBrowserHeight: getBrowserHeight,
         getBrowserWidth: getBrowserWidth,
         getBrowserSize: getBrowserSize,
-        getOuterBrowserSize: getOuterBrowserSize,
-        getInnerBrowserSize: getInnerBrowserSize,
-        getAvailBrowserSize: getAvailBrowserSize
+        getAvailBrowserSize: getAvailBrowserSize,
+        getBrowserOffset: getBrowserOffset
     };
 });
