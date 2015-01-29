@@ -160,7 +160,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
             var browserSize = backgroundAccess.getOuterBrowserSize(),
                 newHeight = browserSize.width,
                 newWidth = browserSize.height;
-            viewportSize.changeSize(newHeight, newWidth);
+            viewportSize.changeSize(newWidth, newHeight);
             // Scrollbars anpassen
             updateScrollbarValue($heightScrollBar, newHeight, "px");
             updateScrollbarValue($widthScrollBar, newWidth, "px");
