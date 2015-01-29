@@ -1,3 +1,6 @@
+define([
+    'jquery', 'visualizeElements'
+],
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
  * Dieses Grid kann durch die Angabe mehrerer CSS-Selektoren angegeben werden.
@@ -7,13 +10,11 @@
  * oder
  * "div[class*='column-']"  // Alle Klassem, die "column-" beinhalten
  *
- * @module grid
- */
-define([
-    'jquery', 'visualizeElements'
-],
-/**
  * @exports grid
+ * @param {Object} $ - JQuery
+ * @param {module} visualizeElements - visualizeElements-Modul
+ * @param visualizeElements
+ * @returns {{init: Function}}
  */
 function($, visualizeElements) {
     var $contentWrapper,        // Parent Element des Grid Contents
@@ -69,6 +70,7 @@ function($, visualizeElements) {
 
     /**
      * Liefert die Farbe, in der das Grid angezeigt werden soll.
+     * @return {string}
      */
     var getColor = function() {
         return $gridColor.val();

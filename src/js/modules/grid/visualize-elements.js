@@ -6,7 +6,7 @@ define([
  * Die Elemente werden durch ihre css-Selektoren identifiziert.
  * @exports visualizeElements
  * @param {Object} $ - JQuery
- * @param {module} extension - extensionModul
+ * @param {module} extension - extension-Modul
  * @see module:extension
  * @param {module} config - config-Modul
  * @see module:config
