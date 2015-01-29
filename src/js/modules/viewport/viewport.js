@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
+    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -8,6 +8,8 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} config - config-Modul
  * @see module:config
+ * @param {module} extension - extension-Modul
+ * @see module:extension
  * @param {module} viewportSize - viewportSize-Modul
  * @see module:viewportSize
  * @param {module} viewportAnimation - viewportAnimation-Modul
@@ -16,7 +18,7 @@ define([
  * @see module:backgroundAccess
  * @returns {{init: Function}}
  */
-function($, config, viewportSize, viewportAnimation, backgroundAccess) {
+function($, config, extension, viewportSize, viewportAnimation, backgroundAccess) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -29,8 +31,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $switchOrientationButton,        // Button zum Ändern der Orientierung
         MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
             "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
-        sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
-        MIN_WIDTH_CHROME = 299;          // Minimale Breite, die der Chrome Browser annehmen kann
+        sizesContainBrowserOffset;       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -118,9 +119,8 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         var max = backgroundAccess.getAvailBrowserSize().width,
             cur = backgroundAccess.getBrowserWidth(sizesContainBrowserOffset);
         initScrollBar(
-            $widthScrollBar, max, MIN_WIDTH_CHROME, cur, true, false
+            $widthScrollBar, max, 1, cur, true, false
         );
-        // TODO echte Min Width?
     };
 
     /**
@@ -145,8 +145,6 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $resolutionDropdown.change(function(){
             var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
             viewportSize.calcAndChangeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
-            updateScrollbarValue($(widthScrollBar), selectedResolution.width, "px");
-            updateScrollbarValue($(heightScrollBar), selectedResolution.height, "px");
         });
     };
 
@@ -164,6 +162,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
             // Scrollbars anpassen
             updateScrollbarValue($heightScrollBar, newHeight, "px");
             updateScrollbarValue($widthScrollBar, newWidth, "px");
+            // TODO das hier eventuell rausnehmen
         });
     };
 
@@ -203,9 +202,28 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
             } else {
                 // Animation starten
                 viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
-                updateScrollbarValue($(widthScrollBar), endPx, "px");
             }
         });
+    };
+
+    /**
+     * Übernimmt die aktuelle Größe des Browsers zur Anzeige in den Scrollbars.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     */
+    var handleCurrentBrowserSizeMessage = function(request){
+        var data = request.data,
+            curHeight = sizesContainBrowserOffset ? data.outerBrowserHeight : data.innerBrowserHeight,
+            curWidth = sizesContainBrowserOffset ? data.outerBrowserWidth : data.innerBrowserWidth;
+        updateScrollbarValue($heightScrollBar, curHeight, "px");
+        updateScrollbarValue($widthScrollBar, curWidth, "px");
+        // TODO händisches Setzen bei Größenänderung kann dann rausgenommen werden wenn das hier funktioniert
+    };
+
+    /**
+     * Verarbeitung der Nachrichten beim Message Passing.
+     */
+    var handleMessages = function(){
+        extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
     };
 
     /**
@@ -251,6 +269,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         initWidthScrollBar();
         initHeightScrollBar();
         initSwitchOrientationButton();
+        handleMessages();
     };
 
     return {
