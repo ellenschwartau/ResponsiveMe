@@ -155,10 +155,10 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var initSwitchOrientationButton = function(){
         $switchOrientationButton.click(function(){
-            var browserSize = backgroundAccess.getOuterBrowserSize(),
+            var browserSize = backgroundAccess.getBrowserSize(sizesContainBrowserOffset),
                 newHeight = browserSize.width,
                 newWidth = browserSize.height;
-            viewportSize.changeSize(newWidth, newHeight);
+            viewportSize.calcAndChangeSize(newWidth, newHeight, sizesContainBrowserOffset);
             // Scrollbars anpassen
             updateScrollbarValue($heightScrollBar, newHeight, "px");
             updateScrollbarValue($widthScrollBar, newWidth, "px");
