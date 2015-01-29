@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/config.js</title>
+    <title>JSDoc: Source: modules/mediaQueries/active-media-queries.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/config.js</h1>
+    <h1 class="page-title">Source: modules/mediaQueries/active-media-queries.js</h1>
 
     
 
@@ -27,46 +27,65 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
+    'jquery', 'extension', 'config', 'backgroundAccess'
 ],
 /**
- * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
- * @exports config
- * @returns {{baseDir: string, modules: Array, resolutions: Array, messageTypes: {showElements: string, showMediaQueries: string, windowResize: string, updateStyle: string, insertStyle: string, deleteStyle: string, displayCurrentMediaList: string}}}
+ * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
+ * @exports activeMediaQueries
+ * @param {Object} $ - JQuery
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} backgroundAccess - backgroundAccess-Modul
+ * @see module:backgroundAccess
+ * @returns {{init: Function, setMatchMedia: Function}}
  */
-function() {
-    var baseDir = "modules/",       // Basispfad zu den Modulen
-        modules = [                 // Module, die eingebunden werden sollen
-            "viewport",
-            "grid",
-            "media-queries"
-        ],
-        resolutions = [             // vordefinierte Display-Auflösungen
-            {name: "1920x1080", width: 1920, height: 1200},
-            {name: "1366x768", width: 1366, height: 768},
-            {name: "1280x800", width: 1280, height: 800},
-            {name: "1024x768", width: 1024, height: 768},
-            {name: "800x600", width: 800, height: 600},
-            {name: "640x960", width: 640, height: 960},
-            {name: "320x480", width: 320, height: 480}
-        ],
-        // TODO in ein Message Handling Modul, oder mit in extension.js?
-        messageTypes = {            // Type, zur Identifikation der Nachrichten, die zwischen
-            showElements: "showElements",    // den Komponenten der Erweiterung verschickt werden
-            showMediaQueries: "showMediaQueries",
-            windowResize: "windowResize",
-            updateStyle: "updateStyle",
-            insertStyle: "insertStyle",
-            deleteStyle: "deleteStyle",
-            displayCurrentMediaList: "displayCurrentMediaList",
-            updateBrowserSize: "updateBrowserSize",
-            updateAvailBrowserSize: "updateAvailBrowserSize"
-        };
+function($, extension, config, backgroundAccess){
+    var $matchedMediaElement,       // Element, in dem die greifenden Media Angaben angezeigt werden sollen
+        MSG_NO_MEDIAS = "-",        // Nachricht, die ausgegeben wird, wenn aktuell keine Media Queries greifen
+        $mediaElement = $("&lt;li>&lt;/li>"); // Markup eines Listen-Elements der aktuell greifenden Media-Angaben
+
+    /**
+     * Behandelt die Anzeige der aktuell greifenden Media Angaben.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     */
+    var handleCurrentMediaMessage = function(request){
+        setMatchMedia(request.data.mediaList)
+    };
+
+    /**
+     * Setzt den Inhalt des Media-Elements und zeigt die übergebenen Media-Angaben in der Liste an.
+     * Ist die Liste leer, wird eine entsprechende Nachricht angezeigt.
+     * @param {String[]} mediaList - Liste an Media-Angaben
+     */
+    var setMatchMedia = function(mediaList) {
+        $matchedMediaElement.empty();
+        if(mediaList != null){
+            if(mediaList.length == 0){
+                $matchedMediaElement.html(MSG_NO_MEDIAS);
+            } else {
+                $.each(mediaList, function(i, media) {
+                    var $element = $mediaElement.clone();
+                    $element.html(media);
+                    $matchedMediaElement.append($element);
+                })
+            }
+        }
+    };
+
+    /**
+     * Initialisiert die Anzeige der greifenden Media Queries.
+     */
+    var init = function(){
+        $matchedMediaElement = $("#matchedMedia");
+        extension.handleMessage(config.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
+        setMatchMedia(backgroundAccess.getMediaList());
+    };
 
     return {
-        baseDir: baseDir,
-        modules: modules,
-        resolutions: resolutions,
-        messageTypes: messageTypes
+        init: init,
+        setMatchMedia: setMatchMedia
     };
 });
 </code></pre>
