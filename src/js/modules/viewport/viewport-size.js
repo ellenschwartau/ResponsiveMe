@@ -139,10 +139,9 @@ function($, browserOffset) {
     };
 
     return {
-        calcAndChangeSize: calcAndChangeSize,
-        calcAndChangeWidth: calcAndChangeWidth,
-        calcAndChangeHeight: calcAndChangeHeight,
-        changeSize: changeSize,
+        changeSize: calcAndChangeSize,
+        changeWidth: calcAndChangeWidth,
+        changeHeight: calcAndChangeHeight,
         toggleInnerOuter: toggleInnerOuter,
         init: init
     }

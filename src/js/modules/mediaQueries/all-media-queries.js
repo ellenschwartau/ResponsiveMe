@@ -88,7 +88,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         var $button = $("<a class='button'>Auf " + mediaQueryWidth + "px skalieren</a>");
         $button.click(function() {
             // Browser auf die angegebene Breite skalieren, wenn auf eine Media Query geklickt wird
-            viewportSize.calcAndChangeWidth(mediaQueryWidth, false);
+            viewportSize.changeWidth(mediaQueryWidth, false);
         });
         $insertAfterElm.after($button);
     };

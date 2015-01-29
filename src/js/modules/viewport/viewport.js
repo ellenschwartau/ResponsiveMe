@@ -87,10 +87,10 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $scrollbar.change(function() {
             var value = parseInt($(this).val());
             if(changeWidth) {
-                viewportSize.calcAndChangeWidth(value, sizesContainBrowserOffset);
+                viewportSize.changeWidth(value, sizesContainBrowserOffset);
             }
             if(changeHeight) {
-                viewportSize.calcAndChangeHeight(value, sizesContainBrowserOffset);
+                viewportSize.changeHeight(value, sizesContainBrowserOffset);
             }
         });
     };
@@ -144,7 +144,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
         $resolutionDropdown.change(function(){
             var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
-            viewportSize.calcAndChangeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
+            viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
         });
     };
 
@@ -158,7 +158,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
             var browserSize = backgroundAccess.getBrowserSize(sizesContainBrowserOffset),
                 newHeight = browserSize.width,
                 newWidth = browserSize.height;
-            viewportSize.calcAndChangeSize(newWidth, newHeight, sizesContainBrowserOffset);
+            viewportSize.changeSize(newWidth, newHeight, sizesContainBrowserOffset);
             // Scrollbars anpassen
             updateScrollbarValue($heightScrollBar, newHeight, "px");
             updateScrollbarValue($widthScrollBar, newWidth, "px");
