@@ -15,4 +15,24 @@
     display: inline-block;
     text-align: right;
   }
+
+  #switchOrientationButton {
+    // image-url arguments:
+      // $path: path relative to images directory in config.rb
+      // $path-only: if true, will cause only the path to be returned instead of a `url()` function
+      // $cache-buster: When set to `false` no cache buster will be used (i.e. `?313420982`)
+    background-image: image-url("icon-switch-48px.png", false, false);
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 2.5%;
+    right: 2.5%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

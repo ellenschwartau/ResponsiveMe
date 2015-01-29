@@ -4,26 +4,26 @@
  */
 /**
  * Definiert gemeinsam genutzte CSS Variablen, wie Farben, Fonts und Strings.
- * Hier werden auch global ben├Âtigte Dateien eingebunden.
+ * Hier werden auch global benötigte Dateien eingebunden.
  */
 /* fonts */
 @font-face {
   font-family: "Montserrat Light";
-  src: url('../fonts/Montserrat-Light.otf?1419776508') format('opentype');
+  src: url('../fonts/Montserrat-Light.otf?1421411244') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Regular";
-  src: url('../fonts/Montserrat-Regular.otf?1419776509') format('opentype');
+  src: url('../fonts/Montserrat-Regular.otf?1421411244') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Black";
-  src: url('../fonts/Montserrat-Black.otf?1419776508') format('opentype');
+  src: url('../fonts/Montserrat-Black.otf?1421411244') format('opentype');
 }
 /* colors */
 /* styles */
 /* buttons */
 /**
- * B├╝ndelt die ├╝bergreifenden Styles.
+ * Bündelt die übergreifenden Styles.
  */
 /* line 1, ../includes/atoms/_body.scss */
 html, body {
@@ -45,7 +45,7 @@ html:hover body.hide {
 }
 
 /**
- * Definiert das Aussehen der ├£berschriften
+ * Definiert das Aussehen der Überschriften
  */
 /* line 4, ../includes/atoms/_heading.scss */
 h1 {
@@ -86,7 +86,7 @@ h4:hover {
 }
 
 /**
- * Enth├ñlt die Styles f├╝r Input Elemente.
+ * Enthält die Styles für Input Elemente.
  */
 /* line 4, ../includes/atoms/input/_input.scss */
 input[type=number],
@@ -190,7 +190,7 @@ input[type=color] {
 }
 
 /**
-  * ├£berschreibt die vordefinierten Styles der Scrollbars.
+  * Überschreibt die vordefinierten Styles der Scrollbars.
   */
 /* line 4, ../includes/atoms/_scrollbar.scss */
 ::-webkit-scrollbar {
@@ -212,7 +212,7 @@ input[type=color] {
 }
 
 /*
- * Styles f├╝r eine Checkbox mit on-off-switch button
+ * Styles für eine Checkbox mit on-off-switch button
  *
  * Folgendes HTML muss eingebunden werden:
 
@@ -224,7 +224,7 @@ input[type=color] {
       </label>
   </div>
 
- * Die Beschriftung der labels kann wie folgt ├╝berschrieben werden:
+ * Die Beschriftung der labels kann wie folgt überschrieben werden:
 
    .onoffswitch-inner:before {
     content: "OUTER";
@@ -343,15 +343,16 @@ input[type=color] {
 /* line 32, ../popup.scss */
 .module-content {
   border-radius: 5px 5px 5px 5px;
+  position: relative;
 }
 
-/* line 36, ../popup.scss */
+/* line 37, ../popup.scss */
 .module-description {
   border-radius: 0px 20px 20px 20px;
 }
 
 /* --- Footer --- */
-/* line 41, ../popup.scss */
+/* line 42, ../popup.scss */
 #popup-footer {
   font-family: "Montserrat Regular";
   padding: 10px 0px;
@@ -359,7 +360,7 @@ input[type=color] {
   text-align: center;
 }
 
-/* line 48, ../popup.scss */
+/* line 49, ../popup.scss */
 .settings-icon {
   display: inline-block;
   height: 50px;
@@ -369,13 +370,13 @@ input[type=color] {
   background-position: center;
   background-size: 100%;
 }
-/* line 57, ../popup.scss */
+/* line 58, ../popup.scss */
 .settings-icon:hover {
   background-image: url('../images/icon-settings-light-128px.png');
   cursor: pointer;
 }
 
-/* line 67, ../popup.scss */
+/* line 68, ../popup.scss */
 .settings {
   min-width: 42.5%;
   height: 100%;
@@ -383,38 +384,38 @@ input[type=color] {
   padding: 0 10% 5px 10%;
   display: none;
 }
-/* line 74, ../popup.scss */
+/* line 75, ../popup.scss */
 .settings .onoffswitch {
   width: 145px;
 }
-/* line 78, ../popup.scss */
+/* line 79, ../popup.scss */
 .settings .onoffswitch .onoffswitch-inner:before, .settings .onoffswitch .onoffswitch-inner:after {
   width: 46%;
 }
-/* line 83, ../popup.scss */
+/* line 84, ../popup.scss */
 .settings .onoffswitch .onoffswitch-switch {
   right: 123px;
 }
-/* line 88, ../popup.scss */
+/* line 89, ../popup.scss */
 .settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:before {
   content: "Hinweise ausschalten";
 }
-/* line 91, ../popup.scss */
+/* line 92, ../popup.scss */
 .settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:after {
   content: "Hinweise einschalten";
 }
-/* line 97, ../popup.scss */
+/* line 98, ../popup.scss */
 .settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:before {
   content: "Alle ausblenden";
 }
-/* line 100, ../popup.scss */
+/* line 101, ../popup.scss */
 .settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:after {
   content: "Alle einblenden";
 }
 
 /* --- einbinden der Module --- */
 /**
- * B├╝ndelt die Stylesheets aller Module.
+ * Bündelt die Stylesheets aller Module.
  */
 /* line 4, ../modules/_modules.scss */
 .item {
@@ -467,9 +468,25 @@ a.button:hover {
   display: inline-block;
   text-align: right;
 }
+/* line 19, ../modules/_viewport.scss */
+#moduleViewport #switchOrientationButton {
+  background-image: url('../images/icon-switch-48px.png');
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  top: 2.5%;
+  right: 2.5%;
+}
+/* line 34, ../modules/_viewport.scss */
+#moduleViewport #switchOrientationButton:hover {
+  cursor: pointer;
+}
 
 /**
- * Enth├ñlt die Styles des Visualisierungs-Moduls.
+ * Enthält die Styles des Visualisierungs-Moduls.
  */
 /* line 5, ../modules/_mediaQueries.scss */
 #moduleMediaQueries #mediaQueries {
