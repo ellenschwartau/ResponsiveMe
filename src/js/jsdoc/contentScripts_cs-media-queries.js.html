@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>require([
-    'jquery', 'matchMedia', 'extension', 'config'
+    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
 ],
 /**
  * Content Script zur Verarbeitung der aktuellen Media Angaben.
@@ -35,12 +35,14 @@
  * @param {Object} $ - JQuery
  * @param {module} matchMedia - matchMedia-Modul
  * @see module:matchMedia
+ * @param {module} styleSheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
  * @param {module} extension - extension-Modul
  * @see module:extension
  * @param {module} config - config-Modul
  * @see module:config
  */
-function($, matchMedia, extension, config){
+function($, matchMedia, styleSheetParser, extension, config){
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
      */
@@ -63,11 +65,33 @@ function($, matchMedia, extension, config){
     };
 
     /**
+     * Liest die Media Queries aus den Style Sheets aus.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {MessageSender} sender - Enthält Informationen über den Absender
+     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
+     */
+    var handleShowMediaQueries = function(request, sender, sendResponse) {
+        sendResponse({
+            data: styleSheetParser.getMediaQueries()
+        });
+    };
+
+    /**
+     * Behandelt die Nachrichten, die an das Content Script gesendet werden.
+     */
+    var handleMessages = function() {
+        extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
+    };
+
+    /**
      * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
      */
     var init = function(){
         updateMediaList();
         updateMatchedMediaOnResize();
+        handleMessages();
     }();
 });
 </code></pre>
@@ -80,13 +104,13 @@ function($, matchMedia, extension, config){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Thu Jan 29 2015 10:59:14 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Thu Jan 29 2015 12:12:53 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

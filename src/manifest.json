@@ -30,9 +30,10 @@
       "/js/libs/require.js",
       "/js/requirejs/requireContent.js",
       "/js/requirejs/requireJsConfig.js",
-      "/js/contentScripts/message-handling.js",
       "/js/contentScripts/cs-media-queries.js",
-      "/js/contentScripts/cs-browser-size.js"
+      "/js/contentScripts/cs-browser-size.js",
+      "/js/contentScripts/cs-styles.js",
+      "/js/contentScripts/cs-visualize-elements.js"
     ]
   }],
   // Dateien, die über Websites zugänglich sein sollen

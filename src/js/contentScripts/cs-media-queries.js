@@ -1,5 +1,5 @@
 require([
-    'jquery', 'matchMedia', 'extension', 'config'
+    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
 ],
 /**
  * Content Script zur Verarbeitung der aktuellen Media Angaben.
@@ -7,12 +7,14 @@ require([
  * @param {Object} $ - JQuery
  * @param {module} matchMedia - matchMedia-Modul
  * @see module:matchMedia
+ * @param {module} styleSheetParser - stylesheetParser-Modul
+ * @see module:stylesheetParser
  * @param {module} extension - extension-Modul
  * @see module:extension
  * @param {module} config - config-Modul
  * @see module:config
  */
-function($, matchMedia, extension, config){
+function($, matchMedia, styleSheetParser, extension, config){
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
      */
@@ -35,10 +37,32 @@ function($, matchMedia, extension, config){
     };
 
     /**
+     * Liest die Media Queries aus den Style Sheets aus.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {MessageSender} sender - Enthält Informationen über den Absender
+     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
+     */
+    var handleShowMediaQueries = function(request, sender, sendResponse) {
+        sendResponse({
+            data: styleSheetParser.getMediaQueries()
+        });
+    };
+
+    /**
+     * Behandelt die Nachrichten, die an das Content Script gesendet werden.
+     */
+    var handleMessages = function() {
+        extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
+    };
+
+    /**
      * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
      */
     var init = function(){
         updateMediaList();
         updateMatchedMediaOnResize();
+        handleMessages();
     }();
 });
