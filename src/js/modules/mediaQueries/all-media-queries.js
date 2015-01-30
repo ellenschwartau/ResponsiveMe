@@ -158,6 +158,12 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         $mediaQueries = $("#mediaQueries");
     };
 
+    var promise = new Promise(function(resolve, reject){
+        // ...
+    });
+
+    promise.then(onFullFilled, onRejected);
+
     /**
      * Initialisiert das Media Query Modul.
      * Die benötigten Elemente werden ausgelesen und die notwendigen Callbacks gesetzt.
