@@ -7,7 +7,7 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} viewportSize - viewportSize-Modul
  * @see module:viewportSize
- * @returns {{animateWidth: Function, init: Function}}
+ * @returns {{animateWidth: Function}}
  */
 function($, viewportSize) {
     /**
@@ -140,15 +140,7 @@ function($, viewportSize) {
         );
     };
 
-    /**
-     * Initialisiert den Browser-Offset.
-     */
-    var init = function() {
-        viewportSize.init();
-    };
-
     return {
-        animateWidth: animateWidth,
-        init: init
+        animateWidth: animateWidth
     };
 });

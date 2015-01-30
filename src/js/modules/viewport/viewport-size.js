@@ -7,7 +7,7 @@ define([
  * @param {$} $ - JQuery
  * @param {module} browserOffset - browserOffest-Modul
  * @see module:browserOffset
- * @returns {{changeSize: Function, changeWidth: Function, changeHeight: Function, toggleInnerOuter: Function, init: Function}}
+ * @returns {{changeSize: Function, changeWidth: Function, changeHeight: Function, toggleInnerOuter: Function}}
  */
 function($, browserOffset) {
      /**
@@ -129,20 +129,10 @@ function($, browserOffset) {
         });
     };
 
-    /**
-     * Initialisiert die Angaben, wie viel Pixel der Browser horizontal wie auch vertikal einnimmt
-     * (dazu zählen beispielsweise Tool- oder Scrollbars).
-     * Weil die Abfrage Asynchron erfolgt, sollte diese Initialisierung so früh wie möglich stattfinden.
-     */
-    var init = function() {
-        browserOffset.init();
-    };
-
     return {
         changeSize: calcAndChangeSize,
         changeWidth: calcAndChangeWidth,
         changeHeight: calcAndChangeHeight,
-        toggleInnerOuter: toggleInnerOuter,
-        init: init
+        toggleInnerOuter: toggleInnerOuter
     }
 });

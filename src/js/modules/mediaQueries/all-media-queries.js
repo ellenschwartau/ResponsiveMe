@@ -163,7 +163,6 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
      * Die benötigten Elemente werden ausgelesen und die notwendigen Callbacks gesetzt.
      */
     var init = function() {
-        viewportSize.init();
         initElements();
         initHideMediaQueries();
     };

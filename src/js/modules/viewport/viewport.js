@@ -256,8 +256,6 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * und die entsprechenden Callbacks zur Manipulation des Browserfensters gesetzt.
      */
     var init = function (){
-        viewportSize.init();
-        viewportAnimation.init();
         initElements();
         initData();
         initInnerOuterSwitch();
