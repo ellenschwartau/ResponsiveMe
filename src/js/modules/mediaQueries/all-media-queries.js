@@ -158,9 +158,9 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         $mediaQueries = $("#mediaQueries");
     };
 
-    var promise = new Promise(function(resolve, reject){
-        // ...
-    });
+    var promise = new Promise(
+        //..
+    );
 
     promise.then(onFullFilled, onRejected);
 
