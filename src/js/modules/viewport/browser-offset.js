@@ -1,5 +1,5 @@
 define([
-        'extension', 'backgroundAccess'
+        'backgroundAccess'
 ],
 /**
  * Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbars

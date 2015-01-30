@@ -31,19 +31,24 @@ function($, matchMedia, extension, config){
     /**
      * Berechnet ausgehend von den inner und outer Browsergrößen den Offset des Browsers,
      * den er beispielsweise durch Scroll- und Toolbars einnimmt.
+     * @param {{outerBrowserHeight: int, innerBrowserHeight: int, outerBrowserWidth: int, innerBrowserWidth: int}} data - Größenangaben
      */
-    var calcBrowserOffset = function(){
-        browserOffset.x = outerBrowserWidth - innerBrowserWidth;
-        browserOffset.y = outerBrowserHeight - innerBrowserHeight;
+    var calcBrowserOffset = function(data){
+        browserOffset.x = data.outerBrowserWidth - data.innerBrowserWidth;
+        browserOffset.y = data.outerBrowserHeight - data.innerBrowserHeight;
         exportBrowserOffsetToBackgoundPage();
     };
 
     /**
-     * Behandelt die Anzeige der aktuell greifenden Media Angaben.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * Speichert die inner und outer Größe des Browsers zwischen
+     * und gibt diese Werte der Hintergrundseite bekannt.
+     * @param {{outerBrowserHeight: int, innerBrowserHeight: int, outerBrowserWidth: int, innerBrowserWidth: int}} data - Größenangaben
      */
-    var handleCurrentMediaMessage = function(request){
-        mediaList = request.data.mediaList;
+    var saveBrowserSizes = function(data) {
+        outerBrowserHeight = data.outerBrowserHeight;
+        innerBrowserHeight = data.innerBrowserHeight;
+        outerBrowserWidth = data.outerBrowserWidth;
+        innerBrowserWidth = data.innerBrowserWidth;
         exportBrowserSizeToBackgroundPage();
     };
 
@@ -53,12 +58,17 @@ function($, matchMedia, extension, config){
      */
     var handleCurrentBrowserSizeMessage = function(request){
         var data = request.data;
-        outerBrowserHeight = data.outerBrowserHeight;
-        innerBrowserHeight = data.innerBrowserHeight;
-        outerBrowserWidth = data.outerBrowserWidth;
-        innerBrowserWidth = data.innerBrowserWidth;
-        exportBrowserOffsetToBackgoundPage();
-        calcBrowserOffset();
+        saveBrowserSizes(data);
+        calcBrowserOffset(data);
+    };
+
+    /**
+     * Behandelt die Anzeige der aktuell greifenden Media Angaben.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     */
+    var handleCurrentMediaMessage = function(request){
+        mediaList = request.data.mediaList;
+        exportBrowserSizeToBackgroundPage();
     };
 
     /**

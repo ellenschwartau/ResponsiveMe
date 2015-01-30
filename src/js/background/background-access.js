@@ -6,7 +6,7 @@ define([
  * @exports backgroundAccess
  * @param {module} extension - extensionModul
  * @see module:extension
- * @returns {{getMediaList: Function, getOuterBrowserSize: Function, getInnerBrowserSize: Function}}
+ * @returns {{getMediaList: Function, getBrowserHeight: Function, getBrowserWidth: Function, getBrowserSize: Function, getAvailBrowserSize: Function, getBrowserOffset: Function}}
  */
 function(extension){
     /**
