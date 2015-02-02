@@ -223,7 +223,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
                 times = getAnimationTimes(),
                 duration = getAnimationDuration();
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
-                // Bei fehlenden Angaben eine Fehlermeldung ausgeben
+                // Bei fehlenden Angaben eine Fehlermeldung ausgeben // TODO kein alert sondern einfach im Popup anzeigen
                 alert(MSG_ANIMATION_DATA_MISSING);
             } else {
                 // Animation starten
@@ -272,6 +272,10 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         localStorage.readStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, function($element, value){
             updateScrollbarValue($element, value, UNIT_S);
         });
+        localStorage.readStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, function($element, value){
+            $element.prop('checked', value);
+            // TODO eventuell muss hier noch ein bisschen was initialisiert werden, bzw. Callback für on off switch der das bei Änderung tut
+        });
     };
 
     /**
@@ -282,6 +286,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         localStorage.registerStorage($animationEnd, localStorage.keys.viewport.animation.endWidth, getAnimationEndWidth, 0);
         localStorage.registerStorage($animationTimes, localStorage.keys.viewport.animation.times, getAnimationTimes, 0);
         localStorage.registerStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, getAnimationDuration);
+        localStorage.registerStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, doSizesContainBrowserOffset);
     };
 
     /**
