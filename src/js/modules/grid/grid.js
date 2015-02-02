@@ -1,5 +1,5 @@
 define([
-    'jquery', 'visualizeElements', 'localStorage'
+    'jquery', 'visualizeElements', 'localStorage', 'tools'
 ],
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
@@ -16,9 +16,11 @@ define([
  * @param {visualizeElements} visualizeElements - visualizeElements-Modul
  * @param {module} localStorage - localStorage-Modul
  * @see modules:localStorage
+ * @param {module} tools - tools-Modul
+ * @see module:tools
  * @returns {{init: Function}}
  */
-function($, visualizeElements, localStorage) {
+function($, visualizeElements, localStorage, tools) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
@@ -83,14 +85,14 @@ function($, visualizeElements, localStorage) {
      * @returns {Number}
      */
     var getWidth = function() {
-        return parseInt($gridWidth.val());
+        return tools.parsing.parseIntVal($gridWidth);
     };
 
     /**
      * Liest die Benutzereingaben aus der Local Storage aus.
      */
     var readStorageValues = function(){
-        localStorage.readStorage($gridWidth, localStorage.keys.grid.width, 0);
+        localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
         localStorage.readStorage($gridColor, localStorage.keys.grid.color);
     };
 
@@ -98,7 +100,7 @@ function($, visualizeElements, localStorage) {
      * Registriert die Callbacks zum speichern der Benutzereingaben.
      */
     var initStorageUpdate = function(){
-        localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth);
+        localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth, 0);
         localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
     };
 
