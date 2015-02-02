@@ -38,15 +38,10 @@ function($, visualizeElements, localStorage, tools) {
 
     /**
      * Fügt ein neues Input-Element zur Angabe eines weiteren Selektors hinzu.
-     * @param {string} [value] - optional, vordefinierter Wert des Input-Elements
      */
-    var addNewSelectorInput = function(value){
-        var $lastInput = getLastInputElement(),
-            $newInput = $lastInput.clone();
-        if(value != undefined){
-            $newInput.val(value);
-        }
-        $lastInput.after($newInput);
+    var addNewSelectorInput = function(){
+        var $lastInput = getLastInputElement();
+        $lastInput.after($lastInput.clone());
     };
 
     /**
@@ -72,6 +67,14 @@ function($, visualizeElements, localStorage, tools) {
                 visualizeElements.triggerShowElements(selectors, getColor(), getWidth());
             }
         });
+    };
+
+    /**
+     * Liefert den Inhalt des letzten Input Elements in der Liste der Selektoren.
+     * @returns {string}
+     */
+    var getLastSelectorValue = function(){
+        return getLastInputElement()[0].value;
     };
 
     /**
@@ -112,7 +115,7 @@ function($, visualizeElements, localStorage, tools) {
     var readStorageValues = function(){
         localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
         localStorage.readStorage($gridColor, localStorage.keys.grid.color);
-        //localStorage.readStorage(getLastInputElement(), localStorage.keys.grid.selectors);
+        localStorage.readStorage(getLastInputElement(), localStorage.keys.grid.selectors);
     };
 
     /**
@@ -121,7 +124,7 @@ function($, visualizeElements, localStorage, tools) {
     var initStorageUpdate = function(){
         localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth, 0);
         localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
-        //localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getGridSelectors);
+        localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getLastSelectorValue);
     };
 
     /**
