@@ -124,7 +124,7 @@ function($, visualizeElements, localStorage, tools) {
     var initStorageUpdate = function(){
         localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth, 0);
         localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
-        localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getLastSelectorValue);
+        localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getLastSelectorValue, "");
     };
 
     /**
