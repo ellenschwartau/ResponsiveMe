@@ -11,7 +11,7 @@ var requireJsConfig = {
         // Hintergrundseite
         backgroundAccess: 'background/background-access',
         // Konfiguration
-        config: 'modules/config',
+        config: 'config',
         // Helper
         extension: 'helper/extension',
         codeEditorHelper: 'helper/ace-helper',

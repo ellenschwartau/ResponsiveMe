@@ -29,6 +29,27 @@ function($, visualizeElements, localStorage, tools) {
         inputSelectors = "input[type=text]";    // Selektor zur Identifizierung der angegebenen Selektoren
 
     /**
+     * Liefert das letzte Input-Element des Moduls.
+     * @returns {*}
+     */
+    var getLastInputElement = function(){
+        return $contentWrapper.find(inputSelectors).last();
+    };
+
+    /**
+     * Fügt ein neues Input-Element zur Angabe eines weiteren Selektors hinzu.
+     * @param {string} [value] - optional, vordefinierter Wert des Input-Elements
+     */
+    var addNewSelectorInput = function(value){
+        var $lastInput = getLastInputElement(),
+            $newInput = $lastInput.clone();
+        if(value != undefined){
+            $newInput.val(value);
+        }
+        $lastInput.after($newInput);
+    };
+
+    /**
      * Initialisiert den Button zum Hinzufügen neuer Selektoren.
      * Bei einem Klick auf den Button wird ein neues Input-Element vor dem Button hinzugefügt.
      */
@@ -37,10 +58,7 @@ function($, visualizeElements, localStorage, tools) {
         // delegated Event Handling --> http://learn.jquery.com/events/event-delegation/l
         // Um Events bei Elementen zu registrieren, die nachgeladen werden und zum Zeitpunkt der Initialisierung
         // noch nicht vorhanden sind
-        $addSelectorButton.click(function(){
-            var $lastInput = $contentWrapper.find(inputSelectors).last();
-            $lastInput.after($lastInput.clone());
-        });
+        $addSelectorButton.click(addNewSelectorInput);
     };
 
     /**
@@ -94,6 +112,7 @@ function($, visualizeElements, localStorage, tools) {
     var readStorageValues = function(){
         localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
         localStorage.readStorage($gridColor, localStorage.keys.grid.color);
+        //localStorage.readStorage(getLastInputElement(), localStorage.keys.grid.selectors);
     };
 
     /**
@@ -102,6 +121,7 @@ function($, visualizeElements, localStorage, tools) {
     var initStorageUpdate = function(){
         localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth, 0);
         localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
+        //localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getGridSelectors);
     };
 
     /**
@@ -121,10 +141,10 @@ function($, visualizeElements, localStorage, tools) {
      */
     var init = function() {
         initElements();
-        initAddSelectorButton();
-        initShowGrid();
         initStorageUpdate();
         readStorageValues();
+        initAddSelectorButton();
+        initShowGrid();
     };
 
     return {

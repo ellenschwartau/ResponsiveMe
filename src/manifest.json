@@ -39,6 +39,7 @@
   }],
   // Dateien, die über Websites zugänglich sein sollen
   "web_accessible_resources": [
+    "/js/*",
     "/js/modules/*",
     "/js/modules/*/*",
     "/js/helper/*",
