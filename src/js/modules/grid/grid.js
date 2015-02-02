@@ -1,5 +1,5 @@
 define([
-    'jquery', 'visualizeElements'
+    'jquery', 'visualizeElements', 'localStorage'
 ],
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
@@ -13,10 +13,11 @@ define([
  * @exports grid
  * @param {Object} $ - JQuery
  * @param {module} visualizeElements - visualizeElements-Modul
- * @param visualizeElements
+ * @param {visualizeElements} visualizeElements - visualizeElements-Modul
+ * @param localStorage
  * @returns {{init: Function}}
  */
-function($, visualizeElements) {
+function($, visualizeElements, localStorage) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
@@ -85,10 +86,25 @@ function($, visualizeElements) {
     };
 
     /**
+     * Liest die Benutzereingaben aus der local Storage aus.
+     */
+    var readStorageValues = function(){
+        localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
+        localStorage.readStorage($gridColor, localStorage.keys.grid.color);
+    };
+
+    /**
+     * Registriert die Callbacks zum speichern der Benutzereingaben.
+     */
+    var initStorageUpdate = function(){
+        localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth);
+        localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
+    };
+
+    /**
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
-        // TODO in Konstanten auslagern? Werden nur an dieser Stelle gebraucht..
         $contentWrapper = $("#showGrid");
         $addSelectorButton = $("#addSelectorButton");
         $showGridButton = $("#showGridButton");
@@ -104,6 +120,8 @@ function($, visualizeElements) {
         initElements();
         initAddSelectorButton();
         initShowGrid();
+        initStorageUpdate();
+        readStorageValues();
     };
 
     return {

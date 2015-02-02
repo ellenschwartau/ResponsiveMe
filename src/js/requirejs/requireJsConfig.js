@@ -16,6 +16,8 @@ var requireJsConfig = {
         extension: 'helper/extension',
         codeEditorHelper: 'helper/ace-helper',
         tools: 'helper/tools',
+        // Local Storage
+        localStorage: 'localStorage/local-storage',
         // Popup
         popup: 'popup/popup',
         modules: 'popup/module',

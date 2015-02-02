@@ -9,14 +9,44 @@ define([
  */
 function(){
     /**
+     * Schlüssel zum Zugriff und Speichern verschiedener Werte.
+     * @type {{settings: {toggleModules: string, toggleHints: string}, displayModules: {viewport: string, grid: string, mediaQueries: string}, viewport: {sizesContainBrowserOffset: string, animation: {startWidth: string, endWidth: string, duration: string, times: string}}, grid: {selectors: string, color: string, width: string}}}
+     */
+    var keys = {
+        settings: {
+            toggleModules: "toggleModules",
+            toggleHints: "toggleHints"
+        },
+        displayModules: {
+            viewport: "displayViewportModule",
+            grid: "displayGridModule",
+            mediaQueries: "displayMediaQueriesModule"
+        },
+        viewport: {
+            sizesContainBrowserOffset: "viewportSizesContainBrowserOffset",
+            animation: {
+                startWidth: "animationStartWidth",
+                endWidth: "animationEndWidth",
+                duration: "animationDuration",
+                times: "animationTimes"
+            }
+        },
+        grid: {
+            selectors: "gridSelectors",
+            color: "gridColor",
+            width: "gridWidth"
+        }
+    };
+
+    /**
      * Speichert einen Wert in der chrome.storage.
      * @param {string} key - Schlüssel unter dem der Wert gespeichert werden soll
      * @param {object} value - Wert der gespeichert werden soll
      */
-    var save = function(key, value) {
-        chrome.storage.sync.set({
-            key: value
-        });
+    var saveValue = function(key, value) {
+        var data = {};
+        data[key] = value; // Um key variabel zu machen - {key: value} würde als Schlüssel 'key' erzeugen
+        chrome.storage.sync.set(data);
     };
 
     /**
@@ -24,14 +54,42 @@ function(){
      * @param {string} key - Schlüssel des auszulesenden Wertes
      * @param {function} callback - Funktion, die nach dem Auslesen ausgeführt werden soll
      */
-    var get = function(key, callback){
+    var getValue = function(key, callback){
         chrome.storage.sync.get(key, function(result){
-            callback(result);
+            if(!$.isEmptyObject(result)){
+                callback(result);
+            }
+        });
+    };
+
+    /**
+     * Registriert das Speichern des aktuellen Wertes, wenn sich dieser ändert.
+     * @param {$} $element - Element, dessen Wert gespeichert werden soll
+     * @param {string} key - Schlüssel, unter dem der Wert gespeichert werden soll
+     * @param {function} getValueCb - Funktion, um an den Wert heranzukommen
+     */
+    var registerStorage = function($element, key, getValueCb){
+        $element.change(function(){
+            saveValue(key, getValueCb());
+        });
+    };
+
+    /**
+     * Liest einen Wert aus der Storage und setzt diesen bei dem übergebenen Element.
+     * @param {$} $element - Element, in dem der Wert gesetzt werden soll
+     * @param {string} key - Schlüssel des Wertes, der ausgelesen werden soll
+     */
+    var readStorage = function($element, key){
+        getValue(key, function(result){
+            $element.val(result[key]);
         });
     };
 
     return {
-        save: save,
-        get: get
+        save: saveValue,
+        get: getValue,
+        registerStorage: registerStorage,
+        readStorage: readStorage,
+        keys: keys
     }
 });
