@@ -14,7 +14,8 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} visualizeElements - visualizeElements-Modul
  * @param {visualizeElements} visualizeElements - visualizeElements-Modul
- * @param localStorage
+ * @param {module} localStorage - localStorage-Modul
+ * @see modules:localStorage
  * @returns {{init: Function}}
  */
 function($, visualizeElements, localStorage) {
@@ -86,10 +87,10 @@ function($, visualizeElements, localStorage) {
     };
 
     /**
-     * Liest die Benutzereingaben aus der local Storage aus.
+     * Liest die Benutzereingaben aus der Local Storage aus.
      */
     var readStorageValues = function(){
-        localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
+        localStorage.readStorage($gridWidth, localStorage.keys.grid.width, 0);
         localStorage.readStorage($gridColor, localStorage.keys.grid.color);
     };
 

@@ -2,9 +2,10 @@ define([
 ],
 /**
  * Stellt übrgreifend nützliche Funktionen bereit.
+ * @param {Object} $ - JQuery
  * @exports tools
  */
-function(){
+function($){
 
     /**
      * Tools zur Bearbeitung von Listen.
@@ -26,7 +27,19 @@ function(){
         }
     };
 
+    var parsing = {
+        /**
+         * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
+         * @param {$} $element - Element dessen Wert ausgelesen werden soll
+         * @returns {int}
+         */
+        parseIntVal: function($element) {
+            return parseInt(Math.round($element.val()));
+        }
+    };
+
     return {
-        list: list
+        list: list,
+        parsing: parsing
     };
 });

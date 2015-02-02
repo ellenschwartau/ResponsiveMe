@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
+    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess', 'tools', 'localStorage'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -16,9 +16,13 @@ define([
  * @see module:viewportAnimation
  * @param {module} backgroundAccess - backgroundAccess-Modul
  * @see module:backgroundAccess
+ * @param {module} tools - tools-Modul
+ * @see module:tools
+ * @param {module} localStorage - localStorage-Modul
+ * @see modules:localStorage
  * @returns {{init: Function}}
  */
-function($, config, extension, viewportSize, viewportAnimation, backgroundAccess) {
+function($, config, extension, viewportSize, viewportAnimation, backgroundAccess, tools, localStorage) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -33,7 +37,8 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
             "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
         sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
         MIN_VALUE_SIZE_SCROLLBARS = 1,   // Mindestwert zum Skalieren des Browsers
-        UNIT_PX = "px";                  // String zur Anzeige der Einheiten px
+        UNIT_PX = "px",                  // String zur Anzeige der Einheit px
+        UNIT_S = "s";                    // String zur Anzeige der Einheit s
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -87,7 +92,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
         showScrollBarValue($scrollbar, $scrollbar.next(), UNIT_PX);
         $scrollbar.change(function() {
-            var value = parseInt($(this).val());
+            var value = tools.parsing.parseIntVal($(this).val());
             if(changeWidth) {
                 viewportSize.changeWidth(value, sizesContainBrowserOffset);
             }
@@ -107,7 +112,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $scrollbar.mousemove(function() {
             // Anzeige aktualisieren, wenn die Maus darüber bewegt wird
             // (weniger komplex als auf Click + Mousemove, da es hierfür kein Event gibt)
-            $displayElement.html(parseInt($(this).val()) + unit);
+            $displayElement.html(tools.parsing.parseIntVal($(this).val()) + unit);
         });
     };
 
@@ -165,13 +170,35 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
-     * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
-     * @param {$} $element - Element dessen Wert ausgelesen werden soll
-     * @returns {int}
+     * Liest die Zielbreite der Animation aus.
+     * @returns {Number}
      */
-    var parseIntVal = function($element) {
-        return parseInt(Math.round($element.val()));
-        // TODO in TOOLS auslagern
+    var getAnimationEndWidth = function(){
+        return tools.parsing.parseIntVal($animationEnd);
+    };
+
+    /**
+     * Liest die Startbreite der Animation aus.
+     * @returns {Number}
+     */
+    var getAnimationStartWidth = function(){
+        return tools.parsing.parseIntVal($animationStart);
+    };
+
+    /**
+     * Liefert die Anzahl der Wiederholungen der Animationen.
+     * @returns {Number}
+     */
+    var getAnimationTimes = function(){
+        return tools.parsing.parseIntVal($animationTimes);
+    };
+
+    /**
+     * Liefert die Dauer der Animation.
+     * @returns {Number}
+     */
+    var getAnimationDuration = function(){
+        return tools.parsing.parseIntVal($animationDurationScrollBar);
     };
 
     /**
@@ -185,15 +212,16 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die Anzeige des Aktuell auf dem Schieberegler der Zeitangabe eingestellten Wertes wird initialisiert.
      */
     var initAnimation = function() {
+        // TODO Bild in Doku aktualisieren?
         // Anzeige des Zeitwertes initialiseren
-        showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), "s");
+        showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), UNIT_S);
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
             // Angaben auslesen
-            var startPx = parseIntVal($animationStart),
-                endPx = parseIntVal($animationEnd),
-                times = parseIntVal($animationTimes),
-                duration = parseIntVal($animationDurationScrollBar);
+            var startPx = getAnimationStartWidth(),
+                endPx = getAnimationEndWidth(),
+                times = getAnimationTimes(),
+                duration = getAnimationDuration();
             if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
                 // Bei fehlenden Angaben eine Fehlermeldung ausgeben
                 alert(MSG_ANIMATION_DATA_MISSING);
@@ -235,6 +263,28 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
+     * Liest die Benutzereingaben aus der Local Storage aus.
+     */
+    var readStorageValues = function(){
+        localStorage.readStorage($animationStart, localStorage.keys.viewport.animation.startWidth);
+        localStorage.readStorage($animationEnd, localStorage.keys.viewport.animation.endWidth);
+        localStorage.readStorage($animationTimes, localStorage.keys.viewport.animation.times);
+        localStorage.readStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, function($element, value){
+            updateScrollbarValue($element, value, UNIT_S);
+        });
+    };
+
+    /**
+     * Registriert die Callbacks zum speichern der Benutzereingaben.
+     */
+    var initStorageUpdate = function(){
+        localStorage.registerStorage($animationStart, localStorage.keys.viewport.animation.startWidth, getAnimationStartWidth, 0);
+        localStorage.registerStorage($animationEnd, localStorage.keys.viewport.animation.endWidth, getAnimationEndWidth, 0);
+        localStorage.registerStorage($animationTimes, localStorage.keys.viewport.animation.times, getAnimationTimes, 0);
+        localStorage.registerStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, getAnimationDuration);
+    };
+
+    /**
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
@@ -264,6 +314,8 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         initWidthScrollBar();
         initHeightScrollBar();
         initSwitchOrientationButton();
+        readStorageValues();
+        initStorageUpdate();
         handleMessages();
     };
 

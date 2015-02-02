@@ -63,14 +63,29 @@ function(){
     };
 
     /**
+     * Löscht einen Wert aus der Local Storage.
+     * @param {string} key - Schlüssel des zu löschenden Wertes
+     */
+    var removeValue = function(key){
+        chrome.storage.sync.remove(key);
+    };
+
+    /**
      * Registriert das Speichern des aktuellen Wertes, wenn sich dieser ändert.
      * @param {$} $element - Element, dessen Wert gespeichert werden soll
      * @param {string} key - Schlüssel, unter dem der Wert gespeichert werden soll
      * @param {function} getValueCb - Funktion, um an den Wert heranzukommen
+     * @param {Object} deleteValue - Wert, bei dem der Eintrag gelöscht werden soll
+     * @param {function} getValueCb - Funktion, um an den Wert heranzukommen
      */
-    var registerStorage = function($element, key, getValueCb){
+    var registerStorage = function($element, key, getValueCb, deleteValue){
         $element.change(function(){
-            saveValue(key, getValueCb());
+            var value = getValueCb();
+            if (value !== deleteValue) {
+                saveValue(key, getValueCb());
+            } else {
+                removeValue(key);
+            }
         });
     };
 
@@ -78,10 +93,18 @@ function(){
      * Liest einen Wert aus der Storage und setzt diesen bei dem übergebenen Element.
      * @param {$} $element - Element, in dem der Wert gesetzt werden soll
      * @param {string} key - Schlüssel des Wertes, der ausgelesen werden soll
+     * @param {function} setCb - optionaler Callback zur Verarbeitung des Ergebnisses
      */
-    var readStorage = function($element, key){
+    var readStorage = function($element, key, setCb){
         getValue(key, function(result){
-            $element.val(result[key]);
+            var value = result[key];
+            if(setCb != undefined){
+                // Wenn benutzerdefinierte Set-Funktion vorhanden, diese nutzen
+                setCb($element, value);
+            } else {
+                // Default: Wert über val()-Methode des Elements setzen
+                $element.val(value);
+            }
         });
     };
 
