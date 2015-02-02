@@ -4,7 +4,7 @@ define([
 /**
  * Das Local Storage Modul implementiert Logik um benutzerspezifische Angaben zwischenzuspeichern.
  * Dabei wird auf Funktionen der chrome.storage-API zurückgegriffen.
- * @exports: localStorage
+ * @exports localStorage
  * @returns {{save: Function, get: Function}}
  */
 function(){

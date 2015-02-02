@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
-    'jquery', 'config', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
+    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -36,6 +36,8 @@
  * @param {Object} $ - JQuery
  * @param {module} config - config-Modul
  * @see module:config
+ * @param {module} extension - extension-Modul
+ * @see module:extension
  * @param {module} viewportSize - viewportSize-Modul
  * @see module:viewportSize
  * @param {module} viewportAnimation - viewportAnimation-Modul
@@ -44,7 +46,7 @@
  * @see module:backgroundAccess
  * @returns {{init: Function}}
  */
-function($, config, viewportSize, viewportAnimation, backgroundAccess) {
+function($, config, extension, viewportSize, viewportAnimation, backgroundAccess) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -54,10 +56,12 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $animationTimes,                 // Input-Feld zur Angabe das Anzahl an Wiederholungen
         $animationButton,                // Button zum Starten der Animation
         $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
+        $switchOrientationButton,        // Button zum Ändern der Orientierung
         MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
             "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
         sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
-        MIN_WIDTH_CHROME = 299;          // Minimale Breite, die der Chrome Browser annehmen kann
+        MIN_VALUE_SIZE_SCROLLBARS = 1,   // Mindestwert zum Skalieren des Browsers
+        UNIT_PX = "px";                  // String zur Anzeige der Einheiten px
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -106,10 +110,10 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         // Werte initialiseren
         $scrollbar.attr('max', max);
         $scrollbar.attr('min', min);
-        updateScrollbarValue($scrollbar, cur, "px");
+        updateScrollbarValue($scrollbar, cur, UNIT_PX);
 
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
-        showScrollBarValue($scrollbar, $scrollbar.next(), "px");
+        showScrollBarValue($scrollbar, $scrollbar.next(), UNIT_PX);
         $scrollbar.change(function() {
             var value = parseInt($(this).val());
             if(changeWidth) {
@@ -145,9 +149,8 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         var max = backgroundAccess.getAvailBrowserSize().width,
             cur = backgroundAccess.getBrowserWidth(sizesContainBrowserOffset);
         initScrollBar(
-            $widthScrollBar, max, MIN_WIDTH_CHROME, cur, true, false
+            $widthScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, true, false
         );
-        // TODO echte Min Width?
     };
 
     /**
@@ -160,7 +163,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         var max = backgroundAccess.getAvailBrowserSize().height,
             cur = backgroundAccess.getBrowserHeight(sizesContainBrowserOffset);
         initScrollBar(
-            $heightScrollBar, max, 1, cur, false, true
+            $heightScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, false, true
         );
     };
 
@@ -170,10 +173,22 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
     var initResolutionDropDown = function() {
         // Breite Anpassen, wenn eine bestimmte Auflösungausgewählt wird
         $resolutionDropdown.change(function(){
-           var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
+            var selectedResolution = config.resolutions[$resolutionDropdown.find(":selected").val()];
             viewportSize.changeSize(selectedResolution.width, selectedResolution.height, sizesContainBrowserOffset);
-            updateScrollbarValue($(widthScrollBar), selectedResolution.width, "px");
-            updateScrollbarValue($(heightScrollBar), selectedResolution.height, "px");
+        });
+    };
+
+    /**
+     * Initialisiert den Button zum Tauschen der Orientierung.
+     * Bei einem Klick auf diesen Button werden Breite und Höhe des Browser getauscht
+     * und die Anzeige auf den Scrollbars aktualisiert.
+     */
+    var initSwitchOrientationButton = function(){
+        $switchOrientationButton.click(function(){
+            var browserSize = backgroundAccess.getBrowserSize(sizesContainBrowserOffset),
+                newHeight = browserSize.width,
+                newWidth = browserSize.height;
+            viewportSize.changeSize(newWidth, newHeight, sizesContainBrowserOffset);
         });
     };
 
@@ -184,6 +199,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
      */
     var parseIntVal = function($element) {
         return parseInt(Math.round($element.val()));
+        // TODO in TOOLS auslagern
     };
 
     /**
@@ -212,9 +228,27 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
             } else {
                 // Animation starten
                 viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
-                updateScrollbarValue($(widthScrollBar), endPx, "px");
             }
         });
+    };
+
+    /**
+     * Übernimmt die aktuelle Größe des Browsers zur Anzeige in den Scrollbars.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     */
+    var handleCurrentBrowserSizeMessage = function(request){
+        var data = request.data,
+            curHeight = sizesContainBrowserOffset ? data.outerBrowserHeight : data.innerBrowserHeight,
+            curWidth = sizesContainBrowserOffset ? data.outerBrowserWidth : data.innerBrowserWidth;
+        updateScrollbarValue($heightScrollBar, curHeight, UNIT_PX);
+        updateScrollbarValue($widthScrollBar, curWidth, UNIT_PX);
+    };
+
+    /**
+     * Verarbeitung der Nachrichten beim Message Passing.
+     */
+    var handleMessages = function(){
+        extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
     };
 
     /**
@@ -232,7 +266,6 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
-        // TODO Konstanten?
         $widthScrollBar = $("#widthScrollBar");
         $heightScrollBar = $("#heightScrollBar");
         $resolutionDropdown = $('#resolutions');
@@ -242,6 +275,7 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         $animationTimes = $('#animationTimes');
         $animationButton = $('#animationButton');
         $innerOuterSwitch = $('#switchInnerOuter');
+        $switchOrientationButton = $("#switchOrientationButton");
     };
 
     /**
@@ -250,8 +284,6 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
      * und die entsprechenden Callbacks zur Manipulation des Browserfensters gesetzt.
      */
     var init = function (){
-        viewportSize.init();
-        viewportAnimation.init();
         initElements();
         initData();
         initInnerOuterSwitch();
@@ -259,6 +291,8 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
         initAnimation();
         initWidthScrollBar();
         initHeightScrollBar();
+        initSwitchOrientationButton();
+        handleMessages();
     };
 
     return {
@@ -275,13 +309,13 @@ function($, config, viewportSize, viewportAnimation, backgroundAccess) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Thu Jan 29 2015 12:12:53 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:15:11 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
