@@ -177,7 +177,6 @@ function($, tools){
      * @return {Array}
      */
     var getMediaQueries = function(){
-        console.log(getCssRules(CSS_MEDIA_RULE_TYPE));
         return getCssRules(CSS_MEDIA_RULE_TYPE);
     };
 

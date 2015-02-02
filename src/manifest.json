@@ -20,7 +20,8 @@
   },
   "permissions": [
     "tabs",                                       // Zugriff auf Felder des Tab-Objects
-    "http://*/*", "https://*/*"                   // Zugriff auf bestimmte Hosts
+    "http://*/*", "https://*/*",                  // Zugriff auf bestimmte Hosts
+    "storage"                                     // Zur Nutzung der chrome.storage-API
   ],
   // Script and Styles, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
   "content_scripts": [{

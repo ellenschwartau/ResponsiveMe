@@ -22,10 +22,11 @@ function(){
     /**
      * Liefert einen gespeicherten Wert.
      * @param {string} key - Schlüssel des auszulesenden Wertes
+     * @param {function} callback - Funktion, die nach dem Auslesen ausgeführt werden soll
      */
-    var get = function(key){
+    var get = function(key, callback){
         chrome.storage.sync.get(key, function(result){
-            return result;
+            callback(result);
         });
     };
 
