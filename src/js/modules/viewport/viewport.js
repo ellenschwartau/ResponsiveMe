@@ -92,7 +92,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
         showScrollBarValue($scrollbar, $scrollbar.next(), UNIT_PX);
         $scrollbar.change(function() {
-            var value = tools.parsing.parseIntVal($(this).val());
+            var value = tools.parser.parseIntVal($(this).val());
             if(changeWidth) {
                 viewportSize.changeWidth(value, sizesContainBrowserOffset);
             }
@@ -112,7 +112,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $scrollbar.mousemove(function() {
             // Anzeige aktualisieren, wenn die Maus darüber bewegt wird
             // (weniger komplex als auf Click + Mousemove, da es hierfür kein Event gibt)
-            $displayElement.html(tools.parsing.parseIntVal($(this).val()) + unit);
+            $displayElement.html(tools.parser.parseIntVal($(this).val()) + unit);
         });
     };
 
@@ -174,7 +174,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {Number}
      */
     var getAnimationEndWidth = function(){
-        return tools.parsing.parseIntVal($animationEnd);
+        return tools.parser.parseIntVal($animationEnd);
     };
 
     /**
@@ -182,7 +182,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {Number}
      */
     var getAnimationStartWidth = function(){
-        return tools.parsing.parseIntVal($animationStart);
+        return tools.parser.parseIntVal($animationStart);
     };
 
     /**
@@ -190,7 +190,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {Number}
      */
     var getAnimationTimes = function(){
-        return tools.parsing.parseIntVal($animationTimes);
+        return tools.parser.parseIntVal($animationTimes);
     };
 
     /**
@@ -198,7 +198,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {Number}
      */
     var getAnimationDuration = function(){
-        return tools.parsing.parseIntVal($animationDurationScrollBar);
+        return tools.parser.parseIntVal($animationDurationScrollBar);
     };
 
     /**

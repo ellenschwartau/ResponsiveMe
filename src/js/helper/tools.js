@@ -27,7 +27,7 @@ function($){
         }
     };
 
-    var parsing = {
+    var parser = {
         /**
          * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
          * @param {$} $element - Element dessen Wert ausgelesen werden soll
@@ -40,6 +40,6 @@ function($){
 
     return {
         list: list,
-        parsing: parsing
+        parser: parser
     };
 });

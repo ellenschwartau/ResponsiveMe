@@ -85,7 +85,7 @@ function($, visualizeElements, localStorage, tools) {
      * @returns {Number}
      */
     var getWidth = function() {
-        return tools.parsing.parseIntVal($gridWidth);
+        return tools.parser.parseIntVal($gridWidth);
     };
 
     /**
