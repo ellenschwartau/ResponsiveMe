@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contentScripts/cs-styles.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contentScripts/cs-styles.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>require([
+    'extension', 'config', 'styleEditor'
+],
+/**
+ * Javascript, dass auf aufgerufene Seiten injiziert wird.
+ * Behandelt die Messages und führt die gewünschten Aktionen aus.
+ * @exports csStyles
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} styleEditor - styleEditor-Modul
+ * @see module:styleEditor
+ */
+    function(extension, config,  styleEditor) {
+    /**
+     * Fügt eine neue CSS-Regel hinzu.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {string} request.data.style - Style-Angaben
+     * @param {int} request.data.indexStyleSheet - Index des Style Sheets aus der Style Sheet Liste des document
+     */
+    var handleInsertStyle = function(request) {
+        var data = request.data;
+        styleEditor.insert(data.style, data.indexStyleSheet, 0);
+    };
+
+    /**
+     * Ändert eine bestehende CSS-Regel ab.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {string} request.data.style - Style-Angaben
+     * @param {int} request.data.indexStyleSheet - Index des Style Sheets aus der Style Sheet Liste des document
+     * @param {int} request.data.indexRule - zu bearbeitende Rule aus der CSSRuleList des Style Sheets
+     */
+    var handleUpdateStyle = function(request) {
+        var data = request.data;
+        styleEditor.update(data.style, data.indexStyleSheet, data.indexRule);
+    };
+
+    /**
+     * Löscht eine bestimmte CSS-Regel.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {string} request.data.style - Style-Angaben
+     * @param {int} request.data.indexStyleSheet - Index des Style Sheets aus der Style Sheet Liste des document
+     * @param {int} request.data.indexRule - zu bearbeitende Rule aus der CSSRuleList des Style Sheets
+     */
+    var handleDeleteStyle = function(request) {
+        var data = request.data;
+        styleEditor.remove(data.indexStyleSheet, data.indexRule);
+    };
+
+    /**
+     * Behandelt die Nachrichten, die an das Content Script gesendet werden.
+     */
+    var handleMessages = function() {
+        extension.handleMessage(config.messageTypes.insertStyle, handleInsertStyle);
+        extension.handleMessage(config.messageTypes.updateStyle, handleUpdateStyle);
+        extension.handleMessage(config.messageTypes.deleteStyle, handleDeleteStyle);
+    }();
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

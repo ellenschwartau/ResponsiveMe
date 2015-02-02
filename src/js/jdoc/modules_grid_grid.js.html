@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/grid/grid.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/grid/grid.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([
+    'jquery', 'visualizeElements'
+],
+/**
+ * Visualisiert das Grid, auf dem eine Website beruht.
+ * Dieses Grid kann durch die Angabe mehrerer CSS-Selektoren angegeben werden.
+ *
+ * Zur Anzeige des Grids können auch reguläre Ausdrücke verwendet werden, z.B.:
+ * "div[class^='column-'],div[class*=' column-']" // Alle Klassen, die mit "column-" beginnen oder " column-" beinhalten
+ * oder
+ * "div[class*='column-']"  // Alle Klassem, die "column-" beinhalten
+ *
+ * @exports grid
+ * @param {Object} $ - JQuery
+ * @param {module} visualizeElements - visualizeElements-Modul
+ * @param visualizeElements
+ * @returns {{init: Function}}
+ */
+function($, visualizeElements) {
+    var $contentWrapper,        // Parent Element des Grid Contents
+        $addSelectorButton,     // Button zum Hinzufügen von Selektoren
+        $showGridButton,        // Button zum Anzeigen des Grids
+        $gridColor,             // Eingabe-Feld zu Angabe der Darstellungsfarbe
+        $gridWidth,             // Eingabe-Feld zur Angabe der Anzeigebreite
+        inputSelectors = "input[type=text]";    // Selektor zur Identifizierung der angegebenen Selektoren
+
+    /**
+     * Initialisiert den Button zum Hinzufügen neuer Selektoren.
+     * Bei einem Klick auf den Button wird ein neues Input-Element vor dem Button hinzugefügt.
+     */
+    var initAddSelectorButton = function() {
+        // TODO Doku: Keine Delegated Events
+        // delegated Event Handling --> http://learn.jquery.com/events/event-delegation/l
+        // Um Events bei Elementen zu registrieren, die nachgeladen werden und zum Zeitpunkt der Initialisierung
+        // noch nicht vorhanden sind
+        $addSelectorButton.click(function(){
+            var $lastInput = $contentWrapper.find(inputSelectors).last();
+            $lastInput.after($lastInput.clone());
+        });
+    };
+
+    /**
+     * Initialisiert die Anzeige des Grids.
+     */
+    var initShowGrid = function() {
+        $showGridButton.click(function(){
+            var selectors = getGridSelectors();
+            // Wenn Selektoren angegeben wurden, Anzeige anstoßen
+            if(selectors.length >= 1) {
+                visualizeElements.triggerShowElements(selectors, getColor(), getWidth());
+            }
+        });
+    };
+
+    /**
+     * Liest die angegebenen Selektoren aus, die das Grid definierten.
+     * @returns {Array}
+     */
+    var getGridSelectors = function() {
+        var inputFields =  $contentWrapper.find(inputSelectors),
+            values = [];
+        inputFields.each(function(i, element) {
+            var value = element.value;
+            if(value !== "") {
+                values.push(value);
+            }
+        });
+        return values;
+    };
+
+    /**
+     * Liefert die Farbe, in der das Grid angezeigt werden soll.
+     * @return {string}
+     */
+    var getColor = function() {
+        return $gridColor.val();
+    };
+
+    /**
+     * Liefert die Breite, in der das Grid dargestellt werden soll.
+     * @returns {Number}
+     */
+    var getWidth = function() {
+        return parseInt($gridWidth.val());
+    };
+
+    /**
+     * Speichert die Interaktionselemente zwischen.
+     */
+    var initElements = function() {
+        // TODO in Konstanten auslagern? Werden nur an dieser Stelle gebraucht..
+        $contentWrapper = $("#showGrid");
+        $addSelectorButton = $("#addSelectorButton");
+        $showGridButton = $("#showGridButton");
+        $gridColor = $("#gridColor");
+        $gridWidth = $("#gridWidth");
+    };
+
+    /**
+     * Initialisiert das Grid-Modul.
+     * Die benötigten Elemente werden ausgelesen und die Callbacks gesetzt.
+     */
+    var init = function() {
+        initElements();
+        initAddSelectorButton();
+        initShowGrid();
+    };
+
+    return {
+        init: init
+    };
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: helper/styles/style-editor.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: helper/styles/style-editor.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([
+    'config', 'extension'
+],
+/**
+ * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets bereit,
+ * die auf einer Seite geladen werden.
+ * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
+ * @exports styleEditor
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @returns {{insert: Function, remove: Function, update: Function, triggerInsertStyle: Function, triggerUpdateStyle: Function, triggerDeleteStyle: Function}}
+ */
+function(config, extension){
+    /**
+     * Prüft, ob ein angefordertes Style Sheet vorhanden ist.
+     * @param {StyleSheetList} styleSheets - Liste vorhandener Style Sheets
+     * @param {int} styleSheetIndex - Index des auszulesenden Style Sheets
+     * @returns {boolean}
+     */
+    var styleSheetIsValid = function(styleSheets, styleSheetIndex){
+        return styleSheetIndex &lt; styleSheets.length &amp;&amp; styleSheets[styleSheetIndex] != null;
+    };
+
+    /**
+     * Prüft, ob eine CSS Regel an einer bestimmten Stelle in eine bestehende Liste eingefügt werden kann.
+     * Das ist der Fall, wenn diese Liste leer ist, oder die neue Regel innerhalb oder am Ende der Liste
+     * eingefügt werden soll.
+     * @param {CSSRuleList} cssRules - Liste bestehender Regeln
+     * @param {int} newRuleIndex - Index der Stelle, an der die neue Regel eingefügt werden soll
+     * @returns {boolean}
+     */
+    var ruleCanBeInserted = function(cssRules, newRuleIndex){
+        return cssRules != null &amp;&amp; newRuleIndex >= 0 &amp;&amp; newRuleIndex &lt;= cssRules.length;
+    };
+
+    /**
+     * Fügt ein neues Style Sheet mit den übergebenen Style Angaben hinzu.
+     * @param {String} style - CSS
+     */
+    var addNewStyleSheet = function(style){
+        // Create the &lt;style> tag
+        var styleElm = document.createElement("style");
+        $(styleElm).html(style);
+        document.head.appendChild(styleElm);
+    };
+
+    /**
+     * Fügt einem Style Sheet (identifiziert über dessen Index) eine neue CSS-Regel
+     * hinzu, wenn die Style-Angaben nicht leer sind. Sollte das Einfügen an der definierten
+     * Stelle nicht möglich sein, weil das Style Sheet nicht existiert oder die gewünschte Stelle
+     * in der Liste der CSS Regeln nicht valide ist, dann wird ein neues Style Sheet erstellt.
+     * @param {string} style - Style der hinzugefügt werden soll
+     * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
+     * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     */
+    var insert = function(style, styleSheetIndex, ruleIndex){
+        if(style != ""){
+            var styleSheets = document.styleSheets,
+                insertionPossible = false;
+            if(styleSheetIsValid(styleSheets, styleSheetIndex)) {
+                var styleSheet = styleSheets[styleSheetIndex];
+                insertionPossible = ruleCanBeInserted(styleSheet.cssRules, ruleIndex);
+                if(insertionPossible) {
+                    styleSheet.insertRule(style, ruleIndex);
+                }
+            }
+            if(!insertionPossible){
+                addNewStyleSheet(style);
+            }
+        }
+    };
+
+    /**
+     * Löscht eine CSSRegel aus einem Style Sheet.
+     * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
+     * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     */
+    var remove = function(styleSheetIndex, ruleIndex){
+        var styleSheets = document.styleSheets;
+        if(styleSheetIndex &lt; styleSheets.length){
+            styleSheets[styleSheetIndex].deleteRule(ruleIndex);
+        }
+    };
+
+    /**
+     * Aktualisiert eine CSSRule. Ist die neue Style-Angabe leer, wird die CSS-Regel gelöscht.
+     * @param {string} style - Style der hinzugefügt werden soll
+     * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
+     * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     */
+    var update = function(style, styleSheetIndex, ruleIndex) {
+        remove(styleSheetIndex, ruleIndex);
+        insert(style, styleSheetIndex, ruleIndex);
+    };
+
+    /**
+     * Triggert das Speichern eines neuen Styles in ein bestimmtes Style Sheet.
+     * @param {string} style - css Style
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     */
+    var triggerInsertStyle = function(style, indexStyleSheet) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.insertStyle,
+            data: {
+                style: style,
+                indexStyleSheet: indexStyleSheet
+            }
+        });
+    };
+
+    /**
+     * Triggert die Aktualisierung eines Styles in ein bestimmtes Style Sheet.
+     * @param {string} style - css Style
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     * @param {int} indexRule - Index der CSSRule aus der Liste der Regeln eines bestimmten Style Sheets
+     */
+    var triggerUpdateStyle = function(style, indexStyleSheet, indexRule) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.updateStyle,
+            data: {
+                style: style,
+                indexStyleSheet: indexStyleSheet,
+                indexRule: indexRule
+            }
+        });
+    };
+
+    /**
+     * Triggert das Löschen eines Styles aus einem bestimmten Style Sheet.
+     * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
+     */
+    var triggerDeleteStyle = function(indexStyleSheet) {
+        extension.sendMessageToTab({
+            type: config.messageTypes.deleteStyle,
+            data: {
+                indexStyleSheet: indexStyleSheet
+            }
+        });
+    };
+
+    return {
+        insert: insert,
+        remove: remove,
+        update: update,
+        triggerInsertStyle: triggerInsertStyle,
+        triggerUpdateStyle: triggerUpdateStyle,
+        triggerDeleteStyle: triggerDeleteStyle
+    };
+
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

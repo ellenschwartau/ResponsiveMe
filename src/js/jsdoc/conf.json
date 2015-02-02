@@ -4,7 +4,7 @@
     "dictionaries": ["jsdoc","closure"]
   },
   "source": {
-    "include": ["./background", "./contentScripts", "./helper", "./modules", "./popup", "./requirejs", "./main.js"],
+    "include": ["./background", "./contentScripts", "./helper", "./modules", "./popup", "./requirejs", "./main.js", "./localStorage"],
     "includePattern": ".+\\.js(doc)?$"
   },
   "plugins": [],

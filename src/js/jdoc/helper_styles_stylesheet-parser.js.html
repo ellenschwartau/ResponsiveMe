@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: helper/styles/stylesheet-parser.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: helper/styles/stylesheet-parser.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([
+    'jquery', 'tools'
+],
+/**
+ * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
+ * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
+ * @exports stylesheetParser
+ * @param {Object} $ - JQuery
+ * @param {module} tools - tools-Module
+ * @see module:tools
+ * @returns {{getMediaQueries: Function, getEmptyCssRuleJson: Function, getMediaList: Function}}
+ */
+function($, tools){
+    // Typ der Media Queries
+    var CSS_MEDIA_RULE_TYPE = 4;
+
+    // {{styleSheetIndex:int,ruleIndex:int,fullCss:string}[]}
+    // TODO
+
+    /**
+     * Liefert alle css-Regeln eines bestimmten Typs der aktuell geladenen Stylesheets.
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @returns *
+     */
+    var getCssRules = function(type) {
+        var styleSheets = document.styleSheets,
+            cssRules = [];
+
+        // StyleSheets durchlaufen
+        $.each(styleSheets, function(indexStyleSheet, styleSheet){
+            var ruleList = styleSheet.cssRules;
+            if(ruleList != null &amp;&amp; ruleList.length > 0) {
+                // Für jedes StyleSheet die Liste an Regeln in JSON konvertieren
+                var rules = getCssRulesFromRuleList(type, indexStyleSheet, ruleList);
+                // Und die Regeln in eine Liste speichern
+                $.each(rules, function(i, rule){
+                    cssRules.push(rule);
+                });
+            }
+        });
+
+        return cssRules;
+    };
+
+    /**
+     * List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert die
+     * benötigten Informationen ins JSON-Format.
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
+     * @param {CSSRuleList} ruleList - Liste, die die css-Regeln enthält
+     * @returns *
+     */
+    var getCssRulesFromRuleList = function(type, indexStyleSheet, ruleList) {
+        var cssRules = [];
+        $.each(ruleList, function(indexRule, rule){
+            if(rule.type == type) {
+                // Jede Rule des Typs in JSON mit den benötigten Informationen speichern
+                cssRules.push(convertRuleToJson(type, indexStyleSheet, indexRule, rule));
+            }
+        });
+        return cssRules;
+    };
+
+    /**
+     * Konvertiert eine Media Query in ein JSON-Format.
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
+     * @param {int} indexRule - Index der Regel, die die Media Query definiert
+     * @param {CSSRule} rule - CSS-Regel
+     * @returns {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string}}
+     */
+    var convertRuleToJson = function(type, indexStyleSheet, indexRule, rule) {
+        return addTypeSpecificInformation(type, rule, {
+            indexStyleSheet: indexStyleSheet,
+            indexRule: indexRule,
+            fullCss: rule.cssText
+        });
+    };
+
+    /**
+     * Fügt dem JSON Object der css-Regel je nach dessen Typ weitere Daten an.
+     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * @param {CSSRule} rule - CSS-Regel
+     * @param {json} json  - bisherig gesammelte Daten zur Regel
+     * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
+     */
+    var addTypeSpecificInformation = function(type, rule, json) {
+        switch(type) {
+            case CSS_MEDIA_RULE_TYPE:
+                json.mediaQueryWidth = getMediaQueryWidth(rule);
+                json.selector = getMediaRuleSelectorValue(rule);
+                json.media = rule.media;
+                break;
+        }
+        return json;
+    };
+
+    /**
+     * Liefert den Wert des Selektors einer Media Query.
+     * @param {CSSMediaRule} rule - Media Query
+     * @returns {string}
+     */
+    var getMediaRuleSelectorValue = function(rule) {
+        return "@media " + rule.media.mediaText;
+    };
+
+    /**
+     * Liefert ein leeres Object einer CSSRule im JSON Format.
+     * @returns {{indexStyleSheet: number, indexRule: number, fullCss: string}}
+     */
+    var getEmptyCssRuleJson = function() {
+        return {
+            indexStyleSheet: 0,
+            indexRule: 0,
+            fullCss: ""
+        };
+    };
+
+    /**
+     * Liefert die Breite, ab der eine Media Query greift und geht dabei nur von korrekt verfassten Media Queries aus.
+     * Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte Zahl, geliefert.
+     * @param {CSSMediaRule} cssMediaRule - Media Query
+     * @return {int} - maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
+     */
+    var getMediaQueryWidth = function(cssMediaRule) {
+        var mediaList = cssMediaRule.media,
+            PREFIX = "width: ",
+            POSTFIX = "px",
+            width = -1;
+        // Elemente müssen so abgelaufen werden, da die MediaList neben der Liste noch weitere Attribute enthält
+        for(var i=0; i&lt;mediaList.length; i++) {
+            var mediaRule = mediaList[i],
+                widthIndex = mediaRule.indexOf(PREFIX);
+            while(widthIndex > -1) {
+                var endPrefix = widthIndex + PREFIX.length,
+                    unit = mediaRule.indexOf(POSTFIX, endPrefix),
+                    widthBegin = endPrefix,
+                    widthEnd = unit - 1;
+                if(unit > -1 &amp;&amp; (widthEnd > widthBegin)) {
+                    // Wenn der Postfix gefunden wurde und zwischen Pre- und Postfix noch etwas steht,
+                    // diesen Wert auslesen und als width übernehmen, wenn er größer als die bisherige Angabe ist
+                    width = Math.max(
+                        width,
+                        parseFloat(
+                            mediaRule.substr(widthBegin, widthEnd)
+                        )
+                    );
+                }
+                // Nach weiteren Breitenangaben suchen
+                widthIndex = mediaRule.indexOf(PREFIX, endPrefix);
+            }
+        }
+        return width;
+    };
+
+    /**
+     * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
+     * @returns {Array} Liste der Media-Angaben
+     */
+    var getMediaList = function(){
+        var mediaQueries = getMediaQueries(),
+            resultList = [];
+        $.each(mediaQueries, function(i, mediaQuery) {
+            var mediaList = mediaQuery.media;
+            for(var i=0; i&lt;mediaList.length; i++) {
+                var media = mediaList[i];
+                if (!tools.list.listContainsValue(resultList, media)) {
+                    resultList.push(media);
+                }
+            }
+        });
+        return resultList;
+    };
+
+    /**
+     * Liefert die CSS-Rules, die @media-Angaben enthalten.
+     * @return {Array}
+     */
+    var getMediaQueries = function(){
+        console.log(getCssRules(CSS_MEDIA_RULE_TYPE));
+        return getCssRules(CSS_MEDIA_RULE_TYPE);
+    };
+
+    return {
+        getMediaQueries: getMediaQueries,
+        getEmptyCssRuleJson: getEmptyCssRuleJson,
+        getMediaList: getMediaList
+    }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/mediaQueries/media-queries.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/mediaQueries/media-queries.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([
+    'jquery', 'allMediaQueries', 'newMediaQuery', 'activeMediaQueries', 'config', 'extension'
+],
+/**
+ * Dieses Modul dient der Visualisierung von Media Queries.
+ * Es bringt die aktuell vorhandenen Media Queries zur Anzeige und bietet außerdem die Möglichkeit,
+ * die vorhandenen Media Queries zu bearbeiten und neue Hinzuzufügen.
+ * Auch die aktuell greifenden Media Queries werden aufgelistet.
+ * @exports mediaQueries
+ * @param {Object} $ - JQuery
+ * @param {module} allMediaQueries - allMediaQueries-Modul
+ * @see module:allMediaQueries
+ * @param {module} newMediaQuery - newMediaQuery-Modul
+ * @see module:newMediaQuery
+ * @param {module} activeMediaQueries - activeMediaQueries-Modul
+ * @see module:activeMediaQueries
+ * @param {module} config - config-Modul
+ * @see module:config
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @returns {{init: Function, get: *}}
+ */
+function($, allMediaQueries, newMediaQuery, activeMediaQueries, config, extension) {
+    var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
+        $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
+        EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
+
+    /**
+     * Initialisiert die Anzeige der Media Queries.
+     */
+    var initMediaQueryDisplay = function() {
+        $showMediaQueriesButton.click(function(){
+            // Media Queries von Content Script abfragen
+            extension.sendMessageToTabWithCb({
+                    type: config.messageTypes.showMediaQueries
+                },
+                // erhaltene Antwort verarbeiten und Media Queries anzeigen
+                allMediaQueries.show
+            );
+        });
+    };
+
+    /**
+     * Initialisiert die Funktionalität zum Erstellen einer neuen Media Query.
+     */
+    var initNewMediaQuery = function() {
+        $newMediaQueryButton.click(function() {
+            newMediaQuery.save(EDITOR_ID_NEW_MEDIA_QUERY);
+        });
+    };
+
+    /**
+     * Speichert die Interaktionselemente zwischen.
+     */
+    var initElements = function() {
+        $showMediaQueriesButton = $("#showMediaQueriesButton");
+        $newMediaQueryButton = $("#newMediaQueriesButton");
+    };
+
+    /**
+     * Initialisiert das Media Query Modul.
+     * Die benötigten Elemente werden ausgelesen und die notwendigen Callbacks gesetzt.
+     */
+    var init = function() {
+        initElements();
+        initMediaQueryDisplay();
+        initNewMediaQuery();
+        newMediaQuery.init(EDITOR_ID_NEW_MEDIA_QUERY);
+        allMediaQueries.init();
+        activeMediaQueries.init();
+    };
+
+    return {
+        init: init,
+        get: allMediaQueries.get
+    };
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

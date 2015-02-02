@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: background/background-access.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: background/background-access.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([
+    'extension'
+],
+/**
+ * Dieses Skript kapselt den Zugriff auf Funktionen und Variablen der Hintergrundseite der Erweiterung.
+ * @exports backgroundAccess
+ * @param {module} extension - extensionModul
+ * @see module:extension
+ * @returns {{getMediaList: Function, getBrowserHeight: Function, getBrowserWidth: Function, getBrowserSize: Function, getAvailBrowserSize: Function, getBrowserOffset: Function}}
+ */
+function(extension){
+    /**
+     * Hintergrundseite
+     */
+    var background = extension.getBackgroundPage();
+
+    /**
+     * Liefert die outer Browser-Größe, inklusive Elementen wie Toolbar oder Scrollbar.
+     * @returns {{width: *, height: *}}
+     */
+    var getOuterBrowserSize = function(){
+        return {
+            width: background.outerBrowserWidth,
+            height: background.outerBrowserHeight
+        }
+    };
+
+    /**
+     * Liefert die inner Browser-Größe, ohne Elemente wie Toolbar oder Scrollbar.
+     * @returns {{width: *, height: *}}
+     */
+    var getInnerBrowserSize = function(){
+        return {
+            width: background.innerBrowserWidth,
+            height: background.innerBrowserHeight
+        }
+    };
+
+    /**
+     * Liefert die Größe des Browsers
+     * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
+     * @returns {{width: int, height: int}}
+     */
+    var getBrowserSize = function(includingBrowserOffset){
+        return includingBrowserOffset ? getOuterBrowserSize() : getInnerBrowserSize();
+    };
+
+    /**
+     * Liefert die Breite des Browsers.
+     * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
+     * @returns {int}
+     */
+    var getBrowserWidth = function(includingBrowserOffset){
+        return includingBrowserOffset ? background.outerBrowserWidth : background.innerBrowserWidth;
+    };
+
+    /**
+     * Liefert die Höhe des Browsers.
+     * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
+     * @returns {int}
+     */
+    var getBrowserHeight = function(includingBrowserOffset){
+        return includingBrowserOffset ? background.outerBrowserHeight : background.innerBrowserHeight;
+    };
+
+    /**
+     * Liefert die erreichbare Browser-Größe.
+     * @returns {{width: int, height: int}}
+     */
+    var getAvailBrowserSize = function(){
+        return {
+            width: background.availBrowserWidth,
+            height: background.availBrowserHeight
+        }
+    };
+
+    /**
+     * Liefert die Liste der greifenden Media Angaben.
+     * @returns {Array}
+     */
+    var getMediaList = function(){
+        return background.mediaList;
+    };
+
+    /**
+     * Liefert den Offset, den der Browser aktuell durch Elemente Scroll- oder Toolbars einnimmt.
+     * @returns {{x: int, y:int}}
+     */
+    var getBrowserOffset = function(){
+        return background.browserOffset;
+    };
+
+    return {
+        getMediaList: getMediaList,
+        getBrowserHeight: getBrowserHeight,
+        getBrowserWidth: getBrowserWidth,
+        getBrowserSize: getBrowserSize,
+        getAvailBrowserSize: getAvailBrowserSize,
+        getBrowserOffset: getBrowserOffset
+    };
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:11:55 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
