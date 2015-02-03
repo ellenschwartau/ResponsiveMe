@@ -1,13 +1,15 @@
 define([
-
+    'extension'
 ],
 /**
  * Das Local Storage Modul implementiert Logik um benutzerspezifische Angaben zwischenzuspeichern.
  * Dabei wird auf Funktionen der chrome.storage-API zurückgegriffen.
  * @exports localStorage
+ * @param {module} extension - extension-Modul
+ * @see module:extension
  * @returns {{save: Function, get: Function}}
  */
-function(){
+function(extension){
     /**
      * Schlüssel zum Zugriff und Speichern verschiedener Werte.
      * @type {{settings: {toggleModules: string, toggleHints: string}, displayModules: {viewport: string, grid: string, mediaQueries: string}, viewport: {sizesContainBrowserOffset: string, animation: {startWidth: string, endWidth: string, duration: string, times: string}}, grid: {selectors: string, color: string, width: string}}}
@@ -46,7 +48,7 @@ function(){
     var saveValue = function(key, value) {
         var data = {};
         data[key] = value; // Um key variabel zu machen - {key: value} würde als Schlüssel 'key' erzeugen
-        chrome.storage.sync.set(data);
+        extension.saveStorageValue(data);
     };
 
     /**
@@ -55,11 +57,7 @@ function(){
      * @param {function} callback - Funktion, die nach dem Auslesen ausgeführt werden soll
      */
     var getValue = function(key, callback){
-        chrome.storage.sync.get(key, function(result){
-            if(!$.isEmptyObject(result)){
-                callback(result);
-            }
-        });
+        extension.getStorageValue(key, callback);
     };
 
     /**

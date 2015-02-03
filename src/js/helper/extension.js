@@ -80,12 +80,35 @@ function(){
         return chrome.extension.getBackgroundPage();
     };
 
+    /**
+     * Speichert einen Wert in der chrome.storage.
+     * @param {json} data - Daten, die gespeichert werdens sollen (Key-Value-Paare)
+     */
+    var saveStorageValue = function(data){
+        chrome.storage.sync.set(data);
+    };
+
+    /**
+     * Liefert einen gespeicherten Wert.
+     * @param {string} key - Schlüssel des auszulesenden Wertes
+     * @param {function} callback - Funktion, die nach dem Auslesen ausgeführt werden soll
+     */
+    var getStorageValue = function(key, callback){
+        chrome.storage.sync.get(key, function(result){
+            if(!$.isEmptyObject(result)){
+                callback(result);
+            }
+        });
+    };
+
     return {
         sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
         sendMessageToTabWithCb: sendMessageToTabWithCb,
         handleMessage: handleMessage,
         executeScriptCode: executeScriptCode,
-        getBackgroundPage: getBackgroundPage
+        getBackgroundPage: getBackgroundPage,
+        saveStorageValue: saveStorageValue,
+        getStorageValue: getStorageValue
     };
 });
