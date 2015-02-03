@@ -46,7 +46,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {boolean}
      */
     var doSizesContainBrowserOffset = function() {
-        return $innerOuterSwitch.is(":checked");
+        return tools.properties.isChecked($innerOuterSwitch);
     };
 
     /**

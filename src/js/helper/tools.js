@@ -27,6 +27,10 @@ function($){
         }
     };
 
+    /**
+     * Tools zum Parsen von Werten.
+     * @type {{parseIntVal: Function}}
+     */
     var parser = {
         /**
          * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
@@ -38,8 +42,32 @@ function($){
         }
     };
 
+    /**
+     * Tools zum Auslesen von Eigenschaften eines Elements.
+     * @type {{isVisible: Function, isChecked: Function}}
+     */
+    var properties = {
+        /**
+         * Liefert die Information, ob ein Element sichtbar ist.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @returns {boolean}
+         */
+        isVisible: function($element){
+            return $element.is(":visible");
+        },
+        /**
+         * Liefert die Information, ob ein Element angewählt ist.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @returns {boolean}
+         */
+        isChecked: function($element){
+            return $element.is(":checked");
+        }
+    };
+
     return {
         list: list,
-        parser: parser
+        parser: parser,
+        properties: properties
     };
 });

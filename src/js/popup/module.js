@@ -13,6 +13,8 @@ define([
  * @see module:mediaQueries
  * @param {module} grid - grid-Modul
  * @see module:grid
+ * @param {module} localStorage - localStorage-Modul
+ * @see modules:localStorage
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
 function($, config, viewport, mediaQueries, grid, localStorage) {
@@ -37,6 +39,29 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
     };
 
     /**
+     * Deaktiviert die Anzeige der Modulbeschreibungen und setzt dafür das Einblenden der
+     * Modul-Beschreibung bei Hover zurück.
+     * @param {$} $element - Modul-Element
+     */
+    var disableModuleDescriptionDisplay = function($element) {
+        $element.find("h2").unbind('mouseenter mouseleave');
+        $element.find(".module-description").slideUp();
+    };
+
+    /**
+     * Aktiviert oder Deaktiviert die Anzeige der Modul-Beschreibungen und
+     * setzt oder entfernt dafür den hover-Callback der Modulbeschreibung.
+     * @param {$} $element - Modul-Element
+     */
+    var toggleModuleDescriptionDisplay = function($element) {
+        if(!$element.hasClass(activeClass)) {
+            initModuleDescriptionDisplay($element);
+        } else {
+            disableModuleDescriptionDisplay($element);
+        }
+    };
+
+    /**
      * Initialisiert die Anzeige und die Daten der Module.
      * @param {string} moduleName - Name des Moduls
      */
@@ -55,6 +80,14 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
     };
 
     /**
+     * Markiert ein Modul als aktiv oder inaktiv.
+     * @param {$} $element - Modul-Element
+     */
+    var toggleActive = function($element) {
+        $element.toggleClass(activeClass);
+    };
+
+    /**
      * Liefert den Schlüssel unter dem die Anzeige-Eigenschaft des Moduls in de Local Storage gespeichert ist.
      * @param {string} moduleName - Name des aktuellen Moduls
      * @returns {string}
@@ -68,14 +101,6 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
             case "media-queries":
                 return localStorage.keys.displayModules.mediaQueries;
         }
-    };
-
-    /**
-     * Markiert ein Modul als aktiv oder inaktiv.
-     * @param {$} $element - Modul-Element
-     */
-    var toggleActive = function($element) {
-        $element.toggleClass(activeClass);
     };
 
     /**
@@ -154,29 +179,6 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
     var initModuleDisplay = function(moduleName, $element) {
         initToggleContent(moduleName, $element);
         initModuleDescriptionDisplay($element);
-    };
-
-    /**
-     * Deaktiviert die Anzeige der Modulbeschreibungen und setzt dafür das Einblenden der
-     * Modul-Beschreibung bei Hover zurück.
-     * @param {$} $element - Modul-Element
-     */
-    var disableModuleDescriptionDisplay = function($element) {
-        $element.find("h2").unbind('mouseenter mouseleave');
-        $element.find(".module-description").slideUp();
-    };
-
-    /**
-     * Aktiviert oder Deaktiviert die Anzeige der Modul-Beschreibungen und
-     * setzt oder entfernt dafür den hover-Callback der Modulbeschreibung.
-     * @param {$} $element - Modul-Element
-     */
-    var toggleModuleDescriptionDisplay = function($element) {
-        if(!$element.hasClass(activeClass)) {
-            initModuleDescriptionDisplay($element);
-        } else {
-            disableModuleDescriptionDisplay($element);
-        }
     };
 
     return {
