@@ -65,7 +65,7 @@ function(extension){
      * @param {string} key - Schlüssel des zu löschenden Wertes
      */
     var removeValue = function(key){
-        chrome.storage.sync.remove(key);
+        extension.removeStorageValue(key);
     };
 
     /**

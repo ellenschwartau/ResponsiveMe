@@ -101,6 +101,14 @@ function(){
         });
     };
 
+    /**
+     * Löscht einen Eintrag aus der Storage.
+     * @param {string} key - Schlüssel, der zu löschenden Daten
+     */
+    var removeStorageValue = function(key){
+        chrome.storage.sync.remove(key);
+    };
+
     return {
         sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
@@ -109,6 +117,7 @@ function(){
         executeScriptCode: executeScriptCode,
         getBackgroundPage: getBackgroundPage,
         saveStorageValue: saveStorageValue,
-        getStorageValue: getStorageValue
+        getStorageValue: getStorageValue,
+        removeStorageValue: removeStorageValue
     };
 });
