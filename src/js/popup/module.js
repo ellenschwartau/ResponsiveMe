@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'viewport', 'mediaQueries', 'grid'
+    'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'localStorage'
 ],
 /**
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
@@ -15,7 +15,7 @@ define([
  * @see module:grid
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
-function($, config, viewport, mediaQueries, grid) {
+function($, config, viewport, mediaQueries, grid, localStorage) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
     /**
@@ -27,7 +27,7 @@ function($, config, viewport, mediaQueries, grid) {
                 moduleName = paths[paths.length-1];
             $.get(config.baseDir + modulePath + ".html", function(data) {
                 var $data = $(data);
-                initModuleDisplay($data);
+                initModuleDisplay(moduleName, $data);
                 $parentElement.append($data);
             }).done(function() {
                 // Initialisieren, wenn fertig geladen
@@ -41,7 +41,6 @@ function($, config, viewport, mediaQueries, grid) {
      * @param {string} moduleName - Name des Moduls
      */
     var initModule = function(moduleName){
-        console.log("Modul " + moduleName + " geladen.");
         switch(moduleName) {
             case "viewport":
                 viewport.init();
@@ -56,6 +55,22 @@ function($, config, viewport, mediaQueries, grid) {
     };
 
     /**
+     * Liefert den Schlüssel unter dem die Anzeige-Eigenschaft des Moduls in de Local Storage gespeichert ist.
+     * @param {string} moduleName - Name des aktuellen Moduls
+     * @returns {string}
+     */
+    var getStorageKeyForModule = function(moduleName){
+        switch(moduleName){
+            case "viewport":
+                return localStorage.keys.displayModules.viewport;
+            case "grid":
+                return localStorage.keys.displayModules.grid;
+            case "media-queries":
+                return localStorage.keys.displayModules.mediaQueries;
+        }
+    };
+
+    /**
      * Markiert ein Modul als aktiv oder inaktiv.
      * @param {$} $element - Modul-Element
      */
@@ -64,21 +79,49 @@ function($, config, viewport, mediaQueries, grid) {
     };
 
     /**
-     * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
-     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
-     * sowie das Markieren des Moduls als aktiv oder inaktiv.
+     *
+     * @param {string} key - Schlüssel zum Speichern und Auslesen der Anzeigeeinstellung aus der Local Storage
+     * @param {$} $content - Element, bei dem die Callbacks registriert werden sollen
+     */
+    var saveModuleDisplay = function(key, $content){
+        var isVisible = $content.is(":visible");
+        localStorage.save(key, isVisible);
+    };
+
+    /**
+     * Liest die letzte Anzeige-Einstellung aus der Local Storage aus.
+     * @param {string} key - Schlüssel zum Speichern und Auslesen der Anzeigeeinstellung aus der Local Storage
+     * @param {$} $content - Element, dessen Anzeige-Einstellung bestimmt werden soll
+     */
+    var readModuleDisplay = function(key, $content){
+        localStorage.get(key, function(result){
+            if(result[key]){
+                $content.show();
+                toggleActive($content.parent());
+            }
+        });
+    };
+
+    /**
+     * Initialisiert das Ein- und Ausblenden des Modulinhalts.
+     * Der initiale Anzeigewert wird aus der Local Storage ausgelesen.
+     * @param {string} moduleName - Name des Moduls, das initialisiert werden soll
      * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
      */
-    var initModuleDisplay = function($element) {
-        var toggleContent = $element.find(".module-content");
+    var initToggleContent = function(moduleName, $element){
+        var $toggleContent = $element.find(".module-content"),
+            key = getStorageKeyForModule(moduleName);
+        // initiale Anzeige bestimmen
+        readModuleDisplay(key, $toggleContent);
         // Modul-Inhalt ein- und ausblenden
         $element.find("h2").click(function () {
-            toggleContent.slideToggle();
+            $toggleContent.slideToggle(400, function(){
+                // Sichtbarkeit speichern, wenn toggl fertig
+                saveModuleDisplay(key, $toggleContent);
+            });
             toggleActive($element);
             toggleModuleDescriptionDisplay($element);
         });
-        // Ein- und Ausblenden der Modul-Beschreibung
-        initModuleDescriptionDisplay($element);
     };
 
     /**
@@ -99,6 +142,18 @@ function($, config, viewport, mediaQueries, grid) {
                 toggleDescription.slideUp();
             });
         }
+    };
+
+    /**
+     * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
+     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
+     * sowie das Markieren des Moduls als aktiv oder inaktiv.
+     * @param {string} moduleName - Name des Moduls
+     * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
+     */
+    var initModuleDisplay = function(moduleName, $element) {
+        initToggleContent(moduleName, $element);
+        initModuleDescriptionDisplay($element);
     };
 
     /**
