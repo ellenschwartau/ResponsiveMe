@@ -70,29 +70,6 @@ function($, modules, localStorage, tools) {
     };
 
     /**
-     * Liest die zuletzt gemachten Einstellungen aus der Local Storage aus.
-     */
-    var readStorageValues = function(){
-        var initCb = function($element, value){
-            $element.prop('checked', value);
-        };
-        localStorage.readStorage($showAllModulesCb, localStorage.keys.settings.toggleModules, initCb);
-        localStorage.readStorage($showDescriptionsCb, localStorage.keys.settings.toggleHints, initCb);
-    };
-
-    /**
-     * Setzt das Speichern der Einstellungen in der Local Storage, falls diese geändert werden.
-     */
-    var registerStorageValues = function(){
-        localStorage.registerStorage($showAllModulesCb, localStorage.keys.settings.toggleModules, function(){
-            return tools.properties.isChecked($showAllModulesCb);
-        });
-        localStorage.registerStorage($showDescriptionsCb, localStorage.keys.settings.toggleHints, function(){
-            return tools.properties.isChecked($showDescriptionsCb);
-        });
-    };
-
-    /**
      * Initialisiert die Funktionen der Einstellungen.
      * Dazu gehört das Ein- und Ausblenden der Settings über das Settings Icon,
      * das Aktivieren und Deaktivieren der Beschreibungen der Module
@@ -102,8 +79,6 @@ function($, modules, localStorage, tools) {
         initSettingsDisplay();
         initDescriptionToggle();
         initModuleToggle();
-        readStorageValues();
-        registerStorageValues();
     };
 
     return {
