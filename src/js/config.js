@@ -31,7 +31,8 @@ function() {
             deleteStyle: "deleteStyle",
             displayCurrentMediaList: "displayCurrentMediaList",
             updateBrowserSize: "updateBrowserSize",
-            updateAvailBrowserSize: "updateAvailBrowserSize"
+            updateAvailBrowserSize: "updateAvailBrowserSize",
+            updateBackgroundPage: "updateBackgroundPage"
         };
 
     return {

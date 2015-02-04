@@ -109,6 +109,14 @@ function(){
         chrome.storage.sync.remove(key);
     };
 
+    /**
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderer Tab fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var onActivatedTab = function(callback){
+        chrome.tabs.onActivated.addListener(callback);
+    };
+
     return {
         sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
@@ -118,6 +126,7 @@ function(){
         getBackgroundPage: getBackgroundPage,
         saveStorageValue: saveStorageValue,
         getStorageValue: getStorageValue,
-        removeStorageValue: removeStorageValue
+        removeStorageValue: removeStorageValue,
+        onActivatedTab: onActivatedTab
     };
 });

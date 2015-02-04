@@ -83,6 +83,18 @@ function($, matchMedia, extension, config){
     };
 
     /**
+     * Sendet beim Wechsel des aktiven Tabs die Nachricht, dass die Variablen der Hintergundseite aktualisiert werden
+     * sollen.
+     */
+    var registerUpdateBackgroundPageMessage = function(){
+        extension.onActivatedTab(function(){
+            extension.sendMessageToTab({
+                type: config.messageTypes.updateBackgroundPage
+            });
+        });
+    };
+
+    /**
      * Gibt die benötigten Daten der Hintergraundseite bekannt.
      */
     var exportValuesToBackgroundPage = function() {
@@ -130,6 +142,7 @@ function($, matchMedia, extension, config){
      * bekannt gegeben.
      */
     var init = function(){
+        registerUpdateBackgroundPageMessage();
         extension.handleMessage(config.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
         extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
         extension.handleMessage(config.messageTypes.updateAvailBrowserSize, handleAvailBrowserSizeMessage);
