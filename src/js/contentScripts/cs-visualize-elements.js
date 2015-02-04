@@ -12,7 +12,7 @@ require([
  * @param {module} config - config-Modul
  * @see module:config
  */
-    function(extension, visualizeElements, config) {
+function(extension, visualizeElements, config) {
     /**
      * Visualisiert die gewünschten Elemente durch eine Umrandung.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage

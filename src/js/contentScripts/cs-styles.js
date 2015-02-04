@@ -12,7 +12,7 @@ require([
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
  */
-    function(extension, config,  styleEditor) {
+function(extension, config,  styleEditor) {
     /**
      * Fügt eine neue CSS-Regel hinzu.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
