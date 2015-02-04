@@ -117,6 +117,17 @@ function(){
         chrome.tabs.onActivated.addListener(callback);
     };
 
+    /**
+     * Liest das aktuelle Fenster aus und reicht dieses als Parameter
+     * an die übergebene Funktion weiter.
+     * @param {function} callback - Funktion, die Operationen auf dem aktuellen Fenster aufruft
+     */
+    var getCurrentWindow = function(callback){
+        chrome.windows.getCurrent(function(window) {
+            callback(window);
+        });
+    };
+
     return {
         sendMessage: sendMessage,
         sendMessageToTab: sendMessageToTab,
@@ -127,6 +138,7 @@ function(){
         saveStorageValue: saveStorageValue,
         getStorageValue: getStorageValue,
         removeStorageValue: removeStorageValue,
-        onActivatedTab: onActivatedTab
+        onActivatedTab: onActivatedTab,
+        getCurrentWindow: getCurrentWindow
     };
 });

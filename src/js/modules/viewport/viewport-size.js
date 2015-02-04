@@ -1,5 +1,5 @@
 define([
-        'jquery', 'browserOffset'
+        'jquery', 'browserOffset', 'extension'
 ],
 /**
  * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
@@ -7,9 +7,11 @@ define([
  * @param {$} $ - JQuery
  * @param {module} browserOffset - browserOffest-Modul
  * @see module:browserOffset
+ * @param {module} extension - extensionModul
+ * @see module:extension
  * @returns {{changeSize: Function, changeWidth: Function, changeHeight: Function, toggleInnerOuter: Function}}
  */
-function($, browserOffset) {
+function($, browserOffset, extension) {
      /**
      * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.
      * @param {int} width - Breite, auf die der Browser skaliert werden soll
@@ -110,8 +112,7 @@ function($, browserOffset) {
      * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
      */
     var toggleInnerOuter = function(containsBrowserOffset) {
-        // TODO über backgroud page?
-        chrome.windows.getCurrent(function(window){
+        extension.getCurrentWindow(function(window){
             // Im Falle dass containsBrowserOffset true:
             // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
             // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert

@@ -38,5 +38,11 @@ a.button {
   }
 }
 
+.scroll-bar-label {
+  width: 21%;
+  display: inline-block;
+  text-align: right;
+}
+
 @import "viewport";
 @import "mediaQueries";

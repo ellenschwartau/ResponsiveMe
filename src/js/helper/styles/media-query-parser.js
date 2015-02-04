@@ -69,11 +69,11 @@ function($, tools){
         };
 
         /**
-         * Prüft, ob die Breiten-Angabe eine Minimal-Angabe ist (also z.B. min-width: ... oder min-device-width: ...).
+         * Prüft, ob die vorhandene Breiten-Angabe eine minimale Breite spezifiziert
+         * (also z.B. durch min-width: ... oder min-device-width: ...).
          * Das ist notwendig, um die Breite zum togglen der Media Query anzubieten.
          * Enthält die Media Query beispielsweise die Breitenangabe 500px, wird bei einer minimalen Angabe die
          * Breite 499px, bei allen anderen die Breite 501px zum deaktivieren der Media Query berechnet.
-         * // TODO Kommentar überarbeiten
          * @param {CSSMediaRule} mediaRule - Media Query
          * @param {int} widthIndex - Vorkommen der Breitenangabe
          */

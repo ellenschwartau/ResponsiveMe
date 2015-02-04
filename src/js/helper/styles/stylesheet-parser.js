@@ -19,9 +19,6 @@ function($, tools, mediaQueryParser){
      */
     var CSS_MEDIA_RULE_TYPE = 4;
 
-    // {{styleSheetIndex:int,ruleIndex:int,fullCss:string}[]}
-    // TODO
-
     /**
      * Liefert alle css-Regeln eines bestimmten Typs der aktuell geladenen Stylesheets.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen

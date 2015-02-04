@@ -456,6 +456,13 @@ a.button:hover {
   background-color: #4f806e;
 }
 
+/* line 41, ../modules/_modules.scss */
+.scroll-bar-label {
+  width: 21%;
+  display: inline-block;
+  text-align: right;
+}
+
 /* line 2, ../modules/_viewport.scss */
 #moduleViewport .onoffswitch-switch {
   background: #40403d;
@@ -468,13 +475,7 @@ a.button:hover {
 #moduleViewport .onoffswitch-inner:after {
   content: "INNER";
 }
-/* line 13, ../modules/_viewport.scss */
-#moduleViewport .scroll-bar-label {
-  width: 21%;
-  display: inline-block;
-  text-align: right;
-}
-/* line 19, ../modules/_viewport.scss */
+/* line 12, ../modules/_viewport.scss */
 #moduleViewport #switchOrientationButton {
   background-image: url('../images/icon-switch-48px.png');
   display: inline-block;
@@ -486,7 +487,7 @@ a.button:hover {
   top: 2.5%;
   right: 2.5%;
 }
-/* line 34, ../modules/_viewport.scss */
+/* line 27, ../modules/_viewport.scss */
 #moduleViewport #switchOrientationButton:hover {
   cursor: pointer;
 }
