@@ -52,6 +52,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
      * @param {int} mediaQuery.ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
      * @param {string} mediaQuery.fullCSss - Gesamtes CSS der Regel
      * @param {int} mediaQuery.mediaQueryWidth - obere Grenze der Breite, ab der die Media Query greift (-1 wenn keine Breite angegeben)
+     * @param {int} mediaQuery.mediaQueryToggleWidth - Breite bei der die Media Query nicht greift (-1 wenn keine Breite angegeben)
      * @param {string} mediaQuery.selector - Selektor der CSS Regel
      * @param {string} id - CSS-ID der Media Query
      */
@@ -59,7 +60,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         var $query = $mediaQueryHtml.clone(),
             $heading = $query.find("h4"),
             $style = $query.find(".editor"),
-            mediaQueryWidth = mediaQuery.mediaQueryWidth;
+            widthProperties = mediaQuery.widthProperties;
 
         // Inhalte setzen
         $heading.html(mediaQuery.selector);
@@ -69,10 +70,16 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         $heading.click(function(){
             $style.toggle();
         });
-        // Button zum Browser skalieren einfügen, wenn die Media Query eine Breiten-Angabe enthält
-        if(mediaQueryWidth > -1) {
-            addScaleButton(mediaQueryWidth, $style);
-        }
+
+        $.each(widthProperties, function(i, widthProperty){
+            var widthActiveMediaQuery = widthProperty.active,
+                widthInactiveMediaQuery = widthProperty.inactive;
+            // Button zum Browser skalieren einfügen, wenn die Media Query eine Breiten-Angabe enthält
+            if(widthInactiveMediaQuery > -1 && widthActiveMediaQuery > -1) {
+                addScaleButton(widthInactiveMediaQuery, $style);
+                addScaleButton(widthActiveMediaQuery, $style);
+            }
+        });
 
         return $query;
     };
@@ -80,17 +87,16 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
     /**
      * Fügt einen Button nach dem übergebenen Element an, über den der Browser auf eine bestimmte Breite skaliert
      * werden kann.
-     * @param {int} mediaQueryWidth - Breite, auf die der Browser skaliert werden soll
+     * @param {int} width - Breite, auf die der Browser skaliert werden soll
      * @param {$} $insertAfterElm - Element, nach dem der Button eingefügt werden soll
      */
-    var addScaleButton = function(mediaQueryWidth, $insertAfterElm) {
-        // Button über den auf die Breite gesprungen werden kann, bei dem die Media Query greift
-        var $button = $("<a class='button'>Auf " + mediaQueryWidth + "px skalieren</a>");
-        $button.click(function() {
+    var addScaleButton = function(width, $insertAfterElm) {
+        var $buttonActive = $("<a class='button medium'>Auf " + width + "px skalieren</a>");
+        $buttonActive.click(function() {
             // Browser auf die angegebene Breite skalieren, wenn auf eine Media Query geklickt wird
-            viewportSize.changeWidth(mediaQueryWidth, false);
+            viewportSize.changeWidth(width, false);
         });
-        $insertAfterElm.after($button);
+        $insertAfterElm.after($buttonActive);
     };
 
     /**

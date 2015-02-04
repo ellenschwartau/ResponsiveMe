@@ -1,12 +1,15 @@
 define([
-
+    'jquery', 'tools'
 ],
 /**
  * Modul zum Parsen von Media Queries.
  * Liest aus einer Media Query bestimmte Informationen aus und wandelt diese in JSON um.
  * @exports parseMediaQuery
  */
-function(){
+function($, tools){
+    var WIDTH_PROPERTY_PREFIX = "width: ",
+        MIN_PROPERTY_POSTFIX = ["min-", "min-device-"],
+        WIDTH_PROPERTY_POSTFIX = "px";
     /**
      * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
      * @param {json} mediaQueries - Liste der Media Queries in JSO-Notation
@@ -27,40 +30,96 @@ function(){
     };
 
     /**
-     * Liefert die Breite, ab der eine Media Query greift und geht dabei nur von korrekt verfassten Media Queries aus.
-     * Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte Zahl, geliefert.
-     * @param {CSSMediaRule} cssMediaRule - Media Query
-     * @return {int} - maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
+     * Fügt den bisherigen Daten der Media Query zwei Breitenangaben an:
+     * data.mediaQueryWidth: größte Breitenangabe, ab der die Media Query greift
+     * data.mediaQueryToggleWidth: Breitenangabe, ab der die Media Query gerade nicht greift
+     * @param {json} data  - bisherig gesammelte Daten zur Regel
+     * @param {MediaList} mediaList - Liste der Media Angaben in einer Media Query
+     * // TODO TEST
      */
-    var getMediaQueryWidth = function(cssMediaRule) {
-        var mediaList = cssMediaRule.media,
-            PREFIX = "width: ",
-            POSTFIX = "px",
-            width = -1;
-        // Elemente müssen so abgelaufen werden, da die MediaList neben der Liste noch weitere Attribute enthält
-        for(var i=0; i<mediaList.length; i++) {
-            var mediaRule = mediaList[i],
-                widthIndex = mediaRule.indexOf(PREFIX);
+    var addMediaQueryWidthAttributes = function(data, mediaList) {
+        /**
+         * Ermittelt die maximale Breitenangabe innerhalb der Media Query.
+         * @param {json} data  - bisherig gesammelte Daten zur Regel
+         * @param {CSSMediaRule} mediaRule - Media Query
+         * @param {int} widthIndex - Erstes Vorkommen einer Breitenangabe
+         */
+        var addWidthProperties = function(data, mediaRule, widthIndex){
+            var width = -1;
             while(widthIndex > -1) {
-                var endPrefix = widthIndex + PREFIX.length,
-                    unit = mediaRule.indexOf(POSTFIX, endPrefix),
+                var endPrefix = widthIndex + WIDTH_PROPERTY_PREFIX.length,
+                    unit = mediaRule.indexOf(WIDTH_PROPERTY_POSTFIX, endPrefix),
                     widthBegin = endPrefix,
                     widthEnd = unit - 1;
                 if(unit > -1 && (widthEnd > widthBegin)) {
                     // Wenn der Postfix gefunden wurde und zwischen Pre- und Postfix noch etwas steht,
                     // diesen Wert auslesen und als width übernehmen, wenn er größer als die bisherige Angabe ist
-                    width = Math.max(
-                        width,
-                        parseFloat(
-                            mediaRule.substr(widthBegin, widthEnd)
-                        )
-                    );
+                    var newWidth = parseFloat(mediaRule.substr(widthBegin, widthEnd));
+                    if(newWidth > width){
+                        width = newWidth;
+                        data.widthProperties.push({
+                            active: width,
+                            inactive: getToggleWidth(mediaRule, widthIndex, width)
+                        });
+                    }
                 }
                 // Nach weiteren Breitenangaben suchen
-                widthIndex = mediaRule.indexOf(PREFIX, endPrefix);
+                widthIndex = mediaRule.indexOf(WIDTH_PROPERTY_PREFIX, endPrefix);
             }
+        };
+
+        /**
+         * Prüft, ob die Breiten-Angabe eine Minimal-Angabe ist (also z.B. min-width: ... oder min-device-width: ...).
+         * Das ist notwendig, um die Breite zum togglen der Media Query anzubieten.
+         * Enthält die Media Query beispielsweise die Breitenangabe 500px, wird bei einer minimalen Angabe die
+         * Breite 499px, bei allen anderen die Breite 501px zum deaktivieren der Media Query berechnet.
+         * // TODO Kommentar überarbeiten
+         * @param {CSSMediaRule} mediaRule - Media Query
+         * @param {int} widthIndex - Vorkommen der Breitenangabe
+         */
+        var isMinWidthProperty = function(mediaRule, widthIndex){
+            var isMinWidthProperty = false;
+            $.each(MIN_PROPERTY_POSTFIX, function(i, MIN_PROPERTY){
+                if(!isMinWidthProperty){
+                    var postfixLength = MIN_PROPERTY.length,
+                        startCheck = widthIndex - postfixLength;
+                    if(startCheck > 0) {
+                        isMinWidthProperty = MIN_PROPERTY === mediaRule.substr(startCheck, postfixLength);
+                    }
+                }
+            });
+            return isMinWidthProperty;
+        };
+
+        /**
+         * Berechnet die Breite bei der eine Media Query deaktiviert wird, also um einen Pixel nicht greift.
+         * Bei einer min-Breitenangabe wird diese um einen Pixel unterschritten,
+         * exakte oder max-Breitenangaben werden um einen Pixel überschritten.
+         * @param {CSSMediaRule} mediaRule - Media Query
+         * @param {int} widthIndex - Vorkommen der Breitenangabe
+         * @param {int} width - px-Wert der Breitenangabe
+         * @returns {number}
+         */
+        var getToggleWidth = function(mediaRule, widthIndex, width){
+            if(isMinWidthProperty(mediaRule, widthIndex)){
+                // Minimale Angabe
+                // - um die Media Query zu deaktivieren muss diese unterschritten werden
+                return Math.max(0, --width);
+            } else {
+                // maximale oder exakte Breitenangabe
+                // - um die Media Query zu deaktivieren muss/kann diese überschritten werden
+                return ++width;
+            }
+        };
+
+        // Liste initialisieren
+        data.widthProperties = [];
+        // Elemente müssen so abgelaufen werden, da die MediaList neben der Liste noch weitere Attribute enthält
+        for(var i=0; i<mediaList.length; i++) {
+            var mediaRule = mediaList[i],
+                widthIndex = mediaRule.indexOf(WIDTH_PROPERTY_PREFIX);
+            addWidthProperties(data, mediaRule, widthIndex);
         }
-        return width;
     };
 
     /**
@@ -79,7 +138,7 @@ function(){
      * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
      */
     var addSpecificInformation = function(data, rule){
-        data.mediaQueryWidth = getMediaQueryWidth(rule);
+        addMediaQueryWidthAttributes(data, rule.media);
         data.selector = getMediaRuleSelectorValue(rule);
         data.media = rule.media;
     };
