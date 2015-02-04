@@ -1,5 +1,5 @@
 require([
-    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config', 'csCommons'
+    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
 ],
 /**
  * Content Script zur Verarbeitung der aktuellen Media Angaben.
@@ -14,7 +14,7 @@ require([
  * @param {module} config - config-Modul
  * @see module:config
  */
-function($, matchMedia, styleSheetParser, extension, config, csCommons){
+function($, matchMedia, styleSheetParser, extension, config){
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
      */

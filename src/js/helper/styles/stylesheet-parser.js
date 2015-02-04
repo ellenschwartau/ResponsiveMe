@@ -120,7 +120,6 @@ function($, tools, mediaQueryParser){
      * @return {Array}
      */
     var getMediaQueries = function(){
-        console.log(getCssRules(CSS_MEDIA_RULE_TYPE));
         return getCssRules(CSS_MEDIA_RULE_TYPE);
     };
 

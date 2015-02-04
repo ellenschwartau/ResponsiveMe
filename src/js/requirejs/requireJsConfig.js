@@ -10,8 +10,6 @@ var requireJsConfig = {
         aceLanguageTools: 'libs/ace/ext-language_tools',
         // Hintergrundseite
         backgroundAccess: 'background/background-access',
-        // Content Scripts
-        csCommons: 'contentScripts/cs-commons',
         // Konfiguration
         config: 'config',
         // Helper

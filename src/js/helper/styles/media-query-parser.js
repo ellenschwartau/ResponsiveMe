@@ -35,7 +35,6 @@ function($, tools){
      * data.mediaQueryToggleWidth: Breitenangabe, ab der die Media Query gerade nicht greift
      * @param {json} data  - bisherig gesammelte Daten zur Regel
      * @param {MediaList} mediaList - Liste der Media Angaben in einer Media Query
-     * // TODO TEST
      */
     var addMediaQueryWidthAttributes = function(data, mediaList) {
         /**

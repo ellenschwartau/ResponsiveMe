@@ -49,11 +49,31 @@ function($, extension, config){
     };
 
     /**
+     * Berechnet die benötigten Größen erneut, wenn die Hintergrundseite aktualisiert werden soll.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {MessageSender} sender - Enthält Informationen über den Absender
+     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
+     */
+    var handleUpdateBackgroundPageMessage = function(request, sender, sendResponse){
+        updateAvailBrowserSize();
+    };
+
+    /**
+     * Behandelt die Nachrichten, die an das Content Script gesendet werden.
+     */
+    var handleMessages = function() {
+        extension.handleMessage(config.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
+    };
+
+    /**
      * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
      */
     var init = function(){
         updateBrowserSize();
         updateBrowserSizeOnResize();
         updateAvailBrowserSize();
+        handleMessages();
     }();
 });

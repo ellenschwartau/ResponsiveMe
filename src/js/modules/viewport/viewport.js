@@ -34,7 +34,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
         $switchOrientationButton,        // Button zum Ändern der Orientierung
         MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
-            "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
+            "Für eine Animation müssen alle Felder ausgefüllt werden.",
         sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
         MIN_VALUE_SIZE_SCROLLBARS = 1,   // Mindestwert zum Skalieren des Browsers
         UNIT_PX = "px",                  // String zur Anzeige der Einheit px
@@ -202,6 +202,14 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
+     * Prüft, ob Informationen zur Animation fehlen.
+     * @returns {boolean}
+     */
+    var isAnimationDataMissing = function(){
+        return $animationStart.val() === "" || $animationEnd.val() === "" || $animationTimes.val() === "";
+    };
+
+    /**
      * Initialisiert die Animation des Viewports.
      * Bei Betätigung des Animations-Buttons werden die benötigten Daten:
      * - Start-Breite
@@ -212,24 +220,33 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die Anzeige des Aktuell auf dem Schieberegler der Zeitangabe eingestellten Wertes wird initialisiert.
      */
     var initAnimation = function() {
-        // TODO Bild in Doku aktualisieren?
         // Anzeige des Zeitwertes initialiseren
         showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), UNIT_S);
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
-            // Angaben auslesen
-            var startPx = getAnimationStartWidth(),
-                endPx = getAnimationEndWidth(),
-                times = getAnimationTimes(),
-                duration = getAnimationDuration();
-            if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
-                // Bei fehlenden Angaben eine Fehlermeldung ausgeben // TODO kein alert sondern einfach im Popup anzeigen
-                alert(MSG_ANIMATION_DATA_MISSING);
+            if(isAnimationDataMissing()) {
+                // Bei fehlenden Angaben eine Fehlermeldung ausgeben
+                showMsgAnimationDataMissing();
             } else {
-                // Animation starten
+                // Angaben parsen und Animation starten
+                var startPx = getAnimationStartWidth(),
+                    endPx = getAnimationEndWidth(),
+                    times = getAnimationTimes(),
+                    duration = getAnimationDuration();
                 viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
             }
         });
+    };
+
+    /**
+     * Blendet eine Fehlermeldung unterhalb der Animation-Buttons ein.
+     */
+    var showMsgAnimationDataMissing = function(){
+        var $msg = $("<span class='warning'>" + MSG_ANIMATION_DATA_MISSING + "</span>");
+        $animationButton.after($msg);
+        setTimeout(function(){
+            $msg.hide();
+        }, 3500);
     };
 
     /**
