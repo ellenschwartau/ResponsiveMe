@@ -92,7 +92,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
         showScrollBarValue($scrollbar, $scrollbar.next(), UNIT_PX);
         $scrollbar.change(function() {
-            var value = tools.parser.parseIntVal($(this).val());
+            var value = tools.parser.parseIntVal($(this));
             if(changeWidth) {
                 viewportSize.changeWidth(value, sizesContainBrowserOffset);
             }

@@ -22,7 +22,6 @@ define([
  */
 function($, visualizeElements, localStorage, tools) {
     var $contentWrapper,        // Parent Element des Grid Contents
-        $moduleHeading,         // Überschrift des Moduls
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
         $gridColor,             // Eingabe-Feld zu Angabe der Darstellungsfarbe
