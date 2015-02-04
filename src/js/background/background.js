@@ -68,7 +68,7 @@ function($, matchMedia, extension, config){
      */
     var handleCurrentMediaMessage = function(request){
         mediaList = request.data.mediaList;
-        exportBrowserSizeToBackgroundPage();
+        exportMediaListToBackgoundPage();
     };
 
     /**
