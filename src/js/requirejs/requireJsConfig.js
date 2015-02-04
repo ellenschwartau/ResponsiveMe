@@ -38,7 +38,8 @@ var requireJsConfig = {
         csMediaQueries: 'contentScripts/cs-media-queries',
         // Style-Sheets
         stylesheetParser: 'helper/styles/stylesheet-parser',
-        styleEditor: 'helper/styles/style-editor'
+        styleEditor: 'helper/styles/style-editor',
+        mediaQueryParser: 'helper/styles/media-query-parser'
     }
 };
 require.config(requireJsConfig);
