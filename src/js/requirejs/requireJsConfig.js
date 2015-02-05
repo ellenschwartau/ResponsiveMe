@@ -13,10 +13,19 @@ var requireJsConfig = {
         // Konfiguration
         config: 'config',
         // Helper
-        extension: 'helper/extension',
         codeEditorHelper: 'helper/ace-helper',
         tools: 'helper/tools',
         localStorage: 'helper/local-storage',
+        // Kapselung der Erweiterung
+        extension: 'helper/extension/extension',
+        extensionEvents: 'helper/extension/extension-events',
+        extensionMessagePassing: 'helper/extension/extension-message-passing',
+        extensionStorage: 'helper/extension/extension-storage',
+        extensionComponents: 'helper/extension/extension-components',
+        // Style-Sheets
+        stylesheetParser: 'helper/styles/stylesheet-parser',
+        styleEditor: 'helper/styles/style-editor',
+        mediaQueryParser: 'helper/styles/media-query-parser',
         // Popup
         popup: 'popup/popup',
         modules: 'popup/module',
@@ -35,11 +44,7 @@ var requireJsConfig = {
         allMediaQueries: 'modules/mediaQueries/all-media-queries',
         matchMedia: 'modules/mediaQueries/match-media',
         activeMediaQueries: 'modules/mediaQueries/active-media-queries',
-        csMediaQueries: 'contentScripts/cs-media-queries',
-        // Style-Sheets
-        stylesheetParser: 'helper/styles/stylesheet-parser',
-        styleEditor: 'helper/styles/style-editor',
-        mediaQueryParser: 'helper/styles/media-query-parser'
+        csMediaQueries: 'contentScripts/cs-media-queries'
     }
 };
 require.config(requireJsConfig);
