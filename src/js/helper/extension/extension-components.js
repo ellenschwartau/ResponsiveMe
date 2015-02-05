@@ -1,7 +1,7 @@
 define([
 ],
 /**
- * Kapselt Funktionen zum Auslesen oder Ausführen von Operationen auf bestimmten Componenten der Erweiterung.
+ * Kapselt Funktionen zum Auslesen oder Ausführen von Operationen auf bestimmten Komponenten der Erweiterung.
  * @exports extensionComponents
  * @returns {{getBackgroundPage: Function, getCurrentWindow: Function}}
  */
