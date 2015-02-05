@@ -58,6 +58,7 @@ function($, extension, config){
      */
     var handleUpdateBackgroundPageMessage = function(request, sender, sendResponse){
         updateAvailBrowserSize();
+        updateBrowserSize();
     };
 
     /**

@@ -118,6 +118,22 @@ function(){
     };
 
     /**
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderer Tab fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var onAttachedTab = function(callback){
+        chrome.tabs.onAttached.addListener(callback);
+    };
+
+    /**
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderes Fenster fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var onFocusChangedWindow = function(callback){
+        chrome.windows.onFocusChanged.addListener(callback);
+    };
+
+    /**
      * Liest das aktuelle Fenster aus und reicht dieses als Parameter
      * an die übergebene Funktion weiter.
      * @param {function} callback - Funktion, die Operationen auf dem aktuellen Fenster aufruft
@@ -139,6 +155,8 @@ function(){
         getStorageValue: getStorageValue,
         removeStorageValue: removeStorageValue,
         onActivatedTab: onActivatedTab,
-        getCurrentWindow: getCurrentWindow
+        getCurrentWindow: getCurrentWindow,
+        onAttachedTab: onAttachedTab,
+        onFocusChangedWindow: onFocusChangedWindow
     };
 });

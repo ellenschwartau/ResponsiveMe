@@ -83,15 +83,23 @@ function($, matchMedia, extension, config){
     };
 
     /**
-     * Sendet beim Wechsel des aktiven Tabs die Nachricht, dass die Variablen der Hintergundseite aktualisiert werden
-     * sollen.
+     * Sendet die Nachricht, dass die Hintergrundseite aktualisiert werden muss.
+     */
+    var triggerUpdateBackgroundPage = function(){
+        extension.sendMessageToTab({
+            type: config.messageTypes.updateBackgroundPage
+        });
+    };
+
+    /**
+     * Sendet zu bestimmten Events die Nachricht, dass die Variablen der Hintergundseite aktualisiert werden
+     * sollen. Diese Nachricht wird gesendet, wenn der aktive Tab gewechselt wird, oder ein Tab in ein Fenster
+     * hineingezogen wird.
      */
     var registerUpdateBackgroundPageMessage = function(){
-        extension.onActivatedTab(function(){
-            extension.sendMessageToTab({
-                type: config.messageTypes.updateBackgroundPage
-            });
-        });
+        extension.onActivatedTab(triggerUpdateBackgroundPage);
+        extension.onAttachedTab(triggerUpdateBackgroundPage);
+        extension.onFocusChangedWindow(triggerUpdateBackgroundPage);
     };
 
     /**
