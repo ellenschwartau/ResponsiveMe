@@ -135,6 +135,10 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         if(style == "") {
             removeMediaQuery(id);
         }
+        // Aktuell greifende Media Queries aktualisieren
+        extension.sendMessageToTab({
+            type: config.messageTypes.updateActiveMediaQueries
+        });
     };
 
     /**

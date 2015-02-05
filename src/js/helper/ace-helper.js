@@ -102,11 +102,16 @@ function($){
      * @param {string} id - CSS-ID des Editors
      */
     var removeEditorFromList = function(id) {
+        var removeItem;
         $.each(editors, function(i, editorData){
             if(editorData.id === id) {
-                editors.splite(i, 1);
+                // zwischenmerken, da beim durchlaufen nicht einfach aus dem Array gelöscht werden kann
+                removeItem = i;
             }
         });
+        if(removeItem != undefined){
+            editors.splice(removeItem, 1);
+        }
     };
 
     /**

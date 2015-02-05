@@ -13,6 +13,8 @@ require([
  * @see module:extension
  * @param {module} config - config-Modul
  * @see module:config
+ * @param {module} config - config-Modul
+ * @see module:config
  */
 function($, matchMedia, styleSheetParser, extension, config){
     /**
@@ -63,11 +65,24 @@ function($, matchMedia, styleSheetParser, extension, config){
     };
 
     /**
+     * Berechnet die aktuell greifenden Media Queries erneut, wenn explizit ein Request hierfür gesendet wird.
+     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
+     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
+     * @param {json} request.data - zusätzliche Daten der Nachricht
+     * @param {MessageSender} sender - Enthält Informationen über den Absender
+     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
+     */
+    var handleUpdateActiveMedaQueries = function(request, sender, sendResponse){
+        updateMediaList();
+    };
+
+    /**
      * Behandelt die Nachrichten, die an das Content Script gesendet werden.
      */
     var handleMessages = function() {
         extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
         extension.handleMessage(config.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
+        extension.handleMessage(config.messageTypes.updateActiveMediaQueries, handleUpdateActiveMedaQueries);
     };
 
     /**

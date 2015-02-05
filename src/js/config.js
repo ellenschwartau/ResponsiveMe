@@ -32,7 +32,8 @@ function() {
             displayCurrentMediaList: "displayCurrentMediaList",
             updateBrowserSize: "updateBrowserSize",
             updateAvailBrowserSize: "updateAvailBrowserSize",
-            updateBackgroundPage: "updateBackgroundPage"
+            updateBackgroundPage: "updateBackgroundPage",
+            updateActiveMediaQueries: "updateActiveMediaQueries"
         };
 
     return {

@@ -1,5 +1,5 @@
 define([
-    'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor'
+    'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor', 'extension', 'config'
 ],
 /**
  * Modul zum Erstellen und speichern einer neuen Media Query.
@@ -13,9 +13,11 @@ define([
  * @see module:codeEditorHelper
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
+ * @param {module} extension - extension-Modul
+ * @see module:extension
  * @returns {{init: Function, save: Function}}
  */
-function($, stylesheetParser, aceHelper, styleEditor) {
+function($, stylesheetParser, aceHelper, styleEditor, extension, config) {
     /**
      * Stößt das Speichern einer neuen Media Query an.
      * @param {string} id - ID des Code Editors, das die Style-Angaben enthält
@@ -24,7 +26,11 @@ function($, stylesheetParser, aceHelper, styleEditor) {
         var style = aceHelper.getEditorValue(id),
             editorData = aceHelper.getEditorData(id);
         if(style != "" && editorData != undefined) {
+            // Speichern und aktuell freigende Media Queries Aktualisieren
             styleEditor.triggerInsertStyle(style, editorData.indexStyleSheet);
+            extension.sendMessageToTab({
+                type: config.messageTypes.updateActiveMediaQueries
+            });
         }
     };
 
