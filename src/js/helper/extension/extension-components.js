@@ -29,7 +29,6 @@ function(){
      * Führt Javascript auf der geöffneten Seite aus.
      * @param {string} code - Code, der ausgeführt werden soll
      * @param {function} callback - Funktion, die das Ergebnis verarbeitet
-     * // TODO Doku Tab noch null?
      */
     var executeScriptCodeInTab = function(code, callback) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
