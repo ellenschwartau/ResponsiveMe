@@ -210,6 +210,15 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
+     * Methode zur Abfrage, ob aktuell eine Animation läuft.
+     * Wird überschrieben, wenn eine Animation gestartet wird.
+     * @returns {boolean}
+     */
+    var isAnimationRunning = function(){ // Methode zur Abfrage ob aktuell eine Animation läuft
+        return false;
+    };
+
+    /**
      * Initialisiert die Animation des Viewports.
      * Bei Betätigung des Animations-Buttons werden die benötigten Daten:
      * - Start-Breite
@@ -224,16 +233,19 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), UNIT_S);
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
-            if(isAnimationDataMissing()) {
-                // Bei fehlenden Angaben eine Fehlermeldung ausgeben
-                showMsgAnimationDataMissing();
-            } else {
-                // Angaben parsen und Animation starten
-                var startPx = getAnimationStartWidth(),
-                    endPx = getAnimationEndWidth(),
-                    times = getAnimationTimes(),
-                    duration = getAnimationDuration();
-                viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
+            // Nur eine Animation Starten wenn gerade keine andere läuft
+            if(!isAnimationRunning()){
+                if(isAnimationDataMissing()) {
+                    // Bei fehlenden Angaben eine Fehlermeldung ausgeben
+                    showMsgAnimationDataMissing();
+                } else {
+                    // Angaben parsen und Animation starten
+                    var startPx = getAnimationStartWidth(),
+                        endPx = getAnimationEndWidth(),
+                        times = getAnimationTimes(),
+                        duration = getAnimationDuration();
+                    isAnimationRunning = viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
+                }
             }
         });
     };

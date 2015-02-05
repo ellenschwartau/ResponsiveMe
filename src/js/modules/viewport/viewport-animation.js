@@ -22,7 +22,8 @@ function($, viewportSize) {
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
         // Kaspeln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
-        var start,                      // Start-Breite
+        var isAnimating = true,  // Angabe ob zu Zeit eine Animation läuft
+            start,                      // Start-Breite
             end,                        // End-Breite
             duration,                   // Zur Verfügung stehende Zeit
             wantedCalls,                // gewünschte Wiederholungen
@@ -33,6 +34,14 @@ function($, viewportSize) {
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
             CALL_ANIMATION_EVERY_X_MS = 10;              // Anagebe, wie oft die Animationsfunktion aufgerufen werden soll
+
+        /**
+         * Liefert den Status, ob eine Animation gerade läuft.
+         * @returns {boolean}
+         */
+        var isAnimationRunning = function(){
+            return isAnimating;
+        };
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
@@ -54,6 +63,8 @@ function($, viewportSize) {
         var checkForRestart = function () {
             if (doneCalls < wantedCalls) {
                 animate(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
+            } else {
+                isAnimating = false;
             }
         };
 
@@ -138,6 +149,9 @@ function($, viewportSize) {
             doneAnimationCalls,
             containsBrowserOffset
         );
+
+        // TODO Doku
+        return isAnimationRunning;
     };
 
     return {
