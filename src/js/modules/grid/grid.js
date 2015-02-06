@@ -15,7 +15,7 @@ define([
  * @param {module} visualizeElements - visualizeElements-Modul
  * @param {visualizeElements} visualizeElements - visualizeElements-Modul
  * @param {module} localStorage - localStorage-Modul
- * @see modules:localStorage
+ * @see module:localStorage
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @returns {{init: Function}}

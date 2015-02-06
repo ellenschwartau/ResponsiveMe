@@ -11,7 +11,8 @@
       "./modules",
       "./popup",
       "./requirejs",
-      "./main.js"
+      "./main.js",
+      "./config.js"
     ],
     "includePattern": ".+\\.js(doc)?$"
   },

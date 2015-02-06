@@ -19,7 +19,7 @@ define([
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @param {module} localStorage - localStorage-Modul
- * @see modules:localStorage
+ * @see module:localStorage
  * @returns {{init: Function}}
  */
 function($, config, extension, viewportSize, viewportAnimation, backgroundAccess, tools, localStorage) {

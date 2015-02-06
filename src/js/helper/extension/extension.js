@@ -7,13 +7,13 @@ define([
  * und kapselt die Funktionen der verschiedenen extension-*-Hilfsmodule.
  * @exports extension
  * @param {module} extensionEvents - extensionEvents-Modul
- * @see modules:extensionEvents
+ * @see module:extensionEvents
  * @param {module} extensionMessagePassing - extensionMessagePassing-Modul
- * @see modules:extensionMessagePassing
+ * @see module:extensionMessagePassing
  * @param {module} extensionStorage - extensionStorage-Modul
- * @see modules:extensionStorage
+ * @see module:extensionStorage
  * @param {module} extensionComponents - extensionComponents-Modul
- * @see modules:extensionComponents
+ * @see module:extensionComponents
  * @returns {{sendMessage: Function, sendMessageToTab: Function, sendMessageToTabWithCb: Function, handleMessage: Function, executeScriptCode: Function, getBackgroundPage: Function, saveStorageValue: Function, getStorageValue: Function, removeStorageValue: Function, getCurrentWindow: Function, onActivatedTab: (*|exports.onActivatedTab), onAttachedTab: (*|exports.onAttachedTab), onFocusChangedWindow: (*|exports.onFocusChangedWindow)}}
  */
 function(extensionEvents, extensionMessagePassing, extensionStorage, extensionComponents){

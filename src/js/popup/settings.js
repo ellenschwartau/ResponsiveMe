@@ -1,5 +1,5 @@
 define([
-    'jquery', 'modules', 'localStorage', 'tools'
+    'jquery', 'modules', 'tools'
 ],
 /**
  * Die settings.js übernimmt das Initialisieren der Einstellungen und das Behandeln der Änderungen an den
@@ -8,14 +8,11 @@ define([
  * @exports settings
  * @param {Object} $ - JQuery
  * @param {module} modules - modules-Modul
- * @see module:modules
- * @param {module} localStorage - localStorage-Modul
- * @see modules:localStorage
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @returns {{init: Function}}
  */
-function($, modules, localStorage, tools) {
+function($, modules, tools) {
     var $content = $("#popup-content"),                             // Wrapper-Element für den Content
         $footer = $("#popup-footer"),                               // Wrapper-Element für den Footer
         $settings = $footer.find(".settings"),                      // Formular, das die Settings enthält

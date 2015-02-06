@@ -9,7 +9,7 @@ define([
  * @param {module} tools - tools-Module
  * @see module:tools
  * @param {module} mediaQueryParser - mediaQueryParser-Modul
- * @see modules:mediaQueryParser
+ * @see module:mediaQueryParser
  * @returns {{getMediaQueries: Function, getEmptyCssRuleJson: Function, getMediaList: Function}}
  */
 function($, tools, mediaQueryParser){

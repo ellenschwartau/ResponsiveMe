@@ -14,7 +14,7 @@ define([
  * @param {module} grid - grid-Modul
  * @see module:grid
  * @param {module} localStorage - localStorage-Modul
- * @see modules:localStorage
+ * @see module:localStorage
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
 function($, config, viewport, mediaQueries, grid, localStorage) {
