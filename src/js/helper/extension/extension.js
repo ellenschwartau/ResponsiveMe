@@ -28,6 +28,7 @@ function(extensionEvents, extensionMessagePassing, extensionStorage, extensionCo
         sendMessageToTab: extensionMessagePassing.sendMessageToTab,
         sendMessageToTabWithCb: extensionMessagePassing.sendMessageToTabWithCb,
         handleMessage: extensionMessagePassing.handleMessage,
+        messageTypes: extensionMessagePassing.messageTypes,
         onActivatedTab: extensionEvents.onActivatedTab,
         onAttachedTab: extensionEvents.onAttachedTab,
         onFocusChangedWindow: extensionEvents.onFocusChangedWindow

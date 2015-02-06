@@ -1,5 +1,5 @@
 define([
-    'jquery', 'extension', 'config', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
+    'jquery', 'extension', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
 ],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
@@ -11,8 +11,6 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} extension - extensionModul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
  * @param {module} stylesheetParser - stylesheetParser-Modul
  * @see module:stylesheetParser
  * @param {module} viewportSize - viewportSize-Modul
@@ -23,7 +21,7 @@ define([
  * @see module:styleEditor
  * @returns {{init: Function, show: Function, get: Function}}
  */
-function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleEditor) {
+function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
     var $mediaQueries,                                  // Container für die angezeigten Media Queries
         $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         ID_PREFIX_MEDIA_QUERY = "media-query-",         // Prefix der IDs der Media Query Elemente
@@ -137,7 +135,7 @@ function($, extension, config, stylesheetParser, viewportSize, aceHelper, styleE
         }
         // Aktuell greifende Media Queries aktualisieren
         extension.sendMessageToTab({
-            type: config.messageTypes.updateActiveMediaQueries
+            type: extension.messageTypes.updateActiveMediaQueries
         });
     };
 

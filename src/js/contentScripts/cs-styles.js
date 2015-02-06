@@ -1,5 +1,5 @@
 require([
-    'extension', 'config', 'styleEditor'
+    'extension', 'styleEditor'
 ],
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
@@ -7,12 +7,10 @@ require([
  * @exports csStyles
  * @param {module} extension - extensionModul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
  */
-function(extension, config,  styleEditor) {
+function(extension, styleEditor) {
     /**
      * Fügt eine neue CSS-Regel hinzu.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
@@ -58,8 +56,8 @@ function(extension, config,  styleEditor) {
      * Behandelt die Nachrichten, die an das Content Script gesendet werden.
      */
     var handleMessages = function() {
-        extension.handleMessage(config.messageTypes.insertStyle, handleInsertStyle);
-        extension.handleMessage(config.messageTypes.updateStyle, handleUpdateStyle);
-        extension.handleMessage(config.messageTypes.deleteStyle, handleDeleteStyle);
+        extension.handleMessage(extension.messageTypes.insertStyle, handleInsertStyle);
+        extension.handleMessage(extension.messageTypes.updateStyle, handleUpdateStyle);
+        extension.handleMessage(extension.messageTypes.deleteStyle, handleDeleteStyle);
     }();
 });

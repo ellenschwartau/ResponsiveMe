@@ -1,5 +1,5 @@
 define([
-    'jquery', 'allMediaQueries', 'newMediaQuery', 'activeMediaQueries', 'config', 'extension'
+    'jquery', 'allMediaQueries', 'newMediaQuery', 'activeMediaQueries', 'extension'
 ],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
@@ -14,13 +14,11 @@ define([
  * @see module:newMediaQuery
  * @param {module} activeMediaQueries - activeMediaQueries-Modul
  * @see module:activeMediaQueries
- * @param {module} config - config-Modul
- * @see module:config
  * @param {module} extension - extensionModul
  * @see module:extension
  * @returns {{init: Function, get: *}}
  */
-function($, allMediaQueries, newMediaQuery, activeMediaQueries, config, extension) {
+function($, allMediaQueries, newMediaQuery, activeMediaQueries, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
         EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
@@ -32,7 +30,7 @@ function($, allMediaQueries, newMediaQuery, activeMediaQueries, config, extensio
         $showMediaQueriesButton.click(function(){
             // Media Queries von Content Script abfragen
             extension.sendMessageToTabWithCb({
-                    type: config.messageTypes.showMediaQueries
+                    type: extension.messageTypes.showMediaQueries
                 },
                 // erhaltene Antwort verarbeiten und Media Queries anzeigen
                 allMediaQueries.show

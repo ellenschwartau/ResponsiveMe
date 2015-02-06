@@ -1,18 +1,16 @@
 define([
-    'config', 'extension'
+    'extension'
 ],
 /**
  * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets bereit,
  * die auf einer Seite geladen werden.
  * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
  * @exports styleEditor
- * @param {module} config - config-Modul
- * @see module:config
  * @param {module} extension - extensionModul
  * @see module:extension
  * @returns {{insert: Function, remove: Function, update: Function, triggerInsertStyle: Function, triggerUpdateStyle: Function, triggerDeleteStyle: Function}}
  */
-function(config, extension){
+function(extension){
     /**
      * Prüft, ob ein angefordertes Style Sheet vorhanden ist.
      * @param {StyleSheetList} styleSheets - Liste vorhandener Style Sheets
@@ -102,7 +100,7 @@ function(config, extension){
      */
     var triggerInsertStyle = function(style, indexStyleSheet) {
         extension.sendMessageToTab({
-            type: config.messageTypes.insertStyle,
+            type: extension.messageTypes.insertStyle,
             data: {
                 style: style,
                 indexStyleSheet: indexStyleSheet
@@ -118,7 +116,7 @@ function(config, extension){
      */
     var triggerUpdateStyle = function(style, indexStyleSheet, indexRule) {
         extension.sendMessageToTab({
-            type: config.messageTypes.updateStyle,
+            type: extension.messageTypes.updateStyle,
             data: {
                 style: style,
                 indexStyleSheet: indexStyleSheet,
@@ -133,7 +131,7 @@ function(config, extension){
      */
     var triggerDeleteStyle = function(indexStyleSheet) {
         extension.sendMessageToTab({
-            type: config.messageTypes.deleteStyle,
+            type: extension.messageTypes.deleteStyle,
             data: {
                 indexStyleSheet: indexStyleSheet
             }

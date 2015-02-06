@@ -1,5 +1,5 @@
 require([
-    'extension', 'visualizeElements', 'config'
+    'extension', 'visualizeElements'
 ],
 /**
  * Javascript, dass auf aufgerufene Seiten injiziert wird.
@@ -9,10 +9,8 @@ require([
  * @see module:extension
  * @param {module} visualizeElements - visualizeElements-Modul
  * @see module:visualizeElements
- * @param {module} config - config-Modul
- * @see module:config
  */
-function(extension, visualizeElements, config) {
+function(extension, visualizeElements) {
     /**
      * Visualisiert die gewünschten Elemente durch eine Umrandung.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
@@ -30,6 +28,6 @@ function(extension, visualizeElements, config) {
      * Behandelt die Nachrichten, die an das Content Script gedenset werden.
      */
     var handleMessages = function() {
-        extension.handleMessage(config.messageTypes.showElements, handleShowElements);
+        extension.handleMessage(extension.messageTypes.showElements, handleShowElements);
     }();
 });

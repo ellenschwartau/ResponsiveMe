@@ -1,5 +1,5 @@
 require([
-    'jquery', 'matchMedia', 'stylesheetParser', 'extension', 'config'
+    'jquery', 'matchMedia', 'stylesheetParser', 'extension'
 ],
 /**
  * Content Script zur Verarbeitung der aktuellen Media Angaben.
@@ -11,12 +11,8 @@ require([
  * @see module:stylesheetParser
  * @param {module} extension - extension-Modul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
- * @param {module} config - config-Modul
- * @see module:config
  */
-function($, matchMedia, styleSheetParser, extension, config){
+function($, matchMedia, styleSheetParser, extension){
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
      */
@@ -31,7 +27,7 @@ function($, matchMedia, styleSheetParser, extension, config){
      */
     var updateMediaList = function() {
         extension.sendMessage({
-            type: config.messageTypes.displayCurrentMediaList,
+            type: extension.messageTypes.displayCurrentMediaList,
             data: {
                 mediaList: matchMedia.getMatchedMedia()
             }
@@ -80,9 +76,9 @@ function($, matchMedia, styleSheetParser, extension, config){
      * Behandelt die Nachrichten, die an das Content Script gesendet werden.
      */
     var handleMessages = function() {
-        extension.handleMessage(config.messageTypes.showMediaQueries, handleShowMediaQueries);
-        extension.handleMessage(config.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
-        extension.handleMessage(config.messageTypes.updateActiveMediaQueries, handleUpdateActiveMedaQueries);
+        extension.handleMessage(extension.messageTypes.showMediaQueries, handleShowMediaQueries);
+        extension.handleMessage(extension.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
+        extension.handleMessage(extension.messageTypes.updateActiveMediaQueries, handleUpdateActiveMedaQueries);
     };
 
     /**

@@ -1,5 +1,5 @@
 require([
-    'jquery', 'extension', 'config'
+    'jquery', 'extension'
 ],
 /**
  * Content Script zur Ermittlung der aktuellen Browsergröße.
@@ -7,10 +7,8 @@ require([
  * @param {Object} $ - JQuery
  * @param {module} extension - extension-Modul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
  */
-function($, extension, config){
+function($, extension){
     /**
      * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
      */
@@ -25,7 +23,7 @@ function($, extension, config){
      */
     var updateBrowserSize = function() {
         extension.sendMessage({
-            type: config.messageTypes.updateBrowserSize,
+            type: extension.messageTypes.updateBrowserSize,
             data: {
                 innerBrowserHeight: window.innerHeight,
                 outerBrowserHeight: window.outerHeight,
@@ -40,7 +38,7 @@ function($, extension, config){
      */
     var updateAvailBrowserSize = function(){
         extension.sendMessage({
-            type: config.messageTypes.updateAvailBrowserSize,
+            type: extension.messageTypes.updateAvailBrowserSize,
             data: {
                 availBrowserHeight: window.screen.availHeight,
                 availBrowserWidth: window.screen.availWidth
@@ -65,7 +63,7 @@ function($, extension, config){
      * Behandelt die Nachrichten, die an das Content Script gesendet werden.
      */
     var handleMessages = function() {
-        extension.handleMessage(config.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
+        extension.handleMessage(extension.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
     };
 
     /**

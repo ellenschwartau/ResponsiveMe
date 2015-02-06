@@ -1,5 +1,5 @@
 require([
-    'jquery', 'matchMedia', 'extension', 'config'
+    'jquery', 'matchMedia', 'extension'
 ],
 /**
  * Hintergrundseite der Erweiterung.
@@ -11,10 +11,8 @@ require([
  * @see module:matchMedia
  * @param {module} extension - extension-Modul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
  */
-function($, matchMedia, extension, config){
+function($, matchMedia, extension){
     var outerBrowserHeight,
         innerBrowserHeight,
         outerBrowserWidth,
@@ -86,7 +84,7 @@ function($, matchMedia, extension, config){
      */
     var triggerUpdateBackgroundPage = function(){
         extension.sendMessageToTab({
-            type: config.messageTypes.updateBackgroundPage
+            type: extension.messageTypes.updateBackgroundPage
         });
     };
 
@@ -150,9 +148,9 @@ function($, matchMedia, extension, config){
      */
     var init = function(){
         registerUpdateBackgroundPageMessage();
-        extension.handleMessage(config.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
-        extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
-        extension.handleMessage(config.messageTypes.updateAvailBrowserSize, handleAvailBrowserSizeMessage);
+        extension.handleMessage(extension.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
+        extension.handleMessage(extension.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
+        extension.handleMessage(extension.messageTypes.updateAvailBrowserSize, handleAvailBrowserSizeMessage);
         exportValuesToBackgroundPage();
     }();
 });

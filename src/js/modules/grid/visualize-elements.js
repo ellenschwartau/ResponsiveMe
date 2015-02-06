@@ -8,11 +8,9 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} extension - extension-Modul
  * @see module:extension
- * @param {module} config - config-Modul
- * @see module:config
  * @returns {{triggerShowElements: Function, show: Function}}
  */
-function($, extension, config){
+function($, extension){
     /**
      * Stößt die Anzeige der Elemente, die über die Selektoren identifiziert werden an.
      * @param {string[]} selectors -  Selektoren der Elemente, die angezeigt werden sollen
@@ -21,7 +19,7 @@ function($, extension, config){
      */
     var triggerShowElements = function(selectors, color, width) {
         extension.sendMessageToTab({
-            type: config.messageTypes.showElements,
+            type: extension.messageTypes.showElements,
             data: {
                 selectors: selectors,
                 color: color,

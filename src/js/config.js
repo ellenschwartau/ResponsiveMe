@@ -20,26 +20,11 @@ function() {
             {name: "800x600", width: 800, height: 600},
             {name: "640x960", width: 640, height: 960},
             {name: "320x480", width: 320, height: 480}
-        ],
-        // TODO in ein Message Handling Modul, oder mit in extension.js?
-        messageTypes = {            // Type, zur Identifikation der Nachrichten, die zwischen
-            showElements: "showElements",    // den Komponenten der Erweiterung verschickt werden
-            showMediaQueries: "showMediaQueries",
-            windowResize: "windowResize",
-            updateStyle: "updateStyle",
-            insertStyle: "insertStyle",
-            deleteStyle: "deleteStyle",
-            displayCurrentMediaList: "displayCurrentMediaList",
-            updateBrowserSize: "updateBrowserSize",
-            updateAvailBrowserSize: "updateAvailBrowserSize",
-            updateBackgroundPage: "updateBackgroundPage",
-            updateActiveMediaQueries: "updateActiveMediaQueries"
-        };
+        ];
 
     return {
         baseDir: baseDir,
         modules: modules,
-        resolutions: resolutions,
-        messageTypes: messageTypes
+        resolutions: resolutions
     };
 });

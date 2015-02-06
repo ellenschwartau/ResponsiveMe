@@ -288,7 +288,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Verarbeitung der Nachrichten beim Message Passing.
      */
     var handleMessages = function(){
-        extension.handleMessage(config.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
+        extension.handleMessage(extension.messageTypes.updateBrowserSize, handleCurrentBrowserSizeMessage);
     };
 
     /**

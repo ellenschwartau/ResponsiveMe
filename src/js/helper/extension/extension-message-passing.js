@@ -5,6 +5,19 @@ define([],
  * @returns {{sendMessageToTabWithCb: Function, sendMessageToTab: Function, sendMessage: Function, handleMessage: Function}}
  */
 function(){
+    var messageTypes = {                            // Type, zur Identifikation der Nachrichten, die zwischen
+        showElements: "showElements",               // den Komponenten der Erweiterung verschickt werden
+        showMediaQueries: "showMediaQueries",
+        windowResize: "windowResize",
+        updateStyle: "updateStyle",
+        insertStyle: "insertStyle",
+        deleteStyle: "deleteStyle",
+        displayCurrentMediaList: "displayCurrentMediaList",
+        updateBrowserSize: "updateBrowserSize",
+        updateAvailBrowserSize: "updateAvailBrowserSize",
+        updateBackgroundPage: "updateBackgroundPage",
+        updateActiveMediaQueries: "updateActiveMediaQueries"
+    };
     /**
      * Sendet eine Nachricht an den aktiven Tab und führt eine Funktion aus, wenn eine Response zurück kommt.
      * @param {json} data - Daten, die übergeben werden sollen
@@ -58,6 +71,7 @@ function(){
         sendMessageToTabWithCb: sendMessageToTabWithCb,
         sendMessageToTab: sendMessageToTab,
         sendMessage: sendMessage,
-        handleMessage: handleMessage
+        handleMessage: handleMessage,
+        messageTypes: messageTypes
     };
 });

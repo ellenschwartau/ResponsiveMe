@@ -49,8 +49,6 @@ function($, visualizeElements, localStorage, tools) {
      * Bei einem Klick auf den Button wird ein neues Input-Element vor dem Button hinzugefügt.
      */
     var initAddSelectorButton = function() {
-        // TODO Doku: Keine Delegated Events
-        // delegated Event Handling --> http://learn.jquery.com/events/event-delegation/l
         // Um Events bei Elementen zu registrieren, die nachgeladen werden und zum Zeitpunkt der Initialisierung
         // noch nicht vorhanden sind
         $addSelectorButton.click(addNewSelectorInput);
