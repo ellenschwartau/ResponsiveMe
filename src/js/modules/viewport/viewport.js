@@ -313,8 +313,10 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
             updateScrollbarValue($element, value, UNIT_S);
         });
         localStorage.readStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, function($element, value){
+            // inner/outer Switch und maximale Werte der Scrollbars aktualisieren
             $element.prop('checked', value);
-            // TODO eventuell muss hier noch ein bisschen was initialisiert werden, bzw. Callback für on off switch der das bei Änderung tut
+            sizesContainBrowserOffset = value;
+            updateMaxScaleValues();
         });
     };
 
