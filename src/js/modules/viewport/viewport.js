@@ -62,6 +62,34 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
+     * Aktualisiert die maximal-Werte der Scrollbars zum Skalieren des Browser
+     * und addiert oder subtrahiert dazu, je nach der Einstellung des innerOuterSwitch
+     * den Browser Offset.
+     */
+    var updateMaxScaleValues = function(){
+        var browserOffset = backgroundAccess.getBrowserOffset(),
+            curMaxWidth = $widthScrollBar.max,
+            curMaxHeight = $heightScrollBar.max;
+        /**
+         * Addiert oder subtrahiert je nach dem übergebenen Faktor den Browser Offset
+         * auf den maximalen Wert beider Scrollbars.
+         * @param {int} fact - Faktor mit dem der Browser Offset verrechnet wird
+         */
+        var update = function(fact){
+            $widthScrollBar.attr('max', curMaxWidth + fact * browserOffset.x);
+            $heightScrollBar.attr('max', curMaxHeight + fact *browserOffset.y);
+        };
+
+        if(sizesContainBrowserOffset){
+            // Browser Offset aufaddieren
+            update(1);
+        } else {
+            // Browser Offset abziehen
+            update(-1);
+        }
+    };
+
+    /**
      * Aktualisiert den Wert und die Anzeige einer Scrollbar
      * @param {$} $scrollbar - Scrollbar
      * @param {string} unit - Einheit
@@ -112,7 +140,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $scrollbar.mousemove(function() {
             // Anzeige aktualisieren, wenn die Maus darüber bewegt wird
             // (weniger komplex als auf Click + Mousemove, da es hierfür kein Event gibt)
-            $displayElement.html(tools.parser.parseIntVal($(this).val()) + unit);
+            $displayElement.html(tools.parser.parseIntVal($(this)) + unit);
         });
     };
 
