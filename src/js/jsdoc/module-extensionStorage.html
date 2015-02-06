@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: viewportAnimation</title>
+    <title>JSDoc: Module: extensionStorage</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: viewportAnimation</h1>
+    <h1 class="page-title">Module: extensionStorage</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Animiert die Breite eines Browserfensters.</div>
+            <div class="description">Kapselt Funktionen der Erweiterung zum Speichern, Auslesen und Bearbeiten von Daten in der chrome.storage.</div>
         
 
         
@@ -52,78 +52,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>$</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">JQuery</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>viewportSize</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">module</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">viewportSize-Modul</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -159,19 +87,12 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_viewport_viewport-animation.js.html">modules/viewport/viewport-animation.js</a>, <a href="modules_viewport_viewport-animation.js.html#line12">line 12</a>
+        <a href="helper_extension_extension-storage.js.html">helper/extension/extension-storage.js</a>, <a href="helper_extension_extension-storage.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-viewportSize.html">module:viewportSize</a></li>
-        </ul>
-    </dd>
     
 
     
@@ -234,14 +155,14 @@
 
     
 
-    <h4 class="name" id="~animateWidth"><span class="type-signature">(inner) </span>animateWidth<span class="signature">(animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getStorageValue"><span class="type-signature">(inner) </span>getStorageValue<span class="signature">(key, callback)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Animiert die Breite des Browsers.
+    Liefert einen gespeicherten Wert.
 </div>
 
 
@@ -277,13 +198,13 @@
 
         <tr>
             
-                <td class="name"><code>animationDuration</code></td>
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">int</span>
+<span class="param-type">string</span>
 
 
             
@@ -293,20 +214,20 @@
 
             
 
-            <td class="description last">zur Verfügung stehende Zeit</td>
+            <td class="description last">Schlüssel des auszulesenden Wertes</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>startWidth</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">int</span>
+<span class="param-type">function</span>
 
 
             
@@ -316,99 +237,7 @@
 
             
 
-            <td class="description last">Startbreite</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endWidth</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Endbreite</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>wantedAnimationCalls</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">gewollte Anzahl an Wiederholungen der Animation</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>doneAnimationCalls</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">getätigte Anzahl an Wiederholungen der Animation</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>containsBrowserOffset</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten</td>
+            <td class="description last">Funktion, die nach dem Auslesen ausgeführt werden soll</td>
         </tr>
 
     
@@ -449,7 +278,269 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_viewport_viewport-animation.js.html">modules/viewport/viewport-animation.js</a>, <a href="modules_viewport_viewport-animation.js.html#line22">line 22</a>
+        <a href="helper_extension_extension-storage.js.html">helper/extension/extension-storage.js</a>, <a href="helper_extension_extension-storage.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~removeStorageValue"><span class="type-signature">(inner) </span>removeStorageValue<span class="signature">(key)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Löscht einen Eintrag aus der Storage.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Schlüssel, der zu löschenden Daten</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_extension_extension-storage.js.html">helper/extension/extension-storage.js</a>, <a href="helper_extension_extension-storage.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~saveStorageValue"><span class="type-signature">(inner) </span>saveStorageValue<span class="signature">(data)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Speichert einen Wert in der chrome.storage.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">json</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Daten, die gespeichert werdens sollen (Key-Value-Paare)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_extension_extension-storage.js.html">helper/extension/extension-storage.js</a>, <a href="helper_extension_extension-storage.js.html#line12">line 12</a>
     </li></ul></dd>
     
 

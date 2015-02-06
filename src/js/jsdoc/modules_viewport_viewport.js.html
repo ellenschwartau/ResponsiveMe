@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
-    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess'
+    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess', 'tools', 'localStorage'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -44,9 +44,13 @@
  * @see module:viewportAnimation
  * @param {module} backgroundAccess - backgroundAccess-Modul
  * @see module:backgroundAccess
+ * @param {module} tools - tools-Modul
+ * @see module:tools
+ * @param {module} localStorage - localStorage-Modul
+ * @see modules:localStorage
  * @returns {{init: Function}}
  */
-function($, config, extension, viewportSize, viewportAnimation, backgroundAccess) {
+function($, config, extension, viewportSize, viewportAnimation, backgroundAccess, tools, localStorage) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -58,10 +62,11 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $innerOuterSwitch,               // Checkbox zum Einstellen der Abmessungen als inner oder outer
         $switchOrientationButton,        // Button zum Ändern der Orientierung
         MSG_ANIMATION_DATA_MISSING =     // Fehlermeldung
-            "Für eine Animation müssen Start- und Endwert, wie auch die Anzahl an Wiederholungen gesetzt sein.",
+            "Für eine Animation müssen alle Felder ausgefüllt werden.",
         sizesContainBrowserOffset,       // Angabe ob die Browsermaße mit in die Breitenangabe einfließen
         MIN_VALUE_SIZE_SCROLLBARS = 1,   // Mindestwert zum Skalieren des Browsers
-        UNIT_PX = "px";                  // String zur Anzeige der Einheiten px
+        UNIT_PX = "px",                  // String zur Anzeige der Einheit px
+        UNIT_S = "s";                    // String zur Anzeige der Einheit s
 
     /**
      * Liest die Einstellung aus,ob die Größenangaben inklusive der Browserabmessungen
@@ -69,19 +74,30 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * @returns {boolean}
      */
     var doSizesContainBrowserOffset = function() {
-        return $innerOuterSwitch.is(":checked");
+        return tools.properties.isChecked($innerOuterSwitch);
     };
 
     /**
      * Liest die Anfangseinstellung des Inner/Outer-Switch aus und setzt den Wert erneut,
-     * wenn die Einstellung geändert wird.
+     * wenn die Einstellung geändert wird. Bei Änderungen an dieser Einstellung wird der Browser
+     * skaliert und die maximalen Werte der Scrollbars zur Skalierung neu berechnet.
      */
     var initInnerOuterSwitch = function() {
         sizesContainBrowserOffset = doSizesContainBrowserOffset();
         $innerOuterSwitch.change(function() {
             sizesContainBrowserOffset = !sizesContainBrowserOffset;
             viewportSize.toggleInnerOuter(sizesContainBrowserOffset);
+            updateMaxScaleValues();
         });
+    };
+
+    /**
+     * Aktualisiert die maximal-Werte der Scrollbars zum Skalieren des Browsers.
+     */
+    var updateMaxScaleValues = function(){
+        var availBrowserSize = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset);
+        tools.properties.setMaxValue($widthScrollBar, availBrowserSize.width);
+        tools.properties.setMaxValue($heightScrollBar, availBrowserSize.height);
     };
 
     /**
@@ -108,14 +124,14 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var initScrollBar = function($scrollbar, max, min, cur, changeWidth, changeHeight) {
         // Werte initialiseren
-        $scrollbar.attr('max', max);
-        $scrollbar.attr('min', min);
+        tools.properties.setMaxValue($scrollbar, max);
+        tools.properties.setMinValue($scrollbar, min);
         updateScrollbarValue($scrollbar, cur, UNIT_PX);
 
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
         showScrollBarValue($scrollbar, $scrollbar.next(), UNIT_PX);
         $scrollbar.change(function() {
-            var value = parseInt($(this).val());
+            var value = tools.parser.parseIntVal($(this));
             if(changeWidth) {
                 viewportSize.changeWidth(value, sizesContainBrowserOffset);
             }
@@ -135,7 +151,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         $scrollbar.mousemove(function() {
             // Anzeige aktualisieren, wenn die Maus darüber bewegt wird
             // (weniger komplex als auf Click + Mousemove, da es hierfür kein Event gibt)
-            $displayElement.html(parseInt($(this).val()) + unit);
+            $displayElement.html(tools.parser.parseIntVal($(this)) + unit);
         });
     };
 
@@ -146,7 +162,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initWidthScrollBar = function() {
-        var max = backgroundAccess.getAvailBrowserSize().width,
+        var max = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset).width,
             cur = backgroundAccess.getBrowserWidth(sizesContainBrowserOffset);
         initScrollBar(
             $widthScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, true, false
@@ -160,7 +176,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initHeightScrollBar = function() {
-        var max = backgroundAccess.getAvailBrowserSize().height,
+        var max = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset).height,
             cur = backgroundAccess.getBrowserHeight(sizesContainBrowserOffset);
         initScrollBar(
             $heightScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, false, true
@@ -193,13 +209,52 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
-     * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
-     * @param {$} $element - Element dessen Wert ausgelesen werden soll
-     * @returns {int}
+     * Liest die Zielbreite der Animation aus.
+     * @returns {Number}
      */
-    var parseIntVal = function($element) {
-        return parseInt(Math.round($element.val()));
-        // TODO in TOOLS auslagern
+    var getAnimationEndWidth = function(){
+        return tools.parser.parseIntVal($animationEnd);
+    };
+
+    /**
+     * Liest die Startbreite der Animation aus.
+     * @returns {Number}
+     */
+    var getAnimationStartWidth = function(){
+        return tools.parser.parseIntVal($animationStart);
+    };
+
+    /**
+     * Liefert die Anzahl der Wiederholungen der Animationen.
+     * @returns {Number}
+     */
+    var getAnimationTimes = function(){
+        return tools.parser.parseIntVal($animationTimes);
+    };
+
+    /**
+     * Liefert die Dauer der Animation.
+     * @returns {Number}
+     */
+    var getAnimationDuration = function(){
+        return tools.parser.parseIntVal($animationDurationScrollBar);
+    };
+
+    /**
+     * Prüft, ob Informationen zur Animation fehlen.
+     * @returns {boolean}
+     */
+    var isAnimationDataMissing = function(){
+        return $animationStart.val() === "" || $animationEnd.val() === "" || $animationTimes.val() === "";
+    };
+
+    /**
+     * Methode zur Abfrage, ob aktuell eine Animation läuft.
+     * Wird überschrieben, wenn eine Animation gestartet wird.
+     * @returns {boolean}
+     */
+    var isAnimationRunning = function(){ // Methode zur Abfrage ob aktuell eine Animation läuft
+        return false;
     };
 
     /**
@@ -214,22 +269,35 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var initAnimation = function() {
         // Anzeige des Zeitwertes initialiseren
-        showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), "s");
+        showScrollBarValue($animationDurationScrollBar, $animationDurationScrollBar.next(), UNIT_S);
         // Callback zum Starten der Animation initialisieren
         $animationButton.click(function(){
-            // Angaben auslesen
-            var startPx = parseIntVal($animationStart),
-                endPx = parseIntVal($animationEnd),
-                times = parseIntVal($animationTimes),
-                duration = parseIntVal($animationDurationScrollBar);
-            if(isNaN(startPx) || isNaN(endPx) || isNaN(times)) {
-                // Bei fehlenden Angaben eine Fehlermeldung ausgeben
-                alert(MSG_ANIMATION_DATA_MISSING);
-            } else {
-                // Animation starten
-                viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
+            // Nur eine Animation Starten wenn gerade keine andere läuft
+            if(!isAnimationRunning()){
+                if(isAnimationDataMissing()) {
+                    // Bei fehlenden Angaben eine Fehlermeldung ausgeben
+                    showMsgAnimationDataMissing();
+                } else {
+                    // Angaben parsen und Animation starten
+                    var startPx = getAnimationStartWidth(),
+                        endPx = getAnimationEndWidth(),
+                        times = getAnimationTimes(),
+                        duration = getAnimationDuration();
+                    isAnimationRunning = viewportAnimation.animateWidth(duration, startPx, endPx, times, 0, sizesContainBrowserOffset);
+                }
             }
         });
+    };
+
+    /**
+     * Blendet eine Fehlermeldung unterhalb der Animation-Buttons ein.
+     */
+    var showMsgAnimationDataMissing = function(){
+        var $msg = $("&lt;span class='warning'>" + MSG_ANIMATION_DATA_MISSING + "&lt;/span>");
+        $animationButton.after($msg);
+        setTimeout(function(){
+            $msg.hide();
+        }, 3500);
     };
 
     /**
@@ -263,6 +331,36 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
     };
 
     /**
+     * Liest die Benutzereingaben aus der Local Storage aus.
+     */
+    var readStorageValues = function(){
+        localStorage.readStorage($animationStart, localStorage.keys.viewport.animation.startWidth);
+        localStorage.readStorage($animationEnd, localStorage.keys.viewport.animation.endWidth);
+        localStorage.readStorage($animationTimes, localStorage.keys.viewport.animation.times);
+        localStorage.readStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, function($element, value){
+            updateScrollbarValue($element, value, UNIT_S);
+        });
+        localStorage.readStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, function($element, value){
+            // inner/outer Switch und maximale Werte der Scrollbars aktualisieren
+            $element.prop('checked', value);
+            sizesContainBrowserOffset = value;
+            initWidthScrollBar();
+            initHeightScrollBar();
+        });
+    };
+
+    /**
+     * Registriert die Callbacks zum speichern der Benutzereingaben.
+     */
+    var initStorageUpdate = function(){
+        localStorage.registerStorage($animationStart, localStorage.keys.viewport.animation.startWidth, getAnimationStartWidth, 0);
+        localStorage.registerStorage($animationEnd, localStorage.keys.viewport.animation.endWidth, getAnimationEndWidth, 0);
+        localStorage.registerStorage($animationTimes, localStorage.keys.viewport.animation.times, getAnimationTimes, 0);
+        localStorage.registerStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, getAnimationDuration);
+        localStorage.registerStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, doSizesContainBrowserOffset);
+    };
+
+    /**
      * Speichert die Interaktionselemente zwischen.
      */
     var initElements = function() {
@@ -285,12 +383,12 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var init = function (){
         initElements();
+        readStorageValues();
+        initStorageUpdate();
         initData();
         initInnerOuterSwitch();
         initResolutionDropDown();
         initAnimation();
-        initWidthScrollBar();
-        initHeightScrollBar();
         initSwitchOrientationButton();
         handleMessages();
     };
@@ -309,13 +407,13 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:15:11 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 16:56:38 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

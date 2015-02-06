@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/viewport/browser-offset.js</title>
+    <title>JSDoc: Source: helper/extension/extension-message-passing.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/viewport/browser-offset.js</h1>
+    <h1 class="page-title">Source: helper/extension/extension-message-passing.js</h1>
 
     
 
@@ -26,32 +26,69 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>define([
-        'backgroundAccess'
-],
+            <pre class="prettyprint source linenums"><code>define([],
 /**
- * Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbars
- * einnimmt, auf der Background Page.
- *
- * @exports browserOffset
- * @param {module} backgroundAccess - backgroundAccess-Modul
- * @see module:backgroundAccess
- * @returns {{get: Function}}
+ * Kapselt Funktionen der Erweiterung zur Umsetzung des Message Passing.
+ * @exports extensionMessagePassing
+ * @returns {{sendMessageToTabWithCb: Function, sendMessageToTab: Function, sendMessage: Function, handleMessage: Function}}
  */
-function(backgroundAccess) {
+function(){
     /**
-     * Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-     * @returns {{x: int, y: int}}
+     * Sendet eine Nachricht an den aktiven Tab und führt eine Funktion aus, wenn eine Response zurück kommt.
+     * @param {json} data - Daten, die übergeben werden sollen
+     * @param {function} responseCallback - Funktion, die auf der Response ausgeführt werden soll
      */
-    var getBrowserOffset = function() {
-        return backgroundAccess.getBrowserOffset();
+    var sendMessageToTabWithCb = function(data, responseCallback) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(
+                tabs[0].id,
+                data,
+                function(response) {
+                    responseCallback(response);
+                }
+            )
+        });
+    };
+
+    /**
+     * Sendet eine Nachricht an den aktiven Tab.
+     * @param {json} data - Daten, die übergeben werden sollen
+     */
+    var sendMessageToTab = function(data) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, data)
+        });
+    };
+
+    /**
+     * Sendet eine Nachricht mit den übergebenen Daten.
+     * @param {json} data - Daten, die übergeben werden sollen
+     */
+    var sendMessage = function(data) {
+        chrome.runtime.sendMessage(data);
+    };
+
+    /**
+     * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
+     * @param {string} type - Typ der Nachricht
+     * @param {function} action - Funktion, die ausgeführt werden soll
+     */
+    var handleMessage = function(type, action) {
+        chrome.runtime.onMessage.addListener(
+            function(request, sender, sendResponse) {
+                if(type === request.type) {
+                    action(request, sender, sendResponse);
+                }
+            });
     };
 
     return {
-        get: getBrowserOffset
+        sendMessageToTabWithCb: sendMessageToTabWithCb,
+        sendMessageToTab: sendMessageToTab,
+        sendMessage: sendMessage,
+        handleMessage: handleMessage
     };
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 

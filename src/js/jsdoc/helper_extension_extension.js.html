@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/viewport/browser-offset.js</title>
+    <title>JSDoc: Source: helper/extension/extension.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/viewport/browser-offset.js</h1>
+    <h1 class="page-title">Source: helper/extension/extension.js</h1>
 
     
 
@@ -27,31 +27,40 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
-        'backgroundAccess'
+        'extensionEvents', 'extensionMessagePassing', 'extensionStorage', 'extensionComponents'
 ],
 /**
- * Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbars
- * einnimmt, auf der Background Page.
- *
- * @exports browserOffset
- * @param {module} backgroundAccess - backgroundAccess-Modul
- * @see module:backgroundAccess
- * @returns {{get: Function}}
+ * Stellt verschiedene Funktionen bereit, um zwischen Browser und Erweiterung zu kommunizieren.
+ * Dient als Wrapper-Modul für die Funktionalitäten die die chrome.*-API bereitstellt
+ * und kapselt die Funktionen der verschiedenen extension-*-Hilfsmodule.
+ * @exports extension
+ * @param {module} extensionEvents - extensionEvents-Modul
+ * @see modules:extensionEvents
+ * @param {module} extensionMessagePassing - extensionMessagePassing-Modul
+ * @see modules:extensionMessagePassing
+ * @param {module} extensionStorage - extensionStorage-Modul
+ * @see modules:extensionStorage
+ * @param {module} extensionComponents - extensionComponents-Modul
+ * @see modules:extensionComponents
+ * @returns {{sendMessage: Function, sendMessageToTab: Function, sendMessageToTabWithCb: Function, handleMessage: Function, executeScriptCode: Function, getBackgroundPage: Function, saveStorageValue: Function, getStorageValue: Function, removeStorageValue: Function, getCurrentWindow: Function, onActivatedTab: (*|exports.onActivatedTab), onAttachedTab: (*|exports.onAttachedTab), onFocusChangedWindow: (*|exports.onFocusChangedWindow)}}
  */
-function(backgroundAccess) {
-    /**
-     * Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-     * @returns {{x: int, y: int}}
-     */
-    var getBrowserOffset = function() {
-        return backgroundAccess.getBrowserOffset();
-    };
-
+function(extensionEvents, extensionMessagePassing, extensionStorage, extensionComponents){
     return {
-        get: getBrowserOffset
+        executeScriptCodeInTab: extensionComponents.executeScriptCodeInTab,
+        getBackgroundPage: extensionComponents.getBackgroundPage,
+        getCurrentWindow: extensionComponents.getCurrentWindow,
+        saveStorageValue: extensionStorage.saveStorageValue,
+        getStorageValue: extensionStorage.getStorageValue,
+        removeStorageValue: extensionStorage.removeStorageValue,
+        sendMessage: extensionMessagePassing.sendMessage,
+        sendMessageToTab: extensionMessagePassing.sendMessageToTab,
+        sendMessageToTabWithCb: extensionMessagePassing.sendMessageToTabWithCb,
+        handleMessage: extensionMessagePassing.handleMessage,
+        onActivatedTab: extensionEvents.onActivatedTab,
+        onAttachedTab: extensionEvents.onAttachedTab,
+        onFocusChangedWindow: extensionEvents.onFocusChangedWindow
     };
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 

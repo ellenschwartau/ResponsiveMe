@@ -38,8 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
-Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.</div>
+            <div class="description">Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.</div>
         
 
         
@@ -123,6 +122,29 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>mediaQueryParser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">mediaQueryParser-Modul</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -160,7 +182,7 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line13">line 13</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -171,6 +193,8 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
     <dd class="tag-see">
         <ul>
             <li><a href="module-tools.html">module:tools</a></li>
+        
+            <li>modules:mediaQueryParser</li>
         </ul>
     </dd>
     
@@ -225,6 +249,82 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~CSS_MEDIA_RULE_TYPE"><span class="type-signature">(inner) </span>CSS_MEDIA_RULE_TYPE<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    Kennzahl der CSSRules des Typs Media Query
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -381,7 +481,7 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line87">line 87</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -599,7 +699,7 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line72">line 72</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -648,7 +748,7 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
 
     
 
-    <h4 class="name" id="~getCssRules"><span class="type-signature">(inner) </span>getCssRules<span class="signature">(type)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getCssRules"><span class="type-signature">(inner) </span>getCssRules<span class="signature">(type)</span><span class="type-signature"> &rarr; {json}</span></h4>
 
     
 
@@ -748,7 +848,7 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line25">line 25</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -774,11 +874,19 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    *
-</div>
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">json</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -789,15 +897,14 @@ Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JS
 
     
 
-    <h4 class="name" id="~getCssRulesFromRuleList"><span class="type-signature">(inner) </span>getCssRulesFromRuleList<span class="signature">(type, indexStyleSheet, ruleList)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getCssRulesFromRuleList"><span class="type-signature">(inner) </span>getCssRulesFromRuleList<span class="signature">(type, indexStyleSheet, ruleList)</span><span class="type-signature"> &rarr; {json}</span></h4>
 
     
 
 
 
 <div class="description">
-    List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert die
-benötigten Informationen ins JSON-Format.
+    List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert diebenötigten Informationen ins JSON-Format.
 </div>
 
 
@@ -936,7 +1043,7 @@ benötigten Informationen ins JSON-Format.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line53">line 53</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -962,11 +1069,19 @@ benötigten Informationen ins JSON-Format.
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    *
-</div>
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">json</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -1028,7 +1143,7 @@ benötigten Informationen ins JSON-Format.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line111">line 111</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -1128,7 +1243,7 @@ benötigten Informationen ins JSON-Format.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line160">line 160</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -1232,7 +1347,7 @@ benötigten Informationen ins JSON-Format.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line179">line 179</a>
+        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -1277,309 +1392,6 @@ benötigten Informationen ins JSON-Format.
 
 
         
-            
-
-    
-
-    <h4 class="name" id="~getMediaQueryWidth"><span class="type-signature">(inner) </span>getMediaQueryWidth<span class="signature">(cssMediaRule)</span><span class="type-signature"> &rarr; {int}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Liefert die Breite, ab der eine Media Query greift und geht dabei nur von korrekt verfassten Media Queries aus.
-Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte Zahl, geliefert.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cssMediaRule</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">CSSMediaRule</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Media Query</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line125">line 125</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - maximale, angegebene Breitenangebe oder -1 wenn keine angegeben wurde
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">int</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~getMediaRuleSelectorValue"><span class="type-signature">(inner) </span>getMediaRuleSelectorValue<span class="signature">(rule)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Liefert den Wert des Selektors einer Media Query.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>rule</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">CSSMediaRule</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Media Query</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_stylesheet-parser.js.html">helper/styles/stylesheet-parser.js</a>, <a href="helper_styles_stylesheet-parser.js.html#line103">line 103</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
     
 
     
@@ -1595,13 +1407,13 @@ Ist mehr als eine Breitenangabe angegeben, wird immer die oberste, also größte
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:15:11 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 16:56:38 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

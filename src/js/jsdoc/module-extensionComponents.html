@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: browserOffset</title>
+    <title>JSDoc: Module: extensionComponents</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: browserOffset</h1>
+    <h1 class="page-title">Module: extensionComponents</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbarseinnimmt, auf der Background Page.</div>
+            <div class="description">Kapselt Funktionen zum Auslesen oder Ausführen von Operationen auf bestimmten Komponenten der Erweiterung.</div>
         
 
         
@@ -52,55 +52,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>backgroundAccess</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">module</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">backgroundAccess-Modul</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -136,19 +87,12 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_viewport_browser-offset.js.html">modules/viewport/browser-offset.js</a>, <a href="modules_viewport_browser-offset.js.html#line13">line 13</a>
+        <a href="helper_extension_extension-components.js.html">helper/extension/extension-components.js</a>, <a href="helper_extension_extension-components.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-backgroundAccess.html">module:backgroundAccess</a></li>
-        </ul>
-    </dd>
     
 
     
@@ -211,14 +155,168 @@
 
     
 
-    <h4 class="name" id="~getBrowserOffset"><span class="type-signature">(inner) </span>getBrowserOffset<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="~executeScriptCodeInTab"><span class="type-signature">(inner) </span>executeScriptCodeInTab<span class="signature">(code, callback)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
+    Führt Javascript auf der geöffneten Seite aus.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Code, der ausgeführt werden soll</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Funktion, die das Ergebnis verarbeitet</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_extension_extension-components.js.html">helper/extension/extension-components.js</a>, <a href="helper_extension_extension-components.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getBackgroundPage"><span class="type-signature">(inner) </span>getBackgroundPage<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Liefert die Hintergrundseite der Erweiterung.
 </div>
 
 
@@ -262,7 +360,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_viewport_browser-offset.js.html">modules/viewport/browser-offset.js</a>, <a href="modules_viewport_browser-offset.js.html#line18">line 18</a>
+        <a href="helper_extension_extension-components.js.html">helper/extension/extension-components.js</a>, <a href="helper_extension_extension-components.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -296,13 +394,144 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">*</span>
 
 
     </dd>
 </dl>
 
     
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getCurrentWindow"><span class="type-signature">(inner) </span>getCurrentWindow<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Liest das aktuelle Fenster aus und reicht dieses als Parameteran die übergebene Funktion weiter.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Funktion, die Operationen auf dem aktuellen Fenster aufruft</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helper_extension_extension-components.js.html">helper/extension/extension-components.js</a>, <a href="helper_extension_extension-components.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

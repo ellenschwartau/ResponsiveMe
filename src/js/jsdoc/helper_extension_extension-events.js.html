@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/viewport/browser-offset.js</title>
+    <title>JSDoc: Source: helper/extension/extension-events.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/viewport/browser-offset.js</h1>
+    <h1 class="page-title">Source: helper/extension/extension-events.js</h1>
 
     
 
@@ -26,32 +26,43 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>define([
-        'backgroundAccess'
-],
+            <pre class="prettyprint source linenums"><code>define([],
 /**
- * Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbars
- * einnimmt, auf der Background Page.
- *
- * @exports browserOffset
- * @param {module} backgroundAccess - backgroundAccess-Modul
- * @see module:backgroundAccess
- * @returns {{get: Function}}
+ * Kapselt Funktionen der Erweiterung zur Behandlung verschiedener Events.
+ * @exports extensionEvents
+ * @returns {{onActivatedTab: Function, onAttachedTab: Function, onFocusChangedWindow: Function}}
  */
-function(backgroundAccess) {
+function(){
     /**
-     * Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-     * @returns {{x: int, y: int}}
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderer Tab fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
      */
-    var getBrowserOffset = function() {
-        return backgroundAccess.getBrowserOffset();
+    var onActivatedTab = function(callback){
+        chrome.tabs.onActivated.addListener(callback);
+    };
+
+    /**
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderer Tab fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var onAttachedTab = function(callback){
+        chrome.tabs.onAttached.addListener(callback);
+    };
+
+    /**
+     * Registriert einen Callback, der aufgerufen wird, wenn ein anderes Fenster fokussiert wird.
+     * @param {function} callback - Funktion, die aufgerufen werden soll
+     */
+    var onFocusChangedWindow = function(callback){
+        chrome.windows.onFocusChanged.addListener(callback);
     };
 
     return {
-        get: getBrowserOffset
+        onActivatedTab: onActivatedTab,
+        onAttachedTab: onAttachedTab,
+        onFocusChangedWindow: onFocusChangedWindow
     };
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 

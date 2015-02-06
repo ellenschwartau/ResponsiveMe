@@ -13,7 +13,6 @@ require([
  * @see module:extension
  * @param {module} config - config-Modul
  * @see module:config
- * @returns {{mediaList: string[]}}
  */
 function($, matchMedia, extension, config){
     var outerBrowserHeight,

@@ -29,11 +29,14 @@
             <pre class="prettyprint source linenums"><code>define([
 ],
 /**
- * Stellt übrgreifend nützliche Funktionen bereit.
+ * Stellt übergreifend nützliche Funktionen bereit.
  * @exports tools
+ * @returns {{
+ * list: {listContainsValue: Function},
+ * parser: {parseToInt: Function, parseMaxIntValue: Function, parseIntVal: Function},
+ * properties: {setProperty:Function, isVisible: Function, isChecked: Function, setChecked: Function, getMaxValue: Function, setMaxValue: Function, getMinValue: Function, setMinValue: Function}}}
  */
 function(){
-
     /**
      * Tools zur Bearbeitung von Listen.
      * @type {{listContainsValue: Function}}
@@ -54,8 +57,112 @@ function(){
         }
     };
 
+    /**
+     * Tools zum Parsen von Werten.
+     * @type {{parseIntVal: Function}}
+     */
+    var parser = {
+        parseToInt: function(value){
+            return parseInt(Math.round(value));
+        },
+        /**
+         * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
+         * @param {$} $element - Element dessen Wert ausgelesen werden soll
+         * @returns {int}
+         */
+        parseIntVal: function($element) {
+            return parser.parseToInt($element.val());
+        },
+        /**
+         * Liefert den maximalen Wert eines Elements und konvertiert diesen in einen int.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @returns {int}
+         */
+        parseMaxIntValue: function($element){
+            return parser.parseToInt(properties.getMaxValue($element));
+        }
+    };
+
+    /**
+     * Tools zum Auslesen von Eigenschaften eines Elements.
+     * @type {{isVisible: Function, isChecked: Function}}
+     */
+    var properties = {
+        /** Property checked */
+        CHECKED: 'checked',
+        /** Abfrage ob ein Element angewählt ist */
+        IS_CHECKED: ':checked',
+        /** Abfrage ob ein Element sichtbar ist */
+        IS_VISIBLE: ":visible",
+        /** Property minimaler Wert */
+        MIN: 'min',
+        /** Property maximaler Wert */
+        MAX: 'max',
+        /**
+         * Setzt eine Eigenschaft eines Elements auf einen bestimmten Wert.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @param {string} prop - Eigenschaft die gesetzt werden soll
+         * @param {*} value - Wert der gesetzt werden soll
+         */
+        setProperty: function($element, prop, value){
+            $element.prop(prop, value);
+        },
+        /**
+         * Liefert die Information, ob ein Element sichtbar ist.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @returns {boolean}
+         */
+        isVisible: function($element){
+            return $element.is(properties.IS_VISIBLE);
+        },
+        /**
+         * Liefert die Information, ob ein Element angewählt ist.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @returns {boolean}
+         */
+        isChecked: function($element){
+            return $element.is(properties.IS_CHECKED);
+        },
+        /**
+         * Setzt den checked-Status eines Elements.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @param {*} value - Wert der gesetzt werden soll
+         */
+        setChecked: function($element, value){
+            properties.setProperty($element, properties.CHECKED, value);
+        },
+        /**
+         * Liefert den maximalen Wert eines Elements.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @returns {*}
+         */
+        getMaxValue: function($element){
+            return $element.prop(properties.MAX);
+        },
+        /**
+         * Setzt den maximalen Wert eines Elements.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @param {*} value - Wert der gesetzt werden soll
+         * @returns {*}
+         */
+        setMaxValue: function($element, value) {
+            properties.setProperty($element, properties.MAX, value);
+        },
+        /**
+         * Setzt den minimalen Wert eines Elements.
+         * @param {$} $element - Element dessen Eigenschaft abgefragt werden soll
+         * @param {*} value - Wert der gesetzt werden soll
+         * @returns {*}
+         */
+        setMinValue: function($element, value) {
+            properties.setProperty($element, properties.MIN, value);
+        }
+    };
+
     return {
-        list: list
+        list: list,
+        parser: parser,
+        properties: properties
     };
 });
 </code></pre>
@@ -68,13 +175,13 @@ function(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Mon Feb 02 2015 10:15:11 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 16:56:38 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

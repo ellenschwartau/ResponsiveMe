@@ -9,11 +9,9 @@
       "./contentScripts",
       "./helper",
       "./modules",
-      "./extension",
       "./popup",
       "./requirejs",
-      "./main.js",
-      "./localStorage"
+      "./main.js"
     ],
     "includePattern": ".+\\.js(doc)?$"
   },

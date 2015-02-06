@@ -150,7 +150,6 @@ function($, viewportSize) {
             containsBrowserOffset
         );
 
-        // TODO Doku
         return isAnimationRunning;
     };
 

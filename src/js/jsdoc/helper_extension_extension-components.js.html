@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: modules/viewport/browser-offset.js</title>
+    <title>JSDoc: Source: helper/extension/extension-components.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: modules/viewport/browser-offset.js</h1>
+    <h1 class="page-title">Source: helper/extension/extension-components.js</h1>
 
     
 
@@ -27,31 +27,55 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
-        'backgroundAccess'
 ],
 /**
- * Dient zum Auslesen des Browser-Offsets, also dem Platz den dieser beispielsweise durch Tool- oder Scrollbars
- * einnimmt, auf der Background Page.
- *
- * @exports browserOffset
- * @param {module} backgroundAccess - backgroundAccess-Modul
- * @see module:backgroundAccess
- * @returns {{get: Function}}
+ * Kapselt Funktionen zum Auslesen oder Ausführen von Operationen auf bestimmten Komponenten der Erweiterung.
+ * @exports extensionComponents
+ * @returns {{getBackgroundPage: Function, getCurrentWindow: Function}}
  */
-function(backgroundAccess) {
+function(){
     /**
-     * Liefert den Offset in Pixeln, der der Browser (z.B. durch Toolbar oder Scrollbar) einnimmt.
-     * @returns {{x: int, y: int}}
+     * Liefert die Hintergrundseite der Erweiterung.
+     * @returns {*}
      */
-    var getBrowserOffset = function() {
-        return backgroundAccess.getBrowserOffset();
+    var getBackgroundPage = function(){
+        return chrome.extension.getBackgroundPage();
+    };
+
+    /**
+     * Liest das aktuelle Fenster aus und reicht dieses als Parameter
+     * an die übergebene Funktion weiter.
+     * @param {function} callback - Funktion, die Operationen auf dem aktuellen Fenster aufruft
+     */
+    var getCurrentWindow = function(callback){
+        chrome.windows.getCurrent(function(window) {
+            callback(window);
+        });
+    };
+
+    /**
+     * Führt Javascript auf der geöffneten Seite aus.
+     * @param {string} code - Code, der ausgeführt werden soll
+     * @param {function} callback - Funktion, die das Ergebnis verarbeitet
+     */
+    var executeScriptCodeInTab = function(code, callback) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {code: code},
+                function(results){
+                    callback(results);
+                }
+            );
+        });
     };
 
     return {
-        get: getBrowserOffset
+        getBackgroundPage: getBackgroundPage,
+        getCurrentWindow: getCurrentWindow,
+        executeScriptCodeInTab: executeScriptCodeInTab
     };
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 
