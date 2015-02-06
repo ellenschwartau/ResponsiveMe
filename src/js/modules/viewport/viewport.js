@@ -51,42 +51,25 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
 
     /**
      * Liest die Anfangseinstellung des Inner/Outer-Switch aus und setzt den Wert erneut,
-     * wenn die Einstellung geändert wird.
+     * wenn die Einstellung geändert wird. Bei Änderungen an dieser Einstellung wird der Browser
+     * skaliert und die maximalen Werte der Scrollbars zur Skalierung neu berechnet.
      */
     var initInnerOuterSwitch = function() {
         sizesContainBrowserOffset = doSizesContainBrowserOffset();
         $innerOuterSwitch.change(function() {
             sizesContainBrowserOffset = !sizesContainBrowserOffset;
             viewportSize.toggleInnerOuter(sizesContainBrowserOffset);
+            updateMaxScaleValues();
         });
     };
 
     /**
-     * Aktualisiert die maximal-Werte der Scrollbars zum Skalieren des Browser
-     * und addiert oder subtrahiert dazu, je nach der Einstellung des innerOuterSwitch
-     * den Browser Offset.
+     * Aktualisiert die maximal-Werte der Scrollbars zum Skalieren des Browsers.
      */
     var updateMaxScaleValues = function(){
-        var browserOffset = backgroundAccess.getBrowserOffset(),
-            curMaxWidth = $widthScrollBar.max,
-            curMaxHeight = $heightScrollBar.max;
-        /**
-         * Addiert oder subtrahiert je nach dem übergebenen Faktor den Browser Offset
-         * auf den maximalen Wert beider Scrollbars.
-         * @param {int} fact - Faktor mit dem der Browser Offset verrechnet wird
-         */
-        var update = function(fact){
-            $widthScrollBar.attr('max', curMaxWidth + fact * browserOffset.x);
-            $heightScrollBar.attr('max', curMaxHeight + fact *browserOffset.y);
-        };
-
-        if(sizesContainBrowserOffset){
-            // Browser Offset aufaddieren
-            update(1);
-        } else {
-            // Browser Offset abziehen
-            update(-1);
-        }
+        var availBrowserSize = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset);
+        tools.properties.setMaxValue($widthScrollBar, availBrowserSize.width);
+        tools.properties.setMaxValue($heightScrollBar, availBrowserSize.height);
     };
 
     /**
@@ -151,7 +134,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initWidthScrollBar = function() {
-        var max = backgroundAccess.getAvailBrowserSize().width,
+        var max = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset).width,
             cur = backgroundAccess.getBrowserWidth(sizesContainBrowserOffset);
         initScrollBar(
             $widthScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, true, false
@@ -165,7 +148,7 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Auch die benötigten Callbacks werden gesetzt,
      */
     var initHeightScrollBar = function() {
-        var max = backgroundAccess.getAvailBrowserSize().height,
+        var max = backgroundAccess.getAvailBrowserSize(sizesContainBrowserOffset).height,
             cur = backgroundAccess.getBrowserHeight(sizesContainBrowserOffset);
         initScrollBar(
             $heightScrollBar, max, MIN_VALUE_SIZE_SCROLLBARS, cur, false, true

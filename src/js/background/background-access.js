@@ -65,12 +65,14 @@ function(extension){
 
     /**
      * Liefert die erreichbare Browser-Größe.
+     * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
      * @returns {{width: int, height: int}}
      */
-    var getAvailBrowserSize = function(){
+    var getAvailBrowserSize = function(includingBrowserOffset){
+        var browserOffset = getBrowserOffset();
         return {
-            width: background.availBrowserWidth,
-            height: background.availBrowserHeight
+            width: includingBrowserOffset ? background.availBrowserWidth : background.availBrowserWidth - browserOffset.x,
+            height: includingBrowserOffset ? background.availBrowserHeight : background.availBrowserHeight - browserOffset.y
         }
     };
 

@@ -32,13 +32,24 @@ function($){
      * @type {{parseIntVal: Function}}
      */
     var parser = {
+        parseToInt: function(value){
+            return parseInt(Math.round(value));
+        },
         /**
          * Liest den Wert aus einem Inputfeld aus und konvertiert diesen in einen Integer.
          * @param {$} $element - Element dessen Wert ausgelesen werden soll
          * @returns {int}
          */
         parseIntVal: function($element) {
-            return parseInt(Math.round($element.val()));
+            return parser.parseToInt($element.val());
+        },
+        /**
+         * Liefert den maximalen Wert eines Elements und konvertiert diesen in einen int.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @returns {int}
+         */
+        parseMaxIntValue: function($element){
+            return parser.parseToInt(properties.getMaxValue($element));
         }
     };
 
@@ -62,6 +73,23 @@ function($){
          */
         isChecked: function($element){
             return $element.is(":checked");
+        },
+        /**
+         * Liefert den maximalen Wert eines Elements.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @returns {*}
+         */
+        getMaxValue: function($element){
+            return $element.prop('max');
+        },
+        /**
+         * Liefert den maximalen Wert eines Elements.
+         * @param {$} $element - Element, dessen Eigenschaft abgefragt werden soll
+         * @param {*} value - Wert, der gesetzt werden soll
+         * @returns {*}
+         */
+        setMaxValue: function($element, value) {
+            $element.prop('max', value);
         }
     };
 
