@@ -96,8 +96,8 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var initScrollBar = function($scrollbar, max, min, cur, changeWidth, changeHeight) {
         // Werte initialiseren
-        $scrollbar.attr('max', max);
-        $scrollbar.attr('min', min);
+        tools.properties.setMaxValue($scrollbar, max);
+        tools.properties.setMinValue($scrollbar, min);
         updateScrollbarValue($scrollbar, cur, UNIT_PX);
 
         // Callbacks setzen (Anzeige und Ändern der Bildschirmbreite triggern)
@@ -316,7 +316,8 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
             // inner/outer Switch und maximale Werte der Scrollbars aktualisieren
             $element.prop('checked', value);
             sizesContainBrowserOffset = value;
-            updateMaxScaleValues();
+            initWidthScrollBar();
+            initHeightScrollBar();
         });
     };
 
@@ -354,15 +355,13 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      */
     var init = function (){
         initElements();
+        readStorageValues();
+        initStorageUpdate();
         initData();
         initInnerOuterSwitch();
         initResolutionDropDown();
         initAnimation();
-        initWidthScrollBar();
-        initHeightScrollBar();
         initSwitchOrientationButton();
-        readStorageValues();
-        initStorageUpdate();
         handleMessages();
     };
 
