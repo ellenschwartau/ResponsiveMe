@@ -7,7 +7,7 @@
     exports.init = function() {
         try {
             // Konfigurationsdatei auslesen
-            var data = fs.readFileSync('js/requireConfig.js', 'ascii');
+            var data = fs.readFileSync('../js/requirejs/config.js', 'ascii');
         } catch(e) {
             console.error(e);
             return {};
@@ -15,17 +15,16 @@
         // Ausführen um requireJsConfig Object zu initialisieren
         eval(data.toString());
         // absoluter Pfad Prefix für die Test Suite
-        var pathPrefix = _dirname + '/../..';
+        var pathPrefix = __dirname + '/../../js/';
 
         // Modififikationen
-        var config = requirejsConfig;
-        config.baseUrl = pathPrefix + rc.baseUrl;
-        var path;
-        for(path in rc.paths) {
-            if(typeof rc.paths[path] == 'string') {
-                rc.paths[path] = pathPrefix + rc.paths[path];
+        var config = requireJsConfig;
+        config.baseUrl = pathPrefix + config.baseUrl;
+        for(var path in config.paths) {
+            if(typeof config.paths[path] == 'string') {
+                config.paths[path] = pathPrefix + config.paths[path];
             }
         }
-        return rc;
+        return config;
     }
 }).call(this);

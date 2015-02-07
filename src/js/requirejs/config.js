@@ -1,4 +1,3 @@
-// TODO Variable rausnehmen, wenn keine Tests mehr geschrieben werden
 var requireJsConfig = {
     // Basispfad der Javaskript Dateien
     baseUrl: '/js',
