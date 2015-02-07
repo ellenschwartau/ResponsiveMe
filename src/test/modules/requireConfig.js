@@ -1,6 +1,5 @@
 /**
  * Modifiziert die Projekt-Konfiguration zur Ausführung von Unit Tests.
- * TODO brauche ich das wirklich?
  */
 ;(function() {
     var fs = require('fs');
