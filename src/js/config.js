@@ -3,7 +3,7 @@ define([
 /**
  * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
  * @exports config
- * @returns {{baseDir: string, modules: Array, resolutions: Array, messageTypes: {showElements: string, showMediaQueries: string, windowResize: string, updateStyle: string, insertStyle: string, deleteStyle: string, displayCurrentMediaList: string}}}
+ * @returns {{baseDir: string, modules: string[], resolutions: {name: string, width: number, height: number}[], defaultColorGrid: string}}
  */
 function() {
     var baseDir = "modules/",       // Basispfad zu den Modulen
@@ -20,11 +20,13 @@ function() {
             {name: "800x600", width: 800, height: 600},
             {name: "640x960", width: 640, height: 960},
             {name: "320x480", width: 320, height: 480}
-        ];
+        ],
+        defaultGridColor = "#FF8000";
 
     return {
         baseDir: baseDir,
         modules: modules,
-        resolutions: resolutions
+        resolutions: resolutions,
+        defaultGridColor: defaultGridColor
     };
 });

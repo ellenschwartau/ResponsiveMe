@@ -1,5 +1,5 @@
 define([
-    'jquery', 'visualizeElements', 'localStorage', 'tools'
+    'jquery', 'visualizeElements', 'localStorage', 'tools', 'config'
 ],
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
@@ -18,9 +18,11 @@ define([
  * @see module:localStorage
  * @param {module} tools - tools-Modul
  * @see module:tools
+ * @param {module} config - config-Modul
+ * @see module:config
  * @returns {{init: Function}}
  */
-function($, visualizeElements, localStorage, tools) {
+function($, visualizeElements, localStorage, tools, config) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
@@ -65,6 +67,13 @@ function($, visualizeElements, localStorage, tools) {
                 visualizeElements.triggerShowElements(selectors, getColor(), getWidth());
             }
         });
+    };
+
+    /**
+     * Setzt die Default Farbe des Grids.
+     */
+    var initDefaultColor = function(){
+        $gridColor.val(config.defaultGridColor);
     };
 
     /**
@@ -142,6 +151,7 @@ function($, visualizeElements, localStorage, tools) {
      */
     var init = function() {
         initElements();
+        initDefaultColor();
         initStorageUpdate();
         readStorageValues();
         initAddSelectorButton();
