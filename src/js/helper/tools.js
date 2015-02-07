@@ -65,7 +65,7 @@ function(){
         /** Abfrage ob ein Element angewählt ist */
         IS_CHECKED: ':checked',
         /** Abfrage ob ein Element sichtbar ist */
-        IS_VISIBLE: ":visible",
+        IS_VISIBLE: ':visible',
         /** Property minimaler Wert */
         MIN: 'min',
         /** Property maximaler Wert */

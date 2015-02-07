@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'localStorage'
+    'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'localStorage', 'tools'
 ],
 /**
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
@@ -15,9 +15,11 @@ define([
  * @see module:grid
  * @param {module} localStorage - localStorage-Modul
  * @see module:localStorage
+ * @param {module} tools - tools-Modul
+ * @see module:tools
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
-function($, config, viewport, mediaQueries, grid, localStorage) {
+function($, config, viewport, mediaQueries, grid, localStorage, tools) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
     /**
@@ -157,7 +159,7 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
     var initModuleDescriptionDisplay = function($element) {
         var $settings = $("#popup-footer").find(".settings"),
             $descriptionCb = $settings.find("#showDescriptionCb"),
-            shouldDisplayDescriptions = $descriptionCb.is(":checked"),
+            shouldDisplayDescriptions = tools.properties.isChecked($descriptionCb),
             toggleDescription = $element.find(".module-description");
         if(shouldDisplayDescriptions) {
             // Beschreibung ein- und ausblenden wenn die Überschrift gehovert wird
@@ -168,6 +170,8 @@ function($, config, viewport, mediaQueries, grid, localStorage) {
             });
         }
     };
+
+    // TODO Konstanten für Element-Selektoren?
 
     /**
      * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
