@@ -47,4 +47,3 @@ var requireJsConfig = {
         csMediaQueries: 'contentScripts/cs-media-queries'
     }
 };
-require.config(requireJsConfig);
