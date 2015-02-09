@@ -118,7 +118,6 @@ function($, viewportSize) {
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-            deferredPromise = Promise.defer();
             calcAnimationData(
                 animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
             );
