@@ -22,8 +22,7 @@ function($, viewportSize) {
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
         // Kaspeln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
-        var isAnimating = true,  // Angabe ob zu Zeit eine Animation läuft
-            start,                      // Start-Breite
+        var start,                      // Start-Breite
             end,                        // End-Breite
             duration,                   // Zur Verfügung stehende Zeit
             wantedCalls,                // gewünschte Wiederholungen
@@ -33,7 +32,8 @@ function($, viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            CALL_ANIMATION_EVERY_X_MS = 10;              // Anagebe, wie oft die Animationsfunktion aufgerufen werden soll
+            CALL_ANIMATION_EVERY_X_MS = 10,              // Anagebe, wie oft die Animationsfunktion aufgerufen werden soll
+            defer;
 
         /**
          * Liefert den Status, ob eine Animation gerade läuft.
@@ -64,7 +64,7 @@ function($, viewportSize) {
             if (doneCalls < wantedCalls) {
                 animate(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
             } else {
-                isAnimating = false;
+                defer.resolve();
             }
         };
 
@@ -126,6 +126,7 @@ function($, viewportSize) {
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
+            defer = Promise.defer();
             calcAnimationData(
                 animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
             );
@@ -140,6 +141,7 @@ function($, viewportSize) {
             // TODO Request Animation Frame
         };
 
+        defer = Promise.defer();
         // Animation anstoßen
         animate(
             animationDuration,
@@ -149,8 +151,7 @@ function($, viewportSize) {
             doneAnimationCalls,
             containsBrowserOffset
         );
-
-        return isAnimationRunning;
+        return defer.promise;
     };
 
     return {
