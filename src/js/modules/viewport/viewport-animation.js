@@ -21,7 +21,7 @@ function($, viewportSize) {
      */
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-        // Kaspeln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
+        // Kapseln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
         var start,                      // Start-Breite
             end,                        // End-Breite
             duration,                   // Zur Verfügung stehende Zeit
