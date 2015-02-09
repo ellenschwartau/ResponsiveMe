@@ -32,27 +32,19 @@ function($, viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            CALL_ANIMATION_EVERY_X_MS = 10,              // Anagebe, wie oft die Animationsfunktion aufgerufen werden soll
             defer;
-
-        /**
-         * Liefert den Status, ob eine Animation gerade läuft.
-         * @returns {boolean}
-         */
-        var isAnimationRunning = function(){
-            return isAnimating;
-        };
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
          * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde.
          * @param {int} interval - ID des Intervalls, das die Animation durchführt
          */
-        var checkAnimationEnd = function (interval) {
+        var checkAnimationEnd = function () {
             if (((start >= end) && (curWidth <= end))
                 || ((start < end) && (curWidth >= end))) {
-                window.clearInterval(interval);
                 checkForRestart();
+            } else {
+                requestAnimationFrame(animationStep);
             }
         };
 
@@ -90,20 +82,21 @@ function($, viewportSize) {
             // zusätzliche Berechnungen
             durationPerCall = duration / wantedCalls;
             var dist = start - end;
-            stepPerMs = (dist / durationPerCall) / 1000;
+            stepPerMs = (dist / durationPerCall) / 100;
             curWidth = start;
-            lastCall = $.now();
         };
 
         /**
          * Berechnet die Browserbreite, auf die der Browser im aktuellen Animationsschritt animiert werden sollte.
+         * @param {DOMHighResTimeStamp} timestamp - aktueller Zeitpunkt
          * @returns {number}
          */
-        var calcBrowserWidth = function () {
-            var currentCall = $.now(),
+        var calcBrowserWidth = function (timestamp) {
+            var currentCall = timestamp, // $.now(),
                 elapsedTime,
                 animationDist;
 
+            lastCall = !lastCall ? timestamp : lastCall;
             elapsedTime = currentCall - lastCall;
             lastCall = currentCall;
             animationDist = stepPerMs * elapsedTime;
@@ -123,6 +116,7 @@ function($, viewportSize) {
          * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
          * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
          * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+         * TODO Dokumentation
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
@@ -132,13 +126,17 @@ function($, viewportSize) {
             );
             doneCalls++;
             viewportSize.changeWidth(start, containsBrowserOffset);
-            // Animation durchführen
-            var interval = window.setInterval(function () {
-                curWidth = calcBrowserWidth();
-                viewportSize.changeWidth(curWidth, containsBrowserOffset);
-                checkAnimationEnd(interval);
-            }, CALL_ANIMATION_EVERY_X_MS);
-            // TODO Request Animation Frame
+            requestAnimationFrame(animationStep);
+        };
+
+        /**
+         * Führt einen Animationsschritt aus.
+         * @param {DOMHighResTimeStamp} timestamp - aktueller Zeitpunkt
+         */
+        var animationStep = function(timestamp){
+            curWidth = calcBrowserWidth(timestamp);
+            viewportSize.changeWidth(curWidth, containsBrowserOffset);
+            checkAnimationEnd();
         };
 
         defer = Promise.defer();
