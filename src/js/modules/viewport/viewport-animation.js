@@ -88,17 +88,16 @@ function($, viewportSize) {
 
         /**
          * Berechnet die Browserbreite, auf die der Browser im aktuellen Animationsschritt animiert werden sollte.
-         * @param {DOMHighResTimeStamp} timestamp - aktueller Zeitpunkt
+         * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
          * @returns {number}
          */
-        var calcBrowserWidth = function (timestamp) {
-            var currentCall = timestamp, // $.now(),
-                elapsedTime,
+        var calcBrowserWidth = function (currentTime) {
+            var elapsedTime,
                 animationDist;
 
-            lastCall = !lastCall ? timestamp : lastCall;
-            elapsedTime = currentCall - lastCall;
-            lastCall = currentCall;
+            lastCall = !lastCall ? currentTime : lastCall;
+            elapsedTime = currentTime - lastCall;
+            lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
 
             if (start >= end) {
@@ -131,10 +130,10 @@ function($, viewportSize) {
 
         /**
          * Führt einen Animationsschritt aus.
-         * @param {DOMHighResTimeStamp} timestamp - aktueller Zeitpunkt
+         * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
          */
-        var animationStep = function(timestamp){
-            curWidth = calcBrowserWidth(timestamp);
+        var animationStep = function(currentTime){
+            curWidth = calcBrowserWidth(currentTime);
             viewportSize.changeWidth(curWidth, containsBrowserOffset);
             checkAnimationEnd();
         };
