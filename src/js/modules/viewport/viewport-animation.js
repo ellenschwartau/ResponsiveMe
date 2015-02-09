@@ -32,7 +32,7 @@ function($, viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            defer;
+            deferredPromise;            //
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
@@ -56,7 +56,7 @@ function($, viewportSize) {
             if (doneCalls < wantedCalls) {
                 animate(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
             } else {
-                defer.resolve();
+                deferredPromise.resolve();
             }
         };
 
@@ -115,11 +115,10 @@ function($, viewportSize) {
          * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
          * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
          * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
-         * TODO Dokumentation
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-            defer = Promise.defer();
+            deferredPromise = Promise.defer();
             calcAnimationData(
                 animationDuration, startWidth, endWidth, wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset
             );
@@ -138,7 +137,7 @@ function($, viewportSize) {
             checkAnimationEnd();
         };
 
-        defer = Promise.defer();
+        deferredPromise = Promise.defer();
         // Animation anstoßen
         animate(
             animationDuration,
@@ -148,7 +147,7 @@ function($, viewportSize) {
             doneAnimationCalls,
             containsBrowserOffset
         );
-        return defer.promise;
+        return deferredPromise.promise;
     };
 
     return {
