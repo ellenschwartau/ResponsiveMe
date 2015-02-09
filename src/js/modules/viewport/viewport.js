@@ -316,8 +316,6 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
             // inner/outer Switch und maximale Werte der Scrollbars aktualisieren
             $element.prop('checked', value);
             sizesContainBrowserOffset = value;
-            initWidthScrollBar();
-            initHeightScrollBar();
         });
     };
 
@@ -362,6 +360,8 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
         initResolutionDropDown();
         initAnimation();
         initSwitchOrientationButton();
+        initWidthScrollBar();
+        initHeightScrollBar();
         handleMessages();
     };
 
