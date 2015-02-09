@@ -115,6 +115,7 @@ function($, viewportSize) {
          * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
          * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
          * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+         * // TODO Bild in Doku austauschen
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
