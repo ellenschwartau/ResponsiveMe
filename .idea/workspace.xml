@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="Umbenannt handleShowGrid in handleShowElements">
-      <change type="MOVED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\js\localStorage\local-storage.js" afterPath="$PROJECT_DIR$/src/js/helper/local-storage.js" />
-      <change type="MOVED" beforePath="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\js\modules\config.js" afterPath="$PROJECT_DIR$/src/js/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/requirejs/requireJsConfig.js" afterPath="$PROJECT_DIR$/src/js/requirejs/requireJsConfig.js" />
+    <list default="true" id="fcaef1ed-225b-460a-b87b-5517fa730d75" name="Default" comment="testversuche">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ResponsiveMe.iws" />
@@ -36,17 +33,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="local-storage.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/js/helper/local-storage.js">
+      <file leaf-file-name="requireConfig.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test-karma/requireConfig.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.90340906" vertical-offset="877" max-vertical-offset="2091">
-              <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="748">
+              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="karma.conf.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test-karma/karma.conf.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1326">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquerySpec.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test-karma/specs/jquerySpec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+              <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#48#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="55777">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="configSpec.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test-karma/specs/configSpec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="272">
+              <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Push.Settings">
+    <option name="myUpdateMethod" value="REBASE" />
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -60,17 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/css/includes/_includes.scss" />
-        <option value="$PROJECT_DIR$/src/css/includes/input/_input.scss" />
-        <option value="$PROJECT_DIR$/src/css/includes/input/_input-number.scss" />
-        <option value="$PROJECT_DIR$/src/css/_vars.scss" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/html/modules/viewport.html" />
-        <option value="$PROJECT_DIR$/src/css/popup.scss" />
-        <option value="$PROJECT_DIR$/src/css/includes/atoms/input/_includes-text.js" />
-        <option value="$PROJECT_DIR$/src/css/includes/atoms/input/_input-text.scss" />
-        <option value="$PROJECT_DIR$/src/css/includes/atoms/input/_input-number.scss" />
-        <option value="$PROJECT_DIR$/src/css/includes/atoms/input/_input-common.scss" />
         <option value="$PROJECT_DIR$/src/css/modules/_modules.scss" />
         <option value="$PROJECT_DIR$/src/js/main.js" />
         <option value="$PROJECT_DIR$/src/html/modules/template.html" />
@@ -111,6 +144,17 @@
         <option value="$PROJECT_DIR$/src/js/modules/grid/grid.js" />
         <option value="$PROJECT_DIR$/src/js/modules/viewport/viewport.js" />
         <option value="$PROJECT_DIR$/src/js/requirejs/requireJsConfig.js" />
+        <option value="$PROJECT_DIR$/src/js/requirejs/config.js" />
+        <option value="$PROJECT_DIR$/src/test/runTests.js" />
+        <option value="$PROJECT_DIR$/src/test/specs/config.spec.js" />
+        <option value="$PROJECT_DIR$/src/test-2/jasmine/jasmine-html.js" />
+        <option value="$PROJECT_DIR$/src/test-2/jasmine/jasmine.css.scss" />
+        <option value="$PROJECT_DIR$/src/test-2/jasmine/jasmine.css" />
+        <option value="$PROJECT_DIR$/src/test-2/jasmine/jasmine.js" />
+        <option value="$PROJECT_DIR$/src/test/requireConfig.js" />
+        <option value="$PROJECT_DIR$/src/test-2/specRunner.html" />
+        <option value="$PROJECT_DIR$/src/test/karma.conf.js" />
+        <option value="$PROJECT_DIR$/src/test/specs/jquerySpec.js" />
       </list>
     </option>
   </component>
@@ -149,6 +193,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -195,7 +240,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="test-karma" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ResponsiveMe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ResponsiveMe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test-0" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -216,10 +279,6 @@
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="requirejs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -231,105 +290,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contentScripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResponsiveMe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -353,196 +319,19 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\test-2" />
+      <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\test" />
       <recent name="$PROJECT_DIR$/src/js/libs/ace/src-noconflict/snippets" />
       <recent name="$PROJECT_DIR$/src/js/libs/ace/src-noconflict" />
       <recent name="$PROJECT_DIR$/src/js/libs/ace" />
-      <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\html\modules" />
-      <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\test" />
       <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\js" />
       <recent name="C:\Users\Ellipirelli\IdeaProjects\ResponsiveMe\src\js\helper" />
       <recent name="$PROJECT_DIR$/src/js/helper" />
       <recent name="$PROJECT_DIR$/src/js/contentScripts" />
-      <recent name="$PROJECT_DIR$/src/js/requirejs" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="Moments ago" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/helper/styles/stylesheet-parser.js</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/helper/tools.js</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/background_background-access.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/background_background.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/conf.json</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/contentScripts_cs-browser-size.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/contentScripts_cs-media-queries.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/contentScripts_cs-styles.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/contentScripts_cs-visualize-elements.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/helper_ace-helper.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/helper_extension.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/helper_styles_style-editor.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/helper_styles_stylesheet-parser.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/helper_tools.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/index.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/main.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-activeMediaQueries.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-allMediaQueries.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-background.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-backgroundAccess.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-browserOffset.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-codeEditorHelper.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-config.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-csBrowserSize.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-csMediaQueries.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-csStyles.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-extension.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-grid.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-main.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-matchMedia.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-mediaQueries.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-messageHandling.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-modules.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-newMediaQuery.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-popup.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-settings.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-styleEditor.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-stylesheetParser.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-tools.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-viewport.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-viewportAnimation.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-viewportSize.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-visualizeElements.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_config.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_grid_grid.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_grid_visualize-elements.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_mediaQueries_active-media-queries.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_mediaQueries_all-media-queries.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_mediaQueries_match-media.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_mediaQueries_media-queries.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_mediaQueries_new-media-query.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_viewport_browser-offset.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_viewport_viewport-animation.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_viewport_viewport-size.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/modules_viewport_viewport.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/popup_module.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/popup_popup.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/popup_settings.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/requirejs_requireContent.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/modules/grid/grid.js</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/modules/viewport/viewport.js</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/requirejs/requireJsConfig.js</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/manifest.json</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/localStorage_local-storage.js.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/jsdoc/module-localStorage.html</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/js/localStorage/local-storage.js</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -660,18 +449,8 @@
       <workItem from="1421741492000" duration="24515000" />
       <workItem from="1422623381225" duration="7977000" />
       <workItem from="1422888062716" duration="4576000" />
-    </task>
-    <task id="LOCAL-00003" summary="Animationen der Module bei Mouseover, einbinden über javascript">
-      <created>1419872326560</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1419872326560</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Anfang Einstellungen im Footer">
-      <created>1419872888978</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1419872888978</updated>
+      <workItem from="1423554467446" duration="14162000" />
+      <workItem from="1423604829226" duration="967000" />
     </task>
     <task id="LOCAL-00005" summary="fehlende Dateien hinzugefügt">
       <created>1419872975731</created>
@@ -955,17 +734,29 @@
       <option name="project" value="LOCAL" />
       <updated>1422894663133</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Testversuche">
+      <created>1423604438503</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1423604438503</updated>
+    </task>
+    <task id="LOCAL-00053" summary="testversuche">
+      <created>1423605941726</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1423605941764</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193137000" />
+    <option name="totallyTimeSpent" value="208266000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2620321" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32841823" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -975,23 +766,23 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3248322" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32348993" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2613941" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18830334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26156813" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14845759" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22673796" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22654155" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1042,8 +833,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="chrome.windows.gerCurrent verwenden" />
-    <MESSAGE value="obere linke Ecke muss nicht ausgelesen werden, beim Skalieren des Fensters" />
     <MESSAGE value="Auslagern der Funktionalität zum Ermitteln des BrowserOffsets in die browser-offset.js" />
     <MESSAGE value="Auslagern der Animation in die viewport-animation.js" />
     <MESSAGE value="Aus-/ und Einblenden des Popups bei mouseleave/mouseenter" />
@@ -1067,7 +856,9 @@
     <MESSAGE value="Fix Benutzereingaben-Vervollständigung Breite Grid" />
     <MESSAGE value="tools parsing in praser umbenannt" />
     <MESSAGE value="Speichern der letzten inner/outer Einstellung" />
-    <option name="LAST_COMMIT_MESSAGE" value="Speichern der letzten inner/outer Einstellung" />
+    <MESSAGE value="Testversuche" />
+    <MESSAGE value="testversuche" />
+    <option name="LAST_COMMIT_MESSAGE" value="testversuche" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1076,76 +867,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/css/includes/atoms/_heading.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="714">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/modules/requireConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="578">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/popup.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="1921">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/_vars.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="629">
-          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/includes/atoms/input/_input.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="510">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/includes/atoms/input/_input-select.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="238">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/includes/molecules/_on-off-switch.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="38.807693" vertical-offset="1009" max-vertical-offset="1700">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/modules/_viewport.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="391">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/includes/atoms/input/_input-number.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="136">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/modules/_modules.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="697">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/css/includes/_includes.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="238">
@@ -1238,13 +959,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/helper/styles/stylesheet-parser.js">
@@ -1265,13 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="952">
           <caret line="12" column="31" selection-start-line="11" selection-start-column="10" selection-end-line="12" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/helper/extension.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="553" max-vertical-offset="1666">
-          <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1314,7 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27062228" vertical-offset="0" max-vertical-offset="691">
           <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1322,7 +1035,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1088">
           <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1344,7 +1056,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.023709903" vertical-offset="0" max-vertical-offset="717">
           <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1352,7 +1063,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0753138" vertical-offset="1524" max-vertical-offset="2431">
           <caret line="135" column="39" selection-start-line="135" selection-start-column="39" selection-end-line="135" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1360,7 +1070,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="908" max-vertical-offset="1802">
           <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1368,7 +1077,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1376,7 +1084,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8535565" vertical-offset="0" max-vertical-offset="1258">
           <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1384,7 +1091,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.59693164" vertical-offset="1714" max-vertical-offset="2431">
           <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,7 +1098,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17221418" vertical-offset="0" max-vertical-offset="691">
           <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1400,7 +1105,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.6153846" vertical-offset="40" max-vertical-offset="833">
           <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1408,7 +1112,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="867">
           <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1416,7 +1119,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1629" max-vertical-offset="2346">
           <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1424,7 +1126,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="6.852162" vertical-offset="0" max-vertical-offset="5712">
           <caret line="289" column="6" selection-start-line="289" selection-start-column="6" selection-end-line="289" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1432,22 +1133,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16596931" vertical-offset="0" max-vertical-offset="717">
           <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/requirejs/requireJsConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="133" max-vertical-offset="850">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/helper/local-storage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90340906" vertical-offset="877" max-vertical-offset="2091">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1330" max-vertical-offset="2057">
           <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test-0/specs/config.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="718">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/requirejs/requireConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="718">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/requirejs/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029247912" vertical-offset="183" max-vertical-offset="901">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test-karma/specs/configSpec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test-karma/requireConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test-karma/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test-karma/specs/jquerySpec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#48#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="55777">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
