@@ -30,7 +30,6 @@
     "js": [
       "/js/libs/require.js",
       "/js/requirejs/requireContent.js",
-      "/js/requirejs/config.js",
       "/js/requirejs/requireConfig.js",
       "/js/contentScripts/cs-media-queries.js",
       "/js/contentScripts/cs-browser-size.js",
