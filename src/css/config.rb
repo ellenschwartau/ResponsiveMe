@@ -1,3 +1,8 @@
+#--------------------------------------------------#
+# Die config.rb enthält Konfigurationen für die    #
+# Übersetzung der SASS-Dateien in CSS.             #
+#--------------------------------------------------#
+
 require 'compass/import-once/activate'
 # Require any additional compass plugins here.
 

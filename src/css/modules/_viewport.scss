@@ -1,12 +1,17 @@
+/**
+ * Enthält die Styles des Viewport Moduls.
+ */
 #moduleViewport {
-  .onoffswitch-switch {
-    background: $grey;
-  }
-  .onoffswitch-inner:before {
-    content: "OUTER";
-  }
-  .onoffswitch-inner:after {
-    content: "INNER";
+  .onoffswitch {
+    .switch {
+      background: $grey;
+    }
+    .caption:before {
+      content: "OUTER";
+    }
+    .caption:after {
+      content: "INNER";
+    }
   }
 
   #switchOrientationButton {

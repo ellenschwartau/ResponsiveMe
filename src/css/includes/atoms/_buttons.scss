@@ -1,0 +1,33 @@
+/**
+ * Enthält die Styles der unterschiedlichen Buttons.
+ */
+a.button {
+  color: $light-grey;
+  text-decoration: none;
+  background-color: $green;
+  height: $button-heigth;
+  border-radius: $button-border-radius;
+  padding: $button-padding;
+  line-height: $button-heigth;
+  font-size: 10px;
+  display: inline-block;
+  width: 91%;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &.small {
+    width: 5px;
+    margin-left: 5px;
+  }
+
+  &.medium {
+    width: 40%;
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  &:hover {
+    background-color: $light-green;
+  }
+}

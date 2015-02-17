@@ -1,47 +1,10 @@
 /**
- * Bündelt die Stylesheets aller Module.
+ * Bündelt die modulspezifischen Style Sheets.
  */
 .item {
   margin: 5px 0;
   border-radius: 5px 5px 5px 5px;
   padding: 5px;
-}
-
-a.button {
-  color: $light-grey;
-  text-decoration: none;
-  background-color: $green;
-  height: $button-heigth;
-  border-radius: $button-border-radius;
-  padding: $button-padding;
-  line-height: $button-heigth;
-  font-size: 10px;
-  display: inline-block;
-  width: 91%;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 10px;
-
-  &.small {
-    width: 5px;
-    margin-left: 5px;
-  }
-
-  &.medium {
-    width: 40%;
-    margin-right: 1%;
-    margin-left: 1%;
-  }
-
-  &:hover {
-    background-color: $light-green;
-  }
-}
-
-.scroll-bar-label {
-  width: 21%;
-  display: inline-block;
-  text-align: right;
 }
 
 @import "viewport";

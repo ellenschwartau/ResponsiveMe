@@ -4,48 +4,60 @@
  */
 /**
  * Definiert gemeinsam genutzte CSS Variablen, wie Farben, Fonts und Strings.
- * Hier werden auch global benötigte Dateien eingebunden.
+ * Hier werden auch global ben├Âtigte Dateien eingebunden.
  */
 /* fonts */
 @font-face {
   font-family: "Montserrat Light";
-  src: url('../fonts/Montserrat-Light.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Light.otf?1419776508') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Regular";
-  src: url('../fonts/Montserrat-Regular.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Regular.otf?1419776509') format('opentype');
 }
 @font-face {
   font-family: "Montserrat Black";
-  src: url('../fonts/Montserrat-Black.otf?1421411244') format('opentype');
+  src: url('../fonts/Montserrat-Black.otf?1419776508') format('opentype');
 }
 /* colors */
 /* styles */
 /* buttons */
 /**
- * Bündelt die übergreifenden Styles.
+ * B├╝ndelt die ├╝bergreifenden Styles.
  */
-/* line 1, ../includes/atoms/_body.scss */
+/**
+ * Enth├ñlt die Styles des html-Elements.
+ */
+/* line 4, ../includes/atoms/_html.scss */
+html {
+  background: #323232;
+  color: #f2f2f2;
+}
+
+/**
+ * Enth├ñlt die Styles des body-Elements.
+ */
+/* line 4, ../includes/atoms/_body.scss */
 html, body {
   background: #323232;
   color: #f2f2f2;
 }
 
-/* line 5, ../includes/atoms/_body.scss */
+/* line 8, ../includes/atoms/_body.scss */
 body {
   min-width: 400px;
 }
-/* line 7, ../includes/atoms/_body.scss */
+/* line 10, ../includes/atoms/_body.scss */
 body.hide {
   display: none;
 }
-/* line 9, ../includes/atoms/_body.scss */
+/* line 12, ../includes/atoms/_body.scss */
 html:hover body.hide {
   display: block;
 }
 
 /**
- * Definiert das Aussehen der Überschriften
+ * Definiert das Aussehen der ├£berschriften
  */
 /* line 4, ../includes/atoms/_heading.scss */
 h1 {
@@ -86,7 +98,7 @@ h4:hover {
 }
 
 /**
- * Enthält die Styles für Input Elemente.
+ * Enth├ñlt die Styles f├╝r Input Elemente.
  */
 /* line 4, ../includes/atoms/input/_input.scss */
 input[type=number],
@@ -109,7 +121,7 @@ input[type=color]:hover {
 }
 
 /**
- * Definiert das Aussehen von Input Feldern des Typs Range (Schieberegler)
+ * Definiert das Aussehen von Input Elementen des Typs Range (Schieberegler)
  */
 /* line 4, ../includes/atoms/input/_input-range.scss */
 input[type=range] {
@@ -117,15 +129,19 @@ input[type=range] {
   width: 75%;
   margin: 10px 2px;
 }
+/* line 10, ../includes/atoms/input/_input-range.scss */
+input[type=range]:focus {
+  outline: none;
+}
 
-/* line 12, ../includes/atoms/input/_input-range.scss */
+/* line 16, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-runnable-track {
   height: 2px;
   background: #f2f2f2;
   border-radius: 3px;
 }
 
-/* line 19, ../includes/atoms/input/_input-range.scss */
+/* line 23, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -135,15 +151,10 @@ input[type=range]::-webkit-slider-thumb {
   background: #3f6658;
   margin-top: -2px;
 }
-/* line 28, ../includes/atoms/input/_input-range.scss */
+/* line 32, ../includes/atoms/input/_input-range.scss */
 input[type=range]::-webkit-slider-thumb:hover {
   background: #4f806e;
   cursor: pointer;
-}
-
-/* line 34, ../includes/atoms/input/_input-range.scss */
-input[type=range]:focus {
-  outline: none;
 }
 
 /* line 39, ../includes/atoms/input/_input-range.scss */
@@ -151,17 +162,26 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #ccc;
 }
 
-/* line 1, ../includes/atoms/input/_input-number.scss */
+/**
+ * Enth├ñlt die Styles f├╝r Input Elemente des Typs number.
+ */
+/* line 4, ../includes/atoms/input/_input-number.scss */
 input[type=number] {
   width: 24%;
 }
 
-/* line 1, ../includes/atoms/input/_input-text.scss */
+/**
+ * Enth├ñlt die Styles f├╝r Input Elemente des Typs text.
+ */
+/* line 4, ../includes/atoms/input/_input-text.scss */
 input[type=text] {
   width: 50%;
 }
 
-/* line 1, ../includes/atoms/input/_input-select.scss */
+/**
+ * Enth├ñlt die Styles f├╝r Dropdown-Elemente.
+ */
+/* line 4, ../includes/atoms/input/_input-select.scss */
 select {
   height: 20px;
   border-radius: 20px;
@@ -172,7 +192,10 @@ select {
   width: 100%;
 }
 
-/* line 1, ../includes/atoms/input/_input-color.scss */
+/**
+ * Enth├ñlt die Styles f├╝r Input Elemente des Typs color.
+ */
+/* line 4, ../includes/atoms/input/_input-color.scss */
 input[type=color] {
   background-color: transparent;
   cursor: pointer;
@@ -181,7 +204,7 @@ input[type=color] {
   top: 1px;
 }
 
-/* line 10, ../includes/atoms/input/_input-color.scss */
+/* line 13, ../includes/atoms/input/_input-color.scss */
 ::-webkit-color-swatch {
   border: solid #f2f2f2 2px;
   height: 100%;
@@ -190,7 +213,7 @@ input[type=color] {
 }
 
 /**
-  * Überschreibt die vordefinierten Styles der Scrollbars.
+  * ├£berschreibt die vordefinierten Styles der Scrollbars.
   */
 /* line 4, ../includes/atoms/_scrollbar.scss */
 ::-webkit-scrollbar {
@@ -211,49 +234,96 @@ input[type=color] {
   background-color: #40403d;
 }
 
+/**
+ * Enth├ñlt die Styles der unterschiedlichen Buttons.
+ */
+/* line 4, ../includes/atoms/_buttons.scss */
+a.button {
+  color: #f2f2f2;
+  text-decoration: none;
+  background-color: #3f6658;
+  height: 20px;
+  border-radius: 20px;
+  padding: 0px 4%;
+  line-height: 20px;
+  font-size: 10px;
+  display: inline-block;
+  width: 91%;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+/* line 19, ../includes/atoms/_buttons.scss */
+a.button.small {
+  width: 5px;
+  margin-left: 5px;
+}
+/* line 24, ../includes/atoms/_buttons.scss */
+a.button.medium {
+  width: 40%;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+/* line 30, ../includes/atoms/_buttons.scss */
+a.button:hover {
+  background-color: #4f806e;
+}
+
+/**
+ * Enth├ñlt die Styles der Labels.
+ */
+/* line 4, ../includes/atoms/_labels.scss */
+.scroll-bar-label {
+  width: 21%;
+  display: inline-block;
+  text-align: right;
+}
+
 /*
- * Styles für eine Checkbox mit on-off-switch button
+ * Styles f├╝r eine Checkbox mit on-off-switch button
  *
  * Folgendes HTML muss eingebunden werden:
 
  <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchInnerOuter" checked>
-      <label class="onoffswitch-label" for="switchInnerOuter">
-          <span class="onoffswitch-inner"></span>
-          <span class="onoffswitch-switch"></span>
+      <input type="checkbox" name="onoffswitch" class="checkbox" id="switchInnerOuter" checked>
+      <label class="label" for="switchInnerOuter">
+          <span class="caption"></span>
+          <span class="switch"></span>
       </label>
   </div>
 
- * Die Beschriftung der labels kann wie folgt überschrieben werden:
+ * Die Beschriftung der labels kann wie folgt ├╝berschrieben werden:
 
-   .onoffswitch-inner:before {
-    content: "OUTER";
-  }
-  .onoffswitch-inner:after {
-    content: "INNER";
-  }
+   .onoffswitch {
+      .caption:before {
+          content: "OUTER";
+      }
+      .caption:after {
+         content: "INNER";
+      }
+   }
 
  */
-/* line 24, ../includes/molecules/_on-off-switch.scss */
+/* line 26, ../includes/molecules/_on-off-switch.scss */
 .onoffswitch {
   position: relative;
   width: 70px;
   margin: 3px;
 }
-/* line 29, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-checkbox {
+/* line 31, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .checkbox {
   display: none;
 }
-/* line 33, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+/* line 35, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .checkbox:checked + .label .caption {
   margin-left: 0;
 }
-/* line 36, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+/* line 38, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .checkbox:checked + .label .switch {
   right: 0px;
 }
-/* line 42, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label {
+/* line 44, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label {
   display: block;
   overflow: hidden;
   cursor: pointer;
@@ -264,37 +334,37 @@ input[type=color] {
   color: #f2f2f2;
   background-color: #3f6658;
 }
-/* line 53, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label:hover {
+/* line 55, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label:hover {
   background-color: #4f806e;
 }
-/* line 57, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label .onoffswitch-inner {
+/* line 59, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label .caption {
   display: block;
   width: 200%;
   margin-left: -100%;
   transition: margin 0.3s ease-in 0s;
 }
-/* line 63, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label .onoffswitch-inner:before
-, .onoffswitch .onoffswitch-label .onoffswitch-inner:after {
+/* line 65, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label .caption:before
+, .onoffswitch .label .caption:after {
   display: block;
   float: left;
   width: 42%;
 }
-/* line 70, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label .onoffswitch-inner:before {
+/* line 72, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label .caption:before {
   content: "ON";
   padding-left: 10px;
 }
-/* line 75, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label .onoffswitch-inner:after {
+/* line 77, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label .caption:after {
   content: "OFF";
   padding-right: 10px;
   text-align: right;
 }
-/* line 82, ../includes/molecules/_on-off-switch.scss */
-.onoffswitch .onoffswitch-label .onoffswitch-switch {
+/* line 84, ../includes/molecules/_on-off-switch.scss */
+.onoffswitch .label .switch {
   display: block;
   width: 15px;
   margin: 3px;
@@ -307,7 +377,10 @@ input[type=color] {
   transition: all 0.3s ease-in 0s;
 }
 
-/* line 1, ../includes/molecules/_editor.scss */
+/**
+ * Enth├ñlt die Styles der Code Editoren.
+ */
+/* line 4, ../includes/molecules/_editor.scss */
 .editor {
   height: 100px;
   margin-bottom: 10px;
@@ -389,33 +462,33 @@ input[type=color] {
   width: 145px;
 }
 /* line 79, ../popup.scss */
-.settings .onoffswitch .onoffswitch-inner:before, .settings .onoffswitch .onoffswitch-inner:after {
+.settings .onoffswitch .caption:before, .settings .onoffswitch .caption:after {
   width: 46%;
 }
 /* line 84, ../popup.scss */
-.settings .onoffswitch .onoffswitch-switch {
+.settings .onoffswitch .switch {
   right: 123px;
 }
 /* line 89, ../popup.scss */
-.settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:before {
+.settings .onoffswitch.hints .label .caption:before {
   content: "Hinweise ausschalten";
 }
 /* line 92, ../popup.scss */
-.settings .onoffswitch.hints .onoffswitch-label .onoffswitch-inner:after {
+.settings .onoffswitch.hints .label .caption:after {
   content: "Hinweise einschalten";
 }
 /* line 98, ../popup.scss */
-.settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:before {
+.settings .onoffswitch.modules .label .caption:before {
   content: "Alle ausblenden";
 }
 /* line 101, ../popup.scss */
-.settings .onoffswitch.modules .onoffswitch-label .onoffswitch-inner:after {
+.settings .onoffswitch.modules .label .caption:after {
   content: "Alle einblenden";
 }
 
 /* --- einbinden der Module --- */
 /**
- * Bündelt die Stylesheets aller Module.
+ * B├╝ndelt die modulspezifischen Style Sheets.
  */
 /* line 4, ../modules/_modules.scss */
 .item {
@@ -424,58 +497,22 @@ input[type=color] {
   padding: 5px;
 }
 
-/* line 10, ../modules/_modules.scss */
-a.button {
-  color: #f2f2f2;
-  text-decoration: none;
-  background-color: #3f6658;
-  height: 20px;
-  border-radius: 20px;
-  padding: 0px 4%;
-  line-height: 20px;
-  font-size: 10px;
-  display: inline-block;
-  width: 91%;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-/* line 25, ../modules/_modules.scss */
-a.button.small {
-  width: 5px;
-  margin-left: 5px;
-}
-/* line 30, ../modules/_modules.scss */
-a.button.medium {
-  width: 40%;
-  margin-right: 1%;
-  margin-left: 1%;
-}
-/* line 36, ../modules/_modules.scss */
-a.button:hover {
-  background-color: #4f806e;
-}
-
-/* line 41, ../modules/_modules.scss */
-.scroll-bar-label {
-  width: 21%;
-  display: inline-block;
-  text-align: right;
-}
-
-/* line 2, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-switch {
+/**
+ * Enth├ñlt die Styles des Viewport Moduls.
+ */
+/* line 6, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch .switch {
   background: #40403d;
 }
-/* line 5, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-inner:before {
+/* line 9, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch .caption:before {
   content: "OUTER";
 }
-/* line 8, ../modules/_viewport.scss */
-#moduleViewport .onoffswitch-inner:after {
+/* line 12, ../modules/_viewport.scss */
+#moduleViewport .onoffswitch .caption:after {
   content: "INNER";
 }
-/* line 12, ../modules/_viewport.scss */
+/* line 17, ../modules/_viewport.scss */
 #moduleViewport #switchOrientationButton {
   background-image: url('../images/icon-switch-48px.png');
   display: inline-block;
@@ -487,13 +524,13 @@ a.button:hover {
   top: 2.5%;
   right: 2.5%;
 }
-/* line 27, ../modules/_viewport.scss */
+/* line 32, ../modules/_viewport.scss */
 #moduleViewport #switchOrientationButton:hover {
   cursor: pointer;
 }
 
 /**
- * Enthält die Styles des Visualisierungs-Moduls.
+ * Enth├ñlt die Styles des Media Quqery Moduls.
  */
 /* line 5, ../modules/_mediaQueries.scss */
 #moduleMediaQueries #mediaQueries {

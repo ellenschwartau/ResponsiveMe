@@ -75,30 +75,30 @@
   .onoffswitch {
     width: 145px;
 
-    .onoffswitch-inner {
+    .caption {
       &:before, &:after {
         width: 46%;
       }
     }
 
-    .onoffswitch-switch {
+    .switch {
       right: 123px;
     }
 
-    &.hints .onoffswitch-label {
-      .onoffswitch-inner:before {
+    &.hints .label {
+      .caption:before {
         content: "Hinweise ausschalten";
       }
-      .onoffswitch-inner:after {
+      .caption:after {
         content: "Hinweise einschalten";
       }
     }
 
-    &.modules .onoffswitch-label {
-      .onoffswitch-inner:before {
+    &.modules .label {
+      .caption:before {
         content: "Alle ausblenden";
       }
-      .onoffswitch-inner:after {
+      .caption:after {
         content: "Alle einblenden";
       }
     }

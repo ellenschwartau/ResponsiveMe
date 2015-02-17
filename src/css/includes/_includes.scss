@@ -1,9 +1,12 @@
 /**
  * Bündelt die übergreifenden Styles.
  */
+@import "atoms/html";
 @import "atoms/body";
 @import "atoms/heading";
 @import "atoms/input/input";
 @import "atoms/scrollbar";
+@import "atoms/buttons";
+@import "atoms/labels";
 @import "molecules/on-off-switch";
 @import "molecules/editor";

@@ -4,21 +4,23 @@
  * Folgendes HTML muss eingebunden werden:
 
  <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchInnerOuter" checked>
-      <label class="onoffswitch-label" for="switchInnerOuter">
-          <span class="onoffswitch-inner"></span>
-          <span class="onoffswitch-switch"></span>
+      <input type="checkbox" name="onoffswitch" class="checkbox" id="switchInnerOuter" checked>
+      <label class="label" for="switchInnerOuter">
+          <span class="caption"></span>
+          <span class="switch"></span>
       </label>
   </div>
 
  * Die Beschriftung der labels kann wie folgt überschrieben werden:
 
-   .onoffswitch-inner:before {
-    content: "OUTER";
-  }
-  .onoffswitch-inner:after {
-    content: "INNER";
-  }
+   .onoffswitch {
+      .caption:before {
+          content: "OUTER";
+      }
+      .caption:after {
+         content: "INNER";
+      }
+   }
 
  */
 .onoffswitch {
@@ -26,20 +28,20 @@
   width: 70px;
   margin: 3px;
 
-  .onoffswitch-checkbox {
+  .checkbox {
     display: none;
 
-    &:checked + .onoffswitch-label {
-      & .onoffswitch-inner {
+    &:checked + .label {
+      & .caption {
         margin-left: 0;
       }
-      .onoffswitch-switch {
+      .switch {
         right: 0px;
       }
     }
   }
 
-  .onoffswitch-label {
+  .label {
     display: block;
     overflow: hidden;
     cursor: pointer;
@@ -54,7 +56,7 @@
       background-color: $light-green;
     }
 
-    .onoffswitch-inner {
+    .caption {
       display: block;
       width: 200%;
       margin-left: -100%;
@@ -79,7 +81,7 @@
       }
     }
 
-    .onoffswitch-switch {
+    .switch {
       display: block;
       width: 15px;
       margin: 3px;
