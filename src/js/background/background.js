@@ -6,28 +6,25 @@ require([
  * Sie läuft durchgehend im Hintergrund und hält Daten und Funktionen zur Kommunikation zwischen
  * den einzelnen Bestandteilen der Erweiterung bereit.
  * @exports background
- * @param {Object} $ - JQuery
- * @param {module} matchMedia - matchMedia-Modul
- * @see module:matchMedia
  * @param {module} extension - extension-Modul
  * @see module:extension
  */
-function($, matchMedia, extension){
-    var outerBrowserHeight,
-        innerBrowserHeight,
-        outerBrowserWidth,
-        innerBrowserWidth,
-        availBrowserHeight,
-        availBrowserWidth,
-        browserOffset = {
+function(extension){
+    var outerBrowserHeight,     // äußere Browser Höhe
+        innerBrowserHeight,     // innere Browser Höhe
+        outerBrowserWidth,      // äußere Browser Breite
+        innerBrowserWidth,      // innere Browser Breite
+        availBrowserHeight,     // verfügbare Höhe
+        availBrowserWidth,      // verfügbare Breite
+        browserOffset = {       // Browser Offset
             x: 0,
             y: 0
         },
-        mediaList;
+        mediaList;              // aktuell greifende Media Queries
 
     /**
      * Berechnet ausgehend von den inner und outer Browsergrößen den Offset des Browsers,
-     * den er beispielsweise durch Scroll- und Toolbars einnimmt.
+     * also den Platz den dieser beispielsweise durch Scroll- und Toolbars einnimmt.
      * @param {{outerBrowserHeight: int, innerBrowserHeight: int, outerBrowserWidth: int, innerBrowserWidth: int}} data - Größenangaben
      */
     var calcBrowserOffset = function(data){
@@ -37,8 +34,7 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Speichert die inner und outer Größe des Browsers zwischen
-     * und gibt diese Werte der Hintergrundseite bekannt.
+     * Speichert die inner und outer Größe des Browsers zwischen.
      * @param {{outerBrowserHeight: int, innerBrowserHeight: int, outerBrowserWidth: int, innerBrowserWidth: int}} data - Größenangaben
      */
     var saveBrowserSizes = function(data) {
@@ -50,7 +46,8 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Behandelt die Aktuelle Browser-Größe bei einer Größenänderung.
+     * Behandelt die aktuelle Browsergröße bei einer Skalierung des Browsers.
+     * Die Größenangaben werden dabei aktualisiert und der Browser Offset neu berechnet.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleCurrentBrowserSizeMessage = function(request){
@@ -60,7 +57,7 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Behandelt die Anzeige der aktuell greifenden Media Angaben.
+     * Aktualisiert die aktuell greifenden Media Queries.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleCurrentMediaMessage = function(request){
@@ -69,7 +66,7 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Behandelt die erreichbare Browser-Größe.
+     * Aktualisiert die erreichbare Browser-Größe.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleAvailBrowserSizeMessage = function(request){
@@ -89,9 +86,9 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Sendet zu bestimmten Events die Nachricht, dass die Variablen der Hintergundseite aktualisiert werden
-     * sollen. Diese Nachricht wird gesendet, wenn der aktive Tab gewechselt wird, oder ein Tab in ein Fenster
-     * hineingezogen wird.
+     * Sendet zu bestimmten Events die Nachricht, dass die Variablen der Hintergundseite aktualisiert werden sollen.
+     * Diese Nachricht wird gesendet, wenn der aktive Tab gewechselt, ein Tab in ein Fenster hineingezogen,
+     * oder das aktuelle Fenster gewechselt wird.
      */
     var registerUpdateBackgroundPageMessage = function(){
         extension.onActivatedTab(triggerUpdateBackgroundPage);
@@ -110,21 +107,21 @@ function($, matchMedia, extension){
     };
 
     /**
-     * Gibt die Greifenden Media Angaben der Hintergundseite bekannt.
+     * Gibt die aktuell greifenden Media Queries der Hintergundseite bekannt.
      */
     var exportMediaListToBackgoundPage = function(){
         window.mediaList = mediaList;
     };
 
     /**
-     * Gibt den Browser-Offset der Hintergundseite bekannt.
+     * Gibt den Browser Offset der Hintergundseite bekannt.
      */
     var exportBrowserOffsetToBackgoundPage = function(){
         window.browserOffset = browserOffset;
     };
 
     /**
-     * Gibt die Greifenden aktuelle Größe des Browsers der Hintergundseite bekannt.
+     * Gibt die aktuelle Größe des Browsers der Hintergundseite bekannt.
      */
     var exportBrowserSizeToBackgroundPage = function(){
         window.outerBrowserHeight = outerBrowserHeight;

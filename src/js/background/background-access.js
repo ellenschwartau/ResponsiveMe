@@ -2,7 +2,7 @@ define([
     'extension'
 ],
 /**
- * Dieses Skript kapselt den Zugriff auf Funktionen und Variablen der Hintergrundseite der Erweiterung.
+ * Dieses Skript kapselt den Zugriff auf Funktionen und Variablen der Hintergrundseite.
  * @exports backgroundAccess
  * @param {module} extension - extensionModul
  * @see module:extension
@@ -15,7 +15,7 @@ function(extension){
     var background = extension.getBackgroundPage();
 
     /**
-     * Liefert die outer Browser-Größe, inklusive Elementen wie Toolbar oder Scrollbar.
+     * Liefert die äußere Browsergröße, inklusive Elementen wie Toolbar oder Scrollbar.
      * @returns {{width: *, height: *}}
      */
     var getOuterBrowserSize = function(){
@@ -26,7 +26,7 @@ function(extension){
     };
 
     /**
-     * Liefert die inner Browser-Größe, ohne Elemente wie Toolbar oder Scrollbar.
+     * Liefert die innere Browsergröße, ohne Elemente wie Toolbar oder Scrollbar.
      * @returns {{width: *, height: *}}
      */
     var getInnerBrowserSize = function(){
@@ -37,7 +37,8 @@ function(extension){
     };
 
     /**
-     * Liefert die Größe des Browsers
+     * Liefert die Größe des Browsers. In Abhängigkeit zum Parameter werden entweder die inneren oder äußteren
+     * Maße zurückgeliefert.
      * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
      * @returns {{width: int, height: int}}
      */
@@ -55,7 +56,8 @@ function(extension){
     };
 
     /**
-     * Liefert die Höhe des Browsers.
+     * Liefert die Höhe des Browsers. In Abhängigkeit zum Parameter werden entweder die inneren oder äußteren
+     * Maße zurückgeliefert.
      * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
      * @returns {int}
      */
@@ -64,7 +66,8 @@ function(extension){
     };
 
     /**
-     * Liefert die erreichbare Browser-Größe.
+     * Liefert die erreichbare Browser-Größe. In Abhängigkeit zum Parameter werden entweder die maximalen
+     * inneren oder äußteren Maße zurückgeliefert.
      * @param {boolean} includingBrowserOffset - Angabe, ob die Größe inklusive Browserabmessung gesucht wird
      * @returns {{width: int, height: int}}
      */
@@ -78,7 +81,7 @@ function(extension){
 
     /**
      * Liefert die Liste der greifenden Media Angaben.
-     * @returns {Array}
+     * @returns {string[]} - String-Liste der greifenden Media Queries
      */
     var getMediaList = function(){
         return background.mediaList;
@@ -86,7 +89,7 @@ function(extension){
 
     /**
      * Liefert den Offset, den der Browser aktuell durch Elemente Scroll- oder Toolbars einnimmt.
-     * @returns {{x: int, y:int}}
+     * @returns {{x: int, y: int}}
      */
     var getBrowserOffset = function(){
         return background.browserOffset;
