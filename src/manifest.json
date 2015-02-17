@@ -1,10 +1,13 @@
+/**
+ * Manifest Datei - dient der Deklaration der Bestandteile der Chrome Erweiterung.
+ */
 {
-  // required
+  /* required */
   "manifest_version": 2,
   "name": "ResponsiveMe",
   "version": "1.0.0",
 
-  // recommended
+  /* recommended */
   "description": "Chrome Erweiterung, die das Entwickeln von Websites im Responsive Design vereinfacht.",
   "icons": {
     "16": "./css/images/icon-16px.png",           // Browser-Icon
@@ -12,7 +15,7 @@
     "128": "./css/images/icon-128px.png"          // wird bei der Installation angezeigt
   },
 
-  // optional
+  /* optional */
   // Fügt das Plugin zur Toolbar hinzu und setzt den Inhalt des Popups
   "browser_action": {
     "default_icon": "./css/images/icon-16px.png",
@@ -23,10 +26,9 @@
     "http://*/*", "https://*/*",                  // Zugriff auf bestimmte Hosts
     "storage"                                     // Zur Nutzung der chrome.storage-API
   ],
-  // Script and Styles, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
+  // Skripte, die injiziert werden, wenn die URL der Website den regulären Ausdruck erfüllt
   "content_scripts": [{
-    "matches": ["https://*/*", "http://*/*"], // <all_urls>
-    "css": ["./css/stylesheets/inject.css"],
+    "matches": ["<all_urls>"],
     "js": [
       "/js/libs/require.js",
       "/js/requirejs/requireContent.js",
