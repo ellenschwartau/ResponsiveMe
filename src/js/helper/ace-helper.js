@@ -21,10 +21,11 @@ function($){
      * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
      * @param {string} id - CSS-ID des Editors
      * @param {{indexStyleSheet:int,indexRule:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
-     * @param {function} [onBlurCallback] - Funktion, die beim Verlassen des Editors ausgeführt werden soll
+     * @param {string} [bindEvent] - optionaler Name des Events, das behandelt werden soll
+     * @param {function} [onBlurCallback] - optionale Funktion zur Behandlung des Events
      * @returns {Object} - Editor
      */
-    var initCodeEditor = function(id, rule, onBlurCallback) {
+    var initCodeEditor = function(id, rule, bindEvent, onBlurCallback) {
         // Editor Erstellen und Modus sowie Theme setzen
         var editor = ace.edit(id),
             style = rule.fullCss,
@@ -48,8 +49,8 @@ function($){
         // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
         saveEditorData(editor, id, indexStyleSheet, indexRule);
         // Callbacks initialisieren
-        if(onBlurCallback != undefined) {
-            bindBlurCallback(editor, indexStyleSheet, indexRule, id, onBlurCallback);
+        if(onBlurCallback != undefined && bindEvent != undefined) {
+            bindEventCallback(editor, indexStyleSheet, indexRule, id, bindEvent, onBlurCallback);
         }
 
         return editor;
@@ -75,8 +76,8 @@ function($){
      * @param {string} id - CSS-ID des Editors
      * @param {function} callback - Funktion, die aufgerufen werden soll
      */
-    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, id, callback) {
-        editor.on("blur", function(){
+    var bindEventCallback = function(editor, indexStyleSheet, indexRule, id, bindEvent, callback) {
+        editor.on(bindEvent, function(){
             callback(editor.session.getValue(), indexStyleSheet, indexRule, id);
         });
     };
@@ -95,6 +96,13 @@ function($){
             indexStyleSheet: indexStyleSheet,
             indexRule: indexRule
         });
+    };
+
+    /**
+     * Leert die Liste der gespeicherten Editoren.
+     */
+    var clearEditorList = function(){
+        editors = [];
     };
 
     /**
@@ -153,8 +161,9 @@ function($){
     return {
         initCodeEditor: initCodeEditor,
         getEditorValue: getEditorValue,
-        cleatEditorValue: clearEditorValue,
         getEditorData: getEditorData,
-        removeEditorFromList: removeEditorFromList
-    }
+        cleatEditorValue: clearEditorValue,
+        removeEditorFromList: removeEditorFromList,
+        clearEditorList: clearEditorList
+    };
 });

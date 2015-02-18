@@ -29,11 +29,12 @@ function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
             "Es sind keine Media Queries vorhanden.",   // Meldung, falls keine Media Queries gefunden wurden
         $hideMediaQueriesButton =                       // Button um de Media Queries wieder auszublenden
             $("<a id='hideMediaQueriesButton' class='button'>Media Queries ausblenden</a>"),
-        $mediaQueryHtml =                                   // Vorlage für eine Media Query
+        $mediaQueryHtml =                               // Vorlage für eine Media Query
             $("<div class='mediaQuery'>" +
                 "<h4></h4>" +
                 "<div class='editor'></div>" +
-            "</div>");
+            "</div>"),
+        SAVE_MEDIA_QUERY_EVENT = "blur";                // Code-Editor Event, bei dem die Media Query gespeichert werden soll
 
     /**
      * Ermittelt die Media Queries, die in den Styles der Website vorhanden sind.
@@ -103,15 +104,16 @@ function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
      * @param {json} response.data - Daten der Antwort
      */
     var showMediaQueries = function(response){
-        // Eventuell vorher angezeigte Media Queries löschen
+        // Eventuell vorher angezeigte Media Queries und zugehörige Code Editoren löschen
         $mediaQueries.empty();
+        aceHelper.clearEditorList();
         var data = response.data;
         if(data.length > 0) {
             // neue Media Queries einfügen
             $.each(data, function(i, mediaQuery){
                 var id = ID_PREFIX_MEDIA_QUERY + i;
                 $mediaQueries.append(createMediaQueryMarkup(mediaQuery, id));
-                aceHelper.initCodeEditor(id, mediaQuery, saveMediaQuery);
+                aceHelper.initCodeEditor(id, mediaQuery, SAVE_MEDIA_QUERY_EVENT, saveMediaQuery);
             });
             $showMediaQueriesButton.after($hideMediaQueriesButton);
         } else {
