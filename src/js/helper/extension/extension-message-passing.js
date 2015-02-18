@@ -35,15 +35,11 @@ function(){
      */
     var sendMessageToTab = function(data, responseCallback) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(
-                tabs[0].id,
-                data,
-                function(response) {
-                    if(responseCallback != undefined){
-                        responseCallback(response);
-                    }
-                }
-            )
+            if(responseCallback){
+                chrome.tabs.sendMessage(tabs[0].id, data, responseCallback);
+            } else {
+                chrome.tabs.sendMessage(tabs[0].id, data);
+            }
         });
     };
 
