@@ -29,7 +29,7 @@ function($, allMediaQueries, newMediaQuery, activeMediaQueries, extension) {
     var initMediaQueryDisplay = function() {
         $showMediaQueriesButton.click(function(){
             // Media Queries von Content Script abfragen
-            extension.sendMessageToTabWithCb({
+            extension.sendMessageToTab({
                     type: extension.messageTypes.showMediaQueries
                 },
                 // erhaltene Antwort verarbeiten und Media Queries anzeigen

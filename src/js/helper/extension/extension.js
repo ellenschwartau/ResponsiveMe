@@ -26,7 +26,6 @@ function(extensionEvents, extensionMessagePassing, extensionStorage, extensionCo
         removeStorageValue: extensionStorage.removeStorageValue,
         sendMessage: extensionMessagePassing.sendMessage,
         sendMessageToTab: extensionMessagePassing.sendMessageToTab,
-        sendMessageToTabWithCb: extensionMessagePassing.sendMessageToTabWithCb,
         handleMessage: extensionMessagePassing.handleMessage,
         messageTypes: extensionMessagePassing.messageTypes,
         onActivatedTab: extensionEvents.onActivatedTab,

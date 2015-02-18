@@ -2,7 +2,7 @@ define([],
 /**
  * Kapselt Funktionen der Erweiterung zur Umsetzung des Message Passing.
  * @exports extensionMessagePassing
- * @returns {{sendMessageToTabWithCb: Function, sendMessageToTab: Function, sendMessage: Function, handleMessage: Function}}
+ * @returns {{sendMessageToTab: Function, sendMessage: Function, handleMessage: Function}}
  */
 function(){
     var messageTypes = {                            // Type, zur Identifikation der Nachrichten, die zwischen
@@ -18,32 +18,6 @@ function(){
         updateBackgroundPage: "updateBackgroundPage",
         updateActiveMediaQueries: "updateActiveMediaQueries"
     };
-    /**
-     * Sendet eine Nachricht an den aktiven Tab und führt eine Funktion aus, wenn eine Response zurück kommt.
-     * @param {json} data - Daten, die übergeben werden sollen
-     * @param {function} responseCallback - Funktion, die auf der Response ausgeführt werden soll
-     */
-    var sendMessageToTabWithCb = function(data, responseCallback) {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(
-                tabs[0].id,
-                data,
-                function(response) {
-                    responseCallback(response);
-                }
-            )
-        });
-    };
-
-    /**
-     * Sendet eine Nachricht an den aktiven Tab.
-     * @param {json} data - Daten, die übergeben werden sollen
-     */
-    var sendMessageToTab = function(data) {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, data)
-        });
-    };
 
     /**
      * Sendet eine Nachricht mit den übergebenen Daten.
@@ -51,6 +25,26 @@ function(){
      */
     var sendMessage = function(data) {
         chrome.runtime.sendMessage(data);
+    };
+
+    /**
+     * Sendet eine Nachricht an den aktiven Tab und kann optional eine Funktion ausführen,
+     * wenn eine Antwort geliefert wird.
+     * @param {json} data - Daten, die übergeben werden sollen
+     * @param {function} [responseCallback] - optionale Funktion, die die Response verarbeitet
+     */
+    var sendMessageToTab = function(data, responseCallback) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(
+                tabs[0].id,
+                data,
+                function(response) {
+                    if(responseCallback != undefined){
+                        responseCallback(response);
+                    }
+                }
+            )
+        });
     };
 
     /**
@@ -68,7 +62,6 @@ function(){
     };
 
     return {
-        sendMessageToTabWithCb: sendMessageToTabWithCb,
         sendMessageToTab: sendMessageToTab,
         sendMessage: sendMessage,
         handleMessage: handleMessage,
