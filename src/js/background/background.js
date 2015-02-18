@@ -1,5 +1,5 @@
 require([
-    'jquery', 'matchMedia', 'extension'
+    'extension'
 ],
 /**
  * Hintergrundseite der Erweiterung.
