@@ -157,6 +157,7 @@ function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
         $hideMediaQueriesButton.click(function(){
             $mediaQueries.empty();
             $hideMediaQueriesButton.remove();
+            aceHelper.clearEditorList();
         });
     };
 
