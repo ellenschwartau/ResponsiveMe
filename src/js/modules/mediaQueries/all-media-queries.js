@@ -1,5 +1,5 @@
 define([
-    'jquery', 'extension', 'stylesheetParser', 'viewportSize', 'codeEditorHelper', 'styleEditor'
+    'jquery', 'extension', 'stylesheetParser', 'viewportSize', 'aceHelper', 'styleEditor'
 ],
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
@@ -15,8 +15,8 @@ define([
  * @see module:stylesheetParser
  * @param {module} viewportSize - viewportSize-Modul
  * @see module:viewportSize
- * @param {module} aceHelper - codeEditorHelper-Modul
- * @see module:codeEditorHelper
+ * @param {module} aceHelper - aceHelper-Modul
+ * @see module:aceHelper
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
  * @returns {{init: Function, show: Function, get: Function}}

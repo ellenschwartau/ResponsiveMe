@@ -6,7 +6,7 @@ define([
  * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
  * werden.
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
- * @exports codeEditorHelper
+ * @exports aceHelper
  * @param {Object} $ - JQuery
  * @returns {{initCodeEditor: Function, getEditorValue: Function, cleatEditorValue: Function, getEditorData: Function, removeEditorFromList: Function}}
  */

@@ -1,5 +1,5 @@
 define([
-    'jquery', 'stylesheetParser', 'codeEditorHelper', 'styleEditor', 'extension'
+    'jquery', 'stylesheetParser', 'aceHelper', 'styleEditor', 'extension'
 ],
 /**
  * Modul zum Erstellen und speichern einer neuen Media Query.
@@ -9,8 +9,8 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} stylesheetParser - stylesheetParser-Modul
  * @see module:stylesheetParser
- * @param {module} aceHelper - codeEditorHelper-Modul
- * @see module:codeEditorHelper
+ * @param {module} aceHelper - aceHelper-Modul
+ * @see module:aceHelper
  * @param {module} styleEditor - styleEditor-Modul
  * @see module:styleEditor
  * @param {module} extension - extension-Modul

@@ -12,7 +12,7 @@ var requireJsConfig = {
         // Konfiguration
         config: 'config',
         // Helper
-        codeEditorHelper: 'helper/ace-helper',
+        aceHelper: 'helper/ace-helper',
         tools: 'helper/tools',
         localStorage: 'helper/local-storage',
         // Kapselung der Erweiterung
