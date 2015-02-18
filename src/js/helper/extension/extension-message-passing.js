@@ -35,10 +35,11 @@ function(){
      */
     var sendMessageToTab = function(data, responseCallback) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            var activeTabId = tabs[0].id;
             if(responseCallback){
-                chrome.tabs.sendMessage(tabs[0].id, data, responseCallback);
+                chrome.tabs.sendMessage(activeTabId, data, responseCallback);
             } else {
-                chrome.tabs.sendMessage(tabs[0].id, data);
+                chrome.tabs.sendMessage(activeTabId, data);
             }
         });
     };
