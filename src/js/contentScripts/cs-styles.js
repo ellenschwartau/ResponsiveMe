@@ -2,8 +2,7 @@ require([
     'extension', 'styleEditor'
 ],
 /**
- * Javascript, dass auf aufgerufene Seiten injiziert wird.
- * Behandelt die Messages und führt die gewünschten Aktionen aus.
+ * Content Script zur Bearbeitung der vorhandenen Styles.
  * @exports csStyles
  * @param {module} extension - extensionModul
  * @see module:extension

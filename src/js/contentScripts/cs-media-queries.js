@@ -14,16 +14,7 @@ require([
  */
 function($, matchMedia, styleSheetParser, extension){
     /**
-     * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
-     */
-    var updateMatchedMediaOnResize = function(){
-        $(window).resize(function(){
-            updateMediaList();
-        });
-    };
-
-    /**
-     * Berechnet die aktuell greifenden Media Angaben und triggert die Aktualisierung in Background Page und Popup.
+     * Berechnet die aktuell greifenden Media Queries und stößt die Aktualisierung in Background Page und Popup an.
      */
     var updateMediaList = function() {
         extension.sendMessage({
@@ -31,6 +22,15 @@ function($, matchMedia, styleSheetParser, extension){
             data: {
                 mediaList: matchMedia.getMatchedMedia()
             }
+        });
+    };
+
+    /**
+     * Berechnet bei Skalierung des Browsers die aktuell greifenden Media Queries.
+     */
+    var updateMatchedMediaOnResize = function(){
+        $(window).resize(function(){
+            updateMediaList();
         });
     };
 
@@ -49,36 +49,12 @@ function($, matchMedia, styleSheetParser, extension){
     };
 
     /**
-     * Berechnet die aktuell greifenden Media Queries erneut, wenn die Hintergrundseite aktualisiert werden soll.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
-     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
-     * @param {json} request.data - zusätzliche Daten der Nachricht
-     * @param {MessageSender} sender - Enthält Informationen über den Absender
-     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
-     */
-    var handleUpdateBackgroundPageMessage = function(request, sender, sendResponse){
-        updateMediaList();
-    };
-
-    /**
-     * Berechnet die aktuell greifenden Media Queries erneut, wenn explizit ein Request hierfür gesendet wird.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
-     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
-     * @param {json} request.data - zusätzliche Daten der Nachricht
-     * @param {MessageSender} sender - Enthält Informationen über den Absender
-     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
-     */
-    var handleUpdateActiveMedaQueries = function(request, sender, sendResponse){
-        updateMediaList();
-    };
-
-    /**
      * Behandelt die Nachrichten, die an das Content Script gesendet werden.
      */
     var handleMessages = function() {
         extension.handleMessage(extension.messageTypes.showMediaQueries, handleShowMediaQueries);
-        extension.handleMessage(extension.messageTypes.updateBackgroundPage, handleUpdateBackgroundPageMessage);
-        extension.handleMessage(extension.messageTypes.updateActiveMediaQueries, handleUpdateActiveMedaQueries);
+        extension.handleMessage(extension.messageTypes.updateBackgroundPage, updateMediaList);
+        extension.handleMessage(extension.messageTypes.updateActiveMediaQueries, updateMediaList);
     };
 
     /**

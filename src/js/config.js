@@ -6,13 +6,13 @@ define([
  * @returns {{baseDir: string, modules: string[], resolutions: {name: string, width: number, height: number}[], defaultColorGrid: string}}
  */
 function() {
-    var baseDir = "modules/",       // Basispfad zu den Modulen
-        modules = [                 // Module, die eingebunden werden sollen
+    var baseDir = "modules/",           // Basispfad zu den Modulen
+        modules = [                     // Module, die eingebunden werden sollen
             "viewport",
             "grid",
             "media-queries"
         ],
-        resolutions = [             // vordefinierte Display-Auflösungen
+        resolutions = [                 // vordefinierte Display-Auflösungen
             {name: "1920x1080", width: 1920, height: 1200},
             {name: "1366x768", width: 1366, height: 768},
             {name: "1280x800", width: 1280, height: 800},
@@ -21,7 +21,7 @@ function() {
             {name: "640x960", width: 640, height: 960},
             {name: "320x480", width: 320, height: 480}
         ],
-        defaultGridColor = "#FF8000";
+        defaultGridColor = "#FF8000";   // Default-Farbe zur Visualisierung des Grids
 
     return {
         baseDir: baseDir,

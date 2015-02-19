@@ -1,3 +1,6 @@
+/**
+ * Enthält die Konfiguration zum Erstellen des JSDoc.
+ */
 {
   "tags": {
     "allowUnknownTags": true,

@@ -2,8 +2,7 @@ require([
     'extension', 'visualizeElements'
 ],
 /**
- * Javascript, dass auf aufgerufene Seiten injiziert wird.
- * Behandelt die Visualisierung verschiedener Elemente.
+ * Content Script zur  Visualisierung verschiedener Elemente.
  * @exports messageHandling
  * @param {module} extension - extensionModul
  * @see module:extension
@@ -25,7 +24,7 @@ function(extension, visualizeElements) {
     };
 
     /**
-     * Behandelt die Nachrichten, die an das Content Script gedenset werden.
+     * Behandelt die Nachrichten, die an das Content Skript gesendet werden.
      */
     var handleMessages = function() {
         extension.handleMessage(extension.messageTypes.showElements, handleShowElements);

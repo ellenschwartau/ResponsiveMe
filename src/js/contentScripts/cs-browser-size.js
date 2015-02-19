@@ -2,7 +2,7 @@ require([
     'jquery', 'extension'
 ],
 /**
- * Content Script zur Ermittlung der aktuellen Browsergröße.
+ * Content Script zur Ermittlung der aktuellen und maximalen Browsergröße.
  * @exports csBrowserSize
  * @param {Object} $ - JQuery
  * @param {module} extension - extension-Modul
@@ -10,7 +10,7 @@ require([
  */
 function($, extension){
     /**
-     * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
+     * Berechnet bei Skalierung des Browsers dessen Größe erneut.
      */
     var updateBrowserSizeOnResize = function(){
         $(window).resize(function(){
@@ -19,7 +19,7 @@ function($, extension){
     };
 
     /**
-     * Berechnet die aktuell greifenden Media Angaben und triggert die Aktualisierung in Background Page und Popup.
+     * Berechnet die aktuelle Browsergröße und stößt die Aktualisierung in Background Page und Popup an.
      */
     var updateBrowserSize = function() {
         extension.sendMessage({
@@ -34,7 +34,7 @@ function($, extension){
     };
 
     /**
-     * Triggert das Aktualisieren der möglichen Browser-Größe.
+     * Stößt das Aktualisieren der maximalen Browser-Größe an.
      */
     var updateAvailBrowserSize = function(){
         extension.sendMessage({
@@ -48,13 +48,8 @@ function($, extension){
 
     /**
      * Berechnet die benötigten Größen erneut, wenn die Hintergrundseite aktualisiert werden soll.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
-     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
-     * @param {json} request.data - zusätzliche Daten der Nachricht
-     * @param {MessageSender} sender - Enthält Informationen über den Absender
-     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
      */
-    var handleUpdateBackgroundPageMessage = function(request, sender, sendResponse){
+    var handleUpdateBackgroundPageMessage = function(){
         updateAvailBrowserSize();
         updateBrowserSize();
     };
@@ -67,7 +62,7 @@ function($, extension){
     };
 
     /**
-     * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
+     * Initialisiert die Ermittlung der aktuellen und maximalen Browsergröße.
      */
     var init = function(){
         updateBrowserSize();
