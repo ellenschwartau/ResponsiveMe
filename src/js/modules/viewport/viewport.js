@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess', 'tools', 'localStorage'
+    'jquery', 'config', 'extension', 'viewportSize', 'viewportAnimation', 'backgroundAccess', 'tools', 'chromeStorage'
 ],
 /**
  * Beinhaltet die Funktionalitäten des Viewport Moduls,
@@ -18,11 +18,11 @@ define([
  * @see module:backgroundAccess
  * @param {module} tools - tools-Modul
  * @see module:tools
- * @param {module} localStorage - localStorage-Modul
- * @see module:localStorage
+ * @param {module} chromeStorage - chromeStorage-Modul
+ * @see module:chromeStorage
  * @returns {{init: Function}}
  */
-function($, config, extension, viewportSize, viewportAnimation, backgroundAccess, tools, localStorage) {
+function($, config, extension, viewportSize, viewportAnimation, backgroundAccess, tools, chromeStorage) {
     var $widthScrollBar,                 // Schieberegler zum Skalieren der Breite
         $heightScrollBar,                // Schieberegler zum Skalieren der Höhe
         $resolutionDropdown,             // Dropdown-Element mit vordefinierten Auflösungen
@@ -313,13 +313,13 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Liest die Benutzereingaben aus der Local Storage aus.
      */
     var readStorageValues = function(){
-        localStorage.readStorage($animationStart, localStorage.keys.viewport.animation.startWidth);
-        localStorage.readStorage($animationEnd, localStorage.keys.viewport.animation.endWidth);
-        localStorage.readStorage($animationTimes, localStorage.keys.viewport.animation.times);
-        localStorage.readStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, function($element, value){
+        chromeStorage.readStorage($animationStart, chromeStorage.keys.viewport.animation.startWidth);
+        chromeStorage.readStorage($animationEnd, chromeStorage.keys.viewport.animation.endWidth);
+        chromeStorage.readStorage($animationTimes, chromeStorage.keys.viewport.animation.times);
+        chromeStorage.readStorage($animationDurationScrollBar, chromeStorage.keys.viewport.animation.duration, function($element, value){
             updateScrollbarValue($element, value, UNIT_S);
         });
-        localStorage.readStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, function($element, value){
+        chromeStorage.readStorage($innerOuterSwitch, chromeStorage.keys.viewport.sizesContainBrowserOffset, function($element, value){
             // inner/outer Switch und maximale Werte der Scrollbars aktualisieren
             $element.prop('checked', value);
             sizesContainBrowserOffset = value;
@@ -330,11 +330,11 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
      * Registriert die Callbacks zum speichern der Benutzereingaben.
      */
     var initStorageUpdate = function(){
-        localStorage.registerStorage($animationStart, localStorage.keys.viewport.animation.startWidth, getAnimationStartWidth, 0);
-        localStorage.registerStorage($animationEnd, localStorage.keys.viewport.animation.endWidth, getAnimationEndWidth, 0);
-        localStorage.registerStorage($animationTimes, localStorage.keys.viewport.animation.times, getAnimationTimes, 0);
-        localStorage.registerStorage($animationDurationScrollBar, localStorage.keys.viewport.animation.duration, getAnimationDuration);
-        localStorage.registerStorage($innerOuterSwitch, localStorage.keys.viewport.sizesContainBrowserOffset, doSizesContainBrowserOffset);
+        chromeStorage.registerStorage($animationStart, chromeStorage.keys.viewport.animation.startWidth, getAnimationStartWidth, 0);
+        chromeStorage.registerStorage($animationEnd, chromeStorage.keys.viewport.animation.endWidth, getAnimationEndWidth, 0);
+        chromeStorage.registerStorage($animationTimes, chromeStorage.keys.viewport.animation.times, getAnimationTimes, 0);
+        chromeStorage.registerStorage($animationDurationScrollBar, chromeStorage.keys.viewport.animation.duration, getAnimationDuration);
+        chromeStorage.registerStorage($innerOuterSwitch, chromeStorage.keys.viewport.sizesContainBrowserOffset, doSizesContainBrowserOffset);
     };
 
     /**

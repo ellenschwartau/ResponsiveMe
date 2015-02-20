@@ -2,13 +2,13 @@ define([
     'jquery'
 ],
 /**
- * Hilfsskript zur Verwendung des Code Editors ACE.
- * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
+ * Hilfsskript zur Arbeit mit dem Code Editor ACE.
+ * Hierüber können HTML-Elemente, identifieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
  * werden.
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
  * @exports aceHelper
  * @param {Object} $ - JQuery
- * @returns {{initCodeEditor: Function, getEditorValue: Function, cleatEditorValue: Function, getEditorData: Function, removeEditorFromList: Function}}
+ * @returns {{initCodeEditor: Function, getEditorValue: Function, getEditorData: Function, cleatEditorValue: Function, removeEditorFromList: Function, clearEditorList: Function}}
  */
 function($){
     /**
@@ -26,7 +26,7 @@ function($){
      * @returns {Object} - Editor
      */
     var initCodeEditor = function(id, rule, bindEvent, onBlurCallback) {
-        // Editor Erstellen und Modus sowie Theme setzen
+        // Editor erstellen und Modus sowie Theme setzen
         var editor = ace.edit(id),
             style = rule.fullCss,
             indexStyleSheet = rule.indexStyleSheet,
@@ -69,11 +69,12 @@ function($){
     };
 
     /**
-     * Bindet eine Callback-Funktion an das blur-Event.
+     * Bindet eine Callback-Funktion zur Behandlung des spezifizierten Events.
      * @param {Object} editor - Code-Editor
      * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
      * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
      * @param {string} id - CSS-ID des Editors
+     * @param {string} bindEvent - Name des Events, das behandelt werden soll
      * @param {function} callback - Funktion, die aufgerufen werden soll
      */
     var bindEventCallback = function(editor, indexStyleSheet, indexRule, id, bindEvent, callback) {
@@ -123,9 +124,9 @@ function($){
     };
 
     /**
-     * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen id.
+     * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen ID.
      * @param {string} id - CSS-ID des Editors
-     * @returns {string}
+     * @returns {string} Inhalt des Editors
      */
     var getEditorValue = function(id) {
         var editorData = getEditorData(id);
@@ -145,7 +146,7 @@ function($){
 
     /**
      * Liefert die Daten eines Editors, der über seine ID spezifiziert wird.
-     * @param {String} id - css-ID des Editors
+     * @param {String} id - CSS-ID des Editors
      * @returns {undefined|{editor:Object,id:string,indexStyleSheets:int,indexRule:int}}
      */
     var getEditorData = function(id) {

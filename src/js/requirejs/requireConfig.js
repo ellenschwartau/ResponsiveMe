@@ -14,7 +14,7 @@ var requireJsConfig = {
         // Helper
         aceHelper: 'helper/ace-helper',
         tools: 'helper/tools',
-        localStorage: 'helper/local-storage',
+        chromeStorage: 'helper/chrome-storage',
         // Kapselung der Erweiterung
         extension: 'helper/extension/extension',
         extensionEvents: 'helper/extension/extension-events',

@@ -1,5 +1,5 @@
 define([
-    'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'localStorage', 'tools'
+    'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'chromeStorage', 'tools'
 ],
 /**
  * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
@@ -13,13 +13,13 @@ define([
  * @see module:mediaQueries
  * @param {module} grid - grid-Modul
  * @see module:grid
- * @param {module} localStorage - localStorage-Modul
- * @see module:localStorage
+ * @param {module} chromeStorage - chromeStorage-Modul
+ * @see module:chromeStorage
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
-function($, config, viewport, mediaQueries, grid, localStorage, tools) {
+function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
     var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
 
     /**
@@ -97,11 +97,11 @@ function($, config, viewport, mediaQueries, grid, localStorage, tools) {
     var getStorageKeyForModule = function(moduleName){
         switch(moduleName){
             case "viewport":
-                return localStorage.keys.displayModules.viewport;
+                return chromeStorage.keys.displayModules.viewport;
             case "grid":
-                return localStorage.keys.displayModules.grid;
+                return chromeStorage.keys.displayModules.grid;
             case "media-queries":
-                return localStorage.keys.displayModules.mediaQueries;
+                return chromeStorage.keys.displayModules.mediaQueries;
         }
     };
 
@@ -112,7 +112,7 @@ function($, config, viewport, mediaQueries, grid, localStorage, tools) {
      */
     var saveModuleDisplay = function(key, $content){
         var isVisible = $content.is(":visible");
-        localStorage.save(key, isVisible);
+        chromeStorage.save(key, isVisible);
     };
 
     /**
@@ -121,7 +121,7 @@ function($, config, viewport, mediaQueries, grid, localStorage, tools) {
      * @param {$} $content - Element, dessen Anzeige-Einstellung bestimmt werden soll
      */
     var readModuleDisplay = function(key, $content){
-        localStorage.get(key, function(result){
+        chromeStorage.get(key, function(result){
             if(result[key]){
                 $content.show();
                 toggleActive($content.parent());

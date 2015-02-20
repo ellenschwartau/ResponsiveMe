@@ -2,16 +2,16 @@ define([
     'extension'
 ],
 /**
- * Das Local Storage Modul implementiert Logik um benutzerspezifische Angaben zwischenzuspeichern.
+ * Das Chrome Storage Modul implementiert Logik um benutzerspezifische Angaben zwischenzuspeichern.
  * Dabei wird auf Funktionen der chrome.storage-API zurückgegriffen.
- * @exports localStorage
+ * @exports chromeStorage
  * @param {module} extension - extension-Modul
  * @see module:extension
- * @returns {{save: Function, get: Function}}
+ * @returns {{save: Function, get: Function, registerStorage: Function, readStorage: Function, keys: {settings: {toggleModules: string, toggleHints: string}, displayModules: {viewport: string, grid: string, mediaQueries: string}, viewport: {sizesContainBrowserOffset: string, animation: {startWidth: string, endWidth: string, duration: string, times: string}}, grid: {selectors: string, color: string, width: string}}}}
  */
 function(extension){
     /**
-     * Schlüssel zum Zugriff und Speichern verschiedener Werte.
+     * Schlüssel zum Speichern von Daten in und Zugriff auf Werte aus der Chrome Storage.
      * @type {{settings: {toggleModules: string, toggleHints: string}, displayModules: {viewport: string, grid: string, mediaQueries: string}, viewport: {sizesContainBrowserOffset: string, animation: {startWidth: string, endWidth: string, duration: string, times: string}}, grid: {selectors: string, color: string, width: string}}}
      */
     var keys = {
@@ -41,9 +41,9 @@ function(extension){
     };
 
     /**
-     * Speichert einen Wert in der chrome.storage.
+     * Speichert einen Wert in der Chrome Storage.
      * @param {string} key - Schlüssel unter dem der Wert gespeichert werden soll
-     * @param {object} value - Wert der gespeichert werden soll
+     * @param {object} value - Wert, der gespeichert werden soll
      */
     var saveValue = function(key, value) {
         var data = {};
@@ -61,7 +61,7 @@ function(extension){
     };
 
     /**
-     * Löscht einen Wert aus der Local Storage.
+     * Löscht einen Wert aus der Chrome Storage.
      * @param {string} key - Schlüssel des zu löschenden Wertes
      */
     var removeValue = function(key){
@@ -72,9 +72,8 @@ function(extension){
      * Registriert das Speichern des aktuellen Wertes, wenn sich dieser ändert.
      * @param {$} $element - Element, dessen Wert gespeichert werden soll
      * @param {string} key - Schlüssel, unter dem der Wert gespeichert werden soll
-     * @param {function} getValueCb - Funktion, um an den Wert heranzukommen
+     * @param {function} getValueCb - Funktion zum Auslesen des Wertes
      * @param {Object} deleteValue - Wert, bei dem der Eintrag gelöscht werden soll
-     * @param {function} getValueCb - Funktion, um an den Wert heranzukommen
      */
     var registerStorage = function($element, key, getValueCb, deleteValue){
         $element.change(function(){
@@ -88,7 +87,7 @@ function(extension){
     };
 
     /**
-     * Liest einen Wert aus der Storage und setzt diesen bei dem übergebenen Element.
+     * Liest einen Wert aus der Chrome Storage aus und setzt diesen bei dem übergebenen Element.
      * @param {$} $element - Element, in dem der Wert gesetzt werden soll
      * @param {string} key - Schlüssel des Wertes, der ausgelesen werden soll
      * @param {function} setCb - optionaler Callback zur Verarbeitung des Ergebnisses

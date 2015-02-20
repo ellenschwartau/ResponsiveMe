@@ -2,22 +2,26 @@ define([
     'jquery', 'tools'
 ],
 /**
- * Modul zum Parsen von Media Queries.
- * Liest aus einer Media Query bestimmte Informationen aus und wandelt diese in JSON um.
+ * Modul zum Parsen von Media Queries. Dient dem Auslesen aller vorhandenen Media Queries sowie dem Umwandeln
+ * von Media Queries in JSON.
  * @exports parseMediaQuery
+ * @param {Object} $ - JQuery
+ * @param {module} tools - tools-Modul
+ * @see module:tools
+ * @returns {{getMediaList: Function, addSpecificInformation: Function}}
  */
 function($, tools){
-    var WIDTH_PROPERTY_PREFIX = "width: ",
-        MIN_PROPERTY_POSTFIX = ["min-", "min-device-"],
-        WIDTH_PROPERTY_POSTFIX = "px";
+    var WIDTH_PROPERTY_PREFIX = "width: ",              // String zur Angabe einer Breite
+        MIN_PROPERTY_POSTFIX = ["min-", "min-device-"], // String zur Angaben einer minimalen Breite
+        WIDTH_PROPERTY_POSTFIX = "px";                  // String zur Angabe einer Pixel-Größe
     /**
-     * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
+     * Liefert die einzigartigen Vorkommen an Media Queries aus der übergebenen Liste.
      * @param {json} mediaQueries - Liste der Media Queries in JSO-Notation
-     * @returns {Array} Liste der Media-Angaben
+     * @returns {Array} Menge der Media-Angaben
      */
     var getMediaList = function(mediaQueries){
         var resultList = [];
-        $.each(mediaQueries, function(i, mediaQuery) {
+        $.each(mediaQueries, function(index, mediaQuery) {
             var mediaList = mediaQuery.media;
             for(var i=0; i<mediaList.length; i++) {
                 var media = mediaList[i];
@@ -30,7 +34,7 @@ function($, tools){
     };
 
     /**
-     * Fügt den bisherigen Daten der Media Query zwei Breitenangaben an:
+     * Fügt den bisherigen Daten der Media Query zwei Breitenangaben hinzu:
      * data.mediaQueryWidth: größte Breitenangabe, ab der die Media Query greift
      * data.mediaQueryToggleWidth: Breitenangabe, ab der die Media Query gerade nicht greift
      * @param {json} data  - bisherig gesammelte Daten zur Regel
@@ -41,7 +45,7 @@ function($, tools){
          * Ermittelt die maximale Breitenangabe innerhalb der Media Query.
          * @param {json} data  - bisherig gesammelte Daten zur Regel
          * @param {CSSMediaRule} mediaRule - Media Query
-         * @param {int} widthIndex - Erstes Vorkommen einer Breitenangabe
+         * @param {int} widthIndex - erstes Vorkommen einer Breitenangabe
          */
         var addWidthProperties = function(data, mediaRule, widthIndex){
             var width = -1;
@@ -52,7 +56,7 @@ function($, tools){
                     widthEnd = unit - 1;
                 if(unit > -1 && (widthEnd > widthBegin)) {
                     // Wenn der Postfix gefunden wurde und zwischen Pre- und Postfix noch etwas steht,
-                    // diesen Wert auslesen und als width übernehmen, wenn er größer als die bisherige Angabe ist
+                    // diesen Wert auslesen und als width übernehmen, wenn er größer als die bisher gefundene Angabe ist
                     var newWidth = parseFloat(mediaRule.substr(widthBegin, widthEnd));
                     if(newWidth > width){
                         width = newWidth;
@@ -70,7 +74,7 @@ function($, tools){
         /**
          * Prüft, ob die vorhandene Breiten-Angabe eine minimale Breite spezifiziert
          * (also z.B. durch min-width: ... oder min-device-width: ...).
-         * Das ist notwendig, um die Breite zum togglen der Media Query anzubieten.
+         * Das ist notwendig, um die richtigr Breite zum togglen der Media Query anzubieten.
          * Enthält die Media Query beispielsweise die Breitenangabe 500px, wird bei einer minimalen Angabe die
          * Breite 499px, bei allen anderen die Breite 501px zum deaktivieren der Media Query berechnet.
          * @param {CSSMediaRule} mediaRule - Media Query
@@ -91,7 +95,7 @@ function($, tools){
         };
 
         /**
-         * Berechnet die Breite bei der eine Media Query deaktiviert wird, also um einen Pixel nicht greift.
+         * Berechnet die Breite bei der eine gerade nicht greift Media Query deaktiviert wird.
          * Bei einer min-Breitenangabe wird diese um einen Pixel unterschritten,
          * exakte oder max-Breitenangaben werden um einen Pixel überschritten.
          * @param {CSSMediaRule} mediaRule - Media Query
@@ -101,12 +105,10 @@ function($, tools){
          */
         var getToggleWidth = function(mediaRule, widthIndex, width){
             if(isMinWidthProperty(mediaRule, widthIndex)){
-                // Minimale Angabe
-                // - um die Media Query zu deaktivieren muss diese unterschritten werden
+                // Minimale Angabe - um die Media Query zu deaktivieren muss diese unterschritten werden
                 return Math.max(0, --width);
             } else {
-                // maximale oder exakte Breitenangabe
-                // - um die Media Query zu deaktivieren muss/kann diese überschritten werden
+                // maximale oder exakte Breitenangabe - um die Media Query zu deaktivieren muss/kann diese überschritten werden
                 return ++width;
             }
         };
@@ -122,7 +124,7 @@ function($, tools){
     };
 
     /**
-     * Liefert den Wert des Selektors einer Media Query.
+     * Liefert den Selektor einer Media Query inklusive @media-Angabe.
      * @param {CSSMediaRule} rule - Media Query
      * @returns {string}
      */
@@ -131,8 +133,8 @@ function($, tools){
     };
 
     /**
-     * Fügt dem JSON Object der css-Regel weitere Media Query spezifische Daten an.
-     * @param {json} data  - bisherig gesammelte Daten zur Regel
+     * Fügt dem JSON-Object der CSS-Regel Media Query spezifische Daten an.
+     * @param {json} data  - bisheR gesammelte Daten zur Regel
      * @param {CSSRule} rule - CSS-Regel
      * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
      */

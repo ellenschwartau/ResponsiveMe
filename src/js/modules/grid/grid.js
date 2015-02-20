@@ -1,5 +1,5 @@
 define([
-    'jquery', 'visualizeElements', 'localStorage', 'tools', 'config'
+    'jquery', 'visualizeElements', 'chromeStorage', 'tools', 'config'
 ],
 /**
  * Visualisiert das Grid, auf dem eine Website beruht.
@@ -14,15 +14,15 @@ define([
  * @param {Object} $ - JQuery
  * @param {module} visualizeElements - visualizeElements-Modul
  * @param {visualizeElements} visualizeElements - visualizeElements-Modul
- * @param {module} localStorage - localStorage-Modul
- * @see module:localStorage
+ * @param {module} chromeStorage - chromeStorage-Modul
+ * @see module:chromeStorage
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @param {module} config - config-Modul
  * @see module:config
  * @returns {{init: Function}}
  */
-function($, visualizeElements, localStorage, tools, config) {
+function($, visualizeElements, chromeStorage, tools, config) {
     var $contentWrapper,        // Parent Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
         $showGridButton,        // Button zum Anzeigen des Grids
@@ -120,18 +120,18 @@ function($, visualizeElements, localStorage, tools, config) {
      * Liest die Benutzereingaben aus der Local Storage aus.
      */
     var readStorageValues = function(){
-        localStorage.readStorage($gridWidth, localStorage.keys.grid.width);
-        localStorage.readStorage($gridColor, localStorage.keys.grid.color);
-        localStorage.readStorage(getLastInputElement(), localStorage.keys.grid.selectors);
+        chromeStorage.readStorage($gridWidth, chromeStorage.keys.grid.width);
+        chromeStorage.readStorage($gridColor, chromeStorage.keys.grid.color);
+        chromeStorage.readStorage(getLastInputElement(), chromeStorage.keys.grid.selectors);
     };
 
     /**
      * Registriert die Callbacks zum speichern der Benutzereingaben.
      */
     var initStorageUpdate = function(){
-        localStorage.registerStorage($gridWidth, localStorage.keys.grid.width, getWidth, 0);
-        localStorage.registerStorage($gridColor, localStorage.keys.grid.color, getColor);
-        localStorage.registerStorage(getLastInputElement(), localStorage.keys.grid.selectors, getLastSelectorValue, "");
+        chromeStorage.registerStorage($gridWidth, chromeStorage.keys.grid.width, getWidth, 0);
+        chromeStorage.registerStorage($gridColor, chromeStorage.keys.grid.color, getColor);
+        chromeStorage.registerStorage(getLastInputElement(), chromeStorage.keys.grid.selectors, getLastSelectorValue, "");
     };
 
     /**

@@ -2,8 +2,7 @@ define([
     'extension'
 ],
 /**
- * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets bereit,
- * die auf einer Seite geladen werden.
+ * Dieses Skript stellt verschiedene Funktionen zum Bearbeiten der Style Sheets einer Website bereit.
  * Es können vorhandene CSSRegeln gelöscht oder bearbeitet, sowie neue Style-Angaben hinzugefügt werden.
  * @exports styleEditor
  * @param {module} extension - extensionModul
@@ -34,8 +33,8 @@ function(extension){
     };
 
     /**
-     * Fügt ein neues Style Sheet mit den übergebenen Style Angaben hinzu.
-     * @param {String} style - CSS
+     * Fügt ein neues Style Sheet mit den übergebenen Style-Angaben hinzu.
+     * @param {String} style - CSS-Angaben
      */
     var addNewStyleSheet = function(style){
         // Create the <style> tag
@@ -49,7 +48,7 @@ function(extension){
      * hinzu, wenn die Style-Angaben nicht leer sind. Sollte das Einfügen an der definierten
      * Stelle nicht möglich sein, weil das Style Sheet nicht existiert oder die gewünschte Stelle
      * in der Liste der CSS Regeln nicht valide ist, dann wird ein neues Style Sheet erstellt.
-     * @param {string} style - Style der hinzugefügt werden soll
+     * @param {string} style - Style, der hinzugefügt werden soll
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
      * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
      */
@@ -73,7 +72,7 @@ function(extension){
     /**
      * Löscht eine CSSRegel aus einem Style Sheet.
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
-     * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     * @param {int} ruleIndex - Index der CSSRuleList, an dem die Regel gelöscht werden soll
      */
     var remove = function(styleSheetIndex, ruleIndex){
         var styleSheets = document.styleSheets;
@@ -86,7 +85,7 @@ function(extension){
      * Aktualisiert eine CSSRule. Ist die neue Style-Angabe leer, wird die CSS-Regel gelöscht.
      * @param {string} style - Style der hinzugefügt werden soll
      * @param {int} styleSheetIndex - Index des Style Sheets in der StyleSheetList
-     * @param {int} ruleIndex - Index, an dem die Regel der CSSRuleList hinzugefügt werden soll
+     * @param {int} ruleIndex - Index der CSSRuleList, an dem die Regel aktualisiert werden soll
      */
     var update = function(style, styleSheetIndex, ruleIndex) {
         remove(styleSheetIndex, ruleIndex);
@@ -95,7 +94,7 @@ function(extension){
 
     /**
      * Triggert das Speichern eines neuen Styles in ein bestimmtes Style Sheet.
-     * @param {string} style - css Style
+     * @param {string} style - CSS-Angaben
      * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
      */
     var triggerInsertStyle = function(style, indexStyleSheet) {
@@ -109,8 +108,8 @@ function(extension){
     };
 
     /**
-     * Triggert die Aktualisierung eines Styles in ein bestimmtes Style Sheet.
-     * @param {string} style - css Style
+     * Triggert die Aktualisierung eines Styles in einem bestimmten Style Sheet.
+     * @param {string} style - CSS-Angaben
      * @param {int} indexStyleSheet - Index des Style Sheets aus der Liste der geladenen Style Sheets
      * @param {int} indexRule - Index der CSSRule aus der Liste der Regeln eines bestimmten Style Sheets
      */

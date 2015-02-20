@@ -1,18 +1,16 @@
 define([
-    'jquery', 'tools', 'mediaQueryParser'
+    'jquery', 'mediaQueryParser'
 ],
 /**
  * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
- * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
+ * Die CSS-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
  * @exports stylesheetParser
  * @param {Object} $ - JQuery
- * @param {module} tools - tools-Module
- * @see module:tools
  * @param {module} mediaQueryParser - mediaQueryParser-Modul
  * @see module:mediaQueryParser
  * @returns {{getMediaQueries: Function, getEmptyCssRuleJson: Function, getMediaList: Function}}
  */
-function($, tools, mediaQueryParser){
+function($, mediaQueryParser){
     /**
      * Kennzahl der CSSRules des Typs Media Query
      * @type {number}
@@ -20,7 +18,7 @@ function($, tools, mediaQueryParser){
     var CSS_MEDIA_RULE_TYPE = 4;
 
     /**
-     * Liefert alle css-Regeln eines bestimmten Typs der aktuell geladenen Stylesheets.
+     * Liefert alle CSS-Regeln eines bestimmten Typs der aktuell geladenen Style Sheets.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
      * @returns {json}
      */
@@ -45,11 +43,11 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert die
+     * Liest aus einer Liste an CSSRules die Regeln eines Typs aus und konvertiert die
      * benötigten Informationen ins JSON-Format.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
-     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
-     * @param {CSSRuleList} ruleList - Liste, die die css-Regeln enthält
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Regel stammt
+     * @param {CSSRuleList} ruleList - Liste, die die CSS-Regeln enthält
      * @returns {json}
      */
     var getCssRulesFromRuleList = function(type, indexStyleSheet, ruleList) {
@@ -64,10 +62,10 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Konvertiert eine Media Query in ein JSON-Format.
+     * Konvertiert eine CSS-Regel ins JSON-Format.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
      * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
-     * @param {int} indexRule - Index der Regel, die die Media Query definiert
+     * @param {int} indexRule - Index der Regel, aus der Liste der CSS-Regeln des Style Sheets
      * @param {CSSRule} rule - CSS-Regel
      * @returns {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string}}
      */
@@ -80,10 +78,10 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Fügt dem JSON Object der css-Regel je nach dessen Typ weitere Daten an.
-     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * Fügt dem JSON Object der CSS-Regel je nach dessen Typ weitere Daten an.
+     * @param {int} type - Typ der Regeln
      * @param {CSSRule} rule - CSS-Regel
-     * @param {json} json  - bisherig gesammelte Daten zur Regel
+     * @param {json} json  - bisher gesammelte Daten zur Regel
      * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
      */
     var addTypeSpecificInformation = function(type, rule, json) {
@@ -108,15 +106,15 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
-     * @returns {Array} Liste der Media-Angaben
+     * Liefert die Liste an Media Queries, die in Style Sheets enthalten sind.
+     * @returns {string[]} Liste der Media-Angaben
      */
     var getMediaList = function(){
         return mediaQueryParser.getMediaList(getMediaQueries());
     };
 
     /**
-     * Liefert die CSS-Rules, die @media-Angaben enthalten.
+     * Liefert die Media Queries der geladenen Website.
      * @return {Array}
      */
     var getMediaQueries = function(){
