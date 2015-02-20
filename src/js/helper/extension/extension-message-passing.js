@@ -1,12 +1,16 @@
 define([],
 /**
- * Kapselt Funktionen der Erweiterung zur Umsetzung des Message Passing.
+ * Kapselt Funktionen zur Umsetzung des Message Passing.
  * @exports extensionMessagePassing
- * @returns {{sendMessageToTab: Function, sendMessage: Function, handleMessage: Function}}
+ * @returns {{sendMessageToTab: Function, sendMessage: Function, handleMessage: Function, messafeTypes: json}}
  */
 function(){
-    var messageTypes = {                            // Type, zur Identifikation der Nachrichten, die zwischen
-        showElements: "showElements",               // den Komponenten der Erweiterung verschickt werden
+    /**
+     * Typen, zur Identigikation der Nachrichten, die zwischen den Komponenten der Erweiterung verschickt werden.
+     * @type {{showElements: string, showMediaQueries: string, windowResize: string, updateStyle: string, insertStyle: string, deleteStyle: string, displayCurrentMediaList: string, updateBrowserSize: string, updateAvailBrowserSize: string, updateBackgroundPage: string, updateActiveMediaQueries: string}}
+     */
+    var messageTypes = {
+        showElements: "showElements",
         showMediaQueries: "showMediaQueries",
         windowResize: "windowResize",
         updateStyle: "updateStyle",
@@ -20,7 +24,7 @@ function(){
     };
 
     /**
-     * Sendet eine Nachricht mit den übergebenen Daten.
+     * Versendet eine Nachricht mit den spezifizierten Daten.
      * @param {json} data - Daten, die übergeben werden sollen
      */
     var sendMessage = function(data) {
@@ -28,24 +32,18 @@ function(){
     };
 
     /**
-     * Sendet eine Nachricht an den aktiven Tab und kann optional eine Funktion ausführen,
-     * wenn eine Antwort geliefert wird.
+     * Sendet eine Nachricht an den aktiven Tab und kann optional eine Funktion zur Verarbeitung der Antwort ausführen.
      * @param {json} data - Daten, die übergeben werden sollen
      * @param {function} [responseCallback] - optionale Funktion, die die Response verarbeitet
      */
     var sendMessageToTab = function(data, responseCallback) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            var activeTabId = tabs[0].id;
-            if(responseCallback){
-                chrome.tabs.sendMessage(activeTabId, data, responseCallback);
-            } else {
-                chrome.tabs.sendMessage(activeTabId, data);
-            }
+            chrome.tabs.sendMessage(tabs[0].id, data, responseCallback);
         });
     };
 
     /**
-     * Behandelt eines Message des Types type und führt eine entsprechende Aktion aus.
+     * Behandelt die Nachricht eines bestimmten Typs und führt eine entsprechende Aktion aus.
      * @param {string} type - Typ der Nachricht
      * @param {function} action - Funktion, die ausgeführt werden soll
      */

@@ -1,12 +1,12 @@
 define([],
 /**
- * Kapselt Funktionen der Erweiterung zum Speichern, Auslesen und Bearbeiten von Daten in der chrome.storage.
+ * Kapselt Funktionen der Erweiterung zum Speichern, Auslesen und Bearbeiten von Daten in der Chrome Storage.
  * @exports extensionStorage
  * @returns {{saveStorageValue: Function, getStorageValue: Function, removeStorageValue: Function}}
  */
 function(){
     /**
-     * Speichert einen Wert in der chrome.storage.
+     * Speichert einen Wert in der Chrome Storage.
      * @param {json} data - Daten, die gespeichert werdens sollen (Key-Value-Paare)
      */
     var saveStorageValue = function(data){
@@ -14,7 +14,8 @@ function(){
     };
 
     /**
-     * Liefert einen gespeicherten Wert.
+     * Liest den unter dem Schlüssel gespeicherten Wert und führt den Callback aus,
+     * wenn das Ergebnis nicht leer sein sollte.
      * @param {string} key - Schlüssel des auszulesenden Wertes
      * @param {function} callback - Funktion, die nach dem Auslesen ausgeführt werden soll
      */
@@ -27,7 +28,7 @@ function(){
     };
 
     /**
-     * Löscht einen Eintrag aus der Storage.
+     * Löscht den unter dem Schlüssel gespeicherten Eintrag aus der Chrome Storage.
      * @param {string} key - Schlüssel, der zu löschenden Daten
      */
     var removeStorageValue = function(key){

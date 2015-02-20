@@ -1,9 +1,10 @@
 define([
 ],
 /**
- * Kapselt Funktionen zum Auslesen oder Ausführen von Operationen auf bestimmten Komponenten der Erweiterung.
+ * Kapselt Funktionen zum Auslesen bestimmter Bestandteile oder Ausführen von
+ * Operationen auf bestimmten Komponenten der Erweiterung.
  * @exports extensionComponents
- * @returns {{getBackgroundPage: Function, getCurrentWindow: Function}}
+ * @returns {{getBackgroundPage: Function, getCurrentWindow: Function, executeScriptCodeInTab: Function}}
  */
 function(){
     /**
@@ -15,30 +16,21 @@ function(){
     };
 
     /**
-     * Liest das aktuelle Fenster aus und reicht dieses als Parameter
-     * an die übergebene Funktion weiter.
-     * @param {function} callback - Funktion, die Operationen auf dem aktuellen Fenster aufruft
+     * Liest das aktuelle Browserfenster aus und reicht dieses als Parameter an die übergebene Funktion weiter.
+     * @param {function} callback - Funktion, die Operationen auf dem aktuellen Fenster ausführt. Erhält das Fenster als Parameter.
      */
     var getCurrentWindow = function(callback){
-        chrome.windows.getCurrent(function(window) {
-            callback(window);
-        });
+        chrome.windows.getCurrent(callback);
     };
 
     /**
      * Führt Javascript auf der geöffneten Seite aus.
      * @param {string} code - Code, der ausgeführt werden soll
-     * @param {function} callback - Funktion, die das Ergebnis verarbeitet
+     * @param {function} callback - Funktion, die das Ergebnis verarbeitet. Erhält das letzte Ergebnis als Parameter.
      */
     var executeScriptCodeInTab = function(code, callback) {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.executeScript(
-                tabs[0].id,
-                {code: code},
-                function(results){
-                    callback(results);
-                }
-            );
+            chrome.tabs.executeScript(tabs[0].id, {code: code}, callback);
         });
     };
 

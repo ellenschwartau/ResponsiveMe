@@ -4,7 +4,7 @@ define([
 /**
  * Stellt verschiedene Funktionen bereit, um zwischen Browser und Erweiterung zu kommunizieren.
  * Dient als Wrapper-Modul für die Funktionalitäten die die chrome.*-API bereitstellt
- * und kapselt die Funktionen der verschiedenen extension-*-Hilfsmodule.
+ * und kapselt die Funktionen der verschiedenen extension-Hilfsmodule.
  * @exports extension
  * @param {module} extensionEvents - extensionEvents-Modul
  * @see module:extensionEvents
@@ -14,7 +14,7 @@ define([
  * @see module:extensionStorage
  * @param {module} extensionComponents - extensionComponents-Modul
  * @see module:extensionComponents
- * @returns {{sendMessage: Function, sendMessageToTab: Function, sendMessageToTabWithCb: Function, handleMessage: Function, executeScriptCode: Function, getBackgroundPage: Function, saveStorageValue: Function, getStorageValue: Function, removeStorageValue: Function, getCurrentWindow: Function, onActivatedTab: (*|exports.onActivatedTab), onAttachedTab: (*|exports.onAttachedTab), onFocusChangedWindow: (*|exports.onFocusChangedWindow)}}
+ * @returns {{sendMessage: Function, sendMessageToTab: Function, sendMessageToTabWithCb: Function, handleMessage: Function, executeScriptCode: Function, getBackgroundPage: Function, saveStorageValue: Function, getStorageValue: Function, removeStorageValue: Function, getCurrentWindow: Function, onActivatedTab: Function, onAttachedTab: Function, onFocusChangedWindow: Function}}
  */
 function(extensionEvents, extensionMessagePassing, extensionStorage, extensionComponents){
     return {

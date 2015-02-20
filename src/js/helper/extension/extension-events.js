@@ -1,6 +1,6 @@
 define([],
 /**
- * Kapselt Funktionen der Erweiterung zur Behandlung verschiedener Events.
+ * Kapselt Funktionen zur Behandlung verschiedener Events.
  * @exports extensionEvents
  * @returns {{onActivatedTab: Function, onAttachedTab: Function, onFocusChangedWindow: Function}}
  */
