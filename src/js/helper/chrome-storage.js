@@ -72,14 +72,14 @@ function(extension){
      * Registriert das Speichern des aktuellen Wertes, wenn sich dieser ändert.
      * @param {$} $element - Element, dessen Wert gespeichert werden soll
      * @param {string} key - Schlüssel, unter dem der Wert gespeichert werden soll
-     * @param {function} getValueCb - Funktion zum Auslesen des Wertes
+     * @param {function} getValueCallback - Funktion zum Auslesen des Wertes
      * @param {Object} deleteValue - Wert, bei dem der Eintrag gelöscht werden soll
      */
-    var registerStorage = function($element, key, getValueCb, deleteValue){
+    var registerStorage = function($element, key, getValueCallback, deleteValue){
         $element.change(function(){
-            var value = getValueCb();
+            var value = getValueCallback();
             if (value !== deleteValue) {
-                saveValue(key, getValueCb());
+                saveValue(key, getValueCallback());
             } else {
                 removeValue(key);
             }
@@ -90,14 +90,14 @@ function(extension){
      * Liest einen Wert aus der Chrome Storage aus und setzt diesen bei dem übergebenen Element.
      * @param {$} $element - Element, in dem der Wert gesetzt werden soll
      * @param {string} key - Schlüssel des Wertes, der ausgelesen werden soll
-     * @param {function} setCb - optionaler Callback zur Verarbeitung des Ergebnisses
+     * @param {function} setCallback - optionaler Callback zur Verarbeitung des Ergebnisses
      */
-    var readStorage = function($element, key, setCb){
+    var readStorage = function($element, key, setCallback){
         getValue(key, function(result){
             var value = result[key];
-            if(setCb != undefined){
+            if(setCallback != undefined){
                 // Wenn benutzerdefinierte Set-Funktion vorhanden, diese nutzen
-                setCb($element, value);
+                setCallback($element, value);
             } else {
                 // Default: Wert über val()-Methode des Elements setzen
                 $element.val(value);
