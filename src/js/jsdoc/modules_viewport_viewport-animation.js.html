@@ -49,9 +49,8 @@ function($, viewportSize) {
      */
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-        // Kaspeln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
-        var isAnimating = true,  // Angabe ob zu Zeit eine Animation läuft
-            start,                      // Start-Breite
+        // Kapseln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
+        var start,                      // Start-Breite
             end,                        // End-Breite
             duration,                   // Zur Verfügung stehende Zeit
             wantedCalls,                // gewünschte Wiederholungen
@@ -61,26 +60,19 @@ function($, viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            CALL_ANIMATION_EVERY_X_MS = 10;              // Anagebe, wie oft die Animationsfunktion aufgerufen werden soll
-
-        /**
-         * Liefert den Status, ob eine Animation gerade läuft.
-         * @returns {boolean}
-         */
-        var isAnimationRunning = function(){
-            return isAnimating;
-        };
+            deferredPromise;            //
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
          * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde.
          * @param {int} interval - ID des Intervalls, das die Animation durchführt
          */
-        var checkAnimationEnd = function (interval) {
+        var checkAnimationEnd = function () {
             if (((start >= end) &amp;&amp; (curWidth &lt;= end))
                 || ((start &lt; end) &amp;&amp; (curWidth >= end))) {
-                window.clearInterval(interval);
                 checkForRestart();
+            } else {
+                requestAnimationFrame(animationStep);
             }
         };
 
@@ -92,7 +84,7 @@ function($, viewportSize) {
             if (doneCalls &lt; wantedCalls) {
                 animate(duration, end, start, wantedCalls, doneCalls, sizesContainBrowserOffset);
             } else {
-                isAnimating = false;
+                deferredPromise.resolve();
             }
         };
 
@@ -118,22 +110,22 @@ function($, viewportSize) {
             // zusätzliche Berechnungen
             durationPerCall = duration / wantedCalls;
             var dist = start - end;
-            stepPerMs = (dist / durationPerCall) / 1000;
+            stepPerMs = (dist / durationPerCall) / 100;
             curWidth = start;
-            lastCall = $.now();
         };
 
         /**
          * Berechnet die Browserbreite, auf die der Browser im aktuellen Animationsschritt animiert werden sollte.
+         * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
          * @returns {number}
          */
-        var calcBrowserWidth = function () {
-            var currentCall = $.now(),
-                elapsedTime,
+        var calcBrowserWidth = function (currentTime) {
+            var elapsedTime,
                 animationDist;
 
-            elapsedTime = currentCall - lastCall;
-            lastCall = currentCall;
+            lastCall = !lastCall ? currentTime : lastCall;
+            elapsedTime = currentTime - lastCall;
+            lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
 
             if (start >= end) {
@@ -151,6 +143,7 @@ function($, viewportSize) {
          * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
          * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
          * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
+         * // TODO Bild in Doku austauschen
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
@@ -159,15 +152,20 @@ function($, viewportSize) {
             );
             doneCalls++;
             viewportSize.changeWidth(start, containsBrowserOffset);
-            // Animation durchführen
-            var interval = window.setInterval(function () {
-                curWidth = calcBrowserWidth();
-                viewportSize.changeWidth(curWidth, containsBrowserOffset);
-                checkAnimationEnd(interval);
-            }, CALL_ANIMATION_EVERY_X_MS);
-            // TODO Request Animation Frame
+            requestAnimationFrame(animationStep);
         };
 
+        /**
+         * Führt einen Animationsschritt aus.
+         * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
+         */
+        var animationStep = function(currentTime){
+            curWidth = calcBrowserWidth(currentTime);
+            viewportSize.changeWidth(curWidth, containsBrowserOffset);
+            checkAnimationEnd();
+        };
+
+        deferredPromise = Promise.defer();
         // Animation anstoßen
         animate(
             animationDuration,
@@ -177,8 +175,7 @@ function($, viewportSize) {
             doneAnimationCalls,
             containsBrowserOffset
         );
-
-        return isAnimationRunning;
+        return deferredPromise.promise;
     };
 
     return {
@@ -195,13 +192,13 @@ function($, viewportSize) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:15 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:10 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

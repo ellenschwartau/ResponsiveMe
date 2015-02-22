@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.</div>
+            <div class="description">Dieses Modul behandelt das Einbinden und Initialisieren der Moduleund registriert die Callbacks zur Manipulation der Anzeige.</div>
         
 
         
@@ -194,7 +194,7 @@
 
         <tr>
             
-                <td class="name"><code>localStorage</code></td>
+                <td class="name"><code>chromeStorage</code></td>
             
 
             <td class="type">
@@ -210,7 +210,30 @@
 
             
 
-            <td class="description last">localStorage-Modul</td>
+            <td class="description last">chromeStorage-Modul</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tools</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">tools-Modul</td>
         </tr>
 
     
@@ -251,7 +274,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line20">line 20</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -269,7 +292,9 @@
         
             <li><a href="module-grid.html">module:grid</a></li>
         
-            <li><a href="module-localStorage.html">module:localStorage</a></li>
+            <li><a href="module-chromeStorage.html">module:chromeStorage</a></li>
+        
+            <li><a href="module-tools.html">module:tools</a></li>
         </ul>
     </dd>
     
@@ -324,6 +349,72 @@
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~ACTIVE_MODULE_CLASS"><span class="type-signature">(inner) </span>ACTIVE_MODULE_CLASS<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Benötigte CSS-Klassen und HTML-Elemente
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -434,7 +525,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line46">line 46</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -472,7 +563,7 @@
 
 
 <div class="description">
-    Liefert den Schlüssel unter dem die Anzeige-Eigenschaft des Moduls in de Local Storage gespeichert ist.
+    Liefert den Schlüssel, unter dem die Anzeige-Eigenschaft des Moduls in der Chrome Storage gespeichert ist.
 </div>
 
 
@@ -565,7 +656,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line95">line 95</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -614,14 +705,14 @@
 
     
 
-    <h4 class="name" id="~includeModules"><span class="type-signature">(inner) </span>includeModules<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~includeModules"><span class="type-signature">(inner) </span>includeModules<span class="signature">($parentElement)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Inkludiert die Module zur Anzeige im Popup.
+    Inkludiert die in der Konfiguration aufgelisteten Module und hängt diese an das übergebene Element an.Sobald diese fertig geladen sind, werden die allgemeinen Callbacks initialisertund die Modul-spezifische Initialisierung ausgeführt.
 </div>
 
 
@@ -630,6 +721,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>$parentElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">$</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Element, an das das Markup der Module angehängt werden soll</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -665,7 +805,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line26">line 26</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -796,7 +936,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line68">line 68</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -834,7 +974,7 @@
 
 
 <div class="description">
-    Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung, wenn mit der Maus über den Modul-Titelgefahren wird.
+    Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung,wenn mit der Maus über den Modul-Titel gefahren wird.
 </div>
 
 
@@ -927,7 +1067,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line157">line 157</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -965,7 +1105,7 @@
 
 
 <div class="description">
-    Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,sowie das Markieren des Moduls als aktiv oder inaktiv.
+    Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.Dazu gehört das Ein- und Ausblenden der Beschreibung und des Inhalts der Modulesowie das Markieren des Moduls als aktiv oder inaktiv.
 </div>
 
 
@@ -1081,7 +1221,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line179">line 179</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line188">line 188</a>
     </li></ul></dd>
     
 
@@ -1119,7 +1259,7 @@
 
 
 <div class="description">
-    Initialisiert das Ein- und Ausblenden des Modulinhalts.Der initiale Anzeigewert wird aus der Local Storage ausgelesen.
+    Initialisiert das Ein- und Ausblenden des Modulinhalts.Der initiale Anzeigewert wird aus der Chrome Storage ausgelesen.
 </div>
 
 
@@ -1235,7 +1375,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line136">line 136</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line147">line 147</a>
     </li></ul></dd>
     
 
@@ -1273,7 +1413,7 @@
 
 
 <div class="description">
-    Liest die letzte Anzeige-Einstellung aus der Local Storage aus.
+    Liest die letzte Anzeige-Einstellung aus der Chrome Storage aus.
 </div>
 
 
@@ -1389,7 +1529,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line121">line 121</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -1425,6 +1565,10 @@
     
 
 
+
+<div class="description">
+    Speichert die Anzeige-Eigenschaft des Moduls in der Chrome Storage.
+</div>
 
 
 
@@ -1539,7 +1683,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line111">line 111</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -1670,7 +1814,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line86">line 86</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -1801,7 +1945,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line56">line 56</a>
+        <a href="popup_module.js.html">popup/module.js</a>, <a href="popup_module.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -1843,13 +1987,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:16 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:11 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

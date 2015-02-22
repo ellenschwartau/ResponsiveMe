@@ -30,13 +30,13 @@
     'jquery'
 ],
 /**
- * Hilfsskript zur Verwendung des Code Editors ACE.
- * Hierüber können Elemente, identidieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
+ * Hilfsskript zur Arbeit mit dem Code Editor ACE.
+ * Hierüber können HTML-Elemente, identifieziert über ihre ID, als Code Editoren initialisiert und deren Inhalt gesetzt
  * werden.
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
- * @exports codeEditorHelper
+ * @exports aceHelper
  * @param {Object} $ - JQuery
- * @returns {{initCodeEditor: Function, getEditorValue: Function, cleatEditorValue: Function, getEditorData: Function, removeEditorFromList: Function}}
+ * @returns {{initCodeEditor: Function, getEditorValue: Function, getEditorData: Function, cleatEditorValue: Function, removeEditorFromList: Function, clearEditorList: Function}}
  */
 function($){
     /**
@@ -49,11 +49,12 @@ function($){
      * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
      * @param {string} id - CSS-ID des Editors
      * @param {{indexStyleSheet:int,indexRule:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
-     * @param {function} [onBlurCallback] - Funktion, die beim Verlassen des Editors ausgeführt werden soll
+     * @param {string} [bindEvent] - optionaler Name des Events, das behandelt werden soll
+     * @param {function} [onBlurCallback] - optionale Funktion zur Behandlung des Events
      * @returns {Object} - Editor
      */
-    var initCodeEditor = function(id, rule, onBlurCallback) {
-        // Editor Erstellen und Modus sowie Theme setzen
+    var initCodeEditor = function(id, rule, bindEvent, onBlurCallback) {
+        // Editor erstellen und Modus sowie Theme setzen
         var editor = ace.edit(id),
             style = rule.fullCss,
             indexStyleSheet = rule.indexStyleSheet,
@@ -76,8 +77,8 @@ function($){
         // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
         saveEditorData(editor, id, indexStyleSheet, indexRule);
         // Callbacks initialisieren
-        if(onBlurCallback != undefined) {
-            bindBlurCallback(editor, indexStyleSheet, indexRule, id, onBlurCallback);
+        if(onBlurCallback != undefined &amp;&amp; bindEvent != undefined) {
+            bindEventCallback(editor, indexStyleSheet, indexRule, id, bindEvent, onBlurCallback);
         }
 
         return editor;
@@ -96,15 +97,16 @@ function($){
     };
 
     /**
-     * Bindet eine Callback-Funktion an das blur-Event.
+     * Bindet eine Callback-Funktion zur Behandlung des spezifizierten Events.
      * @param {Object} editor - Code-Editor
      * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
      * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
      * @param {string} id - CSS-ID des Editors
+     * @param {string} bindEvent - Name des Events, das behandelt werden soll
      * @param {function} callback - Funktion, die aufgerufen werden soll
      */
-    var bindBlurCallback = function(editor, indexStyleSheet, indexRule, id, callback) {
-        editor.on("blur", function(){
+    var bindEventCallback = function(editor, indexStyleSheet, indexRule, id, bindEvent, callback) {
+        editor.on(bindEvent, function(){
             callback(editor.session.getValue(), indexStyleSheet, indexRule, id);
         });
     };
@@ -126,6 +128,13 @@ function($){
     };
 
     /**
+     * Leert die Liste der gespeicherten Editoren.
+     */
+    var clearEditorList = function(){
+        editors = [];
+    };
+
+    /**
      * Löscht einen Editor aus der Liste der Editoren.
      * @param {string} id - CSS-ID des Editors
      */
@@ -143,9 +152,9 @@ function($){
     };
 
     /**
-     * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen id.
+     * Liefert den aktuellen Inhalt eines Editors, spezifiziert über dessen ID.
      * @param {string} id - CSS-ID des Editors
-     * @returns {string}
+     * @returns {string} Inhalt des Editors
      */
     var getEditorValue = function(id) {
         var editorData = getEditorData(id);
@@ -165,7 +174,7 @@ function($){
 
     /**
      * Liefert die Daten eines Editors, der über seine ID spezifiziert wird.
-     * @param {String} id - css-ID des Editors
+     * @param {String} id - CSS-ID des Editors
      * @returns {undefined|{editor:Object,id:string,indexStyleSheets:int,indexRule:int}}
      */
     var getEditorData = function(id) {
@@ -181,10 +190,11 @@ function($){
     return {
         initCodeEditor: initCodeEditor,
         getEditorValue: getEditorValue,
-        cleatEditorValue: clearEditorValue,
         getEditorData: getEditorData,
-        removeEditorFromList: removeEditorFromList
-    }
+        cleatEditorValue: clearEditorValue,
+        removeEditorFromList: removeEditorFromList,
+        clearEditorList: clearEditorList
+    };
 });
 </code></pre>
         </article>
@@ -196,13 +206,13 @@ function($){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:15 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:10 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

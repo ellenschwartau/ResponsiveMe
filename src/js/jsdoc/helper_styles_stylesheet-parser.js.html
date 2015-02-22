@@ -27,20 +27,18 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>define([
-    'jquery', 'tools', 'mediaQueryParser'
+    'jquery', 'mediaQueryParser'
 ],
 /**
  * Dieses Skript stellt verschiedene Funktionen zum Parsen von Style Sheets bereit.
- * Die Css-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
+ * Die CSS-Regeln können beispielsweise nach Media Queries gefiltert und in ein JSON Format umgewandelt werden.
  * @exports stylesheetParser
  * @param {Object} $ - JQuery
- * @param {module} tools - tools-Module
- * @see module:tools
  * @param {module} mediaQueryParser - mediaQueryParser-Modul
  * @see module:mediaQueryParser
  * @returns {{getMediaQueries: Function, getEmptyCssRuleJson: Function, getMediaList: Function}}
  */
-function($, tools, mediaQueryParser){
+function($, mediaQueryParser){
     /**
      * Kennzahl der CSSRules des Typs Media Query
      * @type {number}
@@ -48,7 +46,7 @@ function($, tools, mediaQueryParser){
     var CSS_MEDIA_RULE_TYPE = 4;
 
     /**
-     * Liefert alle css-Regeln eines bestimmten Typs der aktuell geladenen Stylesheets.
+     * Liefert alle CSS-Regeln eines bestimmten Typs der aktuell geladenen Style Sheets.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
      * @returns {json}
      */
@@ -73,11 +71,11 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * List aus einer Liste an CSSRules die einzelnen Regeln aus und konvertiert die
+     * Liest aus einer Liste an CSSRules die Regeln eines Typs aus und konvertiert die
      * benötigten Informationen ins JSON-Format.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
-     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
-     * @param {CSSRuleList} ruleList - Liste, die die css-Regeln enthält
+     * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Regel stammt
+     * @param {CSSRuleList} ruleList - Liste, die die CSS-Regeln enthält
      * @returns {json}
      */
     var getCssRulesFromRuleList = function(type, indexStyleSheet, ruleList) {
@@ -92,10 +90,10 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Konvertiert eine Media Query in ein JSON-Format.
+     * Konvertiert eine CSS-Regel ins JSON-Format.
      * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
      * @param {int} indexStyleSheet - Index des Style Sheets, aus dem die Media Query stammt
-     * @param {int} indexRule - Index der Regel, die die Media Query definiert
+     * @param {int} indexRule - Index der Regel, aus der Liste der CSS-Regeln des Style Sheets
      * @param {CSSRule} rule - CSS-Regel
      * @returns {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string}}
      */
@@ -108,10 +106,10 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Fügt dem JSON Object der css-Regel je nach dessen Typ weitere Daten an.
-     * @param {int} type - Typ der Regeln, die ausgelesen werden sollen
+     * Fügt dem JSON Object der CSS-Regel je nach dessen Typ weitere Daten an.
+     * @param {int} type - Typ der Regeln
      * @param {CSSRule} rule - CSS-Regel
-     * @param {json} json  - bisherig gesammelte Daten zur Regel
+     * @param {json} json  - bisher gesammelte Daten zur Regel
      * @return {{indexStyleSheet:int, indexRule:int, fullCss:string, selector:string, mediaQueryWidth:int,selector:string}}
      */
     var addTypeSpecificInformation = function(type, rule, json) {
@@ -136,15 +134,15 @@ function($, tools, mediaQueryParser){
     };
 
     /**
-     * Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
-     * @returns {Array} Liste der Media-Angaben
+     * Liefert die Liste an Media Queries, die in Style Sheets enthalten sind.
+     * @returns {string[]} Liste der Media-Angaben
      */
     var getMediaList = function(){
         return mediaQueryParser.getMediaList(getMediaQueries());
     };
 
     /**
-     * Liefert die CSS-Rules, die @media-Angaben enthalten.
+     * Liefert die Media Queries der geladenen Website.
      * @return {Array}
      */
     var getMediaQueries = function(){
@@ -166,13 +164,13 @@ function($, tools, mediaQueryParser){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:15 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:10 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

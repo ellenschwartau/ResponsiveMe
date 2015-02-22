@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Modul zum Parsen von Media Queries.Liest aus einer Media Query bestimmte Informationen aus und wandelt diese in JSON um.</div>
+            <div class="description">Modul zum Parsen von Media Queries. Dient dem Auslesen aller vorhandenen Media Queries sowie dem Umwandelnvon Media Queries in JSON.</div>
         
 
         
@@ -52,6 +52,78 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>$</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">JQuery</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tools</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">tools-Modul</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -87,12 +159,19 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line9">line 9</a>
+        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-tools.html">module:tools</a></li>
+        </ul>
+    </dd>
     
 
     
@@ -110,6 +189,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -144,7 +241,7 @@
 
 
 <div class="description">
-    Fügt den bisherigen Daten der Media Query zwei Breitenangaben an:data.mediaQueryWidth: größte Breitenangabe, ab der die Media Query greiftdata.mediaQueryToggleWidth: Breitenangabe, ab der die Media Query gerade nicht greift
+    Fügt den bisherigen Daten der Media Query zwei Breitenangaben hinzu:data.mediaQueryWidth: größte Breitenangabe, ab der die Media Query greiftdata.mediaQueryToggleWidth: Breitenangabe, ab der die Media Query gerade nicht greift
 </div>
 
 
@@ -260,7 +357,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line39">line 39</a>
+        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -298,7 +395,7 @@
 
 
 <div class="description">
-    Fügt dem JSON Object der css-Regel weitere Media Query spezifische Daten an.
+    Fügt dem JSON-Object der CSS-Regel Media Query spezifische Daten an.
 </div>
 
 
@@ -350,7 +447,7 @@
 
             
 
-            <td class="description last">bisherig gesammelte Daten zur Regel</td>
+            <td class="description last">bisheR gesammelte Daten zur Regel</td>
         </tr>
 
     
@@ -414,7 +511,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line139">line 139</a>
+        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -470,7 +567,7 @@
 
 
 <div class="description">
-    Liefert die Liste an Media-Angaben, die in den Media Queries enthalten sind.
+    Liefert die einzigartigen Vorkommen an Media Queries aus der übergebenen Liste.
 </div>
 
 
@@ -563,7 +660,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line18">line 18</a>
+        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -590,7 +687,7 @@
 
         
 <div class="param-desc">
-    Liste der Media-Angaben
+    Menge der Media-Angaben
 </div>
 
 
@@ -623,7 +720,7 @@
 
 
 <div class="description">
-    Liefert den Wert des Selektors einer Media Query.
+    Liefert den Selektor einer Media Query inklusive @media-Angabe.
 </div>
 
 
@@ -716,7 +813,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line129">line 129</a>
+        <a href="helper_styles_media-query-parser.js.html">helper/styles/media-query-parser.js</a>, <a href="helper_styles_media-query-parser.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -776,13 +873,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:16 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:11 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

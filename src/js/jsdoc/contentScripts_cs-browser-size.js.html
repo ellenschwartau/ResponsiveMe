@@ -30,7 +30,7 @@
     'jquery', 'extension'
 ],
 /**
- * Content Script zur Ermittlung der aktuellen Browsergröße.
+ * Content Script zur Ermittlung der aktuellen und maximalen Browsergröße.
  * @exports csBrowserSize
  * @param {Object} $ - JQuery
  * @param {module} extension - extension-Modul
@@ -38,7 +38,7 @@
  */
 function($, extension){
     /**
-     * Berechnet bei Skalierung des Browsers die zutreffenden Media Angaben aus den Media Queries.
+     * Berechnet bei Skalierung des Browsers dessen Größe erneut.
      */
     var updateBrowserSizeOnResize = function(){
         $(window).resize(function(){
@@ -47,7 +47,7 @@ function($, extension){
     };
 
     /**
-     * Berechnet die aktuell greifenden Media Angaben und triggert die Aktualisierung in Background Page und Popup.
+     * Berechnet die aktuelle Browsergröße und stößt die Aktualisierung in Background Page und Popup an.
      */
     var updateBrowserSize = function() {
         extension.sendMessage({
@@ -62,7 +62,7 @@ function($, extension){
     };
 
     /**
-     * Triggert das Aktualisieren der möglichen Browser-Größe.
+     * Stößt das Aktualisieren der maximalen Browser-Größe an.
      */
     var updateAvailBrowserSize = function(){
         extension.sendMessage({
@@ -76,13 +76,8 @@ function($, extension){
 
     /**
      * Berechnet die benötigten Größen erneut, wenn die Hintergrundseite aktualisiert werden soll.
-     * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
-     * @param {string} request.type - Typ der Nachricht, zur Angabe, welche Aktion folgen soll
-     * @param {json} request.data - zusätzliche Daten der Nachricht
-     * @param {MessageSender} sender - Enthält Informationen über den Absender
-     * @param {function} sendResponse - Funktion zum Absenden einer Antwort
      */
-    var handleUpdateBackgroundPageMessage = function(request, sender, sendResponse){
+    var handleUpdateBackgroundPageMessage = function(){
         updateAvailBrowserSize();
         updateBrowserSize();
     };
@@ -95,7 +90,7 @@ function($, extension){
     };
 
     /**
-     * Initialisiert die Ermittlung der aktuell greifenden Media-Angaben.
+     * Initialisiert die Ermittlung der aktuellen und maximalen Browsergröße.
      */
     var init = function(){
         updateBrowserSize();
@@ -113,13 +108,13 @@ function($, extension){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-codeEditorHelper.html">codeEditorHelper</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-localStorage.html">localStorage</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aceHelper.html">aceHelper</a></li><li><a href="module-activeMediaQueries.html">activeMediaQueries</a></li><li><a href="module-allMediaQueries.html">allMediaQueries</a></li><li><a href="module-background.html">background</a></li><li><a href="module-backgroundAccess.html">backgroundAccess</a></li><li><a href="module-browserOffset.html">browserOffset</a></li><li><a href="module-chromeStorage.html">chromeStorage</a></li><li><a href="module-config.html">config</a></li><li><a href="module-csBrowserSize.html">csBrowserSize</a></li><li><a href="module-csMediaQueries.html">csMediaQueries</a></li><li><a href="module-csStyles.html">csStyles</a></li><li><a href="module-extension.html">extension</a></li><li><a href="module-extensionComponents.html">extensionComponents</a></li><li><a href="module-extensionEvents.html">extensionEvents</a></li><li><a href="module-extensionMessagePassing.html">extensionMessagePassing</a></li><li><a href="module-extensionStorage.html">extensionStorage</a></li><li><a href="module-grid.html">grid</a></li><li><a href="module-main.html">main</a></li><li><a href="module-matchMedia.html">matchMedia</a></li><li><a href="module-mediaQueries.html">mediaQueries</a></li><li><a href="module-messageHandling.html">messageHandling</a></li><li><a href="module-modules.html">modules</a></li><li><a href="module-newMediaQuery.html">newMediaQuery</a></li><li><a href="module-parseMediaQuery.html">parseMediaQuery</a></li><li><a href="module-popup.html">popup</a></li><li><a href="module-settings.html">settings</a></li><li><a href="module-styleEditor.html">styleEditor</a></li><li><a href="module-stylesheetParser.html">stylesheetParser</a></li><li><a href="module-tools.html">tools</a></li><li><a href="module-viewport.html">viewport</a></li><li><a href="module-viewportAnimation.html">viewportAnimation</a></li><li><a href="module-viewportSize.html">viewportSize</a></li><li><a href="module-visualizeElements.html">visualizeElements</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Fri Feb 06 2015 17:30:15 GMT+0100 (Mitteleuropäische Zeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a> on Sun Feb 22 2015 19:01:10 GMT+0100 (Mitteleuropäische Zeit)
 </footer>
 
 <script> prettyPrint(); </script>

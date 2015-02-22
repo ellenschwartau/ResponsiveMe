@@ -3,7 +3,7 @@ define([
 /**
  * Enthält Konfigurationen der Erweiterung, wie vordefinierte Auflösungen und die zu ladenden Module.
  * @exports config
- * @returns {{baseDir: string, modules: string[], resolutions: {name: string, width: number, height: number}[], defaultColorGrid: string}}
+ * @returns {{baseDir: string, modules: Array, resolutions: Array, defaultGridColor: string}}
  */
 function() {
     var baseDir = "modules/",           // Basispfad zu den Modulen
