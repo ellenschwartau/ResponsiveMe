@@ -2,8 +2,8 @@ define([
     'jquery', 'modules', 'settings'
 ],
 /**
- * Javascript der popup.html - initialisiert das Popup.
- * Die verfügbaren Module werden geladen und die Settings initialisiert.
+ * Modul zur Initialisierung des Popups.
+ * Lädt die verfügbaren Module und initialisiert die Settings.
  * @exports popup
  * @param {Object} $ - JQuery
  * @param {module} modules - modules-Modul
@@ -14,23 +14,28 @@ define([
  */
 function($, modules, settings) {
     /**
+     * CSS-Klasse zur Minimierung des Popups.
+     * @type {string}
+     */
+    var HIDE_POPUP_CLASS = "hide";
+    /**
      * Initialisiert das Minimieren und Maximieren des Popups,
      * wenn die Maus auf das Popup oder vom Popup weg bewegt wird.
      */
     var initPopupDisplay = function() {
         var $body = $("body");
         $body.mouseleave(function(){
-            $(this).addClass("hide");
+            $(this).addClass("HIDE_POPUP_CLASS");
         });
         $body.mouseenter(function(){
-            $("body").removeClass("hide");
+            $(this).removeClass("HIDE_POPUP_CLASS");
         });
     };
 
     /**
      * Initialisiert das Popup.
      * Dafür werden die verschiedenen Module in das Popup eingebunden
-     * und die Callbacks zur Manipulation der Anzeige gesetzt.
+     * und die Callbacks zur Manipulation der Anzeige durch die Settings gesetzt.
      */
     var init = function () {
         var $content = $("#popup-content");

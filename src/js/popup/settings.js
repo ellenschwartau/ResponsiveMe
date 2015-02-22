@@ -2,28 +2,32 @@ define([
     'jquery', 'modules', 'tools'
 ],
 /**
- * Die settings.js übernimmt das Initialisieren der Einstellungen und das Behandeln der Änderungen an den
- * Einstellungen. Dazu gehört beispielsweise das Ein- und Ausblenden aller Module und das Aktivieren und Deaktivieren
- * der Beschreibungstexte.
+ * Die settings.js übernimmt das Initialisieren und Behandeln der Einstellungen.
+ * Über die Einstellungen können alle Module zeitgleich ein- und ausgeblendet
+ * sowie die Hinweistexte der Module aktiviert oder deaktiviert werden.
  * @exports settings
  * @param {Object} $ - JQuery
  * @param {module} modules - modules-Modul
+ * @see module:modules
  * @param {module} tools - tools-Modul
  * @see module:tools
  * @returns {{init: Function}}
  */
 function($, modules, tools) {
-    var $content = $("#popup-content"),                             // Wrapper-Element für den Content
+    var $content = $("#popup-content"),                             // Wrapper-Element für den Content des Popups
         $footer = $("#popup-footer"),                               // Wrapper-Element für den Footer
         $settings = $footer.find(".settings"),                      // Formular, das die Settings enthält
         $showDescriptionsCb = $settings.find("#showDescriptionCb"), // Checkbox für die Anzeige der Beschreibungen
-        $showAllModulesCb = $settings.find("#showAllModulesCb");    // Checkboc für die Anzeige der Module
+        $showAllModulesCb = $settings.find("#showAllModulesCb"),    // Checkbox für die Anzeige der Module
+        MODULE_CONTENT = ".module-content",                         // Selektor des Modul-Inhalts
+        SETTINGS_ICON = ".settings-icon",                           // Selektor des Settings-Icon
+        MODULE = ".module";                                         // Selektor der Module
 
     /**
-     * Ein- und Ausblenden der Einstellungen bei Klick auf das Einstelluns-Icon im Footer.
+     * Initialisiert das Ein- und Ausblenden der Einstellungen bei Klick auf das Einstelluns-Icon im Footer.
      */
     var initSettingsDisplay = function() {
-        $footer.find(".settings-icon").click(function() {
+        $footer.find(SETTINGS_ICON).click(function() {
             $settings.toggle("slow");
             if(tools.properties.isVisible($settings)) {
                 $settings.css("display", "inline-block");
@@ -32,11 +36,11 @@ function($, modules, tools) {
     };
 
     /**
-     * Ein- und Ausblenden der Hinweise über die Checkbox ermöglichen.
+     * Initialisiert das  Ein- und Ausblenden der Hinweise über die Checkbox.
      */
     var initDescriptionToggle = function() {
         $showDescriptionsCb.change(function(){
-            $content.find(".module").each(function(i, item) {
+            $content.find(MODULE).each(function(i, item) {
                 if(tools.properties.isChecked($showDescriptionsCb)) {
                     modules.setSlideCallbacks($(item));
                 } else {
@@ -47,18 +51,18 @@ function($, modules, tools) {
     };
 
     /**
-     * Ein- und Ausblenden der Modul-Inhalte über die Einstellungen.
+     * Initialisiert das Ein- und Ausblenden der Modul-Inhalte über die Einstellungen.
      */
     var initModuleToggle = function() {
         $showAllModulesCb.change(function(){
-            $content.find(".module").each(function(i, item) {
+            $content.find(MODULE).each(function(i, item) {
                 var $item = $(item);
                 if(tools.properties.isChecked($showAllModulesCb)) {
-                    $item.find(".module-content").slideDown("slow");
+                    $item.find(MODULE_CONTENT).slideDown("slow");
                     modules.resetSlideCallbacks($item);
                     $item.addClass(modules.activeClass);
                 } else {
-                    $item.find(".module-content").slideUp("slow");
+                    $item.find(MODULE_CONTENT).slideUp("slow");
                     modules.setSlideCallbacks($item);
                     $item.removeClass(modules.activeClass);
                 }

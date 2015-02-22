@@ -2,7 +2,8 @@ define([
     'jquery', 'config', 'viewport', 'mediaQueries', 'grid', 'chromeStorage', 'tools'
 ],
 /**
- * Die module.js behandelt das Einbinden der Module und registriert die Callbacks zur Manipulation der Anzeige.
+ * Dieses Modul behandelt das Einbinden und Initialisieren der Module
+ * und registriert die Callbacks zur Manipulation der Anzeige.
  * @exports modules
  * @param {Object} $ - JQuery
  * @param {module} config - config-Modul
@@ -20,10 +21,18 @@ define([
  * @returns {{init: Function, setSlideCallbacks: Function, resetSlideCallbacks: Function, activeClass: string}}
  */
 function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
-    var activeClass = "active";     // CSS-Klasse zum Markien eines aktiven Moduls
+    /**
+     * Benötigte CSS-Klassen und HTML-Elemente
+     */
+    var ACTIVE_MODULE_CLASS = "active",                     // CSS-Klasse zur Markierung eingeblendeter Module
+        MODULE_DESCRIPTION = ".module-description",         // Selektor der Modul-Beschreibung
+        $descriptionCb = $("#showDescriptionCb");  // Checkbox zur Beeinflussung der Beschreibungen
 
     /**
-     * Inkludiert die Module zur Anzeige im Popup.
+     * Inkludiert die in der Konfiguration aufgelisteten Module und hängt diese an das übergebene Element an.
+     * Sobald diese fertig geladen sind, werden die allgemeinen Callbacks initialisert
+     * und die Modul-spezifische Initialisierung ausgeführt.
+     * @param {$} $parentElement - Element, an das das Markup der Module angehängt werden soll
      */
     var includeModules = function($parentElement) {
         $.each(config.modules, function(i, modulePath) {
@@ -56,7 +65,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
      * @param {$} $element - Modul-Element
      */
     var toggleModuleDescriptionDisplay = function($element) {
-        if(!$element.hasClass(activeClass)) {
+        if(!$element.hasClass(ACTIVE_MODULE_CLASS)) {
             initModuleDescriptionDisplay($element);
         } else {
             disableModuleDescriptionDisplay($element);
@@ -86,11 +95,11 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
      * @param {$} $element - Modul-Element
      */
     var toggleActive = function($element) {
-        $element.toggleClass(activeClass);
+        $element.toggleClass(ACTIVE_MODULE_CLASS);
     };
 
     /**
-     * Liefert den Schlüssel unter dem die Anzeige-Eigenschaft des Moduls in de Local Storage gespeichert ist.
+     * Liefert den Schlüssel, unter dem die Anzeige-Eigenschaft des Moduls in der Chrome Storage gespeichert ist.
      * @param {string} moduleName - Name des aktuellen Moduls
      * @returns {string}
      */
@@ -106,7 +115,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
     };
 
     /**
-     *
+     * Speichert die Anzeige-Eigenschaft des Moduls in der Chrome Storage.
      * @param {string} key - Schlüssel zum Speichern und Auslesen der Anzeigeeinstellung aus der Local Storage
      * @param {$} $content - Element, bei dem die Callbacks registriert werden sollen
      */
@@ -116,7 +125,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
     };
 
     /**
-     * Liest die letzte Anzeige-Einstellung aus der Local Storage aus.
+     * Liest die letzte Anzeige-Einstellung aus der Chrome Storage aus.
      * @param {string} key - Schlüssel zum Speichern und Auslesen der Anzeigeeinstellung aus der Local Storage
      * @param {$} $content - Element, dessen Anzeige-Einstellung bestimmt werden soll
      */
@@ -131,7 +140,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
 
     /**
      * Initialisiert das Ein- und Ausblenden des Modulinhalts.
-     * Der initiale Anzeigewert wird aus der Local Storage ausgelesen.
+     * Der initiale Anzeigewert wird aus der Chrome Storage ausgelesen.
      * @param {string} moduleName - Name des Moduls, das initialisiert werden soll
      * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
      */
@@ -140,10 +149,10 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
             key = getStorageKeyForModule(moduleName);
         // initiale Anzeige bestimmen
         readModuleDisplay(key, $toggleContent);
-        // Modul-Inhalt ein- und ausblenden
+        // Modul-Inhalt bei Klick ein- und ausblenden
         $element.find("h2").click(function () {
             $toggleContent.slideToggle(400, function(){
-                // Sichtbarkeit speichern, wenn toggl fertig
+                // Sichtbarkeit speichern, wenn toggle fertig
                 saveModuleDisplay(key, $toggleContent);
             });
             toggleActive($element);
@@ -152,15 +161,13 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
     };
 
     /**
-     * Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung, wenn mit der Maus über den Modul-Titel
-     * gefahren wird.
+     * Setzt den Callback für das Ein- und Ausblenden der Modul-Beschreibung,
+     * wenn mit der Maus über den Modul-Titel gefahren wird.
      * @param {$}  $element - Element, bei dem die Callbacks registriert werden sollen
      */
     var initModuleDescriptionDisplay = function($element) {
-        var $settings = $("#popup-footer").find(".settings"),
-            $descriptionCb = $settings.find("#showDescriptionCb"),
-            shouldDisplayDescriptions = tools.properties.isChecked($descriptionCb),
-            toggleDescription = $element.find(".module-description");
+        var shouldDisplayDescriptions = tools.properties.isChecked($descriptionCb),
+            toggleDescription = $element.find(MODULE_DESCRIPTION);
         if(shouldDisplayDescriptions) {
             // Beschreibung ein- und ausblenden wenn die Überschrift gehovert wird
             $element.find("h2").hover(function() {
@@ -171,11 +178,9 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
         }
     };
 
-    // TODO Konstanten für Element-Selektoren?
-
     /**
      * Initialisiert die Anzeige der Module und setzt die benötigten Callbacks.
-     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Modulinhalts und der Einstellungen,
+     * Dazu gehört das Ein- und Ausblenden der Beschreibung und des Inhalts der Module
      * sowie das Markieren des Moduls als aktiv oder inaktiv.
      * @param {string} moduleName - Name des Moduls
      * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
@@ -189,6 +194,6 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
         init: includeModules,
         setSlideCallbacks: initModuleDescriptionDisplay,
         resetSlideCallbacks: disableModuleDescriptionDisplay,
-        activeClass: activeClass
+        activeClass: ACTIVE_MODULE_CLASS
     };
 });
