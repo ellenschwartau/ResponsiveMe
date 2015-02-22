@@ -18,6 +18,7 @@ function($, modules, settings) {
      * @type {string}
      */
     var HIDE_POPUP_CLASS = "hide";
+
     /**
      * Initialisiert das Minimieren und Maximieren des Popups,
      * wenn die Maus auf das Popup oder vom Popup weg bewegt wird.
