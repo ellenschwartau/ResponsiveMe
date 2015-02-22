@@ -1,4 +1,4 @@
-var requireJsConfig = {
+require.config({
     // Basispfad der Javaskript Dateien
     baseUrl: '/js',
     // Vorhandene Module und Libs
@@ -45,5 +45,4 @@ var requireJsConfig = {
         activeMediaQueries: 'modules/mediaQueries/active-media-queries',
         csMediaQueries: 'contentScripts/cs-media-queries'
     }
-};
-require.config(requireJsConfig);
+});
