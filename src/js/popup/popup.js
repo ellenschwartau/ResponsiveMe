@@ -26,10 +26,10 @@ function($, modules, settings) {
     var initPopupDisplay = function() {
         var $body = $("body");
         $body.mouseleave(function(){
-            $(this).addClass("HIDE_POPUP_CLASS");
+            $(this).addClass(HIDE_POPUP_CLASS);
         });
         $body.mouseenter(function(){
-            $(this).removeClass("HIDE_POPUP_CLASS");
+            $(this).removeClass(HIDE_POPUP_CLASS);
         });
     };
 

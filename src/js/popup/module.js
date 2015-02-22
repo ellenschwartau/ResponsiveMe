@@ -26,7 +26,8 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
      */
     var ACTIVE_MODULE_CLASS = "active",                     // CSS-Klasse zur Markierung eingeblendeter Module
         MODULE_DESCRIPTION = ".module-description",         // Selektor der Modul-Beschreibung
-        $descriptionCb = $("#showDescriptionCb");  // Checkbox zur Beeinflussung der Beschreibungen
+        MODULE_CONTENT = ".module-content",
+        $descriptionCb = $("#showDescriptionCb");           // Checkbox zur Beeinflussung der Beschreibungen
 
     /**
      * Inkludiert die in der Konfiguration aufgelisteten Module und hängt diese an das übergebene Element an.
@@ -56,7 +57,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
      */
     var disableModuleDescriptionDisplay = function($element) {
         $element.find("h2").unbind('mouseenter mouseleave');
-        $element.find(".module-description").slideUp();
+        $element.find(MODULE_DESCRIPTION).slideUp();
     };
 
     /**
@@ -145,7 +146,7 @@ function($, config, viewport, mediaQueries, grid, chromeStorage, tools) {
      * @param {$} $element - Element, bei dem die Callbacks registriert werden sollen
      */
     var initToggleContent = function(moduleName, $element){
-        var $toggleContent = $element.find(".module-content"),
+        var $toggleContent = $element.find(MODULE_CONTENT),
             key = getStorageKeyForModule(moduleName);
         // initiale Anzeige bestimmen
         readModuleDisplay(key, $toggleContent);
