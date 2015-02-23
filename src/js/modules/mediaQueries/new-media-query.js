@@ -34,7 +34,7 @@ function($, stylesheetParser, aceHelper, styleEditor, extension) {
 
     /**
      * Initialisiert den Editor zum Hinzufügen einer neuen Media Query.
-     * @param {string} id - ID des Code Editors, der Initialisiert werden soll
+     * @param {string} id - ID des Code Editors, der initialisiert werden soll
      */
     var initNewMediaQueryEditor = function(id) {
         aceHelper.initCodeEditor(id, stylesheetParser.getEmptyCssRuleJson(), aceHelper.PERMANENT);

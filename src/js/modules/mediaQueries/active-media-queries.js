@@ -2,34 +2,34 @@ define([
     'jquery', 'extension', 'backgroundAccess'
 ],
 /**
- * Modul zur Anzeige der aktuell greifenden Media Angaben aus den Media Queries.
+ * Modul zur Anzeige der aktuell greifenden Media Queries.
  * @exports activeMediaQueries
  * @param {Object} $ - JQuery
  * @param {module} extension - extensionModul
  * @see module:extension
  * @param {module} backgroundAccess - backgroundAccess-Modul
  * @see module:backgroundAccess
- * @returns {{init: Function, setMatchMedia: Function}}
+ * @returns {{init: Function}}
  */
 function($, extension, backgroundAccess){
-    var $matchedMediaElement,       // Element, in dem die greifenden Media Angaben angezeigt werden sollen
-        MSG_NO_MEDIAS = "-",        // Nachricht, die ausgegeben wird, wenn aktuell keine Media Queries greifen
+    var $matchedMediaElement,           // Element, in dem die greifenden Media Angaben angezeigt werden sollen
+        MSG_NO_MEDIAS = "-",            // Nachricht, die ausgegeben wird, wenn aktuell keine Media Queries greifen
         $mediaElement = $("<li></li>"); // Markup eines Listen-Elements der aktuell greifenden Media-Angaben
 
     /**
-     * Behandelt die Anzeige der aktuell greifenden Media Angaben.
+     * Behandelt die Anzeige der aktuell greifenden Media Queries.
      * @param {{type:string, data:json}} request - Daten und Typ der Anfrage
      */
     var handleCurrentMediaMessage = function(request){
-        setMatchMedia(request.data.mediaList)
+        showMatchedMediaQueries(request.data.mediaList)
     };
 
     /**
-     * Setzt den Inhalt des Media-Elements und zeigt die übergebenen Media-Angaben in der Liste an.
+     * Zeigt die Liste an Media Queries im dafür vorgesehenen Element an.
      * Ist die Liste leer, wird eine entsprechende Nachricht angezeigt.
      * @param {String[]} mediaList - Liste an Media-Angaben
      */
-    var setMatchMedia = function(mediaList) {
+    var showMatchedMediaQueries = function(mediaList) {
         $matchedMediaElement.empty();
         if(mediaList != null){
             if(mediaList.length == 0){
@@ -45,16 +45,15 @@ function($, extension, backgroundAccess){
     };
 
     /**
-     * Initialisiert die Anzeige der greifenden Media Queries.
+     * Initialisiert die Anzeige der aktuell greifenden Media Queries.
      */
     var init = function(){
         $matchedMediaElement = $("#matchedMedia");
         extension.handleMessage(extension.messageTypes.displayCurrentMediaList, handleCurrentMediaMessage);
-        setMatchMedia(backgroundAccess.getMediaList());
+        showMatchedMediaQueries(backgroundAccess.getMediaList());
     };
 
     return {
-        init: init,
-        setMatchMedia: setMatchMedia
+        init: init
     };
 });

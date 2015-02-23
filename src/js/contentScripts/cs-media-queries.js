@@ -20,7 +20,7 @@ function($, matchMedia, styleSheetParser, extension){
         extension.sendMessage({
             type: extension.messageTypes.displayCurrentMediaList,
             data: {
-                mediaList: matchMedia.getMatchedMedia()
+                mediaList: matchMedia.getMatchedMediaQueries()
             }
         });
     };

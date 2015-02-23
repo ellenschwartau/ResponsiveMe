@@ -4,7 +4,7 @@ define([
 /**
  * Dieses Modul dient der Visualisierung von Media Queries.
  * Es bringt die aktuell vorhandenen Media Queries zur Anzeige und bietet außerdem die Möglichkeit,
- * die vorhandenen Media Queries zu bearbeiten und neue Hinzuzufügen.
+ * die vorhandenen Media Queries zu bearbeiten und neue hinzuzufügen.
  * Auch die aktuell greifenden Media Queries werden aufgelistet.
  * @exports mediaQueries
  * @param {Object} $ - JQuery
@@ -21,7 +21,7 @@ define([
 function($, allMediaQueries, newMediaQuery, activeMediaQueries, extension) {
     var $showMediaQueriesButton,                        // Button zum Anzeigen der Media Queries
         $newMediaQueryButton,                           // Button zum Speichern der neuen Media Query
-        EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum verfassen einer neuen Media Query
+        EDITOR_ID_NEW_MEDIA_QUERY = "newMediaQuery";    // ID des Editors zum Verfassen einer neuen Media Query
 
     /**
      * Initialisiert die Anzeige der Media Queries.

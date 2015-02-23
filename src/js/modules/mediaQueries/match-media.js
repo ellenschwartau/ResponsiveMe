@@ -6,13 +6,13 @@ define([
  * @exports matchMedia
  * @param {module} stylesheetParser - stylesheetParser-Modul
  * @see module:stylesheetParser
- * @returns {{matches: Function}}
+ * @returns {{getMatchedMediaQueries: Function}}
  */
 function(stylesheetParser){
     /**
-     * Liefert die aktuell zutreffenden Media-Angaben.
+     * Liefert die aktuell zutreffenden Media Queries.
      */
-    var getMatchedMedia = function() {
+    var getMatchedMediaQueries = function() {
         var matchedMediaList = [],
             mediaList = stylesheetParser.getMediaList();
         $.each(mediaList, function(i, media){
@@ -24,7 +24,7 @@ function(stylesheetParser){
     };
 
     /**
-     * Liefert die Information, ob eine aktuelle Media-Angabe zutrifft.
+     * Liefert die Information, ob eine aktuelle Media Query zutrifft.
      * @param {string} media - Media Query
      * @returns {boolean}
      */
@@ -33,6 +33,6 @@ function(stylesheetParser){
     };
 
     return {
-        getMatchedMedia: getMatchedMedia
+        getMatchedMediaQueries: getMatchedMediaQueries
     }
 });
