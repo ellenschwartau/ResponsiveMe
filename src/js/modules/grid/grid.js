@@ -2,8 +2,8 @@ define([
     'jquery', 'visualizeElements', 'chromeStorage', 'tools', 'config'
 ],
 /**
- * Visualisiert das Grid, auf dem eine Website beruht.
- * Dieses Grid kann durch die Angabe mehrerer CSS-Selektoren angegeben werden.
+ * Dient der Visualisierung ders zugrundeliegenden Rasters einer Website,
+ * dessen Elemente durch die Angabe von CSS-Selektoren spezifiziert werden können.
  *
  * Zur Anzeige des Grids können auch reguläre Ausdrücke verwendet werden, z.B.:
  * "div[class^='column-'],div[class*=' column-']" // Alle Klassen, die mit "column-" beginnen oder " column-" beinhalten
@@ -23,23 +23,63 @@ define([
  * @returns {{init: Function}}
  */
 function($, visualizeElements, chromeStorage, tools, config) {
-    var $contentWrapper,        // Parent Element des Grid Contents
+    var $contentWrapper,        // Parent-Element des Grid Contents
         $addSelectorButton,     // Button zum Hinzufügen von Selektoren
-        $showGridButton,        // Button zum Anzeigen des Grids
-        $gridColor,             // Eingabe-Feld zu Angabe der Darstellungsfarbe
+        $showGridButton,        // Button zur Anzeige des Grids
+        $gridColor,             // Eingabe-Feld zur Angabe der Darstellungsfarbe
         $gridWidth,             // Eingabe-Feld zur Angabe der Anzeigebreite
-        inputSelectors = "input[type=text]";    // Selektor zur Identifizierung der angegebenen Selektoren
+        INPUT_SELECTORS = "input[type=text]";    // Selektor zur Identifizierung der angegebenen Selektoren
+
+    /**
+     * Liefert die Farbe, in der das Grid angezeigt werden soll.
+     * @return {string}
+     */
+    var getColor = function() {
+        return $gridColor.val();
+    };
+
+    /**
+     * Liefert die Breite, in der das Grid dargestellt werden soll.
+     * @returns {Number}
+     */
+    var getWidth = function() {
+        return tools.parser.parseIntVal($gridWidth);
+    };
+
+    /**
+     * Liefert den Inhalt des letzten Input Elements in der Liste der Selektoren.
+     * @returns {string}
+     */
+    var getLastSelectorValue = function(){
+        return getLastInputElement()[0].value;
+    };
+
+    /**
+     * Liest die angegebenen Selektoren aus, die das Grid definierten.
+     * @returns {Array}
+     */
+    var getGridSelectors = function() {
+        var inputFields =  $contentWrapper.find(INPUT_SELECTORS),
+            values = [];
+        inputFields.each(function(i, element) {
+            var value = element.value;
+            if(value !== "") {
+                values.push(value);
+            }
+        });
+        return values;
+    };
 
     /**
      * Liefert das letzte Input-Element des Moduls.
      * @returns {*}
      */
     var getLastInputElement = function(){
-        return $contentWrapper.find(inputSelectors).last();
+        return $contentWrapper.find(INPUT_SELECTORS).last();
     };
 
     /**
-     * Fügt ein neues Input-Element zur Angabe eines weiteren Selektors hinzu.
+     * Dupliziert das letzte Input-Element zur Angabe eines weiteren Selektors.
      */
     var addNewSelectorInput = function(){
         var $lastInput = getLastInputElement();
@@ -62,7 +102,7 @@ function($, visualizeElements, chromeStorage, tools, config) {
     var initShowGrid = function() {
         $showGridButton.click(function(){
             var selectors = getGridSelectors();
-            // Wenn Selektoren angegeben wurden, Anzeige anstoßen
+            // Anzeige anstoßen, wenn Selektoren angegeben wurden
             if(selectors.length >= 1) {
                 visualizeElements.triggerShowElements(selectors, getColor(), getWidth());
             }
@@ -75,49 +115,8 @@ function($, visualizeElements, chromeStorage, tools, config) {
     var initDefaultColor = function(){
         $gridColor.val(config.defaultGridColor);
     };
-
     /**
-     * Liefert den Inhalt des letzten Input Elements in der Liste der Selektoren.
-     * @returns {string}
-     */
-    var getLastSelectorValue = function(){
-        return getLastInputElement()[0].value;
-    };
-
-    /**
-     * Liest die angegebenen Selektoren aus, die das Grid definierten.
-     * @returns {Array}
-     */
-    var getGridSelectors = function() {
-        var inputFields =  $contentWrapper.find(inputSelectors),
-            values = [];
-        inputFields.each(function(i, element) {
-            var value = element.value;
-            if(value !== "") {
-                values.push(value);
-            }
-        });
-        return values;
-    };
-
-    /**
-     * Liefert die Farbe, in der das Grid angezeigt werden soll.
-     * @return {string}
-     */
-    var getColor = function() {
-        return $gridColor.val();
-    };
-
-    /**
-     * Liefert die Breite, in der das Grid dargestellt werden soll.
-     * @returns {Number}
-     */
-    var getWidth = function() {
-        return tools.parser.parseIntVal($gridWidth);
-    };
-
-    /**
-     * Liest die Benutzereingaben aus der Local Storage aus.
+     * Liest die letzten Benutzereingaben aus der Chrome Storage aus.
      */
     var readStorageValues = function(){
         chromeStorage.readStorage($gridWidth, chromeStorage.keys.grid.width);
@@ -126,7 +125,7 @@ function($, visualizeElements, chromeStorage, tools, config) {
     };
 
     /**
-     * Registriert die Callbacks zum speichern der Benutzereingaben.
+     * Registriert die Callbacks zum Speichern der Benutzereingaben.
      */
     var initStorageUpdate = function(){
         chromeStorage.registerStorage($gridWidth, chromeStorage.keys.grid.width, getWidth, 0);

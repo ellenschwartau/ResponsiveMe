@@ -3,7 +3,7 @@ define([
 ],
 /**
  * Skript zur Anzeige von Elementen durch eine Umrandung in einer angegebenen Farbe und Breite.
- * Die Elemente werden durch ihre css-Selektoren identifiziert.
+ * Die zu manipulierenden Elemente werden dazu durch ihre CSS-Selektoren identifiziert.
  * @exports visualizeElements
  * @param {Object} $ - JQuery
  * @param {module} extension - extension-Modul
@@ -12,7 +12,7 @@ define([
  */
 function($, extension){
     /**
-     * Stößt die Anzeige der Elemente, die über die Selektoren identifiziert werden an.
+     * Stößt die Anzeige der Elemente, die über die Selektoren identifiziert werden, an.
      * @param {string[]} selectors -  Selektoren der Elemente, die angezeigt werden sollen
      * @param {string} color - Anzeigefarbe
      * @param {int} width - Dicke der Umrandung
@@ -32,7 +32,7 @@ function($, extension){
      * Liefert den CSS String zur Darstellung einer Außenlinie in der angegebenen Farbe und Dicke.
      * @param {string} color - Anzeigefarbe
      * @param {int} width - Dicke der Umrandung
-     * @returns {{css}}
+     * @returns {{json}} Benötigte CSS Attribute
      */
     var getCssToDisplayElement = function(color, width) {
         // border-box: sorgt dafür, dass die Border nicht auf die Breite aufaddiert wird,
