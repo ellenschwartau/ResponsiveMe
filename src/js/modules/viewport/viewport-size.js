@@ -1,21 +1,20 @@
 define([
-        'jquery', 'browserOffset', 'extension'
+    'browserOffset', 'extension'
 ],
 /**
- * Stellt Funktionen zur Skalierung des Browser-Fenster bereit.
+ * Stellt Funktionen zur Skalierung des Browsers bereit.
  * @exports viewportSize
- * @param {$} $ - JQuery
  * @param {module} browserOffset - browserOffest-Modul
  * @see module:browserOffset
  * @param {module} extension - extensionModul
  * @see module:extension
  * @returns {{changeSize: Function, changeWidth: Function, changeHeight: Function, toggleInnerOuter: Function}}
  */
-function($, browserOffset, extension) {
+function(browserOffset, extension) {
      /**
      * Berechnet die Zielbreite, auf die der Browser skaliert werden muss.
      * @param {int} width - Breite, auf die der Browser skaliert werden soll
-     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite die Abmessungen des Browsers mit einbezieht
      * @returns {int}
       */
     var calcDestWidth = function(width, containsBrowserOffset) {
@@ -26,7 +25,7 @@ function($, browserOffset, extension) {
     /**
      * Berechnet die Zielhöhe, auf die der Browser skaliert werden muss.
      * @param {int} height - Höhe, auf die der Browser skaliert werden soll
-     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite die Abmessungen des Browsers mit einbezieht
      * @returns {int}
      */
     var calcDestHeight = function(height, containsBrowserOffset) {
@@ -35,7 +34,7 @@ function($, browserOffset, extension) {
     };
 
     /**
-     * Skaliert das Browser-Fenster mit Hilfe der chrome.windows-API.
+     * Skaliert den Browser mit Hilfe der chrome.windows-API.
      * @param {int} width - Breite, auf die der Browser skaliert werden soll
      * @param {int} height - Höhe, auf die der Browser skaliert werden soll
      */
@@ -68,7 +67,7 @@ function($, browserOffset, extension) {
 
     /**
      * Aktualisiert das Browserfenster mit der gegebenen Information.
-     * @param updateInfo    Object  in JSON angegebene Attribute des Browserfensters
+     * @param {json} updateInfo - in JSON angegebene Attribute des Browserfensters
      */
     var updateWindowSize = function(updateInfo) {
         updateInfo.state = "normal";
@@ -79,7 +78,7 @@ function($, browserOffset, extension) {
      * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebenen Maße.
      * @param {int} width - Breite, auf die der Browser skaliert werden soll
      * @param {int} height - Höhe, auf die der Browser skaliert werden soll
-     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite ddie Abmessungen des Browsers mit einbezieht
      */
     var calcAndChangeSize = function(width, height, containsBrowserOffset) {
         changeSize(
@@ -91,16 +90,16 @@ function($, browserOffset, extension) {
     /**
      * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebene Breite.
      * @param {int} width - Breite, auf die der Browser skaliert werden soll
-     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite die Abmessungen des Browsers mit einbezieht
      */
     var calcAndChangeWidth = function(width, containsBrowserOffset) {
         changeWidth(calcDestWidth(width, containsBrowserOffset));
     };
 
     /**
-     * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebene Hlhe.
+     * Skaliert das Browserfenster oder den Inhalt der Seite auf die gegebene Höhe.
      * @param {int} height - Höhe, auf die der Browser skaliert werden soll
-     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielbreite den Browser mit einbezieht
+     * @param {boolean} containsBrowserOffset - Angabe, ob die Zielhöhe die Abmessungen des Browsers mit einbezieht
      */
     var calcAndChangeHeight = function(height, containsBrowserOffset) {
         changeHeight(calcDestHeight(height, containsBrowserOffset));
@@ -115,7 +114,6 @@ function($, browserOffset, extension) {
         extension.getCurrentWindow(function(window){
             // Im Falle dass containsBrowserOffset true:
             // Es wurde von Inner auf Outer getogglet, BrowserOffset muss dann wieder abgezogen werden
-            // Wenn containsBrowserOffset true, werden der Offset innerhalb der changeSize aufaddiert
             var width = window.width,
                 height = window.height,
                 offset = browserOffset.get();

@@ -1,27 +1,27 @@
 define([
-    'jquery', 'viewportSize'
+    'viewportSize'
 ],
 /**
- * Animiert die Breite eines Browserfensters.
+ * Stellt Funktionen zur Animation der Browserbreite bereit.
  * @exports viewportAnimation
- * @param {Object} $ - JQuery
  * @param {module} viewportSize - viewportSize-Modul
  * @see module:viewportSize
  * @returns {{animateWidth: Function}}
  */
-function($, viewportSize) {
+function(viewportSize) {
     /**
      * Animiert die Breite des Browsers.
      * @param {int} animationDuration - zur Verfügung stehende Zeit
      * @param {int} startWidth - Startbreite
      * @param {int} endWidth - Endbreite
      * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
-     * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
+     * @param {int} doneAnimationCalls - bereits getätigte Anzahl an Wiederholungen der Animation
      * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
      */
     var animateWidth = function(animationDuration, startWidth, endWidth,
                            wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
-        // Kapseln in eigene Funktion, damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
+        // Kapseln der Eckdaten in eigene Funktion, statt diese global im Modul zu speichern,
+        // damit kein zeitgleicher Zugriff auf diese Variablen durch zwei Prozesse möglich ist
         var start,                      // Start-Breite
             end,                        // End-Breite
             duration,                   // Zur Verfügung stehende Zeit
@@ -32,12 +32,12 @@ function($, viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            deferredPromise;            //
+            deferredPromise;            // Deffered Object zur Verarbeitung des Stadiums der Animation
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
-         * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde.
-         * @param {int} interval - ID des Intervalls, das die Animation durchführt
+         * wenn die Anzahl an gewollten Wiederholungen noch nicht erreicht wurde. Ist die Animation noch nicht
+         * abgeschlossen, wir der nächste Render-Schritt angestoßen.
          */
         var checkAnimationEnd = function () {
             if (((start >= end) && (curWidth <= end))
@@ -51,6 +51,7 @@ function($, viewportSize) {
         /**
          * Startet die Animation erneut mit vertauschtem Start- und Endwert,
          * wenn die gewollte Anzahl an Wiederholungen noch nicht erreicht wurde.
+         * Ist die Animation abgeschlossen, wird der Status über das Deferred Object bekannt gegeben.
          */
         var checkForRestart = function () {
             if (doneCalls < wantedCalls) {
@@ -82,12 +83,12 @@ function($, viewportSize) {
             // zusätzliche Berechnungen
             durationPerCall = duration / wantedCalls;
             var dist = start - end;
-            stepPerMs = (dist / durationPerCall) / 100;
+            stepPerMs = (dist / durationPerCall) / 1000;
             curWidth = start;
         };
 
         /**
-         * Berechnet die Browserbreite, auf die der Browser im aktuellen Animationsschritt animiert werden sollte.
+         * Berechnet die Browserbreite auf die der Browser im aktuellen Animationsschritt skaliert werden muss.
          * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
          * @returns {number}
          */
@@ -115,7 +116,6 @@ function($, viewportSize) {
          * @param {int} wantedAnimationCalls - gewollte Anzahl an Wiederholungen der Animation
          * @param {int} doneAnimationCalls - getätigte Anzahl an Wiederholungen der Animation
          * @param {boolean} containsBrowserOffset - Angabe, ob die Breitenangaben die Maße des Browserfensters beinhalten
-         * // TODO Bild in Doku austauschen
          */
         var animate = function (animationDuration, startWidth, endWidth,
                                      wantedAnimationCalls, doneAnimationCalls, containsBrowserOffset) {
