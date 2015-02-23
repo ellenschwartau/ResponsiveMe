@@ -106,14 +106,14 @@ function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
     var showMediaQueries = function(response){
         // Eventuell vorher angezeigte Media Queries und zugehörige Code Editoren löschen
         $mediaQueries.empty();
-        aceHelper.clearEditorList();
+        aceHelper.removeImpermanentEditorsFromList();
         var data = response.data;
         if(data.length > 0) {
             // neue Media Queries einfügen
             $.each(data, function(i, mediaQuery){
                 var id = ID_PREFIX_MEDIA_QUERY + i;
                 $mediaQueries.append(createMediaQueryMarkup(mediaQuery, id));
-                aceHelper.initCodeEditor(id, mediaQuery, SAVE_MEDIA_QUERY_EVENT, saveMediaQuery);
+                aceHelper.initCodeEditor(id, mediaQuery, aceHelper.IMPERMANENT, SAVE_MEDIA_QUERY_EVENT, saveMediaQuery);
             });
             $showMediaQueriesButton.after($hideMediaQueriesButton);
         } else {
@@ -157,7 +157,7 @@ function($, extension, stylesheetParser, viewportSize, aceHelper, styleEditor) {
         $hideMediaQueriesButton.click(function(){
             $mediaQueries.empty();
             $hideMediaQueriesButton.remove();
-            aceHelper.clearEditorList();
+            aceHelper.removeImpermanentEditorsFromList();
         });
     };
 

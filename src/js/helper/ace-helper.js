@@ -8,7 +8,7 @@ define([
  * Alle vorhandenen Editoren werden in diesem Modul zwischengespeichert, um später auf sie zugreifen zu können.
  * @exports aceHelper
  * @param {Object} $ - JQuery
- * @returns {{initCodeEditor: Function, getEditorValue: Function, getEditorData: Function, cleatEditorValue: Function, removeEditorFromList: Function, clearEditorList: Function}}
+ * @returns {{initCodeEditor: Function, getEditorValue: Function, getEditorData: Function, cleatEditorValue: Function, removeEditorFromList: Function, removeImpermanentEditorsFromList: Function, PERMANENT: boolean, IMPERMANENT: boolean}}
  */
 function($){
     /**
@@ -18,14 +18,22 @@ function($){
     var editors = [];
 
     /**
+     * Attribute zum Setzen der Permanenz-Eigenschaft.
+     * @type {boolean}
+     */
+    var PERMANENT = true,
+        IMPERMANENT = false;
+
+    /**
      * Initialisiert einen Code Editor zur Anzeige und Bearbeitung von CSS-Angaben.
      * @param {string} id - CSS-ID des Editors
      * @param {{indexStyleSheet:int,indexRule:int,fullCss:string}} rule - Daten der Regel, die angezeigt werden soll
+     * @param {boolean} permanent - Angabe, ob der Editor permanent gespeichert werden und demnach beim leeren der Liste nicht gelöscht werden soll
      * @param {string} [bindEvent] - optionaler Name des Events, das behandelt werden soll
      * @param {function} [onBlurCallback] - optionale Funktion zur Behandlung des Events
      * @returns {Object} - Editor
      */
-    var initCodeEditor = function(id, rule, bindEvent, onBlurCallback) {
+    var initCodeEditor = function(id, rule, permanent, bindEvent, onBlurCallback) {
         // Editor erstellen und Modus sowie Theme setzen
         var editor = ace.edit(id),
             style = rule.fullCss,
@@ -47,7 +55,7 @@ function($){
         enableAutocompletion(editor);
 
         // Editor und wichtige Daten zum späteren Zugriff zwischenspeichern
-        saveEditorData(editor, id, indexStyleSheet, indexRule);
+        saveEditorData(editor, id, indexStyleSheet, indexRule, permanent);
         // Callbacks initialisieren
         if(onBlurCallback != undefined && bindEvent != undefined) {
             bindEventCallback(editor, indexStyleSheet, indexRule, id, bindEvent, onBlurCallback);
@@ -89,21 +97,30 @@ function($){
      * @param {string} id - CSS-ID des Editors
      * @param {int} indexStyleSheet - Index des Style Sheets, zu dem der Inhalt des Editors gehört
      * @param {int} indexRule - Index der Regel, zu der der Inhalt des Editors gehört
+     * @param {boolean} permanent - Angabe, ob der Editor permanent gespeichert werden und demnach beim leeren der Liste nicht gelöscht werden soll
      */
-    var saveEditorData = function(editor, id, indexStyleSheet, indexRule) {
+    var saveEditorData = function(editor, id, indexStyleSheet, indexRule, permanent) {
         editors.push({
             editor: editor,
             id: id,
             indexStyleSheet: indexStyleSheet,
-            indexRule: indexRule
+            indexRule: indexRule,
+            savePermanent: permanent
         });
     };
 
     /**
-     * Leert die Liste der gespeicherten Editoren.
+     * Löscht alle Editoren aus der Liste, die nicht permanent gespeichert werden sollen.
      */
-    var clearEditorList = function(){
-        editors = [];
+    var removeImpermanentEditorsFromList = function(){
+        var clearedEditors = [];
+        $.each(editors, function(i, editorData){
+            if(editorData.savePermanent) {
+                // Nur Editoren behalten, die explizit permanent gespeichert werden sollen
+                clearedEditors.push(editorData);
+            }
+        });
+        editors = clearedEditors;
     };
 
     /**
@@ -165,6 +182,8 @@ function($){
         getEditorData: getEditorData,
         cleatEditorValue: clearEditorValue,
         removeEditorFromList: removeEditorFromList,
-        clearEditorList: clearEditorList
+        removeImpermanentEditorsFromList: removeImpermanentEditorsFromList,
+        PERMANENT: PERMANENT,
+        IMPERMANENT: IMPERMANENT
     };
 });

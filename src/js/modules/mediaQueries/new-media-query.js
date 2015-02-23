@@ -2,9 +2,7 @@ define([
     'jquery', 'stylesheetParser', 'aceHelper', 'styleEditor', 'extension'
 ],
 /**
- * Modul zum Erstellen und speichern einer neuen Media Query.
- * Dieses Skript stellt Funktionen bereit, einen Code Editor zu initialisieren und dessen Inhalt
- * als eine neue Style-Angabe zu speichern.
+ * Modul zum Erstellen und Speichern einer neuen Media Query über einen Code-Editor.
  * @exports newMediaQuery
  * @param {Object} $ - JQuery
  * @param {module} stylesheetParser - stylesheetParser-Modul
@@ -39,7 +37,7 @@ function($, stylesheetParser, aceHelper, styleEditor, extension) {
      * @param {string} id - ID des Code Editors, der Initialisiert werden soll
      */
     var initNewMediaQueryEditor = function(id) {
-        aceHelper.initCodeEditor(id, stylesheetParser.getEmptyCssRuleJson());
+        aceHelper.initCodeEditor(id, stylesheetParser.getEmptyCssRuleJson(), aceHelper.PERMANENT);
     };
 
     /**
