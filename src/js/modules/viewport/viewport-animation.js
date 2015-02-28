@@ -111,7 +111,6 @@ function(viewportSize) {
         var calcBrowserWidth = function (currentTime) {
             var elapsedTime,
                 animationDist;
-
             lastCall = !lastCall ? currentTime : lastCall;
             elapsedTime = currentTime - lastCall;
             lastCall = currentTime;
@@ -120,7 +119,6 @@ function(viewportSize) {
             console.log("Vergangene Zeit: " + time);
 
             return roundBrowserWidth((curWidth + currWidthDiff) - animationDist);
-
         };
 
         /**
