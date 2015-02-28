@@ -81,12 +81,15 @@ function(viewportSize) {
             sizesContainBrowserOffset = containsBrowserOffset;
 
             // zusätzliche Berechnungen
-            durationPerCall = duration / wantedCalls;
+            durationPerCall = (duration / wantedCalls) * 1000;
             var dist = start - end;
-            stepPerMs = (dist / durationPerCall) / 1000;
+            stepPerMs = (dist / durationPerCall);
             curWidth = start;
+
+            console.log("Anfang: " + start + " Ende: " + end + " Distanz: " + dist + " dist pro ms:" + stepPerMs + " Zeit: " + animationDuration + " Wiederholungen: " + wantedAnimationCalls + " getätigte: " + doneAnimationCalls + " Zeit pro Aufruf: " + durationPerCall);
         };
 
+        var time = 0;
         /**
          * Berechnet die Browserbreite auf die der Browser im aktuellen Animationsschritt skaliert werden muss.
          * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
@@ -100,6 +103,8 @@ function(viewportSize) {
             elapsedTime = currentTime - lastCall;
             lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
+            time = time + elapsedTime;
+            console.log("Vergangene Zeit: " + time);
 
             if (start >= end) {
                 return Math.round(Math.max(end, curWidth - animationDist));
