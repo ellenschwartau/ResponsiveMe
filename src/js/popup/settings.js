@@ -28,7 +28,7 @@ function($, modules, tools) {
      */
     var initSettingsDisplay = function() {
         $footer.find(SETTINGS_ICON).click(function() {
-            $settings.toggle("slow");
+            $settings.toggle();
             if(tools.properties.isVisible($settings)) {
                 $settings.css("display", "inline-block");
             }
