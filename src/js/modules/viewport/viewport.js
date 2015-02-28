@@ -253,7 +253,6 @@ function($, config, extension, viewportSize, viewportAnimation, backgroundAccess
                     }
                 );
             }
-            // TODO unbind Event
         }
     };
 
