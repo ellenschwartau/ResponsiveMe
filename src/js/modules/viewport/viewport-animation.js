@@ -97,12 +97,14 @@ function(viewportSize) {
          */
         var roundBrowserWidth = function(browserWidth){
             var dest;
+            browserWidth = browserWidth  + currWidthDiff;
             if (start >= end) {
-                dest = Math.round(Math.max(end, browserWidth + currWidthDiff));
+                dest = Math.round(Math.max(end, browserWidth));
             } else {
-                dest = Math.round(Math.min(end, browserWidth + currWidthDiff));
+                dest = Math.round(Math.min(end, browserWidth));
             }
             currWidthDiff = browserWidth - dest;
+            console.log(currWidthDiff);
             return dest;
         };
 
@@ -119,7 +121,7 @@ function(viewportSize) {
             lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
 
-            return roundBrowserWidth(curWidth - animationDist);
+            return roundBrowserWidth((curWidth) - animationDist);
         };
 
         /**
