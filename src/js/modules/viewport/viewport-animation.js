@@ -86,18 +86,21 @@ function(viewportSize) {
             var dist = start - end;
             stepPerMs = (dist / durationPerCall);
             curWidth = start;
-
-            console.log("Anfang: " + start + " Ende: " + end + " Distanz: " + dist + " dist pro ms:" + stepPerMs + " Zeit: " + animationDuration + " Wiederholungen: " + wantedAnimationCalls + " getätigte: " + doneAnimationCalls + " Zeit pro Aufruf: " + durationPerCall);
         };
 
-        var time = 0;
-
+        /**
+         * Berechnet die gerundete Zielbreite für den aktuellen Animationsschritt und merkt sich die Differenz für
+         * den nächsten Schritt zwischen. Dieser wird beim nächsten Schritt draufgerechnet, damit die Animation
+         * innerhalb der gewünschten Zeit fertig wird.
+         * @param browserWidth
+         * @returns {*}
+         */
         var roundBrowserWidth = function(browserWidth){
             var dest;
             if (start >= end) {
-                dest = Math.round(Math.max(end, browserWidth));
+                dest = Math.round(Math.max(end, browserWidth + currWidthDiff));
             } else {
-                dest = Math.round(Math.min(end, browserWidth));
+                dest = Math.round(Math.min(end, browserWidth + currWidthDiff));
             }
             currWidthDiff = browserWidth - dest;
             return dest;
@@ -115,10 +118,8 @@ function(viewportSize) {
             elapsedTime = currentTime - lastCall;
             lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
-            time = time + elapsedTime;
-            console.log("Vergangene Zeit: " + time);
 
-            return roundBrowserWidth((curWidth + currWidthDiff) - animationDist);
+            return roundBrowserWidth(curWidth - animationDist);
         };
 
         /**
