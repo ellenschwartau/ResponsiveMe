@@ -32,7 +32,8 @@ function(viewportSize) {
             curWidth,                   // aktelle Breite
             sizesContainBrowserOffset,  // Angabe, ob die Größenangaben inklusive der Browserabmessung gemeint sind
             lastCall,                   // Zeitpunkt des letzen Animationsschritts
-            deferredPromise;            // Deffered Object zur Verarbeitung des Stadiums der Animation
+            deferredPromise,            // Deffered Object zur Verarbeitung des Stadiums der Animation
+            currWidthDiff = 0;               // Genauigkeitsverlust durch runden
 
         /**
          * Beendet die Animation, wenn die Zielbreite des Browsers erreicht wurde und startet die Animation erneut,
@@ -90,6 +91,18 @@ function(viewportSize) {
         };
 
         var time = 0;
+
+        var roundBrowserWidth = function(browserWidth){
+            var dest;
+            if (start >= end) {
+                dest = Math.round(Math.max(end, browserWidth));
+            } else {
+                dest = Math.round(Math.min(end, browserWidth));
+            }
+            currWidthDiff = browserWidth - dest;
+            return dest;
+        };
+
         /**
          * Berechnet die Browserbreite auf die der Browser im aktuellen Animationsschritt skaliert werden muss.
          * @param {DOMHighResTimeStamp} currentTime - aktueller Zeitpunkt
@@ -106,11 +119,8 @@ function(viewportSize) {
             time = time + elapsedTime;
             console.log("Vergangene Zeit: " + time);
 
-            if (start >= end) {
-                return Math.round(Math.max(end, curWidth - animationDist));
-            } else {
-                return Math.round(Math.min(end, curWidth - animationDist));
-            }
+            return roundBrowserWidth((curWidth + currWidthDiff) - animationDist);
+
         };
 
         /**
