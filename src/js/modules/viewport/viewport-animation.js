@@ -104,7 +104,6 @@ function(viewportSize) {
                 dest = Math.round(Math.min(end, browserWidth));
             }
             currWidthDiff = browserWidth - dest;
-            console.log(currWidthDiff);
             return dest;
         };
 
@@ -121,7 +120,7 @@ function(viewportSize) {
             lastCall = currentTime;
             animationDist = stepPerMs * elapsedTime;
 
-            return roundBrowserWidth((curWidth) - animationDist);
+            return roundBrowserWidth(curWidth - animationDist);
         };
 
         /**
